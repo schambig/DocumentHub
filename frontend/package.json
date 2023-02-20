@@ -1,0 +1,65 @@
+{
+  "name": "react-materialui-typescript-core",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.8",
+    "@mui/styled-engine": "^5.11.8",
+    "@mui/system": "^5.11.8",
+    "@mui/x-data-grid": "^5.17.23",
+    "@svgr/cli": "^6.5.1",
+    "@svgr/core": "^6.5.1",
+    "@svgr/rollup": "^6.5.1",
+    "@svgr/webpack": "^6.5.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^29.4.0",
+    "@types/node": "^18.13.0",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@types/react-router-dom": "^5.3.3",
+    "framer-motion": "^9.0.2",
+    "nth-check": "^2.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
+    "react-router-dom": "^6.8.1",
+    "request": "^2.88.2",
+    "svgo": "^3.0.2",
+    "uuid": "^9.0.0",
+    "uuidv4": "^6.2.13",
+    "web-vitals": "^3.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/path-to-regexp": "^1.7.0",
+    "react-scripts": "^5.0.1"
+  }
+}
