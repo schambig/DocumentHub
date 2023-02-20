@@ -1,0 +1,23 @@
+{
+  "name": "documenthub",
+  "version": "1.0.0",
+  "description": "Document Management System",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schambig/DocumentHub.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/schambig/DocumentHub/issues"
+  },
+  "homepage": "https://github.com/schambig/DocumentHub#readme",
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
+}
