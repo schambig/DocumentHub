@@ -23,7 +23,7 @@ model TablaInversionista {
   relProdCateInver   RelProdCateInver[]
 }
 
-model TablaProduco {
+model TablaProducto {
   id               String             @id @default(cuid())
   codProducto      String
   nombreProducto   String
@@ -36,17 +36,17 @@ model TablaProduco {
 model RelProdInver {
   inversionista        TablaInversionista @relation(fields: [tablaInversionistaId], references: [id])
   tablaInversionistaId String
-  producto             TablaProduco       @relation(fields: [tablaProducoId], references: [id])
-  tablaProducoId       String
+  producto             TablaProducto      @relation(fields: [tablaProductoId], references: [id])
+  tablaProductoId      String
 
-  @@id([tablaInversionistaId, tablaProducoId])
+  @@id([tablaInversionistaId, tablaProductoId])
 }
 
 model TablaDocumento {
   id            String          @id @default(cuid())
   nombreFile    String
   userSubida    String
-  fechaSubida   DateTime
+  fechaSubida   DateTime        @default(now())
   uuidAws       String
   urlAws        String
   tablaDescarga TablaDescarga[]
@@ -54,8 +54,8 @@ model TablaDocumento {
   // Relations
   inversionista        TablaInversionista? @relation(fields: [tablaInversionistaId], references: [id])
   tablaInversionistaId String?
-  producto             TablaProduco?       @relation(fields: [tablaProducoId], references: [id])
-  tablaProducoId       String?
+  producto             TablaProducto?      @relation(fields: [tablaProductoId], references: [id])
+  tablaProductoId      String?
   categoria            TablaCategoria?     @relation(fields: [tablaCategoriaId], references: [id])
   tablaCategoriaId     String?
   tipoDocumento        TablaTipoDocumento  @relation(fields: [tablaTipoDocumentoId], references: [id])
@@ -64,30 +64,30 @@ model TablaDocumento {
 
 model TablaCategoria {
   id               String             @id @default(cuid())
-  descripcion      String
+  descripcion      String?
   tablaDocumento   TablaDocumento[]
   relProdCate      RelProdCate[]
   relProdCateInver RelProdCateInver[]
 }
 
 model RelProdCate {
-  producto         TablaProduco   @relation(fields: [tablaProducoId], references: [id])
-  tablaProducoId   String
+  producto         TablaProducto  @relation(fields: [tablaProductoId], references: [id])
+  tablaProductoId  String
   categoria        TablaCategoria @relation(fields: [tablaCategoriaId], references: [id])
   tablaCategoriaId String
 
-  @@id([tablaProducoId, tablaCategoriaId])
+  @@id([tablaProductoId, tablaCategoriaId])
 }
 
 model RelProdCateInver {
-  producto             TablaProduco       @relation(fields: [tablaProducoId], references: [id])
-  tablaProducoId       String
+  producto             TablaProducto      @relation(fields: [tablaProductoId], references: [id])
+  tablaProductoId      String
   categoria            TablaCategoria     @relation(fields: [tablaCategoriaId], references: [id])
   tablaCategoriaId     String
   inversionista        TablaInversionista @relation(fields: [tablaInversionistaId], references: [id])
   tablaInversionistaId String
 
-  @@id([tablaProducoId, tablaCategoriaId, tablaInversionistaId])
+  @@id([tablaProductoId, tablaCategoriaId, tablaInversionistaId])
 }
 
 model TablaTipoDocumento {
@@ -98,11 +98,11 @@ model TablaTipoDocumento {
 }
 
 model TablaUsuarios {
-  id         String @id @default(cuid())
+  id         String  @id @default(cuid())
   userNombre String
-  email      String @unique
+  email      String  @unique
   password   String
-  estado     Int
+  estado     Boolean
 
   // Relation
   rol           TablaRol        @relation(fields: [tablaRolId], references: [id])
@@ -119,7 +119,7 @@ model TablaRol {
 
 model TablaDescarga {
   id            String   @id @default(cuid())
-  fechaDescarga DateTime
+  fechaDescarga DateTime @default(now())
 
   // Relations
   usuarioDescarga  TablaUsuarios  @relation(fields: [tablaUsuariosId], references: [id])
