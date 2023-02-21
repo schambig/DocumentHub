@@ -1,0 +1,135 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model TablaInversionista {
+  id                 String             @id @default(cuid())
+  nombres            String
+  apPaterno          String
+  apMaterno          String
+  tipoIdentificacion DocIdent
+  nroIdentificacion  String
+  pep                Boolean
+  relProdInver       RelProdInver[]
+  tablaDocumento     TablaDocumento[]
+  relProdCateInver   RelProdCateInver[]
+}
+
+model TablaProduco {
+  id               String             @id @default(cuid())
+  codProducto      String
+  nombreProducto   String
+  relProdInver     RelProdInver[]
+  tablaDocumento   TablaDocumento[]
+  relProdCate      RelProdCate[]
+  relProdCateInver RelProdCateInver[]
+}
+
+model RelProdInver {
+  inversionista        TablaInversionista @relation(fields: [tablaInversionistaId], references: [id])
+  tablaInversionistaId String
+  producto             TablaProduco       @relation(fields: [tablaProducoId], references: [id])
+  tablaProducoId       String
+
+  @@id([tablaInversionistaId, tablaProducoId])
+}
+
+model TablaDocumento {
+  id            String          @id @default(cuid())
+  nombreFile    String
+  userSubida    String
+  fechaSubida   DateTime
+  uuidAws       String
+  urlAws        String
+  tablaDescarga TablaDescarga[]
+
+  // Relations
+  inversionista        TablaInversionista? @relation(fields: [tablaInversionistaId], references: [id])
+  tablaInversionistaId String?
+  producto             TablaProduco?       @relation(fields: [tablaProducoId], references: [id])
+  tablaProducoId       String?
+  categoria            TablaCategoria?     @relation(fields: [tablaCategoriaId], references: [id])
+  tablaCategoriaId     String?
+  tipoDocumento        TablaTipoDocumento  @relation(fields: [tablaTipoDocumentoId], references: [id])
+  tablaTipoDocumentoId String
+}
+
+model TablaCategoria {
+  id               String             @id @default(cuid())
+  descripcion      String
+  tablaDocumento   TablaDocumento[]
+  relProdCate      RelProdCate[]
+  relProdCateInver RelProdCateInver[]
+}
+
+model RelProdCate {
+  producto         TablaProduco   @relation(fields: [tablaProducoId], references: [id])
+  tablaProducoId   String
+  categoria        TablaCategoria @relation(fields: [tablaCategoriaId], references: [id])
+  tablaCategoriaId String
+
+  @@id([tablaProducoId, tablaCategoriaId])
+}
+
+model RelProdCateInver {
+  producto             TablaProduco       @relation(fields: [tablaProducoId], references: [id])
+  tablaProducoId       String
+  categoria            TablaCategoria     @relation(fields: [tablaCategoriaId], references: [id])
+  tablaCategoriaId     String
+  inversionista        TablaInversionista @relation(fields: [tablaInversionistaId], references: [id])
+  tablaInversionistaId String
+
+  @@id([tablaProducoId, tablaCategoriaId, tablaInversionistaId])
+}
+
+model TablaTipoDocumento {
+  id             String           @id @default(cuid())
+  nombre         String
+  descripcion    String?
+  tablaDocumento TablaDocumento[]
+}
+
+model TablaUsuarios {
+  id         String @id @default(cuid())
+  userNombre String
+  email      String @unique
+  password   String
+  estado     Int
+
+  // Relation
+  rol           TablaRol        @relation(fields: [tablaRolId], references: [id])
+  tablaRolId    String
+  TablaDescarga TablaDescarga[]
+}
+
+model TablaRol {
+  id            String          @id @default(cuid())
+  rolNombre     String
+  rolPermiso    String
+  tablaUsuarios TablaUsuarios[]
+}
+
+model TablaDescarga {
+  id            String   @id @default(cuid())
+  fechaDescarga DateTime
+
+  // Relations
+  usuarioDescarga  TablaUsuarios  @relation(fields: [tablaUsuariosId], references: [id])
+  tablaUsuariosId  String
+  documento        TablaDocumento @relation(fields: [tablaDocumentoId], references: [id])
+  tablaDocumentoId String
+}
+
+enum DocIdent {
+  DNI
+  CARNET_EXTRANJERIA
+  PASSAPORTE
+}
