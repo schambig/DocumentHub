@@ -1,4 +1,4 @@
-// This is your Prisma schema file,
+// Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
@@ -12,12 +12,12 @@ datasource db {
 
 model TablaInversionista {
   id                 String             @id @default(cuid())
-  nombres            String
-  apPaterno          String
-  apMaterno          String
+  nombres            String             @db.VarChar(40)
+  apPaterno          String             @db.VarChar(30)
+  apMaterno          String             @db.VarChar(30)
   tipoIdentificacion DocIdent
-  nroIdentificacion  String
-  pep                Boolean
+  nroIdentificacion  String             @db.VarChar(20)
+  pep                Boolean            @default(false)
   relProdInver       RelProdInver[]
   tablaDocumento     TablaDocumento[]
   relProdCateInver   RelProdCateInver[]
@@ -25,8 +25,8 @@ model TablaInversionista {
 
 model TablaProducto {
   id               String             @id @default(cuid())
-  codProducto      String
-  nombreProducto   String
+  codProducto      String             @db.VarChar(10)
+  nombreProducto   String             @db.VarChar(50)
   relProdInver     RelProdInver[]
   tablaDocumento   TablaDocumento[]
   relProdCate      RelProdCate[]
@@ -44,8 +44,8 @@ model RelProdInver {
 
 model TablaDocumento {
   id            String          @id @default(cuid())
-  nombreFile    String
-  userSubida    String
+  nombreFile    String          @db.VarChar(100)
+  userSubida    String          @db.VarChar(100)
   fechaSubida   DateTime        @default(now())
   uuidAws       String
   urlAws        String
@@ -64,7 +64,7 @@ model TablaDocumento {
 
 model TablaCategoria {
   id               String             @id @default(cuid())
-  descripcion      String?
+  tipo             String             @db.VarChar(40) // Levantamento o emision
   tablaDocumento   TablaDocumento[]
   relProdCate      RelProdCate[]
   relProdCateInver RelProdCateInver[]
@@ -92,29 +92,19 @@ model RelProdCateInver {
 
 model TablaTipoDocumento {
   id             String           @id @default(cuid())
-  nombre         String
-  descripcion    String?
+  nombre         String           @db.VarChar(20)
+  descripcion    String?          @db.VarChar(100)
   tablaDocumento TablaDocumento[]
 }
 
 model TablaUsuarios {
-  id         String  @id @default(cuid())
-  userNombre String
-  email      String  @unique
-  password   String
-  estado     Boolean
-
-  // Relation
-  rol           TablaRol        @relation(fields: [tablaRolId], references: [id])
-  tablaRolId    String
-  TablaDescarga TablaDescarga[]
-}
-
-model TablaRol {
   id            String          @id @default(cuid())
-  rolNombre     String
-  rolPermiso    String
-  tablaUsuarios TablaUsuarios[]
+  userNombre    String          @db.VarChar(100)
+  email         String          @unique
+  password      String
+  estado        Boolean         @default(true)
+  rol           RolUsuario
+  TablaDescarga TablaDescarga[]
 }
 
 model TablaDescarga {
@@ -130,6 +120,12 @@ model TablaDescarga {
 
 enum DocIdent {
   DNI
-  CARNET_EXTRANJERIA
-  PASSAPORTE
+  CARNETEXTRANJERIA
+  PASAPORTE
+}
+
+enum RolUsuario {
+  ADMIN
+  DATAUSER
+  USER
 }
