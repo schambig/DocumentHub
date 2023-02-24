@@ -26,6 +26,10 @@ interface deFaultAPI {
     name: string
 }
 
+// interface Option {
+//     value: string;
+//   }
+
 export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
 
     const initialAPI: deFaultAPI[] = [
@@ -44,6 +48,10 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
     const [loadingAPI3, setLoadingAPI3] = useState<boolean>(true)
     const [loadingAPI4, setLoadingAPI4] = useState<boolean>(true)
     //const [loadingErrorAPI5, setLoadingErrorAPI5] = useState<boolean>(true)
+
+
+
+
     interface filter {
         text: string,
         icon: JSX.Element,
@@ -52,7 +60,6 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
         load: boolean,
         keyui: string
     }
-
 
     useEffect(() => {
         const fetchData = () => {
@@ -159,22 +166,9 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
     // numero de opciones disponible
     const { selectedOption1, selectedOption2, selectedOption3, selectedOption4 } = useContext(SelectionContext);
     const { setSelectedOption1, setSelectedOption2, setSelectedOption3, setSelectedOption4 } = useContext(SelectionContext);
-
-
-    // const optionListSelect = [
-    //     selectedOption1,
-    //     selectedOption2,
-    //     selectedOption3,
-    //     selectedOption4,
-    // ]
-
-    // const optionListSet = [
-    //     setSelectedOption1,
-    //     setSelectedOption2,
-    //     setSelectedOption3,
-    //     setSelectedOption4,
-    // ]
-
+    //const {isAutocomplete1Enabled,isAutocomplete2Enabled,isAutocomplete3Enabled,isAutocomplete4Enabled} = useContext(SelectionContext);
+    //const {setIsAutocomplete1Enabled,setIsAutocomplete2Enabled,setIsAutocomplete3Enabled,setIsAutocomplete4Enabled} = useContext(SelectionContext);
+    
     //     selectedOption1 ► Inversionista,
     //     selectedOption2 ► Tipo Doc,
     //     selectedOption3 ► Producto,
@@ -188,6 +182,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
             return false;
         }else{
             setSelectedOption1(null);
+            // setIsAutocomplete1Enabled(false);
             //value cambiar por ternaria en el mismo value....
             // true enviar a value ► null
             return true;
@@ -227,6 +222,35 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
     }
     // handleDisableCategoria(selectedOption3)
 
+    // const [options, setOptions] = useState<string[]>([
+    //     "1",
+    //     "2",
+    //     "3"
+    //   ]);
+
+
+    // ------ esta opcion no esta vinculada a ningun filtro ---------
+     // -------- esta opcion habilitara un true o false ---------
+      // -------- para el boton que esta en FileUpload ---------
+    // setIsAutocomplete2Enabled();
+
+    // const buttonFunction = () => {
+    //     // Verifica que los Autocomplete habilitados no estén vacíos
+    //     if (
+    //       (isAutocomplete2Enabled && !options[0]) ||
+    //       (isAutocomplete1Enabled && !options[1]) ||
+    //       (isAutocomplete3Enabled && !options[2]) ||
+    //       (isAutocomplete4Enabled && !options[3])
+    //     ) {
+    //         setIsAutocomplete2Enabled(false);
+    //       console.log("Los campos habilitados no pueden estar vacíos.");
+    //     } else {
+    //         setIsAutocomplete2Enabled(true);
+    //       console.log("Los campos están bien y el botón puede ser presionado.");
+    //     }
+    //   };
+
+      //setOptions([newValue, options[1], options[2], options[3]]);
 
 
     return (
@@ -277,7 +301,10 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                                         }} />
                                 )
                             }}
-                            onChange={(event, newValue) => setSelectedOption2(newValue as newTipoDoc | null)}
+                            onChange={(event, newValue) => {
+                            return(
+                                setSelectedOption2(newValue as newTipoDoc | null)
+                            )}}
 
                         />
                     </ListItemText>

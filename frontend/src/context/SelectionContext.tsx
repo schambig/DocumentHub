@@ -6,6 +6,7 @@ import {newTipoDoc} from '../assets/data_documento'
 
 
 interface SelectionContextType {
+    // control filter LatMenu -> TableBusqueda
     selectedOption1: newInversionista | null;
     selectedOption2: newTipoDoc| null;
     selectedOption3: newProDucto | null;
@@ -14,12 +15,23 @@ interface SelectionContextType {
     setSelectedOption2: React.Dispatch<React.SetStateAction<newTipoDoc | null>>;
     setSelectedOption3: React.Dispatch<React.SetStateAction<newProDucto | null>>;
     setSelectedOption4: React.Dispatch<React.SetStateAction<newCategoria | null>>;
+    // control login
     email: string | null;
     password: string | null;
     setEmail: React.Dispatch<React.SetStateAction<string | null>>;
     setPassword: React.Dispatch<React.SetStateAction<string | null>>;
+    // control Rol access -> without Token
     sessionRol: number | null;
     setSessionRol: React.Dispatch<React.SetStateAction<number | null>>;
+    // control filtro para carga de archivos latmenuLoadV2 -> FileUpload 
+    isAutocomplete1Enabled: boolean
+    isAutocomplete2Enabled: boolean
+    isAutocomplete3Enabled: boolean
+    isAutocomplete4Enabled: boolean
+    setIsAutocomplete1Enabled:React.Dispatch<React.SetStateAction<boolean>>;
+    setIsAutocomplete2Enabled:React.Dispatch<React.SetStateAction<boolean>>;
+    setIsAutocomplete3Enabled:React.Dispatch<React.SetStateAction<boolean>>;
+    setIsAutocomplete4Enabled:React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const SelectionContext = React.createContext<SelectionContextType>({
@@ -36,5 +48,13 @@ export const SelectionContext = React.createContext<SelectionContextType>({
     setEmail: () => {},
     setPassword: () => {},
     sessionRol:null,
-    setSessionRol: () => {}
+    setSessionRol: () => {},
+    isAutocomplete1Enabled:true,
+    isAutocomplete2Enabled:true,
+    isAutocomplete3Enabled:true,
+    isAutocomplete4Enabled:true,
+    setIsAutocomplete1Enabled: () => {},
+    setIsAutocomplete2Enabled: () => {},
+    setIsAutocomplete3Enabled: () => {},
+    setIsAutocomplete4Enabled: () => {}
 });

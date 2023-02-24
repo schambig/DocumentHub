@@ -13,6 +13,12 @@ import { SelectionContext } from '../context/SelectionContext';
 import { themePalette } from '../config/theme.condig';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import { motion , AnimatePresence } from "framer-motion";
+import { newTipoDoc } from '../assets/data_documento';
+import { newInversionista } from '../assets/data_inversionistas';
+import { newProDucto } from '../assets/data_producto';
+import axios from 'axios';
+
+
 
 const UploadFiles: React.FC = () => {
   
@@ -43,6 +49,8 @@ const UploadFiles: React.FC = () => {
   }
   
   const { selectedOption1, selectedOption2, selectedOption3, selectedOption4 } = useContext(SelectionContext);
+  const { setSelectedOption1, setSelectedOption3, setSelectedOption4} = useContext(SelectionContext)
+
 
   const initialTransition = {
     duration: 1,
@@ -55,6 +63,107 @@ const UploadFiles: React.FC = () => {
     delay:0,
     ease: [0, 0.71, 0.2, 1.01]
   };
+  
+// pasar la variable (selectedOption2)
+const handleDisableInversionista = (objD:newTipoDoc|null) => {
+  // verificar que TipoDoc este seleccionado
+  // para habilitar el campo Inversionista
+  if(objD){
+      return false;
+  }else{
+      setSelectedOption1(null);
+      // setIsAutocomplete1Enabled(false);
+      //value cambiar por ternaria en el mismo value....
+      // true enviar a value ► null
+      return true;
+  }
+}
+
+// pasar la variable (selectedOption1,selectedOption2)
+const handleDisableProducto = (objInv:newInversionista|null, objDoc:newTipoDoc|null) => {
+  // verificar que Inversionista este seleccionado
+  // para habilitar el campo producto
+  if(objInv && objDoc && (objDoc.tipo !== 'Ficha Cliente' )){
+      return false;
+  }else{
+      setSelectedOption3(null);
+      //value cambiar por ternaria en el mismo value....
+      // true enviar a value ► null
+      return true;
+  }
+}
+
+// pasar la variable (selectedOption3)
+const handleDisableCategoria = (objPro:newProDucto | null) => {
+  // verificar que Inversionista este seleccionado
+  // para habilitar el campo producto
+  if(objPro){
+      return false;
+  }else{
+      setSelectedOption4(null);
+      //value cambiar por ternaria en el mismo value....
+      // true enviar a value ► null
+      return true;
+  }
+}
+
+function verifyData(){
+  const fileData = (dataFile !== null) ? true : false;
+  const documentoComplete = selectedOption2 ? true : false;
+  const inversionistaComplete = ((!handleDisableInversionista(selectedOption2) && selectedOption1)||handleDisableInversionista(selectedOption2)) ? true : false;
+  const productoComplete = ((!handleDisableProducto(selectedOption1,selectedOption2) && selectedOption3)||handleDisableProducto(selectedOption1,selectedOption2)) ? true : false;
+  const categoriaComplete = ((!handleDisableCategoria(selectedOption3) && selectedOption4)||handleDisableCategoria(selectedOption3)) ? true : false;
+  // Agrega más variables según la cantidad de Autocomplete que tengas
+
+  if (documentoComplete && inversionistaComplete && productoComplete && categoriaComplete && fileData) {
+    // Ejecutar la acción que deseas si todos los Autocomplete están habilitados y tienen valores seleccionados
+    return true;
+  } else {
+    // Mostrar un mensaje de error o realizar otra acción si no todos los Autocomplete están habilitados o tienen valores seleccionados
+    return false;
+  }
+}
+
+
+  function errorButtonHandler() {
+    // Realiza alguna accion si no completa los campos necesarios
+    console.log("button desactivado --- error")
+  }
+
+  function successButtonHandler() {
+    // Realiza alguna accion si completa correctamente
+    if (dataFile) {
+      // variable verificada cargada
+      const file = dataFile;
+      const formData = new FormData();
+      // variable lista
+      const data = {
+        documentoLoad:selectedOption2,
+        inversionistaLoad:selectedOption1,
+        productoLoad:selectedOption3,
+        categoriaLoad:selectedOption4,
+      };
+      // agregar al formData
+      formData.append('file', file);
+      formData.append('data', JSON.stringify(data));
+      // enviar el formData a la ruta especifica de la API
+      axios.post('/url-de-la-api', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+        .then((response) => {
+          // ver la url que devuelve el S3
+          // o todo la fila del nuevo elemento de la tabla documento
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      console.log("button activado --- success")
+    }
+
+  }
 
 
   return (
@@ -127,30 +236,11 @@ const UploadFiles: React.FC = () => {
       }
       </AnimatePresence>
       </Grid>
-      {/* {
-        isDisabled && 
-        <motion.div
-        key='hijo2'
-        layout
-        initial={{ opacity: 0, scale: 0.2 }}
-        animate={{ opacity: 0.75, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.2 }}
-        transition={isDisabled ? exitTransition : initialTransition}
-        id='dentro'>
-          <CheckCircleOutlineOutlinedIcon sx={{
-                bg: red[500],
-               // height: '100px',
-                fontSize: '200px',
-                borderStyle: dataFile ? 'groove' : 'dashed',
-                borderColor: dataFile ? themePalette.NARANJACORE : '', 
-                borderWidth: dataFile ? '8px' : '3px',}}/>
-        </motion.div>
-      } */}
-      {/* </AnimatePresence>
-      </Grid> */}
       
       <Grid item sx={{display: 'flex'}}>
+        {/* establecer logica para el boton solo permita la data  */}
       <Button variant='contained'
+        onClick={verifyData() ? successButtonHandler : errorButtonHandler}
         sx={{
           display: 'flex'
         }}> 

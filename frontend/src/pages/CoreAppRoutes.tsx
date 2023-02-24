@@ -74,7 +74,11 @@ function AppRoutes() {
   const [email , setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
   const [sessionRol, setSessionRol] = useState<number | null>(null);
-  
+  const [isAutocomplete1Enabled, setIsAutocomplete1Enabled] = useState(true);
+  const [isAutocomplete2Enabled, setIsAutocomplete2Enabled] = useState(true);
+  const [isAutocomplete3Enabled, setIsAutocomplete3Enabled] = useState(true);
+  const [isAutocomplete4Enabled, setIsAutocomplete4Enabled] = useState(true);
+
   return (
     <SelectionContext.Provider
       value={{
@@ -91,7 +95,15 @@ function AppRoutes() {
         password,
         setPassword,
         sessionRol,
-        setSessionRol
+        setSessionRol,
+        isAutocomplete1Enabled,
+        setIsAutocomplete1Enabled,
+        isAutocomplete2Enabled,
+        setIsAutocomplete2Enabled,
+        isAutocomplete3Enabled,
+        setIsAutocomplete3Enabled,
+        isAutocomplete4Enabled,
+        setIsAutocomplete4Enabled
       }}
     >
     <Router>
