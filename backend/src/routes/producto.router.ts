@@ -6,7 +6,7 @@ import * as ProductoService from "../services/producto.service";
 
 export const productoRouter = express.Router();
 
-// GET: List of all Inversionistas
+// GET: List of all Productos
 productoRouter.get("/", async (request: Request, response: Response) => {
   try {
     const productos = await ProductoService.listProductos()
