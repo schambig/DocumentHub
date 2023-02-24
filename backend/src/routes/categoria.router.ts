@@ -6,7 +6,7 @@ import * as CategoriaService from "../services/categoria.service";
 
 export const categoriaRouter = express.Router();
 
-// GET: List of all TipoDocumentos
+// GET: List of all Categorias
 categoriaRouter.get("/", async (request: Request, response: Response) => {
   try {
     const categorias = await CategoriaService.listCategoria()
