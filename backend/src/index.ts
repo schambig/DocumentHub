@@ -4,6 +4,7 @@ import cors from "cors";
 
 import { inversionistaRouter } from "./routes/inversionista.router";
 import { productoRouter } from "./routes/producto.router";
+import { usuarioRouter } from "./routes/usuario.router";
 
 dotenv.config();
 
@@ -19,7 +20,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/inversionistas", inversionistaRouter);
-app.use("/api/productos", productoRouter)
+app.use("/api/productos", productoRouter);
+app.use("/api/usuarios", usuarioRouter);
 
 app.listen(PORT, () => {
   console.log(`🚀 Listening on port ${PORT} ...`);
