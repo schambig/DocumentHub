@@ -7,6 +7,7 @@ import { productoRouter } from "./routes/producto.router";
 import { usuarioRouter } from "./routes/usuario.router";
 import { documentoRouter } from "./routes/documento.router";
 import { tipoDocumentoRouter } from "./routes/tipo.documento.router";
+import { categoriaRouter } from "./routes/categoria.router";
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use("/api/productos", productoRouter);
 app.use("/api/usuarios", usuarioRouter);
 app.use("/api/documentos", documentoRouter);
 app.use("/api/tipo-documentos", tipoDocumentoRouter);
+app.use("/api/categorias", categoriaRouter);
 
 app.listen(PORT, () => {
   console.log(`🚀 Listening on port ${PORT} ...`);
