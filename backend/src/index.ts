@@ -2,6 +2,8 @@ import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 
+import { inversionistaRouter } from "./routes/inversionista.router";
+
 dotenv.config();
 
 if (!process.env.PORT) {
@@ -14,6 +16,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+app.use("/api/inversionistas", inversionistaRouter);
 
 app.listen(PORT, () => {
   console.log(`🚀 Listening on port ${PORT} ...`);
