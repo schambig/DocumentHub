@@ -15,3 +15,17 @@ usuarioRouter.get("/", async (request: Request, response: Response) => {
     return response.status(500).json(error.message)
   }
 })
+
+// GET: A single Usuario by id
+usuarioRouter.get("/:id", async (request: Request, response: Response) => {
+  const id: string = request.params.id;
+  try {
+    const usuario = await UsuarioService.getUsuario(id)
+    if (usuario) {
+      return response.status(200).json(usuario)
+    }
+    return response.status(404).json("Usuario could not be found")
+  } catch (error: any) {
+    return response.status(500).json(error.message)
+  }
+})
