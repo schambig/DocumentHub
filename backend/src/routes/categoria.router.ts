@@ -16,7 +16,7 @@ categoriaRouter.get("/", async (request: Request, response: Response) => {
   }
 })
 
-// GET: A single Category by id
+// GET: A single Categoria by id
 categoriaRouter.get("/:id", async (request: Request, response: Response) => {
   const id: string = request.params.id;
   try {
@@ -24,7 +24,7 @@ categoriaRouter.get("/:id", async (request: Request, response: Response) => {
     if (categoria) {
       return response.status(200).json(categoria)
     }
-    return response.status(404).json("Inversionista could not be found")
+    return response.status(404).json("Categoria could not be found")
   } catch (error: any) {
     return response.status(500).json(error.message);
   }
