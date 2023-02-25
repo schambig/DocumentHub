@@ -16,3 +16,11 @@ export const listDocumentos = async () => {
     }
   })
 }
+
+export const getDocumento = async(id: string) => {
+  return db.tablaDocumento.findUnique({
+    where: {
+      id: id
+    }
+  })
+}
