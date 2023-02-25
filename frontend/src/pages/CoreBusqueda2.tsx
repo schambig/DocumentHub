@@ -3,21 +3,22 @@
 //import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 //import { SelectionContext } from '../context/SelectionContext';
 import { Container, Grid } from "@mui/material";
-import React, { useContext } from 'react';
+//import React, { useContext } from 'react';
+import React from 'react';
 import { NavBar } from '../common/NavBar';
 import { LatMenu } from '../components/LatMenu';
 import '../styles/CoreAppV1.css';
 import { TableBusqueda } from '../components/TableBusqueda';
-import { SelectionContext } from '../context/SelectionContext';
+//import { SelectionContext } from '../context/SelectionContext';
 
 export const AppBusquedav2: React.FunctionComponent<{}> = (): JSX.Element => {
-  const { sessionRol } = useContext(SelectionContext);
+  //const { sessionRol } = useContext(SelectionContext);
 
   return (
     <Container>
 
-      {sessionRol ? (
-        sessionRol <= 3 ? (
+      {/* {sessionRol ? (
+        sessionRol <= 3 ? ( */}
           <div>
             <Grid sx={{
               display: 'flex',
@@ -38,9 +39,9 @@ export const AppBusquedav2: React.FunctionComponent<{}> = (): JSX.Element => {
             </Grid>
             <TableBusqueda />
           </div>
-        ) : null
+        {/* ) : null
       ) : <h1>Prohibido el acceso sin Rol </h1>
-      }
+      } */}
 
 
       <h1 style={{ display: 'flex' }}>Estoy en Busqueda 2</h1>

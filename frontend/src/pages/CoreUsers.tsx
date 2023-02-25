@@ -1,17 +1,19 @@
 import { Container, Grid } from '@mui/material';
-import React, { useContext } from 'react';
+// import React, { useContext } from 'react';
+import React from 'react';
+
 import { NavBar } from '../common/NavBar';
 import { UserEditor } from '../components/LoginCrud';
-import { SelectionContext } from '../context/SelectionContext';
+// import { SelectionContext } from '../context/SelectionContext';
 
 export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
-  const { sessionRol } = useContext(SelectionContext);
+  // const { sessionRol } = useContext(SelectionContext);
 
   return (
     <Container>
 
-      {sessionRol ? (
-        sessionRol === 1 ? (
+      {/* {sessionRol ? (
+        sessionRol === 1 ? ( */}
           <div>
 
             <Grid sx={{
@@ -36,9 +38,9 @@ export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
 
             </Grid>
           </div>
-        ) : null
+        {/* ) : null
       ) : <h1>Prohibido el acceso sin Rol </h1>
-      }
+      } */}
       <h1>Estoy en CoreUser</h1>
     </Container>
   )

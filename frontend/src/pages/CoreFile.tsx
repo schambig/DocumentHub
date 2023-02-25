@@ -1,18 +1,19 @@
 import { Container, Grid } from '@mui/material';
-import React, { useContext } from 'react';
+//import React, { useContext } from 'react';
+import React from 'react';
 import { NavBar } from '../common/NavBar';
 import UploadFiles from '../components/FileUpload';
 import { LatMenu } from '../components/LatMenu';
-import { SelectionContext } from '../context/SelectionContext';
+//import { SelectionContext } from '../context/SelectionContext';
 
 export const AppFile: React.FunctionComponent<{}> = (): JSX.Element => {
-  const { sessionRol } = useContext(SelectionContext);
+  //const { sessionRol } = useContext(SelectionContext);
   return (
     <Container>
 
-      {
+      {/* {
         sessionRol ? (
-          sessionRol <= 2 ? (
+          sessionRol <= 2 ? ( */}
             <div>
               <Grid sx={{
                 display: 'flex',
@@ -33,9 +34,9 @@ export const AppFile: React.FunctionComponent<{}> = (): JSX.Element => {
                 <UploadFiles />
               </Grid>
             </div>
-          ) : null
+          {/* ) : null
         ) : <h1>Prohibido sin Rol</h1>
-      }
+      } */}
 
       <h1>Estoy en CoreFile</h1>
     </Container>

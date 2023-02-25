@@ -1,14 +1,15 @@
-import React, { useContext } from 'react';
+// import React, { useContext } from 'react';
+import React from 'react';
 import { Container, Grid } from '@mui/material';
 import { NavBar } from '../common/NavBar'
-import { SelectionContext } from '../context/SelectionContext';
+// import { SelectionContext } from '../context/SelectionContext';
 
 export const AppProfile: React.FunctionComponent<{}> = (): JSX.Element => {
-  const { sessionRol } = useContext(SelectionContext);
+  // const { sessionRol } = useContext(SelectionContext);
   return (
     <Container>
-      {sessionRol ? (
-        sessionRol <= 3 ? (
+      {/* {sessionRol ? (
+        sessionRol <= 3 ? ( */}
           <div>
             <Grid sx={{
               display: 'flex',
@@ -30,9 +31,9 @@ export const AppProfile: React.FunctionComponent<{}> = (): JSX.Element => {
 
             </Grid>
           </div>
-        ) : null
+        {/* ) : null
       ) : <h1>Prohibido sin ROL</h1>
-      }
+      } */}
 
 
       <h1>Estoy en Profile</h1>
