@@ -22,7 +22,7 @@ import { SelectionContext } from '../context/SelectionContext';
 
 
 interface deFaultAPI {
-    id: number | null
+    id: string | null
     name: string
 }
 
@@ -34,7 +34,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
 
     const initialAPI: deFaultAPI[] = [
         {
-            id: null,
+            id: '',
             name: 'Loading...'
         }
     ]
@@ -196,7 +196,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
     const handleDisableProducto = (objInv:newInversionista|null, objDoc:newTipoDoc|null) => {
         // verificar que Inversionista este seleccionado
         // para habilitar el campo producto
-        if(objInv && objDoc && (objDoc.tipo !== 'Ficha Cliente' )){
+        if(objInv && objDoc && (objDoc.nombre !== 'Ficha Cliente' )){
             return false;
         }else{
             setSelectedOption3(null);

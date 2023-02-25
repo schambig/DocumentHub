@@ -1,19 +1,22 @@
 export interface tipoDoc{
-    id: number,
-    tipo: string,
+    id: string,
+    nombre: string,
+    descripcion?: string
 }
 
 export interface newTipoDoc{
-    id: number,
+    id: string,
     name: string,
-    tipo: string,
+    nombre: string,
+    descripcion?: string
 }
 
 export function convDOC(doc:tipoDoc ): newTipoDoc {
     return {
       id: doc.id,
-      name: doc.tipo,
-      tipo: doc.tipo,
+      name: doc.nombre,
+      nombre: doc.nombre,
+      descripcion: doc.descripcion ?? ''
     };
 }
 
@@ -26,19 +29,19 @@ export function convDocM(docM:tipoDoc[]): newTipoDoc[] {
 // export const dataDocumento:Array<tipoDoc> = [
 //     {
 //         id: 1,
-//         tipo: 'Contrato'
+//         nombre: 'Contrato'
 //     },
 //     {
 //         id: 2,
-//         tipo: 'Anexo 1'
+//         nombre: 'Anexo 1'
 //     },
 //     {
 //         id: 3,
-//         tipo: 'Anexo 2'
+//         nombre: 'Anexo 2'
 //     },
 //     {
 //         id: 4,
-//         tipo: 'Ficha Cliente'
+//         nombre: 'Ficha Cliente'
 //     }
 // ]
 

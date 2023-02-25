@@ -14,7 +14,7 @@ import {tipoDoc, newTipoDoc} from '../assets/data_documento'
 import {LinearProgress} from '@mui/material';
 import { auto } from '@popperjs/core';
 import {DocumentPreviewButton} from './VisualFile';
-
+import {tDocumento} from '../assets/data_tDocumento'
 
 export const TableBusqueda: React.FunctionComponent<{}> = ():JSX.Element => {
 
@@ -43,55 +43,51 @@ const [loadState, setLoadState] = useState<boolean>(true);
     tipoDocumento: string | null
     nombreFile: string | null
     userSubida: string | null
-    userActualiza: string | null
-    userDelete: string | null
-    fechaSubida: string | null
-    fechaActualiza: string | null
-    fechaDelete: string | null
+    fechaSubida: Date | null
     uuiAws: string | null
-    codAwsUrl: string | null
+    urlAwsUrl: string | null
   }
 
-  interface tDocumentAPI{
-    id: number
-    nombreFile: string
-    userSubida: number | null
-    userActualiza: number | null
-    userDelete: number | null
-    fechaSubida: string | null
-    fechaActualiza: string | null
-    fechaDelete: string | null,
-    uuiAws: string 
-    codAwsUrl: string 
-    idCategoria: number | null
-    idProducto: number | null
-    idInversionista: number | null
-    idTipoDocumento: number
-  }
+  // interface tDocumentAPI{
+  //   id: number
+  //   nombreFile: string
+  //   userSubida: number | null
+  //   userActualiza: number | null
+  //   userDelete: number | null
+  //   fechaSubida: string | null
+  //   fechaActualiza: string | null
+  //   fechaDelete: string | null,
+  //   uuiAws: string 
+  //   codAwsUrl: string 
+  //   idCategoria: number | null
+  //   idProducto: number | null
+  //   idInversionista: number | null
+  //   idTipoDocumento: number
+  // }
 
-  interface identificationAPI {
-    id: number
-    descripcion: string
-  }
+  // interface identificationAPI {
+  //   id: number
+  //   descripcion: string
+  // }
 
-  interface userAPI{
-    id: number
-    idRol: number
-    status: boolean
-    nombreUser: string
-    email: string
-    password: string
-  }
+  // interface userAPI{
+  //   id: number
+  //   idRol: number
+  //   status: boolean
+  //   nombreUser: string
+  //   email: string
+  //   password: string
+  // }
 
   const [tablaLoad, setTablaLoad] = useState<Tabla[]>([])
 
-  let urlTablaDocumento = 'http://localhost:8000/tDocumento';
-  let urlTablaInversionista = 'http://localhost:8000/tInversionista'; 
-  let urlTablaTipoDocumento = 'http://localhost:8000/tTipoDocumento';
-  let urlTablaProducto = 'http://localhost:8000/tProducto';
-  let urlTablaCategoria = 'http://localhost:8000/tCategoria';
-  let urlTablaTipoIdentificacion = 'http://localhost:8000/tTipoIdentificacion';
-  let urlTablaUsuarios = 'http://localhost:8000/tUsuarios';
+  let urlTablaDocumento = 'http://localhost:8000/api/documentos';
+  let urlTablaInversionista = 'http://localhost:8000/api/inversionistas'; 
+  let urlTablaTipoDocumento = 'http://localhost:8000/api/tipo-documentos';
+  let urlTablaProducto = 'http://localhost:8000/api/productos';
+  let urlTablaCategoria = 'http://localhost:8000/api/categorias';
+   // let urlTablaTipoIdentificacion = 'http://localhost:8000/tTipoIdentificacion';
+   // let urlTablaUsuarios = 'http://localhost:8000/api/usuarios';
 
   async function obtenerDato(fil: any, url: string): Promise<any> {
     if (fil !== null) {
@@ -113,49 +109,45 @@ const [loadState, setLoadState] = useState<boolean>(true);
       }
       return res.json();
       })
-      .then((data:tDocumentAPI[]) => {
+      .then((data:tDocumento[]) => {
         let idnro = 1;
         if(filtro.inversionista) {
-          data = data.filter(dato => dato.idInversionista === filtro.inversionista?.id);
+          data = data.filter(dato => dato.tablaInversionistaId === filtro.inversionista?.id);
         }
         if(filtro.tipoDocumento){
-          data = data.filter(dato => dato.idTipoDocumento === filtro.tipoDocumento?.id);
+          data = data.filter(dato => dato.tablaTipoDocumentoId === filtro.tipoDocumento?.id);
         }
         if(filtro.producto){
-          data = data.filter(dato => dato.idProducto === filtro.producto?.id);
+          data = data.filter(dato => dato.tablaProductoId === filtro.producto?.id);
         }
         if(filtro.categoria){
-          data = data.filter(dato => dato.idCategoria === filtro.categoria?.id);
+          data = data.filter(dato => dato.tablaCategoriaId === filtro.categoria?.id);
         }
         data.forEach(async(element) => {
-          const inversionistaE: inVersionista | newInversionista = await obtenerDato(filtro.inversionista, `${urlTablaInversionista}/${element.idInversionista}`);
-          const productoE: proDucto | newProDucto = await obtenerDato(filtro.producto, `${urlTablaProducto}/${element.idProducto}`);
-          const categoriaE: caTegoria | newCategoria= await obtenerDato(filtro.categoria, `${urlTablaCategoria}/${element.idCategoria}`);
-          const tipoDocumentoE: tipoDoc | newTipoDoc = await obtenerDato(filtro.tipoDocumento, `${urlTablaTipoDocumento}/${element.idTipoDocumento}`);
-          const tipoIdentificacionE: identificationAPI = await obtenerDato(null, `${urlTablaTipoIdentificacion}/${inversionistaE.tipoDoc}`);
-          const userSubidaE: userAPI = await obtenerDato(null, `${urlTablaUsuarios}/${element.userSubida}`);
-          const userActualizaE: userAPI = await obtenerDato(null, `${urlTablaUsuarios}/${element.userActualiza}`);
-          const userDeleteE: userAPI = await obtenerDato(null, `${urlTablaUsuarios}/${element.userDelete}`);
+          const inversionistaE: inVersionista | newInversionista = await obtenerDato(filtro.inversionista, `${urlTablaInversionista}/${element.tablaInversionistaId}`);
+          const productoE: proDucto | newProDucto = await obtenerDato(filtro.producto, `${urlTablaProducto}/${element.tablaProductoId}`);
+          const categoriaE: caTegoria | newCategoria= await obtenerDato(filtro.categoria, `${urlTablaCategoria}/${element.tablaCategoriaId}`);
+          const tipoDocumentoE: tipoDoc | newTipoDoc = await obtenerDato(filtro.tipoDocumento, `${urlTablaTipoDocumento}/${element.tablaTipoDocumentoId}`);
+          // const tipoIdentificacionE: identificationAPI = await obtenerDato(null, `${urlTablaTipoIdentificacion}/${inversionistaE.tipoDoc}`);
+          // const userSubidaE: userAPI = await obtenerDato(null, `${urlTablaUsuarios}/${element.userSubida}`);
+          // const userActualizaE: userAPI = await obtenerDato(null, `${urlTablaUsuarios}/${element.userActualiza}`);
+          // const userDeleteE: userAPI = await obtenerDato(null, `${urlTablaUsuarios}/${element.userDelete}`);
 
           const tablaRow:Tabla = {
             id: idnro++,
-            nombreInversionista: `${inversionistaE?.apPat || ''} ${inversionistaE?.apMat || ''}, ${inversionistaE?.nombre || ''}`,
-            tipoDoc: tipoIdentificacionE.descripcion,
-            numDoc: inversionistaE.numDoc,
-            PEP: inversionistaE.PEP ? 'Si': 'No',
-            codigoProducto: productoE.codigo,
-            nombreProducto: productoE.nombre,
-            descripcionCategoria: categoriaE.descripcion,
-            tipoDocumento: tipoDocumentoE.tipo,
+            nombreInversionista: `${inversionistaE?.apMaterno || ''} ${inversionistaE?.apMaterno || ''}, ${inversionistaE?.nombres || ''}`,
+            tipoDoc: tipoDocumentoE.nombre,
+            numDoc: inversionistaE.nroIdentificacion,
+            PEP: inversionistaE.pep ? 'Si': 'No',
+            codigoProducto: productoE.codProducto,
+            nombreProducto: productoE.nombreProducto,
+            descripcionCategoria: categoriaE.tipo,
+            tipoDocumento: tipoDocumentoE.nombre,
             nombreFile: element.nombreFile,
-            userSubida: userSubidaE.nombreUser,
-            userActualiza: userActualizaE.nombreUser,
-            userDelete: userDeleteE.nombreUser,
+            userSubida: element.userSubida,
             fechaSubida: element.fechaSubida,
-            fechaActualiza: element.fechaActualiza,
-            fechaDelete: element.fechaDelete,
-            uuiAws: element.uuiAws,
-            codAwsUrl: element.codAwsUrl
+            uuiAws: element.uuidAws,
+            urlAwsUrl: element.urlAws,
           }
           dataTable.push(tablaRow);
         })
@@ -218,7 +210,6 @@ const [loadState, setLoadState] = useState<boolean>(true);
   // const [urlData, setUrlData] = useState<String>('')
   // version Render Boton
   const columns: GridColDef[] = [
-    
     
     { 
       field: 'codAwsUrl',

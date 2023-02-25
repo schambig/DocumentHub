@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 // import logo from '../logo.svg';
 import { Button, Container, Grid, Typography } from "@mui/material";
 import { NavBar } from '../common/NavBar';
@@ -8,14 +8,14 @@ import '../styles/CoreAppV1.css';
 //import { inherits } from '@babel/types';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { SelectionContext } from '../context/SelectionContext';
+//import { SelectionContext } from '../context/SelectionContext';
 
 
 export const AppBusqueda: React.FunctionComponent<{}> = ():JSX.Element => {
 
 //// importar 4 datos 
-const { selectedOption1, selectedOption2, selectedOption3, selectedOption4 } = useContext(SelectionContext);
-const { setSelectedOption1, setSelectedOption2, setSelectedOption3, setSelectedOption4 } = useContext(SelectionContext);
+//const { selectedOption1, selectedOption2, selectedOption3, selectedOption4 } = useContext(SelectionContext);
+//const { setSelectedOption1, setSelectedOption2, setSelectedOption3, setSelectedOption4 } = useContext(SelectionContext);
   
 //export default function AppBusqueda(){
   const columns: GridColDef[] = [

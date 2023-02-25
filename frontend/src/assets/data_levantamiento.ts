@@ -1,19 +1,19 @@
 export interface caTegoria{
-    id: number,
-    descripcion: string,
+    id: string,
+    tipo: string,
 }
 
 export interface newCategoria{
-    id: number,
+    id: string,
     name: string,
-    descripcion: string,
+    tipo: string,
 }
 
 export function convCate(lev:caTegoria ): newCategoria {
     return {
       id: lev.id,
-      name: lev.descripcion,
-      descripcion: lev.descripcion,
+      name: lev.tipo,
+      tipo: lev.tipo,
     };
 }
 
@@ -26,79 +26,79 @@ export function convCateM(levM:caTegoria[]): newCategoria[] {
 // export const dataLevant_Emi:Array<tCategoria> = [
 //     {
 //         id: 1,
-//         descripcion: 1
+//         tipo: 1
 //     },
 //     {
 //         id: 2,
-//         descripcion: 2
+//         tipo: 2
 //     },
 //     {
 //         id: 3,
-//         descripcion: 3
+//         tipo: 3
 //     },
 //     {
 //         id: 4,
-//         descripcion: 4
+//         tipo: 4
 //     },
 //     {
 //         id: 5,
-//         descripcion: 5
+//         tipo: 5
 //     },
 //     {
 //         id: 6,
-//         descripcion: 6
+//         tipo: 6
 //     },
 //     {
 //         id: 7,
-//         descripcion: 7
+//         tipo: 7
 //     },
 //     {
 //         id: 8,
-//         descripcion: 8
+//         tipo: 8
 //     },
 //     {
 //         id: 9,
-//         descripcion: 9
+//         tipo: 9
 //     },
 //     {
 //         id: 10,
-//         descripcion: 10
+//         tipo: 10
 //     },
 //     {
 //         id: 11,
-//         descripcion: 11
+//         tipo: 11
 //     },
 //     {
 //         id: 12,
-//         descripcion: 12
+//         tipo: 12
 //     },
 //     {
 //         id: 13,
-//         descripcion: 13
+//         tipo: 13
 //     },
 //     {
 //         id: 14,
-//         descripcion: 14
+//         tipo: 14
 //     },
 //     {
 //         id: 15,
-//         descripcion: 15
+//         tipo: 15
 //     },
 //     {
 //         id: 17,
-//         descripcion: 17
+//         tipo: 17
 //     },
 //     {
 //         id: 18,
-//         descripcion: 18
+//         tipo: 18
 //     },
 //     {
 //         id: 19,
-//         descripcion: 19
+//         tipo: 19
 //     },
 //     {
 //         id: 20,
-//         descripcion: 20
+//         tipo: 20
 //     }
 // ]
 

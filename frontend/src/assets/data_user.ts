@@ -1,16 +1,22 @@
+export enum RolUsuario {
+    ADMIN = 'ADMIN',
+    DATAUSER = 'DATAUSER',
+    USER = 'USER',
+  }
+
 export interface usUario{
-    id: number
-    idRol: number
-    status: boolean
-    nombreUser: string
+    id: string
+    userNombre: string
     email: string
     password: string
+    estado: boolean
+    rol: RolUsuario
 }
 
 export interface usUarioSecret{
-    id: number
-    idRol: number
-    status: boolean
-    nombreUser: string
+    id: string
+    userNombre: string
     email: string
+    estado: boolean
+    rol: RolUsuario
 }

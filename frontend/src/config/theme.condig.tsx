@@ -1,6 +1,5 @@
 import React from "react";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import { info } from "console";
 
 type ThemeProp = {
     children: JSX.Element;

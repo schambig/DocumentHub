@@ -18,7 +18,7 @@ import * as React from 'react';
 import { useNavigate } from "react-router-dom";
 import { SelectionContext } from '../context/SelectionContext';
 import { useContext } from 'react';
-import { usUario } from '../assets/data_user';
+import { usUario, RolUsuario } from '../assets/data_user';
 
 // const token = jwt.sign({ /* payload */ }, 'secret');
 // interface User {
@@ -98,13 +98,15 @@ export function LoginMenu() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     //Get the DB data
-    fetch('http://localhost:8000/tUsuarios')
+    fetch('http://localhost:8000/api/usuarios')
       .then(response => response.json())
       .then((item) => {
         const elemento:usUario[] = item.filter((dato:usUario) => dato.email === email && dato.password === password)
         if (elemento.length) {
           // captar la data de idrol y settear el variable sessionRol
-          setSessionRol(elemento[0].idRol)
+          const role = elemento[0].rol
+          const roleSet = role===RolUsuario.ADMIN ? (1):(role===RolUsuario.DATAUSER ? (2):(role===RolUsuario.USER ? (3):(null)))
+          setSessionRol(roleSet)
           navigate("/app")
         }
         // console.log(item[0].email);
