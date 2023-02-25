@@ -15,3 +15,17 @@ categoriaRouter.get("/", async (request: Request, response: Response) => {
     return response.status(500).json(error.message)
   }
 })
+
+// GET: A single Category by id
+categoriaRouter.get("/:id", async (request: Request, response: Response) => {
+  const id: string = request.params.id;
+  try {
+    const categoria = await CategoriaService.getCategoria(id)
+    if (categoria) {
+      return response.status(200).json(categoria)
+    }
+    return response.status(404).json("Inversionista could not be found")
+  } catch (error: any) {
+    return response.status(500).json(error.message);
+  }
+})
