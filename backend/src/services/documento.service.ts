@@ -9,6 +9,10 @@ export const listDocumentos = async () => {
       fechaSubida: true,
       uuidAws: true,
       urlAws: true,
+      tablaInversionistaId: true,
+      tablaProductoId: true,
+      tablaCategoriaId: true,
+      tablaTipoDocumentoId: true
     }
   })
 }

@@ -6,6 +6,7 @@ export const listUsuarios = async () => {
       id: true,
       userNombre: true,
       email: true,
+      password: true,
       estado: true,
       rol: true
     }
