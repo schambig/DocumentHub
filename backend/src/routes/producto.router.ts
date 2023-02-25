@@ -15,3 +15,17 @@ productoRouter.get("/", async (request: Request, response: Response) => {
     return response.status(500).json(error.message)
   }
 })
+
+// GET: A single Producto by id
+productoRouter.get("/:id", async (request: Request, response: Response) => {
+  const id: string = request.params.id;
+  try {
+    const producto = await ProductoService.getProducto(id)
+    if (producto) {
+      return response.status(200).json(producto)
+    }
+    return response.status(404).json("Producto could not be found")
+  } catch (error: any) {
+    return response.status(500).json(error.message)
+  }
+})
