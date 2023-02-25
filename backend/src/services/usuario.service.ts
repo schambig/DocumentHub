@@ -12,3 +12,11 @@ export const listUsuarios = async () => {
     }
   })
 }
+
+export const getUsuario = async (id: string) => {
+  return db.tablaUsuarios.findUnique({
+    where: {
+      id: id
+    }
+  })
+}
