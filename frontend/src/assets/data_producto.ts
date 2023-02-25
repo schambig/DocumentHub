@@ -1,22 +1,22 @@
 export interface proDucto{
-    id: number,
-    codigo: string,
-    nombre: string,
+    id: string,
+    codProducto: string,
+    nombreProducto: string,
 }
 
 export interface newProDucto{
-    id: number,
+    id: string,
     name: string,
-    codigo: string,
-    nombre: string,
+    codProducto: string,
+    nombreProducto: string,
 }
 
 export function convProducto(pro:proDucto ): newProDucto {
     return {
       id: pro.id,
-      name: pro.codigo + ' ► '+ pro.nombre,
-      codigo: pro.codigo,
-      nombre: pro.nombre,
+      name: pro.codProducto + ' ► '+ pro.nombreProducto,
+      codProducto: pro.codProducto,
+      nombreProducto: pro.nombreProducto,
     };
 }
 
@@ -29,103 +29,103 @@ export function convProductoM(proM:proDucto[]): newProDucto[] {
 // export const dataProducto:Array<proDucto> = [
 //     {
 //         id: 1,
-//         nombre: 'Fondo Edifica Core - Renta Fija'
+//         nombreProducto: 'Fondo Edifica Core - Renta Fija'
 //     },
 //     {
 //         id: 2,
-//         nombre: 'Fondo Edifica Core'
+//         nombreProducto: 'Fondo Edifica Core'
 //     },
 //     {
 //         id: 3,
-//         nombre: 'Fondo de Derivados Financieros'
+//         nombreProducto: 'Fondo de Derivados Financieros'
 //     },
 //     {
 //         id: 4,
-//         nombre: 'Fondo Edifica Core II'
+//         nombreProducto: 'Fondo Edifica Core II'
 //     },
 //     {
 //         id: 5,
-//         nombre: 'Fondo Praedium'
+//         nombreProducto: 'Fondo Praedium'
 //     },
 //     {
 //         id: 6,
-//         nombre: 'Bonos Corporativos Praedium'
+//         nombreProducto: 'Bonos Corporativos Praedium'
 //     },
 //     {
 //         id: 7,
-//         nombre: 'Fondo TLR'
+//         nombreProducto: 'Fondo TLR'
 //     },
 //     {
 //         id: 8,
-//         nombre: 'Fondo Performance'
+//         nombreProducto: 'Fondo Performance'
 //     },
 //     {
 //         id: 9,
-//         nombre: 'Fondo Seguridad Core'
+//         nombreProducto: 'Fondo Seguridad Core'
 //     },
 //     {
 //         id: 10,
-//         nombre: 'Bono FEC II'
+//         nombreProducto: 'Bono FEC II'
 //     },
 //     {
 //         id: 11,
-//         nombre: 'Papeles Comerciales - FEC II'
+//         nombreProducto: 'Papeles Comerciales - FEC II'
 //     },
 //     {
 //         id: 12,
-//         nombre: 'Fondo Equilibrio'
+//         nombreProducto: 'Fondo Equilibrio'
 //     },
 //     {
 //         id: 13,
-//         nombre: 'Fondo Oportunidad'
+//         nombreProducto: 'Fondo Oportunidad'
 //     },
 //     {
 //         id: 14,
-//         nombre: 'Bono USA'
+//         nombreProducto: 'Bono USA'
 //     },
 //     {
 //         id: 15,
-//         nombre: 'Bono TRD Artline'
+//         nombreProducto: 'Bono TRD Artline'
 //     },
 //     {
 //         id: 16,
-//         nombre: 'FDI 1A'
+//         nombreProducto: 'FDI 1A'
 //     },
 //     {
 //         id: 17,
-//         nombre: 'FDI 1B'
+//         nombreProducto: 'FDI 1B'
 //     },
 //     {
 //         id: 18,
-//         nombre: 'Fondo Edifica Global'
+//         nombreProducto: 'Fondo Edifica Global'
 //     },
 //     {
 //         id: 19,
-//         nombre: 'Fondo Edifica V'
+//         nombreProducto: 'Fondo Edifica V'
 //     },
 //     {
 //         id: 20,
-//         nombre: 'FSPD'
+//         nombreProducto: 'FSPD'
 //     },
 //     {
 //         id: 21,
-//         nombre: 'FSPEVC'
+//         nombreProducto: 'FSPEVC'
 //     },
 //     {
 //         id: 22,
-//         nombre: 'FIRE'
+//         nombreProducto: 'FIRE'
 //     },
 //     {
 //         id: 23,
-//         nombre: 'FSGOP'
+//         nombreProducto: 'FSGOP'
 //     },
 //     {
 //         id: 24,
-//         nombre: 'Fondo Sabbi Real Estate'
+//         nombreProducto: 'Fondo Sabbi Real Estate'
 //     },
 //     {
 //         id: 25,
-//         nombre: 'BSGOP'
+//         nombreProducto: 'BSGOP'
 //     }
 // ]
 

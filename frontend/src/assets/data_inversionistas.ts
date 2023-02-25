@@ -1,34 +1,42 @@
+//{DocIdent} from '../../../backend/prisma/schema.prisma'
+
+export enum DocIdent {
+    DNI = 'DNI',
+    CARNETEXTRANJERIA = 'CARNETEXTRANJERIA',
+    PASAPORTE = 'PASAPORTE',
+  }
+
 export interface inVersionista{
-    id: number,
-    nombre: string,
-    apPat: string,
-    apMat: string,
-    tipoDoc: number,
-    numDoc: string,
-    PEP: boolean,
+    id: string,
+    nombres: string,
+    apPaterno: string,
+    apMaterno: string,
+    tipoIdentificacion: DocIdent,
+    nroIdentificacion: string,
+    pep: boolean,
 }
 
 export interface newInversionista{
-    id: number,
+    id: string,
     name: string,
-    nombre: string,
-    apPat: string,
-    apMat: string,
-    tipoDoc: number,
-    numDoc: string,
-    PEP: boolean,
+    nombres: string,
+    apPaterno: string,
+    apMaterno: string,
+    tipoIdentificacion: DocIdent,
+    nroIdentificacion: string,
+    pep: boolean,
 }
 
 export function convertirInver(inver: inVersionista): newInversionista {
     return {
       id: inver.id,
-      name: inver.numDoc + ' ► ' + inver.apPat + ' ' + inver.apMat + ', ' + inver.nombre,
-      nombre: inver.nombre,
-      apPat: inver.apPat,
-      apMat: inver.apMat,
-      tipoDoc: inver.tipoDoc,
-      numDoc: inver.numDoc,
-      PEP: inver.PEP
+      name: inver.nroIdentificacion + ' ► ' + inver.apPaterno + ' ' + inver.apMaterno + ', ' + inver.nombres,
+      nombres: inver.nombres,
+      apPaterno: inver.apPaterno,
+      apMaterno: inver.apMaterno,
+      tipoIdentificacion: inver.tipoIdentificacion,
+      nroIdentificacion: inver.nroIdentificacion,
+      pep: inver.pep
     };
 }
 
@@ -38,7 +46,7 @@ export function converInverM(inverM: inVersionista[]): newInversionista[] {
     )
 }
 
-// const tipoDoc:tDOC = {
+// const tipoIdentificacion:tDOC = {
 //     dni: 'dni',
 //     carnet: 'carnet',
 //     pasaporte: 'pasaporte',
@@ -47,67 +55,67 @@ export function converInverM(inverM: inVersionista[]): newInversionista[] {
 // export const dataInversionista:Array<inversionista> = [
 //     {
 //         id: 3,
-//         nombre: 'Juan Manuel',
-//         apPat: 'Villa',
-//         apMat: 'Rushton', 
-//         tipoDoc: 'DNI',
-//         numDoc: 908070456,
+//         nombres: 'Juan Manuel',
+//         apPaterno: 'Villa',
+//         apMaterno: 'Rushton', 
+//         tipoIdentificacion: 'DNI',
+//         nroIdentificacion: 908070456,
 //     },
 //     {
 //         id: 4,
-//         nombre: 'Rodrigo Alessandro',
-//         apPat: 'De Luzio',
-//         apMat: 'Poquioma', 
-//         tipoDoc: 'DNI',
-//         numDoc: 908060154,
+//         nombres: 'Rodrigo Alessandro',
+//         apPaterno: 'De Luzio',
+//         apMaterno: 'Poquioma', 
+//         tipoIdentificacion: 'DNI',
+//         nroIdentificacion: 908060154,
 //     },
 //     {
 //         id: 5,
-//         nombre: 'Elisa Pamela',
-//         apPat: 'LTD',
-//         apMat: 'Calderon', 
-//         tipoDoc: 'CARNET',
-//         numDoc: 917051362,
+//         nombres: 'Elisa Pamela',
+//         apPaterno: 'LTD',
+//         apMaterno: 'Calderon', 
+//         tipoIdentificacion: 'CARNET',
+//         nroIdentificacion: 917051362,
 //     },
 //     {
 //         id: 6,
-//         nombre: 'Mardely del Rosario',
-//         apPat: 'Alfaro',
-//         apMat: 'Stanic', 
-//         tipoDoc: 'DNI',
-//         numDoc: 947071556,
+//         nombres: 'Mardely del Rosario',
+//         apPaterno: 'Alfaro',
+//         apMaterno: 'Stanic', 
+//         tipoIdentificacion: 'DNI',
+//         nroIdentificacion: 947071556,
 //     },
 //     {
 //         id: 7,
-//         nombre: 'Luis Antonio',
-//         apPat: 'Velasco',
-//         apMat: 'Marcelo', 
-//         tipoDoc: 'CARNET',
-//         numDoc: 947032556,
+//         nombres: 'Luis Antonio',
+//         apPaterno: 'Velasco',
+//         apMaterno: 'Marcelo', 
+//         tipoIdentificacion: 'CARNET',
+//         nroIdentificacion: 947032556,
 //     },
 //     {
 //         id: 8,
-//         nombre: 'Nataly',
-//         apPat: 'Guanilo',
-//         apMat: 'Casabonne', 
-//         tipoDoc: 'DNI',
-//         numDoc: 987654321,
+//         nombres: 'Nataly',
+//         apPaterno: 'Guanilo',
+//         apMaterno: 'Casabonne', 
+//         tipoIdentificacion: 'DNI',
+//         nroIdentificacion: 987654321,
 //     },
 //     {
 //         id: 9,
-//         nombre: 'Ericka Sofia',
-//         apPat: 'Rossi de Malaga',
-//         apMat: 'Flores', 
-//         tipoDoc: 'DNI',
-//         numDoc: 654987321,
+//         nombres: 'Ericka Sofia',
+//         apPaterno: 'Rossi de Malaga',
+//         apMaterno: 'Flores', 
+//         tipoIdentificacion: 'DNI',
+//         nroIdentificacion: 654987321,
 //     },
 //     {
 //         id: 10,
-//         nombre: 'Oscar Rodolfo',
-//         apPat: 'Picasso',
-//         apMat: 'Jara', 
-//         tipoDoc: 'DNI',
-//         numDoc: 987123654,
+//         nombres: 'Oscar Rodolfo',
+//         apPaterno: 'Picasso',
+//         apMaterno: 'Jara', 
+//         tipoIdentificacion: 'DNI',
+//         nroIdentificacion: 987123654,
 //     }
 // ]
 

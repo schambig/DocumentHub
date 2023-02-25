@@ -83,7 +83,7 @@ const handleDisableInversionista = (objD:newTipoDoc|null) => {
 const handleDisableProducto = (objInv:newInversionista|null, objDoc:newTipoDoc|null) => {
   // verificar que Inversionista este seleccionado
   // para habilitar el campo producto
-  if(objInv && objDoc && (objDoc.tipo !== 'Ficha Cliente' )){
+  if(objInv && objDoc && (objDoc.nombre !== 'Ficha Cliente' )){
       return false;
   }else{
       setSelectedOption3(null);

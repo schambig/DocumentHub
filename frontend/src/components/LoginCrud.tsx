@@ -58,31 +58,31 @@
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useEffect, useState } from 'react';
-
-interface User {
-  id: number;
-  idRol: number;
-  status: boolean;
-  nombreUser: string;
-  email: string;
-  password: string;
-}
+import {usUario, RolUsuario} from '../assets/data_user'
+// interface User {
+//   id: number;
+//   idRol: number;
+//   status: boolean;
+//   nombreUser: string;
+//   email: string;
+//   password: string;
+// }
 
 export const UserEditor = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const [userData, setUserData] = useState<User>({
-    id: 0,
-    idRol: 0,
-    status: false,
-    nombreUser: "",
-    email: "",
-    password: "",
+  const [users, setUsers] = useState<usUario[]>([]);
+  const [selectedUser, setSelectedUser] = useState<usUario | null>(null);
+  const [userData, setUserData] = useState<usUario>({
+    id: '',
+    userNombre: '',
+    email: '',
+    password: '',
+    estado: false,
+    rol: RolUsuario.USER
   });
   const [statusCheckbox, setStatusCheckbox] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:8000/tUsuarios")
+    fetch("http://localhost:8000/api/usuarios")
       .then((response) => response.json())
       .then((data) => {
         setUsers(data);
@@ -104,7 +104,7 @@ export const UserEditor = () => {
   };
 
   const handleSave = () => {
-    fetch(`http://localhost:8000/tUsuarios/${userData.id}`, {
+    fetch(`http://localhost:8000/api/usuarios/${userData.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -125,20 +125,20 @@ export const UserEditor = () => {
       <Autocomplete
         id="user-select"
         options={users}
-        getOptionLabel={(user) => user.nombreUser}
+        getOptionLabel={(user) => user.userNombre}
         onChange={(event, newValue) => {
           setSelectedUser(newValue);
           if (newValue) {
             setUserData(newValue);
-            setStatusCheckbox(newValue.status);
+            setStatusCheckbox(newValue.estado);
           } else {
             setUserData({
-              id: 0,
-              idRol: 0,
-              status: false,
-              nombreUser: "",
-              email: "",
-              password: "",
+              id: '',
+              userNombre: '',
+              email: '',
+              password: '',
+              estado: false,
+              rol: RolUsuario.USER
             });
             setStatusCheckbox(false);
           }
@@ -152,15 +152,15 @@ export const UserEditor = () => {
           <TextField
             name="id"
             label="ID"
-            type="number"
+            // type="number"
             value={userData.id}
             onChange={handleChange}
           />
           <TextField
-            name="idRol"
-            label="Role ID"
-            type="number"
-            value={userData.idRol}
+            name="rol"
+            label="Role"
+            // type="number"
+            value={userData.rol}
             onChange={handleChange}
           />
           <FormControlLabel
@@ -174,9 +174,9 @@ export const UserEditor = () => {
             label="Active"
           />
           <TextField
-            name="nombreUser"
+            name="userNombre"
             label="Name"
-            value={userData.nombreUser}
+            value={userData.userNombre}
             onChange={handleChange}
           />
           <TextField
