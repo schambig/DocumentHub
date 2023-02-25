@@ -63,7 +63,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
 
     useEffect(() => {
         const fetchData = () => {
-            fetch('http://localhost:8000/tInversionista')
+            fetch('http://localhost:8000/api/inversionistas')
                 .then(res => {
                     if (!res.ok) {
                         throw new Error('Network response was not ok');
@@ -78,7 +78,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                     console.error('There was a problem with the network request:', error);
                 });
 
-            fetch('http://localhost:8000/tTipoDocumento')
+            fetch('http://localhost:8000/api/tipo-documentos')
                 .then(res => {
                     if (!res.ok) {
                         throw new Error('Network response was not ok');
@@ -92,7 +92,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                 .catch(error => {
                     console.error('There was a problem with the network request:', error);
                 });
-            fetch('http://localhost:8000/tProducto')
+            fetch('http://localhost:8000/api/productos')
                 .then(res => {
                     if (!res.ok) {
                         throw new Error('Network response was not ok');
@@ -107,7 +107,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                     console.error('There was a problem with the network request:', error);
                 });
 
-            fetch('http://localhost:8000/tCategoria')
+            fetch('http://localhost:8000/api/categorias')
                 .then(res => {
                     if (!res.ok) {
                         throw new Error('Network response was not ok');
