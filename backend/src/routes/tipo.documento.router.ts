@@ -15,3 +15,17 @@ tipoDocumentoRouter.get("/", async (request: Request, response: Response) => {
     return response.status(500).json(error.message)
   }
 })
+
+// GET: A single Tipo Documento by id
+tipoDocumentoRouter.get("/:id", async (request: Request, response: Response) => {
+  const id: string = request.params.id;
+  try {
+    const tipoDocumento = await TipoDocumentoService.getTipoDocumento(id)
+    if (tipoDocumento) {
+      return response.status(200).json(tipoDocumento)
+    }
+    return response.status(404).json("Tipo documento could not be found")
+  } catch (error: any) {
+    return response.status(500).json(error.message)
+  }
+})

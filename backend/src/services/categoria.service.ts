@@ -8,3 +8,11 @@ export const listCategoria = async () => {
     }
   })
 }
+
+export const getCategoria = async(id: string) => {
+  return db.tablaCategoria.findUnique({
+    where: {
+      id: id
+    }
+  })
+}

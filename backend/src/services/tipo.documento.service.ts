@@ -9,3 +9,11 @@ export const listTipoDocumento = async () => {
     }
   })
 }
+
+export const getTipoDocumento = async (id: string) => {
+  return db.tablaTipoDocumento.findUnique({
+    where: {
+      id: id
+    }
+  })
+}

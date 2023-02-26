@@ -9,3 +9,11 @@ export const listProductos = async () => {
     }
   })
 }
+
+export const getProducto = async (id: string) => {
+  return db.tablaProducto.findUnique({
+    where: {
+      id: id
+    }
+  })
+}
