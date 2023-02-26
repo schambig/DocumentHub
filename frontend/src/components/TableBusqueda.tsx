@@ -135,8 +135,8 @@ const [loadState, setLoadState] = useState<boolean>(true);
 
           const tablaRow:Tabla = {
             id: idnro++,
-            nombreInversionista: `${inversionistaE?.apMaterno || ''} ${inversionistaE?.apMaterno || ''}, ${inversionistaE?.nombres || ''}`,
-            tipoDoc: tipoDocumentoE.nombre,
+            nombreInversionista: `${inversionistaE?.apPaterno || ''} ${inversionistaE?.apMaterno || ''}, ${inversionistaE?.nombres || ''}`,
+            tipoDoc: inversionistaE.tipoIdentificacion,
             numDoc: inversionistaE.nroIdentificacion,
             PEP: inversionistaE.pep ? 'Si': 'No',
             codigoProducto: productoE.codProducto,
