@@ -1,9 +1,6 @@
-// import React, { useState, useContext, useRef } from 'react';
 import React, { useState, useContext} from 'react';
 import '../styles/CoreAppV1.css';
 import {Box, Button, Container, Grid, Typography} from "@mui/material"
-//import { NavBar } from '../common/NavBar';
-//import { LatMenu } from '../components/LatMenu'
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { SelectionContext } from '../context/SelectionContext';
@@ -21,8 +18,7 @@ export const TableBusqueda: React.FunctionComponent<{}> = ():JSX.Element => {
 //// importar 4 datos 
 const { selectedOption1, selectedOption2, selectedOption3, selectedOption4 } = useContext(SelectionContext);
 const [loadState, setLoadState] = useState<boolean>(true);
-// const { setSelectedOption1, setSelectedOption2, setSelectedOption3, setSelectedOption4 } = useContext(SelectionContext);
-//export default function AppBusqueda(){
+
 
   interface Filtro {
     inversionista: newInversionista | null | inVersionista
@@ -43,41 +39,10 @@ const [loadState, setLoadState] = useState<boolean>(true);
     tipoDocumento: string | null
     nombreFile: string | null
     userSubida: string | null
-    fechaSubida: Date | null
+    fechaSubida: string | null
     uuiAws: string | null
     urlAwsUrl: string | null
   }
-
-  // interface tDocumentAPI{
-  //   id: number
-  //   nombreFile: string
-  //   userSubida: number | null
-  //   userActualiza: number | null
-  //   userDelete: number | null
-  //   fechaSubida: string | null
-  //   fechaActualiza: string | null
-  //   fechaDelete: string | null,
-  //   uuiAws: string 
-  //   codAwsUrl: string 
-  //   idCategoria: number | null
-  //   idProducto: number | null
-  //   idInversionista: number | null
-  //   idTipoDocumento: number
-  // }
-
-  // interface identificationAPI {
-  //   id: number
-  //   descripcion: string
-  // }
-
-  // interface userAPI{
-  //   id: number
-  //   idRol: number
-  //   status: boolean
-  //   nombreUser: string
-  //   email: string
-  //   password: string
-  // }
 
   const [tablaLoad, setTablaLoad] = useState<Tabla[]>([])
 
@@ -86,8 +51,6 @@ const [loadState, setLoadState] = useState<boolean>(true);
   let urlTablaTipoDocumento = 'http://localhost:8000/api/tipo-documentos';
   let urlTablaProducto = 'http://localhost:8000/api/productos';
   let urlTablaCategoria = 'http://localhost:8000/api/categorias';
-   // let urlTablaTipoIdentificacion = 'http://localhost:8000/tTipoIdentificacion';
-   // let urlTablaUsuarios = 'http://localhost:8000/api/usuarios';
 
   async function obtenerDato(fil: any, url: string): Promise<any> {
     if (fil !== null) {
@@ -128,10 +91,21 @@ const [loadState, setLoadState] = useState<boolean>(true);
           const productoE: proDucto | newProDucto = await obtenerDato(filtro.producto, `${urlTablaProducto}/${element.tablaProductoId}`);
           const categoriaE: caTegoria | newCategoria= await obtenerDato(filtro.categoria, `${urlTablaCategoria}/${element.tablaCategoriaId}`);
           const tipoDocumentoE: tipoDoc | newTipoDoc = await obtenerDato(filtro.tipoDocumento, `${urlTablaTipoDocumento}/${element.tablaTipoDocumentoId}`);
-          // const tipoIdentificacionE: identificationAPI = await obtenerDato(null, `${urlTablaTipoIdentificacion}/${inversionistaE.tipoDoc}`);
-          // const userSubidaE: userAPI = await obtenerDato(null, `${urlTablaUsuarios}/${element.userSubida}`);
-          // const userActualizaE: userAPI = await obtenerDato(null, `${urlTablaUsuarios}/${element.userActualiza}`);
-          // const userDeleteE: userAPI = await obtenerDato(null, `${urlTablaUsuarios}/${element.userDelete}`);
+          
+          const fechaString = element.fechaSubida;
+          const fecha = new Date(fechaString);
+
+          const dia = fecha.getDate().toString().padStart(2, '0');
+          const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+          const anio = fecha.getFullYear();
+          const hora = fecha.getHours().toString().padStart(2, '0');
+          const minutos = fecha.getMinutes().toString().padStart(2, '0');
+          const segundos = fecha.getSeconds().toString().padStart(2, '0');
+
+          let fechaFormateada = `${dia}/${mes}/${anio} ${hora}:${minutos}:${segundos}`;
+
+
+
 
           const tablaRow:Tabla = {
             id: idnro++,
@@ -145,7 +119,7 @@ const [loadState, setLoadState] = useState<boolean>(true);
             tipoDocumento: tipoDocumentoE.nombre,
             nombreFile: element.nombreFile,
             userSubida: element.userSubida,
-            fechaSubida: element.fechaSubida,
+            fechaSubida: fechaFormateada,
             uuiAws: element.uuidAws,
             urlAwsUrl: element.urlAws,
           }
@@ -189,30 +163,10 @@ const [loadState, setLoadState] = useState<boolean>(true);
   -----------------------------
   */
 
-  // const columns: GridColDef[] = [
-    
-    
-  //   { field: 'id', headerName: 'Id', width: 50,},
-  //   { field: 'tipoDoc', headerName: 'Tipo Ide', width: 90,},
-  //   { field: 'numDoc', headerName: 'Nro. Identidad', width: 140,},
-  //   { field: 'nombreInversionista', headerName: 'Inversionista', width: 320,},
-  //   { field: 'PEP', headerName: 'PEP', width: 50,},
-  //   { field: 'codigoProducto', headerName: 'Cod', width: 70,},
-  //   { field: 'nombreProducto', headerName: 'Producto', width: 320,},
-  //   { field: 'descripcionCategoria', headerName: 'Categoria', width: 150,},
-  //   { field: 'tipoDocumento', headerName: 'Tipo Doc', width: 100,},
-  //   { field: 'nombreFile', headerName: 'Archivo', width: 140,},
-  //   { field: 'codAwsUrl', headerName: 'URL', width: 100,},
-    
-  // ];
-
-
-  // const [urlData, setUrlData] = useState<String>('')
-  // version Render Boton
   const columns: GridColDef[] = [
     
     { 
-      field: 'codAwsUrl',
+      field: 'urlAwsUrl',
       headerAlign: 'center', 
       headerName: 'URL', 
       align: 'center',
@@ -223,57 +177,17 @@ const [loadState, setLoadState] = useState<boolean>(true);
     },
     { field: 'id', headerName: 'N°', flex:1,align: 'center',headerAlign: 'center'},
     { field: 'nombreFile', headerName: 'Archivo',width: 200,headerAlign: 'center'},
+    { field: 'fechaSubida', headerName: 'Fecha', width: 220,headerAlign: 'center' },
     { field: 'tipoDocumento', headerName: 'Doc', width: 100,align: 'center',headerAlign: 'center'},
     { field: 'PEP', headerName: 'PEP', width: 50, align: 'center',headerAlign: 'center'},
-    { field: 'tipoDoc', headerName: 'Id', width: 90, align: 'center',headerAlign: 'center'},
+    { field: 'tipoDoc', headerName: 'Id', width: 180, align: 'center',headerAlign: 'center'},
     { field: 'numDoc', headerName: 'Nro. Identidad', width: 140,align: 'center',headerAlign: 'center'},
     { field: 'nombreInversionista', headerName: 'Inversionista', width: 320,headerAlign: 'center'},
     { field: 'codigoProducto', headerName: 'Cod', width: 70,align: 'center',headerAlign: 'center'},
     { field: 'nombreProducto', headerName: 'Producto', width: 290,headerAlign: 'center'},
     { field: 'descripcionCategoria', headerName: 'Categoria', width: 150,align: 'center',headerAlign: 'center'},
-    
   ];
 
-// const dataGridRef = useRef(null);
-
-// interface SelectionObject {
-//   selectionModel: Tabla[];
-//   lastSelection: Tabla;
-//   selectionModelUpdate: unknown;
-//   rows: Tabla[];
-// }
-
-// function handleSelectionChange(newSelection:any) {
-//   const selectedRow = newSelection.rows[0];
-//   const rowData = dataGridRef.current?.getRow(selectedRow) as Tabla;
-//   console.log(rowData);
-// }
-
-
-
-
-
-    // { 
-    //   field: 'codAwsUrl', 
-    //   headerName: 'URL', 
-    //   width: 150,
-    //   renderCell: (params) => (
-    //     <Button variant="contained" color="primary" onClick={() => window.open(params.value)}>
-    //       {params.value} Descargar
-    //     </Button>
-    //   ),
-    // },
-
-
-
-  // {
-  //   field: 'nombre_completo',
-  //   headerName: 'Nombre Completo',
-  //   width: 260,
-  //   valueGetter: (params: GridValueGetterParams) =>
-  //     `${params.row.apPat || ''} ${params.row.apMat || ''}, ${params.row.apMat || ''}`,
-  // },
-  
   const filterButton:Filtro = {
     inversionista: selectedOption1,
     tipoDocumento: selectedOption2,
@@ -281,7 +195,6 @@ const [loadState, setLoadState] = useState<boolean>(true);
     categoria: selectedOption4
   }
 
-  
   const rows = tablaLoad;
   const [showTable, setShowTable] = useState(false);
   setTimeout(() => {

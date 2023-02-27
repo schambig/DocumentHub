@@ -146,6 +146,7 @@ function verifyData(){
       // agregar al formData
       formData.append('file', file);
       formData.append('data', JSON.stringify(data));
+      
       // enviar el formData a la ruta especifica de la API
       axios.post('/url-de-la-api', formData, {
         headers: {

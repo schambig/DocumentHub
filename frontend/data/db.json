@@ -496,44 +496,69 @@
   ],
   "tUsuarios": [
     {
-      "id": 1,
-      "idRol": 1,
-      "status": true,
-      "nombreUser": "administrator",
+      "id": "1",
+      "rol": "ADMIN",
+      "estado": true,
+      "userNombre": "administrator",
       "email": "admin@gmail.com",
       "password": "psadmin"
     },
     {
-      "id": 2,
-      "idRol": 2,
-      "status": true,
-      "nombreUser": "readwriteuser",
+      "id": "2",
+      "rol": "DATAUSER",
+      "estado": true,
+      "userNombre": "readwriteuser",
       "email": "rwuser@gmail.com",
       "password": "psrwu"
     },
     {
-      "id": 3,
-      "idRol": 3,
-      "status": true,
-      "nombreUser": "readuser",
+      "id": "3",
+      "rol": "USER",
+      "estado": true,
+      "userNombre": "readuser",
       "email": "r1user@gmail.com",
       "password": "psr1"
     },
     {
-      "id": 4,
-      "idRol": 3,
-      "status": false,
-      "nombreUser": "readuserf",
+      "id": "4",
+      "rol": "USER",
+      "estado": false,
+      "userNombre": "readuserf",
       "email": "r2user@gmail.com",
       "password": "psr2"
     },
     {
-      "id": 5,
-      "idRol": 1,
-      "status": true,
-      "nombreUser": "LibreTest",
+      "id": "5",
+      "rol": "USER",
+      "estado": true,
+      "userNombre": "LibreTest",
       "email": "",
       "password": ""
+    },
+    {
+      "id": "ro_Jolk",
+      "userNombre": "pepito",
+      "email": "locura@gmail",
+      "password": "holasoyyo",
+      "estado": false,
+      "rol": "USER",
+      "status": true
+    },
+    {
+      "id": "b73hsI3",
+      "userNombre": "pepito5",
+      "email": "lol",
+      "password": "123",
+      "estado": true,
+      "rol": "ADMIN"
+    },
+    {
+      "id": "mnsomYE",
+      "userNombre": "nombre2",
+      "email": "no2",
+      "password": "ps2",
+      "estado": true,
+      "rol": "USER"
     }
   ],
   "tInversionistaProducto": [

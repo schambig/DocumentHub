@@ -35,3 +35,11 @@ code {
   opacity: 1;
   background-color: rgb(183, 205, 219,0.4);
 }
+
+.container {
+  width: 100%;
+}
+
+.container > div {
+  flex-grow: 1;
+}

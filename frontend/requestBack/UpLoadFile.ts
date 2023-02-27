@@ -3,6 +3,8 @@ import express from 'express';
 import fileUpload from 'express-fileupload';
 import AWS from 'aws-sdk';
 
+
+// importar variables de entorno
 // uuidv4
 
  const app = express();
@@ -35,16 +37,40 @@ app.post('/uploadfile', async (req, res) => {
       secretAccessKey: 'TU_SECRET_ACCESS_KEY',
     });
 
+
+
     // Generamos un nombre único para el archivo en S3
     const fileName = `${uuidv4()}-${file.name}`;
-
-    // Configuramos los parámetros para subir el archivo a S3
+// // ------------------------------------------------------------
+//     // Configuramos los parámetros para subir el archivo a S3
+//     const params = {
+//       Bucket: 'NOMBRE_DE_TU_BUCKET',
+//       Key: fileName,
+//       Body: file.data,
+//       ACL: 'public-read', // Hacemos el archivo público para poder descargarlo
+//     };
+// // ------------------------------------------------------------
+// // ------------------------------------------------------------
+//     // Subir archivo a S3 con metadato personalizado "originalName"
+//     const params = {
+//       Bucket: process.env.S3_BUCKET_NAME!,
+//       Key: fileName,
+//       Body: file.data,
+//       ContentType: file.mimetype,
+//       Metadata: {originalName: file.name,},
+//     };
+// // ------------------------------------------------------------
+// ------------------------------------------------------------
+    // Subir archivo a S3 con metadato personalizado "originalName"
     const params = {
       Bucket: 'NOMBRE_DE_TU_BUCKET',
       Key: fileName,
       Body: file.data,
-      ACL: 'public-read', // Hacemos el archivo público para poder descargarlo
+      ContentType: file.mimetype,
+      Metadata: {originalName: file.name,},
     };
+// ------------------------------------------------------------
+
 
     // Subimos el archivo a S3
     const response = await s3.upload(params).promise();
@@ -68,14 +94,7 @@ app.listen(3000, () => {
 app.post('/upload', async (req, res) => {
   try {
 
-    // Subir archivo a S3 con metadato personalizado "originalName"
-    const params = {
-      Bucket: process.env.S3_BUCKET_NAME!,
-      Key: fileName,
-      Body: file.data,
-      ContentType: file.mimetype,
-      Metadata: {originalName: file.name,},
-    };
+   
     const s3Response = await s3.upload(params).promise();
     const downloadUrl = s3Response.Location;
     res.send({ url: downloadUrl });

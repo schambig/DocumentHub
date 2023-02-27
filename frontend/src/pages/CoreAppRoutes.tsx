@@ -78,6 +78,7 @@ function AppRoutes() {
   const [isAutocomplete2Enabled, setIsAutocomplete2Enabled] = useState(true);
   const [isAutocomplete3Enabled, setIsAutocomplete3Enabled] = useState(true);
   const [isAutocomplete4Enabled, setIsAutocomplete4Enabled] = useState(true);
+  const [refresh, setRefresh] = useState(false);
 
   return (
     <SelectionContext.Provider
@@ -103,7 +104,9 @@ function AppRoutes() {
         isAutocomplete3Enabled,
         setIsAutocomplete3Enabled,
         isAutocomplete4Enabled,
-        setIsAutocomplete4Enabled
+        setIsAutocomplete4Enabled,
+        refresh,
+        setRefresh,
       }}
     >
     <Router>
