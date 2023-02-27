@@ -41,17 +41,25 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
     
   const handleSave = async (): Promise<void> => {
      // fetch(`http://localhost:8000/api/usuarios/${userData.id}`, {
-    return await axios.post(`http://localhost:8000/api/usuarios/${userData.id}`, {
-        ...userData,
-        estado: statusCheckbox,
-    })
-      .then(response => {
-        setRefresh(!refresh)
-        console.log('Respuesta del servidor:', response.data);
+    if ((userData.userNombre === '' || userData.email === '' || userData.password === '')){
+      return console.log("Error push Data");
+      
+    }else if((userData.userNombre === null || userData.email === null || userData.password === null)){
+      return console.log("Error push Data null");
+    }else{
+      return await axios.post(`http://localhost:8000/api/usuarios/${userData.id}`, {
+          ...userData,
+          estado: statusCheckbox,
       })
-      .catch(error => {
-        console.error('Error al enviar datos:', error);
-      });
+        .then(response => {
+          setRefresh(!refresh)
+          console.log('Respuesta del servidor:', response.data);
+        })
+        .catch(error => {
+          console.error('Error al enviar datos:', error);
+        });
+    }
+    
   }
 
   return (
@@ -90,9 +98,9 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
               label="ROL"
               onChange={handleChangeROL}
             >
-              <MenuItem value={RolUsuario.ADMIN}>Admin</MenuItem>
-              <MenuItem value={RolUsuario.DATAUSER}>Datauser</MenuItem>
-              <MenuItem value={RolUsuario.USER}>User</MenuItem>
+              <MenuItem value={RolUsuario.ADMIN}>{RolUsuario.ADMIN}</MenuItem>
+              <MenuItem value={RolUsuario.DATAUSER}>{RolUsuario.DATAUSER}</MenuItem>
+              <MenuItem value={RolUsuario.USER}>{RolUsuario.USER}</MenuItem>
             </Select>
           </FormControl>
           </Grid>
