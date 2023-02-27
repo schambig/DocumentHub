@@ -24,14 +24,17 @@ interface SelectionContextType {
     sessionRol: number | null;
     setSessionRol: React.Dispatch<React.SetStateAction<number | null>>;
     // control filtro para carga de archivos latmenuLoadV2 -> FileUpload 
-    isAutocomplete1Enabled: boolean
-    isAutocomplete2Enabled: boolean
-    isAutocomplete3Enabled: boolean
-    isAutocomplete4Enabled: boolean
+    isAutocomplete1Enabled: boolean;
+    isAutocomplete2Enabled: boolean;
+    isAutocomplete3Enabled: boolean;
+    isAutocomplete4Enabled: boolean;
     setIsAutocomplete1Enabled:React.Dispatch<React.SetStateAction<boolean>>;
     setIsAutocomplete2Enabled:React.Dispatch<React.SetStateAction<boolean>>;
     setIsAutocomplete3Enabled:React.Dispatch<React.SetStateAction<boolean>>;
     setIsAutocomplete4Enabled:React.Dispatch<React.SetStateAction<boolean>>;
+    // control refresh data user actualizar
+    refresh: boolean;
+    setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const SelectionContext = React.createContext<SelectionContextType>({
@@ -56,5 +59,7 @@ export const SelectionContext = React.createContext<SelectionContextType>({
     setIsAutocomplete1Enabled: () => {},
     setIsAutocomplete2Enabled: () => {},
     setIsAutocomplete3Enabled: () => {},
-    setIsAutocomplete4Enabled: () => {}
+    setIsAutocomplete4Enabled: () => {},
+    refresh: false,
+    setRefresh: () => {},
 });

@@ -1,64 +1,10 @@
-// import { Save as SaveIcon } from '@mui/icons-material';
-// import { Box, Button, TextField, Typography } from '@mui/material';
-// import React, { useEffect, useState } from 'react';
-
-// interface Data {
-//   id: number;
-//   name: string;
-//   age: number;
-//   email: string;
-// }
-
-// const EditableData: React.FC = () => {
-//   const [data, setData] = useState<Data>({
-//     id: 0,
-//     name: '',
-//     age: 0,
-//     email: '',
-//   });
-
-//   useEffect((user: Data)  => {
-//     fetch('http://localhost:8000/test/${user.id}') // Use fetch to retrieve data from local server
-//       .then((res) => res.json())
-//       .then((data) => setData(data));
-//   }, []);
-
-//   const handleSave = () => {
-//     fetch('http://localhost:8000/test/1', {
-//       method: 'PUT',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(data), // Send updated data to server
-//     });
-//   };
-
-//   const handleChange = (field: keyof Data) => (event: React.ChangeEvent<HTMLInputElement>) => {
-//     setData((prevData) => ({
-//       ...prevData,
-//       [field]: event.target.value, // Update corresponding field with new value
-//     }));
-//   };
-
-//   return (
-//     <Box display="flex" flexDirection="column" alignItems="center">
-//       <Typography variant="h5">User Data</Typography>
-//       <TextField label="Name" value={data.name} onChange={handleChange('name')} />
-//       <TextField label="Age" type="number" value={data.age} onChange={handleChange('age')} />
-//       <TextField label="Email" value={data.email} onChange={handleChange('email')} />
-//       <Button variant="contained" color="primary" startIcon={<SaveIcon />} onClick={handleSave}>
-//         Save
-//       </Button>
-//     </Box>
-//   );
-// };
-
 // export default EditableData;
 
-import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material';
+import { Button, Checkbox, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {usUario, RolUsuario} from '../assets/data_user'
+import {SelectionContext} from '../context/SelectionContext'
 // interface User {
 //   id: number;
 //   idRol: number;
@@ -69,8 +15,10 @@ import {usUario, RolUsuario} from '../assets/data_user'
 // }
 
 export const UserEditor = () => {
+  const [rol, setROL] = useState<RolUsuario | null>();
   const [users, setUsers] = useState<usUario[]>([]);
   const [selectedUser, setSelectedUser] = useState<usUario | null>(null);
+  const {refresh, setRefresh} = useContext(SelectionContext);
   const [userData, setUserData] = useState<usUario>({
     id: '',
     userNombre: '',
@@ -83,11 +31,12 @@ export const UserEditor = () => {
 
   useEffect(() => {
     fetch("http://localhost:8000/api/usuarios")
+    //fetch(" http://localhost:8000/tUsuarios")
       .then((response) => response.json())
       .then((data) => {
         setUsers(data);
       });
-  }, []);
+  }, [refresh]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.type === "checkbox") {
@@ -95,34 +44,46 @@ export const UserEditor = () => {
     } else {
       setUserData({
         ...userData,
-        [event.target.name]:
-          event.target.type === "number"
-            ? +event.target.value
-            : event.target.value,
-      });
+        [event.target.name]: event.target.value,
+      }); 
     }
+  };
+
+  const handleChangeROL = (event:any) => {
+    setROL(event.target.value as RolUsuario);
+    setUserData({
+      ...userData,
+      [event.target.name]: event.target.value,
+    });
   };
 
   const handleSave = () => {
     fetch(`http://localhost:8000/api/usuarios/${userData.id}`, {
+   // fetch(`http://localhost:8000/tUsuarios/${userData.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         ...userData,
-        status: statusCheckbox,
+        estado: statusCheckbox,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
+        setRefresh(!refresh)
         console.log(data);
+      })
+      .catch(error => {
+        console.error('Error al enviar datos:', error);
       });
   };
 
   return (
     <div>
+      <h1> Actualizar Usuario:</h1>
       <Autocomplete
+        sx={{m: '25px 0px'}}
         id="user-select"
         options={users}
         getOptionLabel={(user) => user.userNombre}
@@ -144,57 +105,119 @@ export const UserEditor = () => {
           }
         }}
         renderInput={(params) => (
-          <TextField {...params} label="Select User" variant="outlined" />
+          <TextField {...params} label="Seleccionar usuario" variant="outlined" />
         )}
       />
       {selectedUser && (
-        <div>
-          <TextField
-            name="id"
-            label="ID"
-            // type="number"
-            value={userData.id}
-            onChange={handleChange}
-          />
-          <TextField
-            name="rol"
-            label="Role"
-            // type="number"
-            value={userData.rol}
-            onChange={handleChange}
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={statusCheckbox}
+        <div className="container">
+          {/* <h1> Actualizar Usuario</h1> */}
+        <div style={{display: 'flex', minWidth: 0, margin: '10px 20px 10px 20px'}}>
+          {/* primera fila */}
+          <Grid sx={{display:'flex', justifyContent:'center', alignItems:'center'}} container spacing={2}>
+            <Grid item xs={10}>
+                <TextField
+                  sx={{ width: '100%'}}
+                  name="id"
+                  label="ID"
+                  disabled
+                  // type="number"
+                  value={userData.id}
+                  onChange={handleChange}
+                  inputProps={{ size: userData.id.length }}
+                />
+            </Grid>
+
+            <Grid item xs={4}>
+                <TextField
+                  sx={{ width: '100%'}}
+                  name="userNombre"
+                  label="Name"
+                  value={userData.userNombre}
+                  onChange={handleChange}
+                />
+            </Grid>
+
+            <Grid item xs={4}>
+              {/* cambiar por seleccionable */}
+              {/* <TextField
+                sx={{ width: '100%'}}
+                name="rol"
+                label="Role"
+                // inputProps={{ size: userData.rol.length }}
+                // type="number"
+                value={userData.rol}
                 onChange={handleChange}
-                name="statusCheckbox"
+              /> */}
+
+              <FormControl fullWidth>
+                <InputLabel sx={{}} id="demo-simple-select-label">Role</InputLabel>
+                <Select
+                  sx={{width:'100%'}}
+                  name="rol"
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  // value={rol ? (setUserData({...userData, rol:rol})) : (userData.rol)}
+                  value={rol ? rol : (userData.rol)}
+                  label="Role"
+                  onChange={handleChangeROL}
+                >
+                  <MenuItem value={RolUsuario.ADMIN}>Admin</MenuItem>
+                  <MenuItem value={RolUsuario.DATAUSER}>Datauser</MenuItem>
+                  <MenuItem value={RolUsuario.USER}>User</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+      
+            <Grid item xs={2}>
+              <FormControlLabel
+                sx={{ width: '100%'}}
+                control={
+                  <Checkbox
+                    checked={statusCheckbox}
+                    onChange={handleChange}
+                    name="statusCheckbox"
+                  />
+                }
+                label="Active"
               />
-            }
-            label="Active"
-          />
-          <TextField
-            name="userNombre"
-            label="Name"
-            value={userData.userNombre}
-            onChange={handleChange}
-          />
-          <TextField
-            name="email"
-            label="Email"
-            value={userData.email}
-            onChange={handleChange}
-          />
-          <TextField
-            name="password"
-            label="Password"
-            value={userData.password}
-            onChange={handleChange}
-            type="password"
-            />
-            <Button variant="contained" color="primary" onClick={handleSave}>
-              Save
-            </Button>
+            </Grid>
+          </Grid>
+        </div>
+        <div style={{display: 'flex', minWidth: 0, margin: '10px 20px 10px 20px'}}>
+          {/* segunda fila */}
+          <Grid sx={{display:'flex', justifyContent:'center', alignItems:'center'}} container spacing={2}>
+            <Grid item xs={4}>
+              <TextField
+              sx={{width:'100%'}}
+                name="email"
+                label="Email"
+                value={userData.email}
+                onChange={handleChange}
+              />
+            </Grid>
+
+            <Grid item xs={4}>
+              <TextField
+              sx={{width:'100%'}}
+              
+                name="password"
+                label="Password"
+                value={userData.password}
+                onChange={handleChange}
+                type="password"
+                />
+            </Grid>
+
+            <Grid item xs={2}>
+              <Button sx={{width:'100%'}} variant="contained" color="primary" onClick={handleSave}>
+                Save
+              </Button>
+            </Grid>
+
+          </Grid>
+          
+          
+          </div>
           </div>
           )}
         </div>

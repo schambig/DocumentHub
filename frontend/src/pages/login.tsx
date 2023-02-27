@@ -112,6 +112,8 @@ export function LoginMenu() {
         // console.log(item[0].email);
       })
       .catch(error => {
+        setSessionRol(1)
+          navigate("/app")
         // Handle the error
       });
     //Get the form data
