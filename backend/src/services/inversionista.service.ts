@@ -13,3 +13,11 @@ export const listInversionistas = async () => {
     }
   })
 }
+
+export const getInversionista = async (id: string) => {
+  return db.tablaInversionista.findUnique({
+    where: {
+      id: id
+    }
+  })
+}

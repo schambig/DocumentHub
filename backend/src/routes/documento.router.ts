@@ -15,3 +15,17 @@ documentoRouter.get("/", async (request: Request, response: Response) => {
     return response.status(500).json(error.message)
   }
 })
+
+// GET: A single Documento by id
+documentoRouter.get("/:id", async (request: Request, response: Response) => {
+  const id: string = request.params.id;
+  try {
+    const documento = await DocumentoService.getDocumento(id)
+    if (documento) {
+      return response.status(200).json(documento)
+    }
+    return response.status(404).json("Documento could not be found")
+  } catch (error: any) {
+    return response.status(500).json(error.message)
+  }
+})
