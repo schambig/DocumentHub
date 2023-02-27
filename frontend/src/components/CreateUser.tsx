@@ -47,7 +47,7 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
     }else if((userData.userNombre === null || userData.email === null || userData.password === null)){
       return console.log("Error push Data null");
     }else{
-      return await axios.post(`http://localhost:8000/api/usuarios/${userData.id}`, {
+      return await axios.post(`http://localhost:8000/api/usuarios/`, {
           ...userData,
           estado: statusCheckbox,
       })

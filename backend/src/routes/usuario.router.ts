@@ -29,3 +29,46 @@ usuarioRouter.get("/:id", async (request: Request, response: Response) => {
     return response.status(500).json(error.message)
   }
 })
+
+// PATCH: A single Usuario by id
+usuarioRouter.patch("/:id", async (request: Request, response: Response) => {
+  const id: string = request.params.id;
+  const { userNombre, email, password, estado, rol } = request.body
+  try {
+    const usuario = await UsuarioService.patchUsuario(id,{
+      userNombre,
+      email,
+      password,
+      estado,
+      rol
+    })
+    if (usuario) {
+      return response.status(200).json(usuario)
+    }
+    return response.status(404).json("Usuario could not be found")
+  } catch (error: any) {
+    return response.status(500).json(error.message)
+  }
+})
+
+
+
+// POST: A single Usuario by id
+usuarioRouter.post("/", async (request: Request, response: Response) => {
+  const { userNombre, email, password, estado, rol } = request.body
+  try {
+    const newusuario = await UsuarioService.createUsuario({
+        userNombre,
+        email,
+        password,
+        estado,
+        rol
+      })
+    if (newusuario) {
+      return response.status(200).json(newusuario)
+    }
+    return response.status(404).json("Usuario could not be found")
+  } catch (error: any) {
+    return response.status(500).json(error.message)
+  }
+})
