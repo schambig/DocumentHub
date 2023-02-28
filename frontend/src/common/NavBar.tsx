@@ -50,7 +50,7 @@ export const NavBar: React.FunctionComponent<{}> = () => {
     }
     const pages = [
         {
-            name: 'Actualizar',
+            name: 'Usuarios',
             ruta: '/user',
             keyChild1: 'actualizar',
             permiso: 1,

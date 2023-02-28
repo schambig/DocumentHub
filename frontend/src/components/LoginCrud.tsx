@@ -5,6 +5,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { useContext, useEffect, useState } from 'react';
 import {usUario, RolUsuario} from '../assets/data_user'
 import {SelectionContext} from '../context/SelectionContext'
+import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 // interface User {
 //   id: number;
 //   idRol: number;
@@ -85,6 +86,7 @@ export const UserEditor = () => {
       <Autocomplete
         sx={{m: '25px 0px'}}
         id="user-select"
+        color='neutral'
         options={users}
         getOptionLabel={(user) => user.userNombre}
         onChange={(event, newValue) => {
@@ -105,7 +107,7 @@ export const UserEditor = () => {
           }
         }}
         renderInput={(params) => (
-          <TextField {...params} label="Seleccionar usuario" variant="outlined" />
+          <TextField {...params} label="Seleccionar usuario" color='neutral' variant="outlined" />
         )}
       />
       {selectedUser && (
@@ -119,6 +121,7 @@ export const UserEditor = () => {
                   sx={{ width: '100%'}}
                   name="id"
                   label="ID"
+                  color='neutral'
                   disabled
                   // type="number"
                   value={userData.id}
@@ -134,6 +137,7 @@ export const UserEditor = () => {
                   label="Name"
                   value={userData.userNombre}
                   onChange={handleChange}
+                  color='neutral'
                 />
             </Grid>
 
@@ -149,8 +153,8 @@ export const UserEditor = () => {
                 onChange={handleChange}
               /> */}
 
-              <FormControl fullWidth>
-                <InputLabel sx={{}} id="demo-simple-select-label">Role</InputLabel>
+              <FormControl color='neutral' fullWidth>
+                <InputLabel sx={{}} id="demo-simple-select-label" >Role</InputLabel>
                 <Select
                   sx={{width:'100%'}}
                   name="rol"
@@ -160,6 +164,7 @@ export const UserEditor = () => {
                   value={rol ? rol : (userData.rol)}
                   label="Role"
                   onChange={handleChangeROL}
+                  //color='neutral'
                 >
                   <MenuItem value={RolUsuario.ADMIN}>Admin</MenuItem>
                   <MenuItem value={RolUsuario.DATAUSER}>Data user</MenuItem>
@@ -173,6 +178,7 @@ export const UserEditor = () => {
                 sx={{ width: '100%'}}
                 control={
                   <Checkbox
+                    color='neutral'
                     checked={statusCheckbox}
                     onChange={handleChange}
                     name="statusCheckbox"
@@ -193,6 +199,7 @@ export const UserEditor = () => {
                 label="Email"
                 value={userData.email}
                 onChange={handleChange}
+                color='neutral'
               />
             </Grid>
 
@@ -205,6 +212,7 @@ export const UserEditor = () => {
                 value={userData.password}
                 onChange={handleChange}
                 type="password"
+                color='neutral'
                 />
             </Grid>
 
@@ -212,6 +220,18 @@ export const UserEditor = () => {
               <Button sx={{width:'100%'}} variant="contained" color="primary" onClick={handleSave}>
                 Save
               </Button>
+              {/* <LoadingButton
+              sx={{height:'100%', width:'100%'}}
+              loading={loadSave?.status ? loadSave.status : false}
+              loadingPosition="start"
+              startIcon={loadSave.respError ? <ErrorOutlineIcon/>: (loadSave.respSuccess ? <CheckCircleOutlineIcon/>: (<SaveIcon />))}
+              variant="contained"
+              color={loadSave.color === 'primary' || loadSave.color === 'error' || loadSave.color === 'success' ? loadSave.color : 'primary'}
+              onClick={handleSave}
+              size="large"
+            >
+              {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("SAVE"))}
+            </LoadingButton> */}
             </Grid>
 
           </Grid>
