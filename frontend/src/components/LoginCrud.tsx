@@ -162,7 +162,7 @@ export const UserEditor = () => {
                   onChange={handleChangeROL}
                 >
                   <MenuItem value={RolUsuario.ADMIN}>Admin</MenuItem>
-                  <MenuItem value={RolUsuario.DATAUSER}>Datauser</MenuItem>
+                  <MenuItem value={RolUsuario.DATAUSER}>Data user</MenuItem>
                   <MenuItem value={RolUsuario.USER}>User</MenuItem>
                 </Select>
               </FormControl>
