@@ -23,6 +23,10 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
 
   const handleChangeROL = (event:any) => {
     setROL(event.target.value as RolUsuario);
+    setUserData({
+      ...userData,
+      [event.target.name]: event.target.value,
+    });
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,14 +97,15 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
             <Select
               sx={{width:'100%'}}
               labelId="demo-simple-select-label"
+              name='rol'
               id="demo-simple-select"
               value={rol}
               label="ROL"
               onChange={handleChangeROL}
             >
-              <MenuItem value={RolUsuario.ADMIN}>{RolUsuario.ADMIN}</MenuItem>
-              <MenuItem value={RolUsuario.DATAUSER}>{RolUsuario.DATAUSER}</MenuItem>
-              <MenuItem value={RolUsuario.USER}>{RolUsuario.USER}</MenuItem>
+              <MenuItem value={RolUsuario.ADMIN}>Admin</MenuItem>
+              <MenuItem value={RolUsuario.DATAUSER}>Data user</MenuItem>
+              <MenuItem value={RolUsuario.USER}>User</MenuItem>
             </Select>
           </FormControl>
           </Grid>
