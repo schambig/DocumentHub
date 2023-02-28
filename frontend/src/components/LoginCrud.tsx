@@ -85,6 +85,7 @@ export const UserEditor = () => {
       <Autocomplete
         sx={{m: '25px 0px'}}
         id="user-select"
+        color='neutral'
         options={users}
         getOptionLabel={(user) => user.userNombre}
         onChange={(event, newValue) => {
@@ -105,7 +106,7 @@ export const UserEditor = () => {
           }
         }}
         renderInput={(params) => (
-          <TextField {...params} label="Seleccionar usuario" variant="outlined" />
+          <TextField {...params} label="Seleccionar usuario" color='neutral' variant="outlined" />
         )}
       />
       {selectedUser && (
@@ -119,6 +120,7 @@ export const UserEditor = () => {
                   sx={{ width: '100%'}}
                   name="id"
                   label="ID"
+                  color='neutral'
                   disabled
                   // type="number"
                   value={userData.id}
@@ -134,6 +136,7 @@ export const UserEditor = () => {
                   label="Name"
                   value={userData.userNombre}
                   onChange={handleChange}
+                  color='neutral'
                 />
             </Grid>
 
@@ -149,8 +152,8 @@ export const UserEditor = () => {
                 onChange={handleChange}
               /> */}
 
-              <FormControl fullWidth>
-                <InputLabel sx={{}} id="demo-simple-select-label">Role</InputLabel>
+              <FormControl color='neutral' fullWidth>
+                <InputLabel sx={{}} id="demo-simple-select-label" >Role</InputLabel>
                 <Select
                   sx={{width:'100%'}}
                   name="rol"
@@ -160,6 +163,7 @@ export const UserEditor = () => {
                   value={rol ? rol : (userData.rol)}
                   label="Role"
                   onChange={handleChangeROL}
+                  //color='neutral'
                 >
                   <MenuItem value={RolUsuario.ADMIN}>Admin</MenuItem>
                   <MenuItem value={RolUsuario.DATAUSER}>Data user</MenuItem>
@@ -173,6 +177,7 @@ export const UserEditor = () => {
                 sx={{ width: '100%'}}
                 control={
                   <Checkbox
+                    color='neutral'
                     checked={statusCheckbox}
                     onChange={handleChange}
                     name="statusCheckbox"
@@ -193,6 +198,7 @@ export const UserEditor = () => {
                 label="Email"
                 value={userData.email}
                 onChange={handleChange}
+                color='neutral'
               />
             </Grid>
 
@@ -205,6 +211,7 @@ export const UserEditor = () => {
                 value={userData.password}
                 onChange={handleChange}
                 type="password"
+                color='neutral'
                 />
             </Grid>
 

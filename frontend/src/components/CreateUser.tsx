@@ -76,6 +76,7 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
           <Grid item xs={4}>
             <TextField
               sx={{width:'100%'}}
+              color='neutral'
               name="userNombre"
               label="Name"
               value={userData.userNombre}
@@ -92,8 +93,8 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
               value={userData.rol}
               onChange={handleChange}
             /> */}
-          <FormControl fullWidth>
-            <InputLabel sx={{}} id="demo-simple-select-label">Role</InputLabel>
+          <FormControl fullWidth color='neutral'>
+            <InputLabel sx={{}} id="demo-simple-select-label"  >Role</InputLabel>
             <Select
               sx={{width:'100%'}}
               labelId="demo-simple-select-label"
@@ -112,8 +113,10 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
           <Grid item xs={2}>
             <FormControlLabel
               sx={{width:'100%'}}
+              color='neutral'
               control={
                 <Checkbox
+                  color='neutral'
                   checked={statusCheckbox}
                   onChange={handleChange}
                   name="statusCheckbox"
@@ -133,6 +136,7 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
           <Grid item xs={4}>
             <TextField
               sx={{width:'100%'}}
+              color='neutral'
               name="email"
               label="Email"
               value={userData.email}
@@ -143,7 +147,7 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
           <Grid item xs={4}>
             <TextField
               sx={{width:'100%'}}
-              color='secondary'
+              color="neutral"
               name="password"
               label="Password"
               value={userData.password}
@@ -157,8 +161,6 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
                 Save
             </Button>
           </Grid>
-
-
 
         </Grid>
         </div>

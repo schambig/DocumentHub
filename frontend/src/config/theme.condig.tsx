@@ -84,6 +84,24 @@ declare module '@mui/material/styles' {
     }
   }
 
+  declare module '@mui/material/FormControl' {
+    interface FormControlPropsColorOverrides{
+      neutral: true;
+    }
+  }
+
+  declare module '@mui/material/Checkbox'{
+    interface CheckboxPropsColorOverrides {
+      neutral: true;
+    }
+  }
+
+  declare module '@mui/material/InputLabel'{
+    interface InputLabelPropsColorOverrides{
+      neutral: true;
+    }
+  }
+
   // const theme = createMuiTheme({
   //   overrides: {
   //     MuiButton: {
