@@ -1,0 +1,1449 @@
+{
+  "tTipoDocumento": [
+    {
+      "id": 1,
+      "tipo": "Contrato"
+    },
+    {
+      "id": 2,
+      "tipo": "Anexo 1"
+    },
+    {
+      "id": 3,
+      "tipo": "Anexo 2"
+    },
+    {
+      "id": 4,
+      "tipo": "Ficha Cliente"
+    },
+    {
+      "id": 5,
+      "tipo": "API DOC"
+    }
+  ],
+  "tCategoria": [
+    {
+      "id": 1,
+      "descripcion": "levantamiento#1"
+    },
+    {
+      "id": 2,
+      "descripcion": "levantamiento#2"
+    },
+    {
+      "id": 3,
+      "descripcion": "levantamiento#3"
+    },
+    {
+      "id": 4,
+      "descripcion": "levantamiento#4"
+    },
+    {
+      "id": 5,
+      "descripcion": "levantamiento#5"
+    },
+    {
+      "id": 6,
+      "descripcion": "levantamiento#6"
+    },
+    {
+      "id": 7,
+      "descripcion": "levantamiento#7"
+    },
+    {
+      "id": 8,
+      "descripcion": "levantamiento#8"
+    },
+    {
+      "id": 9,
+      "descripcion": "levantamiento#9"
+    },
+    {
+      "id": 10,
+      "descripcion": "levantamiento#10"
+    },
+    {
+      "id": 11,
+      "descripcion": "levantamiento#11"
+    },
+    {
+      "id": 12,
+      "descripcion": "levantamiento#12"
+    },
+    {
+      "id": 13,
+      "descripcion": "levantamiento#13"
+    },
+    {
+      "id": 14,
+      "descripcion": "levantamiento#14"
+    },
+    {
+      "id": 15,
+      "descripcion": "levantamiento#15"
+    },
+    {
+      "id": 16,
+      "descripcion": "levantamiento#16"
+    },
+    {
+      "id": 17,
+      "descripcion": "levantamiento#17"
+    },
+    {
+      "id": 18,
+      "descripcion": "levantamiento#18"
+    },
+    {
+      "id": 19,
+      "descripcion": "levantamiento#19"
+    },
+    {
+      "id": 20,
+      "descripcion": "levantamiento#20"
+    },
+    {
+      "id": 21,
+      "descripcion": "emision#1"
+    },
+    {
+      "id": 22,
+      "descripcion": "emision#2"
+    },
+    {
+      "id": 23,
+      "descripcion": "emision#3"
+    },
+    {
+      "id": 24,
+      "descripcion": "emision#4"
+    },
+    {
+      "id": 25,
+      "descripcion": "emision#5"
+    },
+    {
+      "id": 26,
+      "descripcion": "emision#6"
+    },
+    {
+      "id": 27,
+      "descripcion": "emision#7"
+    },
+    {
+      "id": 28,
+      "descripcion": "emision#8"
+    },
+    {
+      "id": 29,
+      "descripcion": "emision#9"
+    },
+    {
+      "id": 30,
+      "descripcion": "emision#10"
+    },
+    {
+      "id": 31,
+      "descripcion": "emision#11"
+    },
+    {
+      "id": 32,
+      "descripcion": "emision#12"
+    },
+    {
+      "id": 33,
+      "descripcion": "emision#13"
+    },
+    {
+      "id": 34,
+      "descripcion": "emision#14"
+    },
+    {
+      "id": 35,
+      "descripcion": "emision#15"
+    },
+    {
+      "id": 36,
+      "descripcion": "emision#16"
+    },
+    {
+      "id": 37,
+      "descripcion": "emision#17"
+    },
+    {
+      "id": 38,
+      "descripcion": "emision#18"
+    },
+    {
+      "id": 39,
+      "descripcion": "emision#19"
+    },
+    {
+      "id": 40,
+      "descripcion": "emision#20"
+    },
+    {
+      "id": 41,
+      "descripcion": "dataAPI"
+    }
+  ],
+  "tProducto": [
+    {
+      "id": 1,
+      "codigo": "FEC-RF",
+      "nombre": "Fondo Edifica Core - Renta Fija"
+    },
+    {
+      "id": 2,
+      "codigo": "FEC",
+      "nombre": "Fondo Edifica Core"
+    },
+    {
+      "id": 3,
+      "codigo": "FDF",
+      "nombre": "Fondo de Derivados Financieros"
+    },
+    {
+      "id": 4,
+      "codigo": "FECII",
+      "nombre": "Fondo Edifica Core II"
+    },
+    {
+      "id": 5,
+      "codigo": "PRD",
+      "nombre": "Fondo Praedium"
+    },
+    {
+      "id": 6,
+      "codigo": "B-PRD",
+      "nombre": "Bonos Corporativos Praedium"
+    },
+    {
+      "id": 7,
+      "codigo": "TLR",
+      "nombre": "Fondo TLR"
+    },
+    {
+      "id": 8,
+      "codigo": "PFM",
+      "nombre": "Fondo Performance"
+    },
+    {
+      "id": 9,
+      "codigo": "FSC",
+      "nombre": "Fondo Seguridad Core"
+    },
+    {
+      "id": 10,
+      "codigo": "B-FECII",
+      "nombre": "Bono FEC II"
+    },
+    {
+      "id": 11,
+      "codigo": "PC-FECII",
+      "nombre": "Papeles Comerciales - FEC II"
+    },
+    {
+      "id": 12,
+      "codigo": "FEQ",
+      "nombre": "Fondo Equilibrio"
+    },
+    {
+      "id": 13,
+      "codigo": "FOP",
+      "nombre": "Fondo Oportunidad"
+    },
+    {
+      "id": 14,
+      "codigo": "B-USA",
+      "nombre": "Bono USA"
+    },
+    {
+      "id": 15,
+      "codigo": "B-TDR-A",
+      "nombre": "Bono TRD Artline"
+    },
+    {
+      "id": 16,
+      "codigo": "FDI-1A",
+      "nombre": "FDI 1A"
+    },
+    {
+      "id": 17,
+      "codigo": "FDI-B",
+      "nombre": "FDI 1B"
+    },
+    {
+      "id": 18,
+      "codigo": "FEG",
+      "nombre": "Fondo Edifica Global"
+    },
+    {
+      "id": 19,
+      "codigo": "FEV",
+      "nombre": "Fondo Edifica V"
+    },
+    {
+      "id": 20,
+      "codigo": "FSPD",
+      "nombre": "FSPD"
+    },
+    {
+      "id": 21,
+      "codigo": "FSPEVC",
+      "nombre": "FSPEVC"
+    },
+    {
+      "id": 22,
+      "codigo": "FIRE",
+      "nombre": "FIRE"
+    },
+    {
+      "id": 23,
+      "codigo": "FSGOP",
+      "nombre": "FSGOP"
+    },
+    {
+      "id": 24,
+      "codigo": "FSRE",
+      "nombre": "Fondo Sabbi Real Estate"
+    },
+    {
+      "id": 25,
+      "codigo": "FSGOP",
+      "nombre": "FSGOP"
+    },
+    {
+      "id": 25,
+      "codigo": "API",
+      "nombre": "API FONDO"
+    }
+  ],
+  "tTipoIdentificacion": [
+    {
+      "id": 1,
+      "descripcion": "DNI"
+    },
+    {
+      "id": 2,
+      "descripcion": "CARNET"
+    },
+    {
+      "id": 3,
+      "descripcion": "PASAPORTE"
+    },
+    {
+      "id": 4,
+      "descripcion": "RUC"
+    },
+    {
+      "id": 5,
+      "descripcion": "CEDULA IDENTIDAD"
+    }
+  ],
+  "tInversionista": [
+    {
+      "id": 1,
+      "nombre": "Juan Manuel",
+      "apPat": "Villa",
+      "apMat": "Rushton",
+      "tipoDoc": 1,
+      "numDoc": "908070456",
+      "PEP": true
+    },
+    {
+      "id": 2,
+      "nombre": "Rodrigo Alessandro",
+      "apPat": "De Luzio",
+      "apMat": "Poquioma",
+      "tipoDoc": 1,
+      "numDoc": "908060154",
+      "PEP": true
+    },
+    {
+      "id": 3,
+      "nombre": "Elisa Pamela",
+      "apPat": "LTD",
+      "apMat": "Calderon",
+      "tipoDoc": 2,
+      "numDoc": "917051362",
+      "PEP": true
+    },
+    {
+      "id": 4,
+      "nombre": "Mardely del Rosario",
+      "apPat": "Alfaro",
+      "apMat": "Stanic",
+      "tipoDoc": 1,
+      "numDoc": "947071556",
+      "PEP": true
+    },
+    {
+      "id": 5,
+      "nombre": "Luis Antonio",
+      "apPat": "Velasco",
+      "apMat": "Marcelo",
+      "tipoDoc": 2,
+      "numDoc": "947032556",
+      "PEP": false
+    },
+    {
+      "id": 6,
+      "nombre": "Nataly",
+      "apPat": "Guanilo",
+      "apMat": "Casabonne",
+      "tipoDoc": 1,
+      "numDoc": "987654321",
+      "PEP": false
+    },
+    {
+      "id": 7,
+      "nombre": "Ericka Sofia",
+      "apPat": "Rossi de Malaga",
+      "apMat": "Flores",
+      "tipoDoc": 1,
+      "numDoc": "654987321",
+      "PEP": false
+    },
+    {
+      "id": 8,
+      "nombre": "Oscar Rodolfo",
+      "apPat": "Picasso",
+      "apMat": "Jara",
+      "tipoDoc": 1,
+      "numDoc": "987123654",
+      "PEP": true
+    },
+    {
+      "id": 9,
+      "nombre": "Alfredo Antonio",
+      "apPat": "Portella",
+      "apMat": "Valdez",
+      "tipoDoc": 1,
+      "numDoc": "998877660",
+      "PEP": false
+    },
+    {
+      "id": 10,
+      "nombre": "Sebastian Alejandro",
+      "apPat": "Suluja",
+      "apMat": "Arbulu",
+      "tipoDoc": 1,
+      "numDoc": "665544330",
+      "PEP": false
+    },
+    {
+      "id": 11,
+      "nombre": "Jose Carlos",
+      "apPat": "Tremolada",
+      "apMat": "Lam",
+      "tipoDoc": 1,
+      "numDoc": "223344550",
+      "PEP": true
+    },
+    {
+      "id": 12,
+      "nombre": "Maria Begoña",
+      "apPat": "Aspillaga",
+      "apMat": "Massa",
+      "tipoDoc": 1,
+      "numDoc": "998844550",
+      "PEP": true
+    },
+    {
+      "id": 13,
+      "nombre": "Renato Eduardo",
+      "apPat": "Herbozo",
+      "apMat": "Hoyos",
+      "tipoDoc": 1,
+      "numDoc": "664455770",
+      "PEP": false
+    },
+    {
+      "id": 14,
+      "nombre": "API Edu",
+      "apPat": "Ramos",
+      "apMat": "Maldonado",
+      "tipoDoc": 1,
+      "numDoc": "987123654",
+      "PEP": true
+    }
+  ],
+  "tRol": [
+    {
+      "id": 1,
+      "rolName": "admin",
+      "rolPermiso": "all"
+    },
+    {
+      "id": 2,
+      "rolName": "datauser",
+      "rolPermiso": "cargaFile"
+    },
+    {
+      "id": 3,
+      "rolName": "readuser",
+      "rolPermiso": "readFile"
+    }
+  ],
+  "tHistorial": [
+    {
+      "id": 0,
+      "userDownload": 1,
+      "idDocumento": 1,
+      "fechaDownload": "day1"
+    }
+  ],
+  "tUsuarios": [
+    {
+      "id": "1",
+      "rol": "ADMIN",
+      "estado": true,
+      "userNombre": "administrator",
+      "email": "admin@gmail.com",
+      "password": "psadmin"
+    },
+    {
+      "id": "2",
+      "rol": "DATAUSER",
+      "estado": true,
+      "userNombre": "readwriteuser",
+      "email": "rwuser@gmail.com",
+      "password": "psrwu"
+    },
+    {
+      "id": "3",
+      "rol": "USER",
+      "estado": true,
+      "userNombre": "readuser",
+      "email": "r1user@gmail.com",
+      "password": "psr1"
+    },
+    {
+      "id": "4",
+      "rol": "USER",
+      "estado": false,
+      "userNombre": "readuserf",
+      "email": "r2user@gmail.com",
+      "password": "psr2"
+    },
+    {
+      "id": "5",
+      "rol": "USER",
+      "estado": true,
+      "userNombre": "LibreTest",
+      "email": "",
+      "password": ""
+    },
+    {
+      "id": "ro_Jolk",
+      "userNombre": "pepito",
+      "email": "locura@gmail",
+      "password": "holasoyyo",
+      "estado": false,
+      "rol": "USER",
+      "status": true
+    },
+    {
+      "id": "b73hsI3",
+      "userNombre": "pepito5",
+      "email": "lol",
+      "password": "123",
+      "estado": true,
+      "rol": "ADMIN"
+    },
+    {
+      "id": "mnsomYE",
+      "userNombre": "nombre2",
+      "email": "no2",
+      "password": "ps2",
+      "estado": true,
+      "rol": "USER"
+    }
+  ],
+  "tInversionistaProducto": [
+    {
+      "idInversionista": 1,
+      "idProducto": 1
+    },
+    {
+      "idInversionista": 1,
+      "idProducto": 2
+    },
+    {
+      "idInversionista": 1,
+      "idProducto": 3
+    },
+    {
+      "idInversionista": 2,
+      "idProducto": 1
+    },
+    {
+      "idInversionista": 2,
+      "idProducto": 2
+    },
+    {
+      "idInversionista": 2,
+      "idProducto": 4
+    },
+    {
+      "idInversionista": 2,
+      "idProducto": 6
+    },
+    {
+      "idInversionista": 2,
+      "idProducto": 19
+    },
+    {
+      "idInversionista": 3,
+      "idProducto": 2
+    },
+    {
+      "idInversionista": 3,
+      "idProducto": 3
+    },
+    {
+      "idInversionista": 3,
+      "idProducto": 6
+    },
+    {
+      "idInversionista": 3,
+      "idProducto": 10
+    },
+    {
+      "idInversionista": 3,
+      "idProducto": 14
+    },
+    {
+      "idInversionista": 3,
+      "idProducto": 20
+    },
+    {
+      "idInversionista": 4,
+      "idProducto": 2
+    },
+    {
+      "idInversionista": 4,
+      "idProducto": 4
+    },
+    {
+      "idInversionista": 4,
+      "idProducto": 15
+    },
+    {
+      "idInversionista": 4,
+      "idProducto": 18
+    },
+    {
+      "idInversionista": 5,
+      "idProducto": 1
+    },
+    {
+      "idInversionista": 5,
+      "idProducto": 3
+    },
+    {
+      "idInversionista": 5,
+      "idProducto": 4
+    },
+    {
+      "idInversionista": 5,
+      "idProducto": 6
+    },
+    {
+      "idInversionista": 5,
+      "idProducto": 16
+    },
+    {
+      "idInversionista": 5,
+      "idProducto": 21
+    },
+    {
+      "idInversionista": 6,
+      "idProducto": 3
+    },
+    {
+      "idInversionista": 6,
+      "idProducto": 8
+    },
+    {
+      "idInversionista": 6,
+      "idProducto": 17
+    },
+    {
+      "idInversionista": 7,
+      "idProducto": 2
+    },
+    {
+      "idInversionista": 7,
+      "idProducto": 5
+    },
+    {
+      "idInversionista": 7,
+      "idProducto": 9
+    },
+    {
+      "idInversionista": 7,
+      "idProducto": 12
+    },
+    {
+      "idInversionista": 7,
+      "idProducto": 22
+    },
+    {
+      "idInversionista": 8,
+      "idProducto": 2
+    },
+    {
+      "idInversionista": 8,
+      "idProducto": 3
+    },
+    {
+      "idInversionista": 8,
+      "idProducto": 7
+    },
+    {
+      "idInversionista": 8,
+      "idProducto": 10
+    },
+    {
+      "idInversionista": 9,
+      "idProducto": 6
+    },
+    {
+      "idInversionista": 9,
+      "idProducto": 7
+    },
+    {
+      "idInversionista": 9,
+      "idProducto": 8
+    },
+    {
+      "idInversionista": 9,
+      "idProducto": 10
+    },
+    {
+      "idInversionista": 10,
+      "idProducto": 9
+    }
+  ],
+  "tProductoCategoria": [
+    {
+      "idProducto": 1,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 1,
+      "idCategoria": 2
+    },
+    {
+      "idProducto": 1,
+      "idCategoria": 3
+    },
+    {
+      "idProducto": 2,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 3,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 1,
+      "idCategoria": 4
+    },
+    {
+      "idProducto": 2,
+      "idCategoria": 2
+    },
+    {
+      "idProducto": 2,
+      "idCategoria": 3
+    },
+    {
+      "idProducto": 4,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 4,
+      "idCategoria": 2
+    },
+    {
+      "idProducto": 3,
+      "idCategoria": 2
+    },
+    {
+      "idProducto": 5,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 6,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 7,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 8,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 7,
+      "idCategoria": 2
+    },
+    {
+      "idProducto": 9,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 10,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 4,
+      "idCategoria": 3
+    },
+    {
+      "idProducto": 8,
+      "idCategoria": 2
+    },
+    {
+      "idProducto": 9,
+      "idCategoria": 2
+    },
+    {
+      "idProducto": 7,
+      "idCategoria": 3
+    },
+    {
+      "idProducto": 2,
+      "idCategoria": 4
+    },
+    {
+      "idProducto": 3,
+      "idCategoria": 2
+    },
+    {
+      "idProducto": 6,
+      "idCategoria": 2
+    },
+    {
+      "idProducto": 11,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 12,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 13,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 14,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 15,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 16,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 17,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 18,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 19,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 20,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 21,
+      "idCategoria": 1
+    },
+    {
+      "idProducto": 22,
+      "idCategoria": 1
+    }
+  ],
+  "tProductoCategoriaInversionista": [
+    {
+      "idProducto": 1,
+      "idCategoria": 1,
+      "idInversionista": 1
+    },
+    {
+      "idProducto": 1,
+      "idCategoria": 2,
+      "idInversionista": 1
+    },
+    {
+      "idProducto": 1,
+      "idCategoria": 3,
+      "idInversionista": 1
+    },
+    {
+      "idProducto": 2,
+      "idCategoria": 1,
+      "idInversionista": 4
+    },
+    {
+      "idProducto": 3,
+      "idCategoria": 1,
+      "idInversionista": 5
+    },
+    {
+      "idProducto": 1,
+      "idCategoria": 4,
+      "idInversionista": 2
+    },
+    {
+      "idProducto": 2,
+      "idCategoria": 2,
+      "idInversionista": 3
+    },
+    {
+      "idProducto": 2,
+      "idCategoria": 3,
+      "idInversionista": 2
+    },
+    {
+      "idProducto": 4,
+      "idCategoria": 1,
+      "idInversionista": 2
+    },
+    {
+      "idProducto": 4,
+      "idCategoria": 2,
+      "idInversionista": 5
+    },
+    {
+      "idProducto": 3,
+      "idCategoria": 2,
+      "idInversionista": 6
+    },
+    {
+      "idProducto": 5,
+      "idCategoria": 1,
+      "idInversionista": 7
+    },
+    {
+      "idProducto": 6,
+      "idCategoria": 1,
+      "idInversionista": 9
+    },
+    {
+      "idProducto": 7,
+      "idCategoria": 1,
+      "idInversionista": 9
+    },
+    {
+      "idProducto": 8,
+      "idCategoria": 1,
+      "idInversionista": 9
+    },
+    {
+      "idProducto": 7,
+      "idCategoria": 2,
+      "idInversionista": 9
+    },
+    {
+      "idProducto": 9,
+      "idCategoria": 1,
+      "idInversionista": 10
+    },
+    {
+      "idProducto": 10,
+      "idCategoria": 1,
+      "idInversionista": 3
+    },
+    {
+      "idProducto": 4,
+      "idCategoria": 3,
+      "idInversionista": 4
+    },
+    {
+      "idProducto": 8,
+      "idCategoria": 2,
+      "idInversionista": 6
+    },
+    {
+      "idProducto": 9,
+      "idCategoria": 2,
+      "idInversionista": 7
+    },
+    {
+      "idProducto": 7,
+      "idCategoria": 3,
+      "idInversionista": 8
+    },
+    {
+      "idProducto": 2,
+      "idCategoria": 4,
+      "idInversionista": 2
+    },
+    {
+      "idProducto": 3,
+      "idCategoria": 2,
+      "idInversionista": 1
+    },
+    {
+      "idProducto": 6,
+      "idCategoria": 2,
+      "idInversionista": 5
+    },
+    {
+      "idProducto": 1,
+      "idCategoria": 1,
+      "idInversionista": 2
+    },
+    {
+      "idProducto": 1,
+      "idCategoria": 1,
+      "idInversionista": 5
+    },
+    {
+      "idProducto": 2,
+      "idCategoria": 3,
+      "idInversionista": 8
+    },
+    {
+      "idProducto": 2,
+      "idCategoria": 3,
+      "idInversionista": 4
+    },
+    {
+      "idProducto": 6,
+      "idCategoria": 1,
+      "idInversionista": 3
+    },
+    {
+      "idProducto": 6,
+      "idCategoria": 1,
+      "idInversionista": 2
+    },
+    {
+      "idProducto": 2,
+      "idCategoria": 3,
+      "idInversionista": 1
+    },
+    {
+      "idProducto": 2,
+      "idCategoria": 3,
+      "idInversionista": 7
+    },
+    {
+      "idProducto": 10,
+      "idCategoria": 1,
+      "idInversionista": 8
+    },
+    {
+      "idProducto": 10,
+      "idCategoria": 1,
+      "idInversionista": 9
+    },
+    {
+      "idProducto": 3,
+      "idCategoria": 1,
+      "idInversionista": 8
+    },
+    {
+      "idProducto": 3,
+      "idCategoria": 1,
+      "idInversionista": 3
+    },
+    {
+      "idProducto": 11,
+      "idCategoria": 1,
+      "idInversionista": 9
+    },
+    {
+      "idProducto": 12,
+      "idCategoria": 1,
+      "idInversionista": 7
+    },
+    {
+      "idProducto": 13,
+      "idCategoria": 1,
+      "idInversionista": 5
+    },
+    {
+      "idProducto": 14,
+      "idCategoria": 1,
+      "idInversionista": 3
+    },
+    {
+      "idProducto": 15,
+      "idCategoria": 1,
+      "idInversionista": 4
+    },
+    {
+      "idProducto": 16,
+      "idCategoria": 1,
+      "idInversionista": 5
+    },
+    {
+      "idProducto": 17,
+      "idCategoria": 1,
+      "idInversionista": 6
+    },
+    {
+      "idProducto": 18,
+      "idCategoria": 1,
+      "idInversionista": 4
+    },
+    {
+      "idProducto": 19,
+      "idCategoria": 1,
+      "idInversionista": 2
+    },
+    {
+      "idProducto": 20,
+      "idCategoria": 1,
+      "idInversionista": 3
+    },
+    {
+      "idProducto": 21,
+      "idCategoria": 1,
+      "idInversionista": 5
+    },
+    {
+      "idProducto": 22,
+      "idCategoria": 1,
+      "idInversionista": 7
+    }
+  ],
+  "tDocumento": [
+    {
+      "id": 1,
+      "nombreFile": "A.L1.1",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "A.L1.1.0",
+      "codAwsUrl": "https://www.youtube.com/",
+      "idCategoria": 1,
+      "idProducto": 1,
+      "idInversionista": 1,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 2,
+      "nombreFile": "A.L2.1",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "A.L2.1.0",
+      "codAwsUrl": "url2",
+      "idCategoria": 2,
+      "idProducto": 1,
+      "idInversionista": 1,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 3,
+      "nombreFile": "A.L3.1",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "A.L3.1.0",
+      "codAwsUrl": "url3",
+      "idCategoria": 3,
+      "idProducto": 1,
+      "idInversionista": 1,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 4,
+      "nombreFile": "A.L4.2 - excel",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "A.L4.2.0",
+      "codAwsUrl": "https://docs.google.com/spreadsheets/d/11yrREmHvOZz0Ekt1JQMnxv7GqNbze46H/edit?usp=share_link&ouid=104186742998159936335&rtpof=true&sd=true",
+      "idCategoria": 4,
+      "idProducto": 1,
+      "idInversionista": 2,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 5,
+      "nombreFile": "A.L1.2",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "A.L1.2.0",
+      "codAwsUrl": "url5",
+      "idCategoria": 1,
+      "idProducto": 1,
+      "idInversionista": 2,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 6,
+      "nombreFile": "A.L1.5",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "A.L1.5.0",
+      "codAwsUrl": "url6",
+      "idCategoria": 1,
+      "idProducto": 1,
+      "idInversionista": 5,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 7,
+      "nombreFile": "B.L1.4 - excel2",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "B.L1.4.0",
+      "codAwsUrl": "https://doc-08-4s-sheets.googleusercontent.com/export/su1i2ie110ua0plfa5rgts2fkc/p5pklkti67ov3q4sasbascqukg/1677029715000/104186742998159936335/104186742998159936335/11yrREmHvOZz0Ekt1JQMnxv7GqNbze46H?format=xlsx&id=11yrREmHvOZz0Ekt1JQMnxv7GqNbze46H&dat=AP36HMX6R15f63ePOmfUiwNsMnpcjdUyeylxvVbICFK-aptSExfSyGpK_8C3VnOsYGxofjnqu9lSLLZ820GO6WSmNaFOXWBP_13S0sVvQ7Qdd25UCmpA1seyoiJtX9gfJe4OF--kDWpFHGLMItX3OLmc_k0UvJ_4og41GZl945N2p7yyQUGHUhvwf2ddvRticIeJ_w7ySFXpYtZ0mudxjZUjIXFN4z4VRBvZuHkH4DXWxNfPhhYGfkab4YvasDBmFvbFjPErbI-gIBSZyIPjO9M8viTpowM5UhMaiDQd_OxOp1S-uIziJDO5tHS1QvudlCnL3vOgVGt5netnZLmjyEbYm90ReRLr74OMT2BoqUjGhZBNlDISGuzViJXdWw2vxIwQ_kZtg2pTGqBPz05rOvJuhkLKU9t_azYY--PyeK_CB0aeNvrDOxOu3sYoN-haOktn2l8WJmse5zJyaEXYFB5uD6CUdUMhBQRjdibx9cPMe2h4j8SdAlqrnNn6XbpiRx7PWKaEZSqDbrcDh_3ZmWY4YQD7JezPGX9evUk1Yvj8n4JXxt1w_U1c1aDgmUP4tmh4YhlyVwDDE1Z2suCvhjl1G5yVVGICuLxQIw5j2Zu6Mxr96wwgfrUOe69EnN-QRgCkly1grGjNkYAcWXXlxpYyrfMG8asjKlX1GTT28fuG-9otUXHcSc0A4NPgk-gJIR_-6kFauW6TFJzcL-0bCtkrlnHXu5reV2IQNS0prrI508blz4_U0rM-ePJIf1CC8mdbtB2HbEil3ZABjbB27I6eb_SXZ8m5C4EHE3Uve9U6buvGrJ-5kj4telwwDylFPbgDI45T3VEgHaVQARZe0tjvktg5wCLfVpCWG_t8r4tdKTfY3N_jQ0uP303qhssDKQxIakbulV6tlq64tpNaxWh4zYRMbIkUigStWA",
+      "idCategoria": 1,
+      "idProducto": 2,
+      "idInversionista": 4,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 8,
+      "nombreFile": "B.L2.3 - pdf share",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "B.L2.3.0",
+      "codAwsUrl": "https://drive.google.com/file/d/1gbzc4j8ZgKtK4Av4c1Ey3l4QFUktkEel/view?usp=sharing",
+      "idCategoria": 2,
+      "idProducto": 2,
+      "idInversionista": 3,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 9,
+      "nombreFile": "B.L3.2",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "B.L3.2.0",
+      "codAwsUrl": "url9",
+      "idCategoria": 3,
+      "idProducto": 2,
+      "idInversionista": 2,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 10,
+      "nombreFile": "B.L4.2",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "B.L4.2.0",
+      "codAwsUrl": "url10",
+      "idCategoria": 4,
+      "idProducto": 2,
+      "idInversionista": 2,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 11,
+      "nombreFile": "B.L3.8 - excel export",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "B.L3.8.0",
+      "codAwsUrl": "https://doc-08-4s-sheets.googleusercontent.com/export/su1i2ie110ua0plfa5rgts2fkc/fjgnfs6e8fifhutk95b4t5fuuc/1677030615000/104186742998159936335/104186742998159936335/11yrREmHvOZz0Ekt1JQMnxv7GqNbze46H?format=xlsx&id=11yrREmHvOZz0Ekt1JQMnxv7GqNbze46H&dat=AP36HMXnLeZxLvwhkk3CDfnK6GHUSJFwpVodLVguInW-1LgrzMvCBgzAeueK7imP1HYaqaou_g-RxesqHXD07KJJTevzFv-VH0WsB13MXYZpnu0t58rvCqs2ya3K80Ihg0pOO99wTeqZMMAyGOeIabyIhg7jtivAzXAYGOfpf3OYcCSKBxem2t2AB4xhKKXsHXS1ziIAGzmrlJIfk2WF4U_qDA5t8we9RAPtnWS36a7cdHNLcBpR7jGy_ax8LvsL6ys_gDxbnsk59qWFPo4CljyYum9xQk0zVfT-MrRYdPHdmifsSOx3wW1k4H0rprYPDIc8v79DYNAP6Y_E0Od0n-7HaJ8cZqcURuR5L2NIT3_l8bVdgawlOmSXUwrvLkK1poRjR6kxOH0V4LbnxXUp37IYGnnMPvvBVZrMC9ntY48MkZBXksObGd_svhqHY9yx7WlvE3iWQfHk-C_tDrWSPo23soA46KATy-8MAmFFFEHlt6btFnvqt2vVkaN8i1354mr_cNcLcWevBTfrpROlnRjMwz6G6-o4NM8ZK3OC_rmWKPmyJRui82Cu5zW8G_pIb6vOnuin8ff7gE96ZivVO9e9sJX0aobbk21kM30HBvtPrOKOTvIYYTgpWeDiUhNm2B6FtVyn0KDQWexx0UM8gPHxp7mCCLzNfCrjQ3uevGN58WQoV2yMlLFqRYkPseomcPKMmrqBCQ6rjRBOp-CisKC-li7QG4aZNw_FVwT25v_N-kjYVhktRadsYBGv0skYYArkwAlQPzMQesUOCjjsXNUUMYAqhl0uhVS60x6v1zcdNZtPnid4jE72Jv6rh2lvd8mJIYK_lDalD0KLO9jtbZel98icGBtvl_RiXbBgUH_ffDfQX-Tv5rrvzlNPdhND_o7MqWjUj2xwpJYevjw3AfA3q58ZK_K91H-5Wg",
+      "idCategoria": 3,
+      "idProducto": 2,
+      "idInversionista": 8,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 12,
+      "nombreFile": "B.L3.4",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "B.L3.4.0",
+      "codAwsUrl": "url12",
+      "idCategoria": 3,
+      "idProducto": 2,
+      "idInversionista": 4,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 13,
+      "nombreFile": "B.L3.1",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "B.L3.1.0",
+      "codAwsUrl": "url13",
+      "idCategoria": 3,
+      "idProducto": 2,
+      "idInversionista": 1,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 14,
+      "nombreFile": "B.L3.7",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "B.L3.7.0",
+      "codAwsUrl": "url14",
+      "idCategoria": 3,
+      "idProducto": 2,
+      "idInversionista": 7,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 15,
+      "nombreFile": "C.L1.5 - excel folder, doc share",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "C.L1.5.0",
+      "codAwsUrl": "https://doc-08-7g-docs.googleusercontent.com/docs/securesc/f62tnljn36f6b1ub69dusc2pj9rnfuot/38lnqab1t0q7jecbiqkmmrgv2avojqp8/1677030450000/18438028895767944539/18438028895767944539/11yrREmHvOZz0Ekt1JQMnxv7GqNbze46H?e=download&ax=AB85Z1CTgi-KLdlK-W4ZflGvxJ8RjAAQYvQfguA2oJycNXxovrNahzO2L2tv5W8sG3sppAUQFwGBqfFZkmjY5_n3R7pOrDPAxVCNkk7VJ68RIKUEyVHbmxjJiHcU2u942Bw4sW7LimhkTbj8MSHvJGkVu5ekAbtpv4buUwBjXVqZVqLQbIGVHLsTgKakg7CXs216Z9RV6UNJLtPhLGbNtC8c7tlLs4x8Vn5_X1zz02kdqhzr4M7q_T50Kyzx95R3wUv52on3CfLAuALfEaFv_QIwOHZ0jqH_lqB8bKPD2QMhk5VoCkdcqfHi3B3N9lU6RAwGVmgy1f8M7KNCbZ3-BQELjr288W5sKjUj-2mhwLk6fnW6FicUHUkWKF81GZJg0MOMrNImew4ma64qnk1K_YnLig8T7k0zQSQd1Vii-Ox95v2IR8_D0QkTNqVtXO2ChyrRksV56E_QPjS4cdjFTnKRVeOR7ARpmYu4_uaL425bfMCsAxZyADcYHKzePanhzLbm002s9wZxH-Fyg9hx6_Ar2Or66JJysEFQ540WipzAErPOLTkXQQM-Ke-qxa_TN77DKtqM9DcyfmKAypFS2blBdVzXpIgsaJz7DW_53Rv2tgxVf6DYyOCAklVO_10mb2GMhynD6bMm5HCSNdhjIqY6Fi6h2fqTs1Md_ZFaGoaHjYxRT2wa7yOYnnyOilRNuuxNI2FAPsaiTnpIZ_FA7hRuRfiuFmTWqoRBs6tiOCnTSm5Yay_5CsDjVh41z-xu6WT1a9SyZJbrVWNF5XpdRruIc_0JHlq9NZ7sUbff3aPE88zXQwscAS2toSV5ETVKZFkbfCtSLWKYcWX1u-_ybp7fC1mxRhMGI_u1FxM64UjvM0hD-h6f-KWmtIG-AapaPIQ&uuid=9444b29e-a6b6-435b-a1bd-c36ca557f3b0&authuser=0&nonce=6ht11akj3qps4&user=18438028895767944539&hash=nnrlir2r0a7umgcf866gdvp8a6lf7mvu",
+      "idCategoria": 1,
+      "idProducto": 3,
+      "idInversionista": 5,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 16,
+      "nombreFile": "C.L2.6 - jpg",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "C.L2.6.0",
+      "codAwsUrl": "https://doc-00-7g-docs.googleusercontent.com/docs/securesc/f62tnljn36f6b1ub69dusc2pj9rnfuot/uo51152c0b4ah77ijk84qf6vr7fvplvl/1677028950000/18438028895767944539/18438028895767944539/1PEHoF5wLGnpSA_DG83I8JGy-cc0OaBYU?e=download&ax=AB85Z1BJUrL04BpMkfoL-Xwx-MhWMmgJdUUq11TrtYjzH7-rwB0rIqQ9QMHuiLEUjNROLQCcAiAfG8RYnF0Rfbe3HyCqtJK6y27dI-nWBGpKprJVixvwFbz7LeOjSoMHDyvcBUBY5jkzqz48fZb5KYmLSI2p7giB_D7yzpVguBUg4P3tLwgOchNwSd_U0J1jAOfoFyXUY9rTQzdelkBaYEtd19lKQsZ-AIoma9Hg4Zm_k7fslOeQRCCQc09eBnN2vq5B9WAY92TQyRgK_4WDCpCIAx49yTlEUkQP0wXZ2x9BOfWWrUDrp9iRDhLyMZ2XMP6P2KelKj7Ggn4FvDJ9cC0qQ55SU8VMcCrlsvffyCqmIovUkpqMph-1Q-KOH-nqo_rM-AIpuOEYkxzBtg5apahdqd7WKU6Ygby2x1HCP-oKxISCyOnLIV-1VBrVYXXvEzLp53IK_gKIPWYHojqBUeT_TTqS2OyrnGE_1JzX--8_kMDb486aNAzcW9YtyVI0ijw_hPK-OLVjE3Jdzbzv1YL76JnA_YVKaqRcFKGiiUTSnpjU8IN5N66QoEKYXN8J0cG-84L9DsygzO83rDrlvYuKdbIoWirH7S_qe9sSUy6YIrxBJOOqrB8VjSXeCASE2XZxBdMNVxXKzjqz7OFKNMraWY5i-ITJsCcBJKLpLWVeBt0OQD84oCNvJ87YHmLe5hfDquimrjjpeHepRCI2yyBYbuoaMUZapp0Dn7xswQjr4KQ4ROJGo587nnG3LYz4AeX_XiN0IqK6zIDi0-OGvJTP5HaCYhy1nwRCe-qUQKM3Q29_kaUaXJgpQ-tqi1tFL17Kxx6Q__WYL4VckQLyjm58kpu0threztv62htY939Mr_6MVXDI-3_gdAb9rAChNuM&uuid=fdd06eb6-3846-4e5e-a43b-7e979d7e1e6a&authuser=0&nonce=op75ur2hm3spu&user=18438028895767944539&hash=4o0ajrd7vql5cf2vojbv91q6qsqdupob",
+      "idCategoria": 2,
+      "idProducto": 3,
+      "idInversionista": 6,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 17,
+      "nombreFile": "C.L2.1",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "C.L2.1.0",
+      "codAwsUrl": "url17",
+      "idCategoria": 2,
+      "idProducto": 3,
+      "idInversionista": 1,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 18,
+      "nombreFile": "C.L3.8",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "C.L3.8.0",
+      "codAwsUrl": "url18",
+      "idCategoria": 3,
+      "idProducto": 3,
+      "idInversionista": 8,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 19,
+      "nombreFile": "C.L3.3",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "C.L3.3.0",
+      "codAwsUrl": "url19",
+      "idCategoria": 3,
+      "idProducto": 3,
+      "idInversionista": 3,
+      "idTipoDocumento": 1
+    },
+    {
+      "id": 20,
+      "nombreFile": "D.L1.2",
+      "userSubida": 1,
+      "userActualiza": 1,
+      "userDelete": null,
+      "fechaSubida": "day1",
+      "fechaActualiza": null,
+      "fechaDelete": null,
+      "uuiAws": "D.L1.2.0",
+      "codAwsUrl": "url20",
+      "idCategoria": 1,
+      "idProducto": 4,
+      "idInversionista": 2,
+      "idTipoDocumento": 1
+    }
+  ]
+}

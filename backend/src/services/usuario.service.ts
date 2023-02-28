@@ -75,4 +75,3 @@ export const updateUsuario = async (usuario: Partial<Omit<Usuario, "id">>, id: s
     }
   })
 }
-

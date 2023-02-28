@@ -1,0 +1,8 @@
+#img_logo {
+    height: 200px;
+    width: auto;
+}
+
+button:disabled {
+    background-color: gray;
+  }
