@@ -5,6 +5,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { useContext, useEffect, useState } from 'react';
 import {usUario, RolUsuario} from '../assets/data_user'
 import {SelectionContext} from '../context/SelectionContext'
+import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 // interface User {
 //   id: number;
 //   idRol: number;
@@ -219,6 +220,18 @@ export const UserEditor = () => {
               <Button sx={{width:'100%'}} variant="contained" color="primary" onClick={handleSave}>
                 Save
               </Button>
+              {/* <LoadingButton
+              sx={{height:'100%', width:'100%'}}
+              loading={loadSave?.status ? loadSave.status : false}
+              loadingPosition="start"
+              startIcon={loadSave.respError ? <ErrorOutlineIcon/>: (loadSave.respSuccess ? <CheckCircleOutlineIcon/>: (<SaveIcon />))}
+              variant="contained"
+              color={loadSave.color === 'primary' || loadSave.color === 'error' || loadSave.color === 'success' ? loadSave.color : 'primary'}
+              onClick={handleSave}
+              size="large"
+            >
+              {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("SAVE"))}
+            </LoadingButton> */}
             </Grid>
 
           </Grid>
