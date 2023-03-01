@@ -37,7 +37,9 @@ export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
               <Divider />
               <Grid item sx={{
                 display: 'flex',
+                flexDirection:'column'
               }}>
+                <h1> Crear Usuario:</h1>
                 <CreateUser />
                 
               </Grid>

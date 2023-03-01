@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import {TextField, FormControlLabel,  Checkbox, Button, Grid, InputLabel, Select, MenuItem, FormControl} from '@mui/material'
+import {TextField, FormControlLabel,  Checkbox, Button, Grid, InputLabel, Select, MenuItem, FormControl, Typography} from '@mui/material'
 import {usUario, RolUsuario} from '../assets/data_user'
 import {SelectionContext} from '../context/SelectionContext'
 import axios from 'axios'
@@ -7,6 +7,8 @@ import {LoadingButton} from '@mui/lab'
 import SaveIcon from '@mui/icons-material/Save';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const CreateUser: React.FC<{}> = ():JSX.Element => {
   // const [loadSave, setLoadSave] = useState<boolean>(false);
@@ -18,11 +20,12 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
     respError: boolean
     color: string
   }
+  const [currentToastId, setCurrentToastId] = useState<any | undefined>(undefined);
   const [loadSave, setLoadSave] = useState<LoadSave>({status:false, respSuccess:false, respError:false, color:'primary' });
   const [rol, setROL] = useState<RolUsuario | null>();
-  const [users, setUsers] = useState<usUario[]>([]);
+  //const [users, setUsers] = useState<usUario[]>([]);
   const {refresh, setRefresh} = useContext(SelectionContext);
-  const [selectedUser, setSelectedUser] = useState<usUario | null>(null);
+  //const [selectedUser, setSelectedUser] = useState<usUario | null>(null);
   const [userData, setUserData] = useState<usUario>({
       id: '',
       userNombre: '',
@@ -65,44 +68,66 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
      // fetch(`http://localhost:8000/api/usuarios/${userData.id}`, {
     
     setLoadSave({...loadSave , status:true})
-
     if ((userData.userNombre === '' || userData.email === '' || userData.password === '')){
       setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
-      setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1000)
+      setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1500)
+      const toastId = toast.error('Completar la informacion', { autoClose: 1500, toastId: currentToastId });
+      setCurrentToastId(toastId);
       return console.log("Error push Data");
       
     }else if((userData.userNombre === null || userData.email === null || userData.password === null)){
       setLoadSave({...loadSave ,status:false, respError:true, color:'error'  })
-      setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1000)
+      setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1500)
+      const toastId = toast.error('Completar la informacion', { autoClose: 1500, toastId: currentToastId });
+      setCurrentToastId(toastId);
       return console.log("Error push Data null");
     }else{
-      return await axios.post(`http://localhost:8000/api/usuarios/`, {
+
+      setTimeout(() => {
+      axios.post(`http://localhost:8000/api/usuarios/`, {
           ...userData,
           estado: statusCheckbox,
       })
         .then(response => {
-          setRefresh(!refresh)
+          setRefresh(!refresh);
           if (response.status === 200){
             setLoadSave({...loadSave ,status:false ,respSuccess:true, color:'success' })
             setTimeout(() => {setLoadSave({...loadSave , respSuccess:false, color:'primary' })},2000)
+            const toastId = toast.success('Usuario creado con exito', { autoClose: 2000, toastId: currentToastId });
+            setCurrentToastId(toastId);
           }else{
             setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
             setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},2000)
+            const toastId = toast.error('Posible falla', { autoClose: 2000, toastId: currentToastId });
+            setCurrentToastId(toastId);
           }
-          console.log('Respuesta del servidor:', response.data);
+          console.log('Respuesta del servidor:', response);
         })
         .catch(error => {
           setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
           setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},2000)
-          console.error('Error al enviar datos:', error);
-        });
+          if (error.response.status === 500){
+            const toastId = toast.error("cambiar correo electrónico, ya está registrado.", { autoClose: 2000, toastId: currentToastId });
+            console.log('Respuesta del servidor ___>:', error);
+            setCurrentToastId(toastId);
+          } else if (error.response.status === 404){
+            const toastId = toast.error('Sin Conexion a DataBase', { autoClose: 2000, toastId: currentToastId });
+            setCurrentToastId(toastId);
+          } else {
+            const toastId = toast.error('Sin Conexion', { autoClose: 2000, toastId: currentToastId });
+            setCurrentToastId(toastId);
+            return console.error('Error al enviar datos:', error);
+          }
+          
+        })
+      },1000)
     }
     
   }
 
   return (
       <div className='container'>
-        <h1> Crear Usuario:</h1>
+        
 
         <div style={{display: 'flex', minWidth: 0, margin: '10px 20px 10px 20px'}} >
         {/* enviar a una primera fila  */}
@@ -118,15 +143,6 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
             />
           </Grid>
           <Grid item xs={4}>
-            {/* menu seleccionable */}
-            {/* <TextField
-              sx={{width:'100%'}}
-              name="rol"
-              label="Role"
-              // type="number"
-              value={userData.rol}
-              onChange={handleChange}
-            /> */}
           <FormControl fullWidth color='neutral'>
             <InputLabel sx={{}} id="demo-simple-select-label"  >Role</InputLabel>
             <Select
@@ -150,7 +166,7 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
               color='neutral'
               control={
                 <Checkbox
-                  color='primary'
+                  color='neutral'
                   checked={statusCheckbox}
                   onChange={handleChange}
                   name="statusCheckbox"
@@ -204,19 +220,22 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
               onClick={handleSave}
               size="large"
             >
-              {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("CREATE"))}
+              <Typography variant="h6" style={{fontWeight: 'bold'}}>
+                {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("CREATE"))}
+              </Typography>
+              
             </LoadingButton>
-
+            <ToastContainer />
           </Grid>
 
         </Grid>
             
         </div>
-        <h3>var loadSave: {loadSave ? " existe":" nulo"}</h3>
+        {/* <h3>var loadSave: {loadSave ? " existe":" nulo"}</h3>
         <h3>var loadSave.status: {loadSave.status ? 'true':'false'}</h3>
         <h3>var loadSave.respSuccess: {loadSave.respSuccess ? 'true':'false'}</h3>
         <h3>var loadSave.respError: {loadSave.respError ? 'true':'false'}</h3>
-        <h3>var loadSave.color: {loadSave.color}</h3>
+        <h3>var loadSave.color: {loadSave.color}</h3> */}
       </div>
   );
 }

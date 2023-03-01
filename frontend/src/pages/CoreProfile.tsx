@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Container, Grid } from '@mui/material';
 import { NavBar } from '../common/NavBar'
 import { SelectionContext } from '../context/SelectionContext';
+import {UserProfile} from '../components/ProfileUser'
 
 export const AppProfile: React.FunctionComponent<{}> = (): JSX.Element => {
   const { sessionRol } = useContext(SelectionContext);
@@ -24,8 +25,10 @@ export const AppProfile: React.FunctionComponent<{}> = (): JSX.Element => {
 
               <Grid item sx={{
                 display: 'flex',
+                flexDirection: 'column',
               }}>
-                <h1>Component a renderizar...</h1>
+                {/* <h1>Component a renderizar...</h1> */}
+                <UserProfile/>
               </Grid>
 
             </Grid>

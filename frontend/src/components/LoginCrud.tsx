@@ -1,11 +1,18 @@
 // export default EditableData;
-
-import { Button, Checkbox, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Button, Checkbox, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {usUario, RolUsuario} from '../assets/data_user'
 import {SelectionContext} from '../context/SelectionContext'
+import axios from 'axios'
+import SyncIcon from '@mui/icons-material/Sync';
+import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
+import {LoadingButton} from '@mui/lab'
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import RotateLeftIcon from '@mui/icons-material/RotateLeft';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // interface User {
 //   id: number;
 //   idRol: number;
@@ -15,7 +22,15 @@ import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 //   password: string;
 // }
 
-export const UserEditor = () => {
+export const UserEditor:React.FC<{}> = ():JSX.Element => {
+  interface LoadSave{
+    status:boolean
+    respSuccess: boolean
+    respError: boolean
+    color: string
+  }
+  const [currentToastId, setCurrentToastId] = useState<any | undefined>(undefined);
+  const [loadSave, setLoadSave] = useState<LoadSave>({status:false, respSuccess:false, respError:false, color:'primary' });
   const [rol, setROL] = useState<RolUsuario | null>();
   const [users, setUsers] = useState<usUario[]>([]);
   const [selectedUser, setSelectedUser] = useState<usUario | null>(null);
@@ -58,27 +73,86 @@ export const UserEditor = () => {
     });
   };
 
-  const handleSave = () => {
-    fetch(`http://localhost:8000/api/usuarios/${userData.id}`, {
-   // fetch(`http://localhost:8000/tUsuarios/${userData.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...userData,
-        estado: statusCheckbox,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setRefresh(!refresh)
-        console.log(data);
+  // const handleSave = () => {
+  //   fetch(`http://localhost:8000/api/usuarios/${userData.id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       ...userData,
+  //       estado: statusCheckbox,
+  //     }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setRefresh(!refresh)
+  //       console.log(data);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error al enviar datos:', error);
+  //     });
+  // };
+
+  const handleSave = async():Promise<void> => {
+    setLoadSave({...loadSave , status:true})
+    if ((userData.userNombre === '' || userData.email === '' || userData.password === '')){
+      setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
+      setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1500)
+      const toastId = toast.error('Completar la informacion', { autoClose: 1500, toastId: currentToastId });
+      setCurrentToastId(toastId);
+      return console.log("Error push Data");
+      
+    }else if((userData.userNombre === null || userData.email === null || userData.password === null)){
+      setLoadSave({...loadSave ,status:false, respError:true, color:'error'  })
+      setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1500)
+      const toastId = toast.error('Completar la informacion', { autoClose: 1500, toastId: currentToastId });
+      setCurrentToastId(toastId);
+      return console.log("Error push Data null");
+
+    }else{
+    setTimeout(() => {
+      axios.patch(`http://localhost:8000/api/usuarios/${userData.id}`, {
+          ...userData,
+          estado: statusCheckbox,
       })
-      .catch(error => {
-        console.error('Error al enviar datos:', error);
-      });
-  };
+        .then(response => {
+          setRefresh(!refresh);
+          if (response.status === 200){
+            setLoadSave({...loadSave ,status:false ,respSuccess:true, color:'success' })
+            setTimeout(() => {setLoadSave({...loadSave , respSuccess:false, color:'primary' })},2000)
+            const toastId = toast.success('Usuario actualizado con exito', { autoClose: 2000, toastId: currentToastId });
+            setCurrentToastId(toastId);
+          }else{
+            setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
+            setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},2000)
+            const toastId = toast.error('Posible falla', { autoClose: 2000, toastId: currentToastId });
+            setCurrentToastId(toastId);
+          }
+          console.log('Respuesta del servidor:', response);
+        })
+        .catch(error => {
+          setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
+          setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},2000)
+          if (error.response.status === 500){
+            const toastId = toast.error("Error al actualizar, correo ya existente", { autoClose: 2000, toastId: currentToastId });
+            console.log('Respuesta del servidor ___>:', error);
+            setCurrentToastId(toastId);
+          } else if (error.response.status === 404){
+            const toastId = toast.error('Sin Conexion a DataBase', { autoClose: 2000, toastId: currentToastId });
+            setCurrentToastId(toastId);
+          } else {
+            const toastId = toast.error('Sin Conexion', { autoClose: 2000, toastId: currentToastId });
+            setCurrentToastId(toastId);
+            return console.error('Error al enviar datos:', error);
+          }
+          
+        })
+      },1000)
+    }
+
+  }
+  
 
   return (
     <div>
@@ -142,17 +216,6 @@ export const UserEditor = () => {
             </Grid>
 
             <Grid item xs={4}>
-              {/* cambiar por seleccionable */}
-              {/* <TextField
-                sx={{ width: '100%'}}
-                name="rol"
-                label="Role"
-                // inputProps={{ size: userData.rol.length }}
-                // type="number"
-                value={userData.rol}
-                onChange={handleChange}
-              /> */}
-
               <FormControl color='neutral' fullWidth>
                 <InputLabel sx={{}} id="demo-simple-select-label" >Role</InputLabel>
                 <Select
@@ -184,7 +247,7 @@ export const UserEditor = () => {
                     name="statusCheckbox"
                   />
                 }
-                label="Active"
+                label={statusCheckbox ? "Status: (Active)": "Status: (Disabled)"}
               />
             </Grid>
           </Grid>
@@ -217,21 +280,23 @@ export const UserEditor = () => {
             </Grid>
 
             <Grid item xs={2}>
-              <Button sx={{width:'100%'}} variant="contained" color="primary" onClick={handleSave}>
+              {/* <Button sx={{width:'100%'}} variant="contained" color="primary" onClick={handleSave}>
                 Save
-              </Button>
-              {/* <LoadingButton
+              </Button> */}
+              <LoadingButton
               sx={{height:'100%', width:'100%'}}
               loading={loadSave?.status ? loadSave.status : false}
               loadingPosition="start"
-              startIcon={loadSave.respError ? <ErrorOutlineIcon/>: (loadSave.respSuccess ? <CheckCircleOutlineIcon/>: (<SaveIcon />))}
+              startIcon={loadSave.respError ? <ErrorOutlineIcon/>: (loadSave.respSuccess ? <PublishedWithChangesIcon/>: (<SyncIcon sx={{fontSize: '35px'}}/>))}
               variant="contained"
               color={loadSave.color === 'primary' || loadSave.color === 'error' || loadSave.color === 'success' ? loadSave.color : 'primary'}
               onClick={handleSave}
               size="large"
             >
-              {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("SAVE"))}
-            </LoadingButton> */}
+             <Typography variant="h6" style={{fontWeight: 'bold'}}>
+                {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("UPDATE"))}
+              </Typography>
+            </LoadingButton>
             </Grid>
 
           </Grid>
