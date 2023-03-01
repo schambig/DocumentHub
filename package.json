@@ -19,5 +19,8 @@
   "homepage": "https://github.com/schambig/DocumentHub#readme",
   "devDependencies": {
     "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.0"
   }
 }
