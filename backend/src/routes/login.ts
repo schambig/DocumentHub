@@ -2,43 +2,61 @@ import * as dotenv from "dotenv";
 import type { Request, Response } from "express";
 import express from "express";
 import jwt from 'jsonwebtoken';
+import * as UsuarioServiceLogin from "../services/login.service";
+import { body, validationResult } from "express-validator";
+import * as UsuarioService from "../services/usuario.service";
 
-
+export const usuarioRouter = express.Router();
 const bcrypt = require('bcrypt');
-export const app = express.Router();
+
+
 dotenv.config();
-app.post('/userjwt', async (req: Request, res: Response) => {
+usuarioRouter.post('/userjwt', async (req: Request, res: Response) => {
   
-  const { username, password } = req.body;//cambiar al modelo de la BD
+  const { email, password } = req.body;
 
-  try {
-    // const client = await pool.connect();
-    //Aqui esta linea conectaba a la base de datos progress directamente, Salo porfa conectala mediante prisma
     const hashedPassword = await bcrypt.hash(password, 10);
-    const reshash = await client.query('INSERT INTO "users" (username, password) VALUES ($1, $2) RETURNING *', [username, hashedPassword]);
-
-    const result = await client.query('SELECT * FROM "users" WHERE username = $1', [
-      username,
-    ]);
-    
-    client.release();
-    
-    if (result.rows.length === 0) {
-      return res.status(401).json({ message: 'Authentication: No found' });
+    try {
+      const usuario = await UsuarioServiceLogin.getUsuario_email(email)
+      if (usuario) {
+        const isPasswordCorrect = await bcrypt.compare(password, usuario.password);
+        if (isPasswordCorrect) {
+          const token = jwt.sign({ username: usuario.email }, process.env.SECRET_KEY, { expiresIn: '0.1h' });
+          return res.json({ token });
+          return res.status(200).json(usuario)
+        }
+        else {
+          return res.status(208).json({message: "Usuario o contraseña incorrecta"})
+        }
+      }
+      return res.status(404).json("Usuario could not be found")
+    } catch (error: any) {
+      return res.status(500).json(error.message)
     }
+  })
+// 
 
-    const user = result.rows[0];
-    console.log(user)
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
-    if (!isPasswordCorrect) {
-      return res.status(401).json({ message: 'Authentication: Password incorrect' });
+// POST: Create a new Usuario
+usuarioRouter.post(
+  "/creahashed",
+  body("userNombre").isString(),
+  body("email").isString(),
+  body("password").isString(),
+  body("estado").isBoolean(),
+  body("rol").isString(),
+  async (request: Request, response: Response) => {
+    const errors = validationResult(request);
+    if (!errors.isEmpty()) {
+      return response.status(400).json({errors: errors.array()});
     }
-
-    const token = jwt.sign({ username: user.username }, process.env.SECRET_KEY, { expiresIn: '1h' });
-    return res.json({ token });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).send('Error al obtener la data de la base de datos');
+    try {
+      request.body.password =  await bcrypt.hash(request.body.password, 10);//enviar la contraseña hasheada a la DB
+      const usuario = request.body
+      const newUsuario = await UsuarioService.createUsuario(usuario)
+      return response.status(201).json(newUsuario)
+    } catch (error: any) {
+      return response.status(500).json(error.message);
+    }
   }
-});
+)

@@ -30,8 +30,6 @@ usuarioRouter.get("/:id", async (request: Request, response: Response) => {
     return response.status(500).json(error.message)
   }
 })
-
-// POST: Create a new Usuario
 usuarioRouter.post(
   "/",
   body("userNombre").isString(),
@@ -45,7 +43,6 @@ usuarioRouter.post(
       return response.status(400).json({errors: errors.array()});
     }
     try {
-      request.body.password =  await bcrypt.hash(request.body.password, 10);//enviar la contraseña hasheada a la DB
       const usuario = request.body
       const newUsuario = await UsuarioService.createUsuario(usuario)
       return response.status(201).json(newUsuario)
