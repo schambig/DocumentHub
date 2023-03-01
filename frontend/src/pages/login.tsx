@@ -13,44 +13,12 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-// import jwt from 'jsonwebtoken';
+import axios from 'axios';
+import * as CryptoJS from 'crypto-js';
 import * as React from 'react';
+import { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import { SelectionContext } from '../context/SelectionContext';
-import { useContext } from 'react';
-import { usUario, RolUsuario } from '../assets/data_user';
-
-// const token = jwt.sign({ /* payload */ }, 'secret');
-// interface User {
-//   username: string;
-//   password: string;
-// }
-
-// function login(username: string, password: string) {
-//   // Send a request to the API to verify the credentials
-//   fetch('http://localhost:3001/users')
-//     .then(response => response.json())
-//     .then((users: User[]) => {
-//       const user = users.find(u => u.username === username && u.password === password);
-
-//       if (user) {
-//         // Generate a JWT token
-//         const token = jwt.sign({ username }, 'secret');
-
-//         // Store the token in localStorage
-//         localStorage.setItem('token', token);
-
-//         // Redirect the user to the dashboard page
-//         window.location.href = '/dashboard';
-//       } else {
-//         // Handle invalid credentials
-//       }
-//     })
-//     .catch(error => {
-//       // Handle the error
-//     });
-// }
-
 
 function Copyright(props: any) {
   return (
@@ -65,64 +33,38 @@ function Copyright(props: any) {
   );
 }
 
-// function login(username: string, password: string) {
-//   // Send a request to the API to verify the credentials
-//   fetch('http://localhost:8000/tUsuarios')
-//     .then(response => response.json())
-//     .then((users) => {
-//       const user = users.find((u:any) => u.username === username && u.password === password);
-
-//       if (user) {
-//         // Generate a JWT token
-//         const token = jwt.sign({ username }, 'secret');
-
-//         // Store the token in localStorage
-//         localStorage.setItem('token', token);
-
-//         // Redirect the user to the dashboard page
-//         window.location.href = '/dashboard';
-//       } else {
-//         // Handle invalid credentials
-//       }
-//     })
-//     .catch(error => {
-//       // Handle the error
-//     });
-// }
-
 export function LoginMenu() {
 
   const { setSessionRol } = useContext(SelectionContext);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const username = data.get('email');
+    const password = data.get('password');
     //Get the DB data
-    fetch('http://localhost:8000/api/usuarios')
-      .then(response => response.json())
-      .then((item) => {
-        const elemento:usUario[] = item.filter((dato:usUario) => dato.email === email && dato.password === password)
-        if (elemento.length) {
-          // captar la data de idrol y settear el variable sessionRol
-          const role = elemento[0].rol
-          const roleSet = role===RolUsuario.ADMIN ? (1):(role===RolUsuario.DATAUSER ? (2):(role===RolUsuario.USER ? (3):(null)))
-          setSessionRol(roleSet)
-          navigate("/app")
+
+
+    axios.post<any>('http://localhost:3000/userjwt')//reemplazar con env variables
+      .then(response => {
+        const elemento = response.data;
+        const bytes = CryptoJS.AES.decrypt(elemento.token, process.env.SECRET_KEY);
+        const datosJson = bytes.toString(CryptoJS.enc.Utf8);
+        const datos = JSON.parse(datosJson);
+        console.log(datos);
+        // estos son los datos desencriptados, falta usar una variable para recuperar solamente el id rol
+
+        console.log(elemento)
+        if (elemento.token) {
+          setSessionRol(elemento.token);
+          navigate("/app");
+          localStorage.setItem('token', elemento.token)
         }
-        // console.log(item[0].email);
       })
       .catch(error => {
-        setSessionRol(1)
-          navigate("/app")
-        // Handle the error
+        console.error(error)
       });
-    //Get the form data
-    const email = data.get('email');
-    const password = data.get('password');
-    //
-    // if ( email === )
-
-    
+    console.log('Sending request with username:', username, 'and password:', password);
+    console.log(localStorage.getItem('token'))
   };
   const [open, setOpen] = React.useState(false);
 

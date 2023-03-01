@@ -1,10 +1,11 @@
-import express from "express";
 import type { Request, Response } from "express";
+import express from "express";
 import { body, validationResult } from "express-validator";
 
 import * as UsuarioService from "../services/usuario.service";
 
 export const usuarioRouter = express.Router();
+const bcrypt = require('bcrypt');
 
 // GET: List of all Usuarios
 usuarioRouter.get("/", async (request: Request, response: Response) => {
@@ -44,6 +45,7 @@ usuarioRouter.post(
       return response.status(400).json({errors: errors.array()});
     }
     try {
+      request.body.password =  await bcrypt.hash(request.body.password, 10);//enviar la contraseña hasheada a la DB
       const usuario = request.body
       const newUsuario = await UsuarioService.createUsuario(usuario)
       return response.status(201).json(newUsuario)
@@ -62,6 +64,7 @@ usuarioRouter.patch(
   body("estado").optional().isBoolean(),
   body("rol").optional().isString(),
   async (request: Request, response: Response) => {
+    request.body.password =  await bcrypt.hash(request.body.password, 10);//enviar la contraseña hasheada a la DB
     const errors = validationResult(request);
     if (!errors.isEmpty()) {
       return response.status(400).json({errors: errors.array()});
