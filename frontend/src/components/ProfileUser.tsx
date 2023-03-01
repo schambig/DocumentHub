@@ -250,7 +250,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 sx={{width: '100%'}}
                 onClick={handleShowPS}
                 variant='contained'>
-              <Typography  style={{fontWeight: 'bold'}}>
+              <Typography  variant="h6" style={{fontWeight: 'bold'}}>
                 {showPS ? "Canceled" :"Update PS"}
               </Typography>
               </Button>
