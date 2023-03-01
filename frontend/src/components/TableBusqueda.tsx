@@ -178,7 +178,7 @@ const [loadState, setLoadState] = useState<boolean>(true);
     { field: 'id', headerName: 'N°', flex:1,align: 'center',headerAlign: 'center'},
     { field: 'nombreFile', headerName: 'Archivo',width: 200,headerAlign: 'center'},
     { field: 'fechaSubida', headerName: 'Fecha', width: 220,headerAlign: 'center' },
-    { field: 'tipoDocumento', headerName: 'Doc', width: 100,align: 'center',headerAlign: 'center'},
+    { field: 'tipoDocumento', headerName: 'Doc', width: 150,align: 'center',headerAlign: 'center'},
     { field: 'PEP', headerName: 'PEP', width: 50, align: 'center',headerAlign: 'center'},
     { field: 'tipoDoc', headerName: 'Id', width: 180, align: 'center',headerAlign: 'center'},
     { field: 'numDoc', headerName: 'Nro. Identidad', width: 140,align: 'center',headerAlign: 'center'},
@@ -269,14 +269,14 @@ const [loadState, setLoadState] = useState<boolean>(true);
       )}
       </Grid>
       </Grid>
-      <DocumentPreviewButton documentUrl={
+      {/* <DocumentPreviewButton documentUrl={
         'https://drive.google.com/file/d/1gbzc4j8ZgKtK4Av4c1Ey3l4QFUktkEel/view?usp=sharing'
-      }/>
-      <h1 style={{ display:'flex' }}>TableBusqueda Component</h1>
+      }/> */}
+      {/* <h1 style={{ display:'flex' }}>TableBusqueda Component</h1>
       <h4>persona valor: {selectedOption1?.id}</h4>
       <h4>doc valor: {selectedOption2?.id}</h4>
       <h4>producto valor: {selectedOption3?.id}</h4>
-      <h4>lev valor: {selectedOption4?.id}</h4>
+      <h4>lev valor: {selectedOption4?.id}</h4> */}
     </Container>
     
   );

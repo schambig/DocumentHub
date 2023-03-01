@@ -36,15 +36,14 @@ function Copyright(props: any) {
 export function LoginMenu() {
 
   const { setSessionRol } = useContext(SelectionContext);
-
+  const { setGlobalID } = useContext(SelectionContext);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const data = new FormData(event.currentTarget);
-    const username = data.get('email');
+    const email = data.get('email');
     const password = data.get('password');
     //Get the DB data
 
-
-    axios.post<any>('http://localhost:3000/userjwt')//reemplazar con env variables
+    axios.post<any>('http://localhost:3000/userjwt',{email, password})//reemplazar con env variables
       .then(response => {
         const elemento = response.data;
         const bytes = CryptoJS.AES.decrypt(elemento.token, process.env.SECRET_KEY);

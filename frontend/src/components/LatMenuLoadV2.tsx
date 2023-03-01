@@ -309,7 +309,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                         />
                     </ListItemText>
                 </ListItem>
-                {selectedOption2 && <p>El ID seleccionado es actual: {selectedOption2.id}</p>}
+                {/* {selectedOption2 && <p>El ID seleccionado es actual: {selectedOption2.id}</p>} */}
             </Grid>
 
 
@@ -356,7 +356,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                         />
                     </ListItemText>
                 </ListItem>
-                {selectedOption1 && <p>El ID seleccionado es actual: {selectedOption1.id}</p>}
+                {/* {selectedOption1 && <p>El ID seleccionado es actual: {selectedOption1.id}</p>} */}
             </Grid>
 
 
@@ -403,7 +403,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                         />
                     </ListItemText>
                 </ListItem>
-                {selectedOption3 && <p>El ID seleccionado es actual: {selectedOption3.id}</p>}
+                {/* {selectedOption3 && <p>El ID seleccionado es actual: {selectedOption3.id}</p>} */}
             </Grid>
 
             {/* para el filtro subcategoria -> disable if desactive in product  */}
@@ -448,15 +448,15 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                         />
                     </ListItemText>
                 </ListItem>
-                {selectedOption4 && <p>El ID seleccionado es actual: {selectedOption4.id}</p>}
+                {/* {selectedOption4 && <p>El ID seleccionado es actual: {selectedOption4.id}</p>} */}
             </Grid>
 
 
-
+            {/* 
             <p> / {selectedOption1?.id} / and / {selectedOption1?.name} / ◄☼► </p><br />
             <p> / {selectedOption2?.id} / and / {selectedOption2?.name} / ◄☼► </p><br />
             <p> / {selectedOption3?.id} / and / {selectedOption3?.name} / ◄☼► </p><br />
-            <p> / {selectedOption4?.id} / and / {selectedOption4?.name} /  </p><br />
+            <p> / {selectedOption4?.id} / and / {selectedOption4?.name} /  </p><br /> */}
         </Grid>
     )
 };

@@ -35,6 +35,9 @@ interface SelectionContextType {
     // control refresh data user actualizar
     refresh: boolean;
     setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+    // captura Profile
+    globalID: string;
+    setGlobalID: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const SelectionContext = React.createContext<SelectionContextType>({
@@ -62,4 +65,6 @@ export const SelectionContext = React.createContext<SelectionContextType>({
     setIsAutocomplete4Enabled: () => {},
     refresh: false,
     setRefresh: () => {},
+    globalID:'',
+    setGlobalID: () => {},
 });
