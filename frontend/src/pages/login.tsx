@@ -93,7 +93,7 @@ function Copyright(props: any) {
 export function LoginMenu() {
 
   const { setSessionRol } = useContext(SelectionContext);
-
+  const { setGlobalID } = useContext(SelectionContext);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -107,6 +107,7 @@ export function LoginMenu() {
           const role = elemento[0].rol
           const roleSet = role===RolUsuario.ADMIN ? (1):(role===RolUsuario.DATAUSER ? (2):(role===RolUsuario.USER ? (3):(null)))
           setSessionRol(roleSet)
+          setGlobalID(elemento[0].id)
           navigate("/app")
         }
         // console.log(item[0].email);

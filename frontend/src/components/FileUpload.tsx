@@ -282,14 +282,14 @@ function verifyData(){
               }} />
         </Grid>
       }
-      <Grid item sx={{display: 'flex'}}>
+      {/* <Grid item sx={{display: 'flex'}}>
       <h3>persona valor: {selectedOption1?.id}</h3>
       <h3>doc valor: {selectedOption2?.id}</h3>
       <h3>producto valor: {selectedOption3?.id}</h3>
       <h3>lev valor: {selectedOption4?.id}</h3>
       
-      </Grid>
-      <h1>Fileupload Component</h1>
+      </Grid> */}
+      {/* <h1>Fileupload Component</h1> */}
     </Grid>
   );
 };
