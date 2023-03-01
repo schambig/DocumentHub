@@ -1,5 +1,6 @@
 // export default EditableData;
-import { Button, Checkbox, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+// import { Button, Checkbox, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { Checkbox, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import React, { useContext, useEffect, useState } from 'react';
 import {usUario, RolUsuario} from '../assets/data_user'
@@ -9,8 +10,8 @@ import SyncIcon from '@mui/icons-material/Sync';
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import {LoadingButton} from '@mui/lab'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import RotateLeftIcon from '@mui/icons-material/RotateLeft';
+// import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+// import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // interface User {
@@ -73,26 +74,6 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
     });
   };
 
-  // const handleSave = () => {
-  //   fetch(`http://localhost:8000/api/usuarios/${userData.id}`, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       ...userData,
-  //       estado: statusCheckbox,
-  //     }),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setRefresh(!refresh)
-  //       console.log(data);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error al enviar datos:', error);
-  //     });
-  // };
 
   const handleSave = async():Promise<void> => {
     setLoadSave({...loadSave , status:true})
@@ -297,6 +278,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
                 {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("UPDATE"))}
               </Typography>
             </LoadingButton>
+            <ToastContainer/>
             </Grid>
 
           </Grid>

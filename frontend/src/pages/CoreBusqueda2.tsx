@@ -43,7 +43,7 @@ export const AppBusquedav2: React.FunctionComponent<{}> = (): JSX.Element => {
       }
 
 
-      <h1 style={{ display: 'flex' }}>Estoy en Busqueda 2</h1>
+      {/* <h1 style={{ display: 'flex' }}>Estoy en Busqueda 2</h1> */}
     </Container>
 
   );

@@ -38,7 +38,7 @@ export const AppProfile: React.FunctionComponent<{}> = (): JSX.Element => {
       }
 
 
-      <h1>Estoy en Profile</h1>
+      {/* <h1>Estoy en Profile</h1> */}
     </Container>
   )
 };

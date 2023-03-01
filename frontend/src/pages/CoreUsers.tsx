@@ -43,13 +43,13 @@ export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
                 <CreateUser />
                 
               </Grid>
-              <h1> Componente  </h1>
+              {/* <h1> Componente  </h1> */}
             </Grid>
           </div>
         ) : null
       ) : <h1>Prohibido el acceso sin Rol </h1>
       }
-      <h1>Estoy en CoreUser</h1>
+      {/* <h1>Estoy en CoreUser</h1> */}
     </Container>
   )
 };

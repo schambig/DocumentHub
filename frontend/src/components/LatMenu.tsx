@@ -166,18 +166,6 @@ export const LatMenu: React.FC<{}> = ():JSX.Element => {
 const { selectedOption1, selectedOption2, selectedOption3, selectedOption4 } = useContext(SelectionContext);
 const { setSelectedOption1, setSelectedOption2, setSelectedOption3, setSelectedOption4 } = useContext(SelectionContext);
 // captar datos dependiendo evento onChange
- //const [selectedOption1, setSelectedOption1] = useState(null);
- //const [selectedOption2, setSelectedOption2] = useState<newTipoDoc | newCategoria | newProDucto | newInversionista | null>(null);
- //const [selectedOption3, setSelectedOption3] = useState<newTipoDoc | newCategoria | newProDucto | newInversionista | null>(null);
- //const [selectedOption4, setSelectedOption4] = useState<newTipoDoc | newCategoria | newProDucto | newInversionista | null>(null);
-
- //const [selectedPER, setSelectedPER] = useState<newTipoDoc | newCategoria | newProDucto | newInversionista | null>(null);
- //const [selectedDOC, setSelectedDOC] = useState<newTipoDoc | newCategoria | newProDucto | newInversionista | null>(null);
- //const [selectedPROD, setSelectedPROD] = useState<newTipoDoc | newCategoria | newProDucto | newInversionista | null>(null);
- //const [selectedLEV, setSelectedLEV] = useState<newTipoDoc | newCategoria | newProDucto | newInversionista | null>(null);
-
- //selectedOption1 = selectedPER
-
 
 const optionListSelect = [
     selectedOption1,
@@ -250,15 +238,15 @@ return (
                 />
                 </ListItemText>
             </ListItem>
-            { selectedOption && <p>El ID seleccionado es actual: {selectedOption.id}</p> }
+            {/* { selectedOption && <p>El ID seleccionado es actual: {selectedOption.id}</p> } */}
             </Grid>
             
             )}
         )}
-    <p> / {selectedOption1?.id} / and / {selectedOption1?.name} / ◄☼► </p><br />
+    {/* <p> / {selectedOption1?.id} / and / {selectedOption1?.name} / ◄☼► </p><br />
     <p> / {selectedOption2?.id} / and / {selectedOption2?.name} / ◄☼► </p><br />
     <p> / {selectedOption3?.id} / and / {selectedOption3?.name} / ◄☼► </p><br />
-    <p> / {selectedOption4?.id} / and / {selectedOption4?.name} /  </p><br />
+    <p> / {selectedOption4?.id} / and / {selectedOption4?.name} /  </p><br /> */}
     </Grid>
 )
 };

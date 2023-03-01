@@ -37,7 +37,7 @@ export const AppFileV2: React.FunctionComponent<{}> = (): JSX.Element => {
         ) : <h1>Prohibido sin Rol</h1>
       }
 
-      <h1>Estoy en CoreFile</h1>
+      {/* <h1>Estoy en CoreFile</h1> */}
     </Container>
   )
 };

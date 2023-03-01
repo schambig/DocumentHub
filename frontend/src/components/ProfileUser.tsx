@@ -1,5 +1,6 @@
-import { Button, Checkbox, Divider, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
-import Autocomplete from '@mui/material/Autocomplete';
+//import { Button, Checkbox, Divider, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { Button, Checkbox, Divider, FormControlLabel, Grid, TextField, Typography } from '@mui/material';
+//import Autocomplete from '@mui/material/Autocomplete';
 import React, { useContext, useEffect, useState } from 'react';
 import {usUario, RolUsuario} from '../assets/data_user'
 import {SelectionContext} from '../context/SelectionContext'
@@ -8,8 +9,8 @@ import SyncIcon from '@mui/icons-material/Sync';
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import {LoadingButton} from '@mui/lab'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import RotateLeftIcon from '@mui/icons-material/RotateLeft';
+//import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+//import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -34,7 +35,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
   const [showPS, setShowPS] = useState<boolean>(false);
   const [currentToastId, setCurrentToastId] = useState<any | undefined>(undefined);
   const [loadSave, setLoadSave] = useState<LoadSave>({status:false, respSuccess:false, respError:false, color:'primary' });
-  const [rol, setROL] = useState<RolUsuario | null>();
+  //const [rol, setROL] = useState<RolUsuario | null>();
   // const [users, setUsers] = useState<usUario[]>([]);
   // const [selectedUser, setSelectedUser] = useState<usUario | null>(null);
   const {refresh, setRefresh} = useContext(SelectionContext);
@@ -80,13 +81,13 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
     setShowPS(!showPS);
   }
 
-  const handleChangeROL = (event:any) => {
-    setROL(event.target.value as RolUsuario);
-    setUserData({
-      ...userData,
-      [event.target.name]: event.target.value,
-    });
-  };
+  // const handleChangeROL = (event:any) => {
+  //   setROL(event.target.value as RolUsuario);
+  //   setUserData({
+  //     ...userData,
+  //     [event.target.name]: event.target.value,
+  //   });
+  // };
 
   const handleSave = async():Promise<void> => {
     setLoadSave({...loadSave , status:true})
