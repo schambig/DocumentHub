@@ -47,9 +47,9 @@ export function LoginMenu() {
     const email = data.get('email');
     const password = data.get('password');
     //Get the DB data
-    axios.post("http://localhost:8000/api/login/jwt", { email, password }, { headers: { "Content-Type": "application/json" } })
+    axios.post("http://localhost:8000/api/login/jwt", { "email":email, "password":password })
     .then((response) => {
-      const token = response.headers.authorization.split(" ")[1];
+      const token = (response.headers.authorization.split(' '))[1];
       localStorage.setItem("token", token);
       return response.data;
     })
