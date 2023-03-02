@@ -3,9 +3,8 @@ import express from "express";
 import { body, validationResult } from "express-validator";
 
 import * as UsuarioService from "../services/usuario.service";
-
+import bcrypt from 'bcrypt';
 export const usuarioRouter = express.Router();
-const bcrypt = require('bcrypt');
 
 // GET: List of all Usuarios
 usuarioRouter.get("/", async (request: Request, response: Response) => {

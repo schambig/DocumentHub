@@ -1,32 +1,48 @@
-import * as dotenv from "dotenv";
+import dotenv from 'dotenv';
 import type { Request, Response } from "express";
 import express from "express";
 import jwt from 'jsonwebtoken';
 import * as UsuarioServiceLogin from "../services/login.service";
 import { body, validationResult } from "express-validator";
 import * as UsuarioService from "../services/usuario.service";
+import bcrypt from "bcrypt"
 
 export const usuarioRouterlogin = express.Router();
-const bcrypt = require('bcrypt');
 
 
-dotenv.config();
-usuarioRouterlogin.post('/userjwt', async (req: Request, res: Response) => {
+
+dotenv.config({ path: './backend/.env' });
+usuarioRouterlogin.post('/jwt', async (req: Request, res: Response) => {
 
   const { email, password } = req.body;
-
-    const hashedPassword = await bcrypt.hash(password, 10);
     try {
       const usuario = await UsuarioServiceLogin.getUsuario_email(email)
       if (usuario) {
-        const isPasswordCorrect = await bcrypt.compare(password, usuario.password);
-        if (isPasswordCorrect) {
-          const token = jwt.sign({ username: usuario.email }, process.env.SECRET_KEY, { expiresIn: '0.1h' });
-          return res.json({ token });
-          return res.status(200).json(usuario)
+        let isPasswordCorrect = false;
+        // comparacion correcta de contraseña
+        if (password !== usuario.password)
+        {
+          isPasswordCorrect = await bcrypt.compare(password, usuario.password);
+        }else if(password === usuario.password){
+          isPasswordCorrect = true;
+        }else{
+          return res.status(401).json({message: "Usuario o contraseña incorrecta"})
+        }
+        if (isPasswordCorrect && process.env.SECRET_KEY) {
+          const tokenPayload = {
+            ...usuario
+          };
+          const token = jwt.sign(tokenPayload, process.env.SECRET_KEY, { expiresIn: '0.1h' });
+          const responsePayload = {
+            ...usuario,
+            password: "",
+            rol: "",
+          };
+          res.setHeader("Authorization", `Bearer ${token}`);
+          return res.status(200).json(responsePayload);
         }
         else {
-          return res.status(208).json({message: "Usuario o contraseña incorrecta"})
+          return res.status(401).json({message: "Usuario o contraseña incorrecta"})
         }
       }
       return res.status(404).json("Usuario could not be found")
