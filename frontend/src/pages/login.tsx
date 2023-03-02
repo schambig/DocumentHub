@@ -14,11 +14,14 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
-import * as CryptoJS from 'crypto-js';
 import * as React from 'react';
 import { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import { SelectionContext } from '../context/SelectionContext';
+import jwt from 'jsonwebtoken';
+// import bcrypt from 'bcrypt';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 function Copyright(props: any) {
   return (
@@ -43,26 +46,41 @@ export function LoginMenu() {
     const password = data.get('password');
     //Get the DB data
 
-    axios.post<any>('http://localhost:3000/userjwt',{email, password})//reemplazar con env variables
+    axios.post('http://localhost:8000/userjwt',{email, password}, { headers: { "Content-Type": "application/json" }})//reemplazar con env variables
       .then(response => {
-        const elemento = response.data;
-        const bytes = CryptoJS.AES.decrypt(elemento.token, process.env.SECRET_KEY);
-        const datosJson = bytes.toString(CryptoJS.enc.Utf8);
-        const datos = JSON.parse(datosJson);
-        console.log(datos);
-        // estos son los datos desencriptados, falta usar una variable para recuperar solamente el id rol
-
-        console.log(elemento)
-        if (elemento.token) {
-          setSessionRol(elemento.token);
-          navigate("/app");
-          localStorage.setItem('token', elemento.token)
+        const token = response.headers.authorization.split(" ")[1];
+        localStorage.setItem("token", token);
+        if(process.env.SECRET_KEY){
+          jwt.verify(token, process.env.SECRET_KEY, (error:Error|null, decodedToken:any) => {
+            if (error) {
+              // Maneja el error de token inválido o expirado
+              console.log(error);
+            } else {
+              setGlobalID(decodedToken.id);
+              let rol = 0;
+              if(decodedToken.rol === 'ADMIN'){
+                rol = 1;
+              }else if(decodedToken.rol === 'DATAUSER'){
+                rol = 2;
+              } else if(decodedToken.rol === 'USER'){
+                rol = 3;
+              }else{
+                rol = 0;
+              }
+              setSessionRol(rol)// Continúa con la lógica de la API
+            }// Accede a la información del token
+          });
         }
+        return response.data;
+      })
+      .then(userdata => {
+        console.log(userdata);
+        navigate('/app');
       })
       .catch(error => {
         console.error(error)
       });
-    console.log('Sending request with username:', username, 'and password:', password);
+    console.log('Sending request with username:', email, 'and password:', password);
     console.log(localStorage.getItem('token'))
   };
   const [open, setOpen] = React.useState(false);

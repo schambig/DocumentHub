@@ -1,11 +1,9 @@
 import type { Request, Response } from "express";
 import express from "express";
 import { body, validationResult } from "express-validator";
-
+import bcrypt from 'bcrypt'
 import * as UsuarioService from "../services/usuario.service";
-
 export const usuarioRouter = express.Router();
-const bcrypt = require('bcrypt');
 
 // GET: List of all Usuarios
 usuarioRouter.get("/", async (request: Request, response: Response) => {
