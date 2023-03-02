@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.282.0",
     "@prisma/client": "^4.10.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
