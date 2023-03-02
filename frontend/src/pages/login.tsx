@@ -53,7 +53,7 @@ export function LoginMenu() {
         console.log(response);
         const token = response.headers.authorization.split(" ")[1];
         if (process.env.SECRET_KEY){
-          jwt.verify(token, process.env.SECRET_KEY, (error:Error, decodedToken:any) => {
+          jwt.verify(token, process.env.SECRET_KEY, (error:any, decodedToken:any) => {
             if (error) {
               // Maneja el error de token inválido o expirado
               setSessionRol(0);
