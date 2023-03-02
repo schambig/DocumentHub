@@ -6,13 +6,13 @@ import * as UsuarioServiceLogin from "../services/login.service";
 import { body, validationResult } from "express-validator";
 import * as UsuarioService from "../services/usuario.service";
 
-export const usuarioRouter = express.Router();
+export const usuarioRouterlogin = express.Router();
 const bcrypt = require('bcrypt');
 
 
 dotenv.config();
-usuarioRouter.post('/userjwt', async (req: Request, res: Response) => {
-  
+usuarioRouterlogin.post('/userjwt', async (req: Request, res: Response) => {
+
   const { email, password } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -34,11 +34,11 @@ usuarioRouter.post('/userjwt', async (req: Request, res: Response) => {
       return res.status(500).json(error.message)
     }
   })
-// 
+//
 
 
 // POST: Create a new Usuario
-usuarioRouter.post(
+usuarioRouterlogin.post(
   "/creahashed",
   body("userNombre").isString(),
   body("email").isString(),
