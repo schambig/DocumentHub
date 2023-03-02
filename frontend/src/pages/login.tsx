@@ -19,37 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { SelectionContext } from '../context/SelectionContext';
 import { useContext } from 'react';
 import { usUario, RolUsuario } from '../assets/data_user';
-
-// const token = jwt.sign({ /* payload */ }, 'secret');
-// interface User {
-//   username: string;
-//   password: string;
-// }
-
-// function login(username: string, password: string) {
-//   // Send a request to the API to verify the credentials
-//   fetch('http://localhost:3001/users')
-//     .then(response => response.json())
-//     .then((users: User[]) => {
-//       const user = users.find(u => u.username === username && u.password === password);
-
-//       if (user) {
-//         // Generate a JWT token
-//         const token = jwt.sign({ username }, 'secret');
-
-//         // Store the token in localStorage
-//         localStorage.setItem('token', token);
-
-//         // Redirect the user to the dashboard page
-//         window.location.href = '/dashboard';
-//       } else {
-//         // Handle invalid credentials
-//       }
-//     })
-//     .catch(error => {
-//       // Handle the error
-//     });
-// }
+import axios from 'axios';
 
 
 function Copyright(props: any) {
@@ -65,30 +35,6 @@ function Copyright(props: any) {
   );
 }
 
-// function login(username: string, password: string) {
-//   // Send a request to the API to verify the credentials
-//   fetch('http://localhost:8000/tUsuarios')
-//     .then(response => response.json())
-//     .then((users) => {
-//       const user = users.find((u:any) => u.username === username && u.password === password);
-
-//       if (user) {
-//         // Generate a JWT token
-//         const token = jwt.sign({ username }, 'secret');
-
-//         // Store the token in localStorage
-//         localStorage.setItem('token', token);
-
-//         // Redirect the user to the dashboard page
-//         window.location.href = '/dashboard';
-//       } else {
-//         // Handle invalid credentials
-//       }
-//     })
-//     .catch(error => {
-//       // Handle the error
-//     });
-// }
 
 export function LoginMenu() {
 
@@ -97,34 +43,23 @@ export function LoginMenu() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    //Get the DB data
-    fetch('http://localhost:8000/api/usuarios')
-      .then(response => response.json())
-      .then((item) => {
-        const elemento:usUario[] = item.filter((dato:usUario) => dato.email === email && dato.password === password)
-        if (elemento.length) {
-          // captar la data de idrol y settear el variable sessionRol
-          const role = elemento[0].rol
-          const roleSet = role===RolUsuario.ADMIN ? (1):(role===RolUsuario.DATAUSER ? (2):(role===RolUsuario.USER ? (3):(null)))
-          setSessionRol(roleSet)
-          setGlobalID(elemento[0].id)
-          navigate("/app")
-        }
-        // console.log(item[0].email);
-      })
-      .catch(error => {
-        setSessionRol(1)
-          navigate("/app")
-        // Handle the error
-      });
     //Get the form data
     const email = data.get('email');
     const password = data.get('password');
-    //
-    // if ( email === )
-
-    
-  };
+    //Get the DB data
+    axios.post("http://localhost:8000/api/login/jwt", { email, password }, { headers: { "Content-Type": "application/json" } })
+    .then((response) => {
+      const token = response.headers.authorization.split(" ")[1];
+      localStorage.setItem("token", token);
+      return response.data;
+    })
+    .then((userData) => {
+      console.log(userData)
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+    };
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
