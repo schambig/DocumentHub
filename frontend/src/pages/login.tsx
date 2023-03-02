@@ -20,7 +20,11 @@ import { SelectionContext } from '../context/SelectionContext';
 import { useContext } from 'react';
 import { usUario, RolUsuario } from '../assets/data_user';
 import axios from 'axios';
+import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
+dotenv.config();
 
 function Copyright(props: any) {
   return (
@@ -34,6 +38,7 @@ function Copyright(props: any) {
     </Typography>
   );
 }
+
 
 
 export function LoginMenu() {
@@ -51,6 +56,22 @@ export function LoginMenu() {
     .then((response) => {
       const token = (response.headers.authorization.split(' '))[1];
       localStorage.setItem("token", token);
+      let coreKey = "core";
+      const options:jwt.VerifyOptions = {
+        algorithms: ['HS256'],
+      };
+      if (coreKey){
+        jwt.verify(token, coreKey, options ,(error:any, decodedToken:any) => {
+          if (error) {
+            // Maneja el error de token inválido o expirado
+            console.log({ message: "Token inválido o expirado" });
+          } else {
+
+            console.log(decodedToken); // Accede a la información del token
+            // Continúa con la lógica de la API
+          }
+        });
+      }
       return response.data;
     })
     .then((userData) => {
