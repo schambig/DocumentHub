@@ -39,6 +39,7 @@ usuarioRouterlogin.post('/jwt', async (req: Request, res: Response) => {
             rol: "",
           };
           res.setHeader("Authorization", `Bearer ${token}`);
+          res.setHeader("Access-Control-Expose-Headers", "Authorization");
           return res.status(200).json(responsePayload);
         }
         else {
