@@ -27,7 +27,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const UploadFiles: React.FC = () => {
   
-  const [dataFile, setDataFile] = useState<File | null>(null)
+  const [dataFile, setDataFile] = useState<File | null>(null);
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   interface LoadSave{
     status:boolean
@@ -61,8 +61,21 @@ const UploadFiles: React.FC = () => {
   }
   
   const { selectedOption1, selectedOption2, selectedOption3, selectedOption4 } = useContext(SelectionContext);
-  const { setSelectedOption1, setSelectedOption3, setSelectedOption4} = useContext(SelectionContext)
+  const { setSelectedOption1, setSelectedOption3, setSelectedOption4} = useContext(SelectionContext);
+  const { globalID } = useContext(SelectionContext)
+  const [userUPname, setUserUPname] = useState<String>('usuarioLOAD');
+  axios.get(`http://localhost:8000/api/usuarios/${globalID}`)
+  .then((response)=>{
+    if (response.status === 200){
+      return response.data;
+    }
+  })
+  .then((userdata)=>{
+    setUserUPname(userdata.userNombre)
+  })
+  .catch((error)=>{
 
+  })
 
   const initialTransition = {
     duration: 1,
@@ -169,12 +182,15 @@ function verifyData(){
       const formData = new FormData();
       // variable lista
       const data = {
-        documentoLoad: selectedOption2,
-        inversionistaLoad: selectedOption1,
-        productoLoad: selectedOption3,
-        categoriaLoad: selectedOption4,
-        tfilename: dataFile.name,
-      };
+          nombreFile:dataFile.name,
+          userSubida:userUPname,
+          urlAws:"urldownload",
+          uuidAws:"nameEncrypt",
+          tablaInversionistaId:selectedOption1?.id,
+          tablaProductoId:selectedOption3?.id,
+          tablaCategoriaId:selectedOption4?.id,
+          tablaTipoDocumentoId:selectedOption2?.id
+      }
       // agregar al formData
       formData.append('file', file);
       formData.append('data', JSON.stringify(data));
@@ -193,8 +209,14 @@ function verifyData(){
           setLoadSave({...loadSave ,status:false ,respSuccess:true, color:'success' })
           setTimeout(() => {setLoadSave({...loadSave , respSuccess:false, color:'primary' })},2000)
           //----cargar datos a la tabla ------------------
-          if(response.status === 201){
-            axios.post('http://localhost:8000/api/documentos',JSON.stringify(data))
+          if(response.status === 200){
+            axios.post('http://localhost:8000/api/documentos',data)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error)=>{
+              console.log(error);
+            })
           }
           //----------------------------------------------
           console.log(response);
@@ -344,13 +366,13 @@ function verifyData(){
               }} />
         </Grid>
       }
-      {/* <Grid item sx={{display: 'flex'}}>
+      <Grid item sx={{display: 'flex'}}>
       <h3>persona valor: {selectedOption1?.id}</h3>
       <h3>doc valor: {selectedOption2?.id}</h3>
       <h3>producto valor: {selectedOption3?.id}</h3>
       <h3>lev valor: {selectedOption4?.id}</h3>
       
-      </Grid> */}
+      </Grid>
       {/* <h1>Fileupload Component</h1> */}
     </Grid>
   );
