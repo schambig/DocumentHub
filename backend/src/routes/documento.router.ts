@@ -38,8 +38,8 @@ documentoRouter.post(
   body("urlAws").isString(),
   body("uuidAws").isString(),
   body("tablaInversionistaId").isString(),
-  body("tablaProductoId").isString(),
-  body("tablaCategoriaId").isString(),
+  body("tablaProductoId").optional().isString(),
+  body("tablaCategoriaId").optional().isString(),
   body("tablaTipoDocumentoId").isString(),
   async (request: Request, response: Response) => {
     const errors = validationResult(request);
