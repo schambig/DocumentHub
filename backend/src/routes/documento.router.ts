@@ -33,18 +33,19 @@ documentoRouter.get("/:id", async (request: Request, response: Response) => {
 // POST: create single Documento
 documentoRouter.post(
   "/",
-  body("userNombre").isString(),
-      body("nombreFile").isString(),
-      body("userSubida").isString(),
-      body("fechaSubida").isString(),
-      body("uuidAws").isString(),
-      body("urlAws").isString(),
-      body("tablaInversionistaId").isString(),
-      body("tablaProductoId").isString(),
-      body("tablaCategoriaId").isString(),
-      body("tablaTipoDocumentoId").isString(),
+  body("nombreFile").isString(),
+  body("userSubida").isString(),
+  body("urlAws").isString(),
+  body("uuidAws").isString(),
+  body("tablaInversionistaId").isString(),
+  body("tablaProductoId").isString(),
+  body("tablaCategoriaId").isString(),
+  body("tablaTipoDocumentoId").isString(),
   async (request: Request, response: Response) => {
-
+    const errors = validationResult(request);
+    if (!errors.isEmpty()) {
+      return response.status(400).json({errors: errors.array()});
+    }
     try {
       const documento = await DocumentoService.createDoc(request.body)
       if (documento) {
