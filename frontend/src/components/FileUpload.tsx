@@ -17,6 +17,11 @@ import { newTipoDoc } from '../assets/data_documento';
 import { newInversionista } from '../assets/data_inversionistas';
 import { newProDucto } from '../assets/data_producto';
 import axios from 'axios';
+import {LoadingButton} from '@mui/lab'
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -24,7 +29,14 @@ const UploadFiles: React.FC = () => {
   
   const [dataFile, setDataFile] = useState<File | null>(null)
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
-
+  interface LoadSave{
+    status:boolean
+    respSuccess: boolean
+    respError: boolean
+    color: string
+  }
+  const [currentToastId, setCurrentToastId] = useState<any | undefined>(undefined);
+  const [loadSave, setLoadSave] = useState<LoadSave>({status:false, respSuccess:false, respError:false, color:'primary' });
   const onDrop = (acceptedFiles: File[], fileRejections: FileRejection[], event: DropEvent) => {
     if (isDisabled) {
       event.preventDefault();
@@ -127,6 +139,24 @@ function verifyData(){
 
   function errorButtonHandler() {
     // Realiza alguna accion si no completa los campos necesarios
+    if(dataFile){
+      const toastId = toast.error('Falta completar campos', { autoClose: 1500, toastId: currentToastId });
+      setCurrentToastId(toastId);
+    }else{
+      const documentoComplete = selectedOption2 ? true : false;
+      const inversionistaComplete = ((!handleDisableInversionista(selectedOption2) && selectedOption1)||handleDisableInversionista(selectedOption2)) ? true : false;
+      const productoComplete = ((!handleDisableProducto(selectedOption1,selectedOption2) && selectedOption3)||handleDisableProducto(selectedOption1,selectedOption2)) ? true : false;
+      const categoriaComplete = ((!handleDisableCategoria(selectedOption3) && selectedOption4)||handleDisableCategoria(selectedOption3)) ? true : false;
+      if(documentoComplete && inversionistaComplete && productoComplete && categoriaComplete){
+
+        const toastId = toast.error('Falta adjuntar el archivo', { autoClose: 1500, toastId: currentToastId });
+        setCurrentToastId(toastId);
+      }else{
+        const toastId = toast.error('Falta completar campos', { autoClose: 1500, toastId: currentToastId });
+        setCurrentToastId(toastId);
+      }
+    }
+    
     console.log("button desactivado --- error")
   }
 
@@ -161,6 +191,8 @@ function verifyData(){
         .catch((error) => {
           console.log(error);
         });
+      const toastId = toast.success('Subiendo archivo', { autoClose: 1500, toastId: currentToastId });
+      setCurrentToastId(toastId);
       console.log("button activado --- success")
     }
 
@@ -257,6 +289,7 @@ function verifyData(){
                 m: '0em 0em 0em 0.2em', 
               }} />
       </Button>
+      <ToastContainer />
       </Grid>
 
       {
