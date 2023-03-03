@@ -148,7 +148,6 @@ function verifyData(){
       const productoComplete = ((!handleDisableProducto(selectedOption1,selectedOption2) && selectedOption3)||handleDisableProducto(selectedOption1,selectedOption2)) ? true : false;
       const categoriaComplete = ((!handleDisableCategoria(selectedOption3) && selectedOption4)||handleDisableCategoria(selectedOption3)) ? true : false;
       if(documentoComplete && inversionistaComplete && productoComplete && categoriaComplete){
-
         const toastId = toast.error('Falta adjuntar el archivo', { autoClose: 1500, toastId: currentToastId });
         setCurrentToastId(toastId);
       }else{
@@ -156,11 +155,13 @@ function verifyData(){
         setCurrentToastId(toastId);
       }
     }
-    
+    setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
+    setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1500)
     console.log("button desactivado --- error")
   }
 
   function successButtonHandler() {
+    setLoadSave({...loadSave , status:true})
     // Realiza alguna accion si completa correctamente
     if (dataFile) {
       // variable verificada cargada
@@ -168,17 +169,18 @@ function verifyData(){
       const formData = new FormData();
       // variable lista
       const data = {
-        documentoLoad:selectedOption2,
-        inversionistaLoad:selectedOption1,
-        productoLoad:selectedOption3,
-        categoriaLoad:selectedOption4,
+        documentoLoad: selectedOption2,
+        inversionistaLoad: selectedOption1,
+        productoLoad: selectedOption3,
+        categoriaLoad: selectedOption4,
+        tfilename: dataFile.name,
       };
       // agregar al formData
       formData.append('file', file);
       formData.append('data', JSON.stringify(data));
-      
+      setTimeout(() => {
       // enviar el formData a la ruta especifica de la API
-      axios.post('/url-de-la-api', formData, {
+      axios.post('http://localhost:8000/api/files', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -186,13 +188,25 @@ function verifyData(){
         .then((response) => {
           // ver la url que devuelve el S3
           // o todo la fila del nuevo elemento de la tabla documento
+          const toastId = toast.success('Subiendo archivo', { autoClose: 1500, toastId: currentToastId });
+          setCurrentToastId(toastId);
+          setLoadSave({...loadSave ,status:false ,respSuccess:true, color:'success' })
+          setTimeout(() => {setLoadSave({...loadSave , respSuccess:false, color:'primary' })},2000)
+          //----cargar datos a la tabla ------------------
+          if(response.status === 201){
+            axios.post('http://localhost:8000/api/documentos',JSON.stringify(data))
+          }
+          //----------------------------------------------
           console.log(response);
         })
         .catch((error) => {
+          const toastId = toast.error('Fallo al intentar subir el archivo', { autoClose: 2000, toastId: currentToastId });
+          setCurrentToastId(toastId);
+          setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
+          setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},2000)
           console.log(error);
         });
-      const toastId = toast.success('Subiendo archivo', { autoClose: 1500, toastId: currentToastId });
-      setCurrentToastId(toastId);
+      },1000)
       console.log("button activado --- success")
     }
 
@@ -272,7 +286,7 @@ function verifyData(){
       
       <Grid item sx={{display: 'flex'}}>
         {/* establecer logica para el boton solo permita la data  */}
-      <Button variant='contained'
+      {/* <Button variant='contained'
         onClick={verifyData() ? successButtonHandler : errorButtonHandler}
         sx={{
           display: 'flex'
@@ -288,7 +302,22 @@ function verifyData(){
                 borderStyle: 'none',
                 m: '0em 0em 0em 0.2em', 
               }} />
-      </Button>
+      </Button> */}
+      <LoadingButton
+              sx={{height:'100%', width:'100%'}}
+              loading={loadSave?.status ? loadSave.status : false}
+              loadingPosition="start"
+              endIcon={loadSave.respError ? <ErrorOutlineIcon/>: (loadSave.respSuccess ? <CheckCircleOutlineIcon/>: (<UploadIcon />))}
+              variant="contained"
+              color={loadSave.color === 'primary' || loadSave.color === 'error' || loadSave.color === 'success' ? loadSave.color : 'primary'}
+              onClick={verifyData() ? successButtonHandler : errorButtonHandler}
+              size="large"
+            >
+              <Typography variant="h6" style={{fontWeight: 'bold'}}>
+                {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("ENVIAR ARCHIVO"))}
+              </Typography>
+              
+            </LoadingButton>
       <ToastContainer />
       </Grid>
 
