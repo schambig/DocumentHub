@@ -21,10 +21,10 @@ import { useContext } from 'react';
 import { usUario, RolUsuario } from '../assets/data_user';
 import axios from 'axios';
 import bcrypt from "bcrypt";
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
+// import jwt from 'jsonwebtoken';
+// import dotenv from 'dotenv';
 
-dotenv.config();
+//dotenv.config();
 
 function Copyright(props: any) {
   return (
@@ -54,27 +54,40 @@ export function LoginMenu() {
     //Get the DB data
     axios.post("http://localhost:8000/api/login/jwt", { "email":email, "password":password })
     .then((response) => {
-      const token = (response.headers.authorization.split(' '))[1];
-      localStorage.setItem("token", token);
-      let coreKey = "core";
-      const options:jwt.VerifyOptions = {
-        algorithms: ['HS256'],
-      };
-      if (coreKey){
-        jwt.verify(token, coreKey, options ,(error:any, decodedToken:any) => {
-          if (error) {
-            // Maneja el error de token inválido o expirado
-            console.log({ message: "Token inválido o expirado" });
-          } else {
+      // const token = (response.headers.authorization.split(' '))[1];
+      // localStorage.setItem("token", token);
+      // let coreKey = "core";
+      // const options:jwt.VerifyOptions = {
+      //   algorithms: ['HS256'],
+      // };
+      // if (coreKey){
+      //   jwt.verify(token, coreKey, options ,(error:any, decodedToken:any) => {
+      //     if (error) {
+      //       // Maneja el error de token inválido o expirado
+      //       console.log({ message: "Token inválido o expirado" });
+      //     } else {
 
-            console.log(decodedToken); // Accede a la información del token
-            // Continúa con la lógica de la API
-          }
-        });
-      }
+      //       console.log(decodedToken); // Accede a la información del token
+      //       // Continúa con la lógica de la API
+      //     }
+      //   });
+      // }
       return response.data;
     })
     .then((userData) => {
+      setGlobalID(userData.id);
+      let rol=0;
+      if (userData.rol === "ADMIN"){
+        rol=1;
+      }else if (userData.rol === "DATAUSER"){
+        rol=2;
+      }else if (userData.rol === "USER"){
+        rol=3;
+      }else{
+        rol=0;
+      }
+      setSessionRol(rol);
+      navigate('/search')
       console.log(userData)
     })
     .catch((error) => {

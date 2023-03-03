@@ -6,7 +6,6 @@ import * as UsuarioServiceLogin from "../services/login.service";
 import { body, validationResult } from "express-validator";
 import * as UsuarioService from "../services/usuario.service";
 import bcrypt from "bcrypt";
-
 export const usuarioRouterlogin = express.Router();
 
 
@@ -39,7 +38,6 @@ usuarioRouterlogin.post('/jwt', async (req: Request, res: Response) => {
         const responsePayload = {
           ...usuario,
           password: "",
-          rol: "",
         };
         res.setHeader("Authorization", `Bearer ${token}`);
         res.setHeader("Access-Control-Expose-Headers", "Authorization");

@@ -1,7 +1,7 @@
 import express from "express";
 import type { Request, Response } from "express";
 import { body, validationResult } from "express-validator";
-
+import bcrypt from "bcrypt";
 import * as UsuarioService from "../services/usuario.service";
 
 export const usuarioRouter = express.Router();
@@ -43,7 +43,11 @@ usuarioRouter.post(
     if (!errors.isEmpty()) {
       return response.status(400).json({errors: errors.array()});
     }
+    if(request.body.rol === ''){
+      return response.status(401).json({message: "Error Role"});
+    }
     try {
+      request.body.password =  await bcrypt.hash(request.body.password, 10);
       const usuario = request.body
       const newUsuario = await UsuarioService.createUsuario(usuario)
       return response.status(201).json(newUsuario)
@@ -68,6 +72,7 @@ usuarioRouter.patch(
     }
     const id: string = request.params.id;
     try {
+      request.body.password =  await bcrypt.hash(request.body.password, 10);
       const usuario = request.body
       const updateUsuario = await UsuarioService.updateUsuario(usuario, id)
       return response.status(200).json(updateUsuario)

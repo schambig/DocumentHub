@@ -106,7 +106,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
       return console.log("Error push Data null");
 
     }else{
-      if((newPS === repPS) && (newPS !== userData.password)){
+      if((newPS === repPS) && (newPS !== userData.password )){
         setTimeout(() => {
           axios.patch(`http://localhost:8000/api/usuarios/${userData.id}`, {
               ...userData,
@@ -146,12 +146,6 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
               
             })
           },1000)
-
-      }else if(newPS === userData.password){
-        setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
-        setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},2000)
-        const toastId = toast.error('No repetir contraseña actual', { autoClose: 2000, toastId: currentToastId });
-        setCurrentToastId(toastId);
       }else{
         setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
         setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},2000)

@@ -26,14 +26,22 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
   //const [users, setUsers] = useState<usUario[]>([]);
   const {refresh, setRefresh} = useContext(SelectionContext);
   //const [selectedUser, setSelectedUser] = useState<usUario | null>(null);
-  const [userData, setUserData] = useState<usUario>({
+  interface Cuser{
+    id: string,
+    userNombre: string,
+    email: string,
+    password: string,
+    estado: boolean,
+    rol: string
+  }
+  const [userData, setUserData] = useState<usUario | Cuser>({
       id: '',
       userNombre: '',
       email: '',
       password: '',
       estado: false,
       // rol: RolUsuario.USER
-      rol: RolUsuario.USER
+      rol: ''
   });
     
   const [statusCheckbox, setStatusCheckbox] = useState<boolean>(false);
@@ -90,7 +98,7 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
       })
         .then(response => {
           setRefresh(!refresh);
-          if (response.status === 200){
+          if (response.status === 201){
             setLoadSave({...loadSave ,status:false ,respSuccess:true, color:'success' })
             setTimeout(() => {setLoadSave({...loadSave , respSuccess:false, color:'primary' })},2000)
             const toastId = toast.success('Usuario creado con exito', { autoClose: 2000, toastId: currentToastId });
@@ -112,6 +120,9 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
             setCurrentToastId(toastId);
           } else if (error.response.status === 404){
             const toastId = toast.error('Sin Conexion a DataBase', { autoClose: 2000, toastId: currentToastId });
+            setCurrentToastId(toastId);
+          } else if (error.response.status === 401){
+            const toastId = toast.error('Debe Asignar un rol', { autoClose: 2000, toastId: currentToastId });
             setCurrentToastId(toastId);
           } else {
             const toastId = toast.error('Sin Conexion', { autoClose: 2000, toastId: currentToastId });
