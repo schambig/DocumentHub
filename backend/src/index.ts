@@ -1,4 +1,5 @@
-import * as dotenv from "dotenv";
+import fileUpload from "express-fileupload";
+import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
 
@@ -9,11 +10,11 @@ import { documentoRouter } from "./routes/documento.router";
 import { tipoDocumentoRouter } from "./routes/tipo.documento.router";
 import { categoriaRouter } from "./routes/categoria.router";
 
-dotenv.config();
+config();
 
 if (!process.env.PORT) {
   process.exit(1);
-}
+};
 
 const PORT: number = parseInt(<string>(process.env.PORT), 10);
 
