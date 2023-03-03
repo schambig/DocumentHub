@@ -9,3 +9,14 @@ export const client = new S3Client({
       secretAccessKey: AWS_SECRET_KEY
   }
 })
+
+export async function uploadFile(file: any) {
+  const stream = fs.createReadStream(file.tempFilePath)
+  const uploadParams = {
+      Bucket: AWS_BUCKET_NAME,
+      Key: file.name,
+      Body: stream
+  }
+  const command = new PutObjectCommand(uploadParams)
+  return await client.send(command)
+}
