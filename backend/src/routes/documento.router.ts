@@ -29,3 +29,29 @@ documentoRouter.get("/:id", async (request: Request, response: Response) => {
     return response.status(500).json(error.message)
   }
 })
+
+// POST: create single Documento
+documentoRouter.post(
+  "/",
+  body("userNombre").isString(),
+      body("nombreFile").isString(),
+      body("userSubida").isString(),
+      body("fechaSubida").isString(),
+      body("uuidAws").isString(),
+      body("urlAws").isString(),
+      body("tablaInversionistaId").isString(),
+      body("tablaProductoId").isString(),
+      body("tablaCategoriaId").isString(),
+      body("tablaTipoDocumentoId").isString(),
+  async (request: Request, response: Response) => {
+
+    try {
+      const documento = await DocumentoService.createDoc(request.body)
+      if (documento) {
+        return response.status(201).json(documento)
+      }
+      return response.status(404).json("Documento could not be found")
+    } catch (error: any) {
+      return response.status(500).json(error.message)
+    }
+})
