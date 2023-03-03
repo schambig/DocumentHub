@@ -59,6 +59,36 @@ export const LatMenu: React.FC<{}> = ():JSX.Element => {
     //     fetch('http://localhost:8000/producto').then(res => res.json()).then(data => setApiProducto(converProM(data)));
     //     fetch('http://localhost:8000/levantamiento').then(res => res.json()).then(data => setApiNumLev(converLevM(data)))
     // }, [])
+    function compareObjectsByField(fieldName: string) {
+        return function(a: any, b: any) {
+          if (a[fieldName] < b[fieldName]) {
+            return -1;
+          }
+          if (a[fieldName] > b[fieldName]) {
+            return 1;
+          }
+          return 0;
+        }
+      }
+
+    function compareObjectsByFieldNum(fieldName: string) {
+        return function(a: any, b: any) {
+            const aValue = Number(a[fieldName].match(/\d+/)?.[0]);
+            const bValue = Number(b[fieldName].match(/\d+/)?.[0]);
+        
+            if (aValue < bValue) {
+            return -1;
+            }
+            if (aValue > bValue) {
+            return 1;
+            }
+            return 0;
+        }
+    }
+
+    function compareObjectsByNombre(a: any, b: any) {
+        return a.tipo.localeCompare(b.tipo);
+    }
 
     useEffect(() => {
         const fetchData = () => {
@@ -70,8 +100,9 @@ export const LatMenu: React.FC<{}> = ():JSX.Element => {
                 return res.json();
                 })
                 .then(data => {
+                    const sortedJson = data.sort(compareObjectsByField("apPaterno"));
                     setLoadingAPI1(false)
-                    setApiInversionista(converInverM(data))
+                    setApiInversionista(converInverM(sortedJson))
                 })
                 .catch(error => {
                     console.error('There was a problem with the network request:', error);
@@ -85,8 +116,9 @@ export const LatMenu: React.FC<{}> = ():JSX.Element => {
                 return res.json();
                 })
                 .then(data => {
+                    const sortedJson = data.sort(compareObjectsByField("nombre"));
                     setLoadingAPI2(false)
-                    setApiTipoDoc(convDocM(data))
+                    setApiTipoDoc(convDocM(sortedJson))
                 })
                 .catch(error => {
                     console.error('There was a problem with the network request:', error);
@@ -99,8 +131,9 @@ export const LatMenu: React.FC<{}> = ():JSX.Element => {
                 return res.json();
                 })
                 .then(data => {
+                    const sortedJson = data.sort(compareObjectsByFieldNum("nombreProducto"));
                     setLoadingAPI3(false)
-                    setApiProducto(convProductoM(data))
+                    setApiProducto(convProductoM(sortedJson))
                 })
                 .catch(error => {
                     console.error('There was a problem with the network request:', error);
@@ -114,8 +147,9 @@ export const LatMenu: React.FC<{}> = ():JSX.Element => {
                 return res.json();
                 })
                 .then(data => {
+                    const sortedJson = data.sort(compareObjectsByFieldNum("tipo"));
                     setLoadingAPI4(false)
-                    setApiNumLev(convCateM(data))
+                    setApiNumLev(convCateM(sortedJson))
                 })
                 .catch(error => {
                     console.error('There was a problem with the network request:', error);
