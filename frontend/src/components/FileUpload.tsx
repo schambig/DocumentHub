@@ -212,6 +212,11 @@ function verifyData(){
           if(response.status === 200){
             axios.post('http://localhost:8000/api/documentos',data)
             .then((response) => {
+              if(response.status === 201){
+                toast.success('Registrado exitoso', { autoClose: 1500 });
+              }else{
+                toast.error('Fallo el registro', { autoClose: 1500});
+              }
               console.log(response);
             })
             .catch((error)=>{
@@ -366,13 +371,13 @@ function verifyData(){
               }} />
         </Grid>
       }
-      <Grid item sx={{display: 'flex'}}>
+      {/* <Grid item sx={{display: 'flex'}}>
       <h3>persona valor: {selectedOption1?.id}</h3>
       <h3>doc valor: {selectedOption2?.id}</h3>
       <h3>producto valor: {selectedOption3?.id}</h3>
       <h3>lev valor: {selectedOption4?.id}</h3>
       
-      </Grid>
+      </Grid> */}
       {/* <h1>Fileupload Component</h1> */}
     </Grid>
   );
