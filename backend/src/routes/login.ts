@@ -31,17 +31,21 @@ usuarioRouterlogin.post('/jwt', async (req: Request, res: Response) => {
         return res.status(401).json({message: "Usuario o contraseña incorrecta"})
       }
       if (isPasswordCorrect && process.env.SECRET_KEY) {
-        const tokenPayload = {
-          ...usuario
-        };
-        const token = jwt.sign(tokenPayload, process.env.SECRET_KEY, options);
-        const responsePayload = {
-          ...usuario,
-          password: "",
-        };
-        res.setHeader("Authorization", `Bearer ${token}`);
-        res.setHeader("Access-Control-Expose-Headers", "Authorization");
-        return res.status(200).json(responsePayload);
+        if (usuario.estado === true){
+          const tokenPayload = {
+            ...usuario
+          };
+          const token = jwt.sign(tokenPayload, process.env.SECRET_KEY, options);
+          const responsePayload = {
+            ...usuario,
+            password: "",
+          };
+          res.setHeader("Authorization", `Bearer ${token}`);
+          res.setHeader("Access-Control-Expose-Headers", "Authorization");
+          return res.status(200).json(responsePayload);
+        }else{
+          return res.status(403).json({message: "Usuario desactivado"})
+        }
       }
       else {
         return res.status(401).json({message: "Usuario o contraseña incorrecta"})

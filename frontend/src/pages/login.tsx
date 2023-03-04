@@ -17,10 +17,12 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { useNavigate } from "react-router-dom";
 import { SelectionContext } from '../context/SelectionContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { usUario, RolUsuario } from '../assets/data_user';
 import axios from 'axios';
 import bcrypt from "bcrypt";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import jwt from 'jsonwebtoken';
 // import dotenv from 'dotenv';
 
@@ -42,9 +44,10 @@ function Copyright(props: any) {
 
 
 export function LoginMenu() {
-
+  const [currentToastId, setCurrentToastId] = useState<any | undefined>(undefined);
   const { setSessionRol } = useContext(SelectionContext);
   const { setGlobalID } = useContext(SelectionContext);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -54,43 +57,81 @@ export function LoginMenu() {
     //Get the DB data
     axios.post("http://localhost:8000/api/login/jwt", { "email":email, "password":password })
     .then((response) => {
-      // const token = (response.headers.authorization.split(' '))[1];
-      // localStorage.setItem("token", token);
-      // let coreKey = "core";
-      // const options:jwt.VerifyOptions = {
-      //   algorithms: ['HS256'],
-      // };
-      // if (coreKey){
-      //   jwt.verify(token, coreKey, options ,(error:any, decodedToken:any) => {
-      //     if (error) {
-      //       // Maneja el error de token inválido o expirado
-      //       console.log({ message: "Token inválido o expirado" });
-      //     } else {
-
-      //       console.log(decodedToken); // Accede a la información del token
-      //       // Continúa con la lógica de la API
-      //     }
-      //   });
-      // }
+      if(response.status !== 200){
+        if(response.status === 401){
+          const toastId = toast.error("Usuario o contraseña incorrecta", { autoClose: 1500, toastId: currentToastId });
+          setCurrentToastId(toastId);
+          // return response.data;
+        } else if (response.status === 403){
+          const toastId = toast.error("Usuario Inactivo, Comuniquese con un administrador para recuperar su cuenta", { autoClose: 3000, toastId: currentToastId });
+          setCurrentToastId(toastId);
+          // return response.data;
+        } else if (response.status === 404){
+          const toastId = toast.error("Usuario o contraseña incorrecta", { autoClose: 3000, toastId: currentToastId });
+          setCurrentToastId(toastId);
+          // return response.data;
+        } else {
+          console.log("resp1",response);
+          return response.data;
+        }
+        return response.data;
+        // const token = (response.headers.authorization.split(' '))[1];
+        // localStorage.setItem("token", token);
+        // let coreKey = "core";
+        // const options:jwt.VerifyOptions = {
+        //   algorithms: ['HS256'],
+        // };
+        // if (coreKey){
+        //   jwt.verify(token, coreKey, options ,(error:any, decodedToken:any) => {
+        //     if (error) {
+        //       // Maneja el error de token inválido o expirado
+        //       console.log({ message: "Token inválido o expirado" });
+        //     } else {
+  
+        //       console.log(decodedToken); // Accede a la información del token
+        //       // Continúa con la lógica de la API
+        //     }
+        //   });
+        // }
+      }
+      console.log(response);
+      console.log(response.status);
       return response.data;
     })
     .then((userData) => {
-      setGlobalID(userData.id);
-      let rol=0;
-      if (userData.rol === "ADMIN"){
-        rol=1;
-      }else if (userData.rol === "DATAUSER"){
-        rol=2;
-      }else if (userData.rol === "USER"){
-        rol=3;
-      }else{
-        rol=0;
+      if (userData.estado){
+        setGlobalID(userData.id);
+        let rol=0;
+        if (userData.rol === "ADMIN"){
+          rol=1;
+        }else if (userData.rol === "DATAUSER"){
+          rol=2;
+        }else if (userData.rol === "USER"){
+          rol=3;
+        }else{
+          rol=0;
+        }
+        setSessionRol(rol);
+        navigate('/search')
+      }else {
+        console.log("no entrega user data")
       }
-      setSessionRol(rol);
-      navigate('/search')
       console.log(userData)
     })
     .catch((error) => {
+      if(error.response.status === 401){
+        const toastId = toast.error("Usuario o contraseña incorrecta", { autoClose: 1500, toastId: currentToastId });
+        setCurrentToastId(toastId);
+      } else if(error.response.status === 403){
+        const toastId = toast.error("Usuario Inactivo, Comuniquese con un administrador para recuperar su cuenta", { autoClose: 3000, toastId: currentToastId });
+        setCurrentToastId(toastId);
+      } else if(error.response.status === 404){
+        const toastId = toast.error("Usuario o contraseña incorrecta", { autoClose: 3000, toastId: currentToastId });
+        setCurrentToastId(toastId);
+      } else {
+        const toastId = toast.error("Usuario o contraseña incorrecta", { autoClose: 3000, toastId: currentToastId });
+        setCurrentToastId(toastId);
+      }
       console.error(error);
     });
     };
@@ -169,7 +210,9 @@ export function LoginMenu() {
               onClick={() => handleSubmit}
             >
               Sign In
+              
             </Button>
+            <ToastContainer />
             <Grid container>
               <Grid item xs justifyContent="center">
                 <Link href="#" variant="body2" onClick={handleClickOpen}>

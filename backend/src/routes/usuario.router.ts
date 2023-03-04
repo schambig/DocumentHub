@@ -72,10 +72,11 @@ usuarioRouter.patch(
     }
     const id: string = request.params.id;
     try {
-      request.body.password =  await bcrypt.hash(request.body.password, 10);
-      const usuario = request.body
-      const updateUsuario = await UsuarioService.updateUsuario(usuario, id)
-      return response.status(200).json(updateUsuario)
+      const newpassword =  await bcrypt.hash(request.body.password, 10);
+      request.body.password = newpassword;
+      const usuario = request.body;
+      const updateUsuario = await UsuarioService.updateUsuario(usuario, id);
+      return response.status(200).json(updateUsuario);
     } catch (error: any) {
       return response.status(500).json(error.message);
     }
