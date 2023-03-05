@@ -91,7 +91,7 @@ fileRouter.get("/download/:name", async (req, res) => {
     if (result.Metadata && result.Metadata.originalname){
       const originalName = result.Metadata?.originalname;
       const url = await FileService.getFileURL(name, originalName);
-      res.status(200).json({url: url});
+      res.status(200).json({url: url, name: originalName});
 
     }
     // res.status(201).send({msg: originalName})
