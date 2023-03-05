@@ -33,7 +33,7 @@ export function DocumentPreviewButton({ documentUrl }:PropsDocUrl):JSX.Element {
     }
   })
   .then((data) => {
-    window.open(data.url, '_blank');
+    window.open(`https://docs.google.com/viewer?url=${encodeURIComponent(data.url)}&embedded=true`, '_blank');
   });
   }
   
