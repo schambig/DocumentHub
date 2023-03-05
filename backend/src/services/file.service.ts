@@ -103,7 +103,7 @@ export async function getFileURL(filename:string, originalName:string) {
   })
   const options = {
     expiresIn: 300,
-    responseContentDisposition: `attachment; filename="${originalName}"`
+    responseContentDisposition: `inline; filename="${filename}"`
   };
   return await getSignedUrl(client, command, options);
 }

@@ -92,9 +92,7 @@ fileRouter.get("/download/:name", async (req, res) => {
       const originalName = result.Metadata?.originalname;
       const url = await FileService.getFileURL(name, originalName);
       res.status(200).json({url: url, name: originalName});
-
     }
-    // res.status(201).send({msg: originalName})
   } else {
     res.status(404).send("File not found");
   }
