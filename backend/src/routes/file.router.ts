@@ -15,6 +15,7 @@ fileRouter.post("/", async (request: Request, response: Response) => {
     }
     const data = JSON.parse(request.body.data)
     const result = await FileService.uploadFile(request.files.file, data.uuidAws)
+    // codigo para borrar temporales de ser necesario. (streamifier)
     response.status(200).json({ result})
   } catch (error: any) {
     return response.status(500).json(error.message)

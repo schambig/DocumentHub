@@ -22,10 +22,12 @@ const PORT: number = parseInt(<string>(process.env.PORT), 10);
 
 const app = express();
 
-app.use(fileUpload({
-  useTempFiles: true,
-  tempFileDir: "./uploads"
-}));
+// app.use(fileUpload({
+//   useTempFiles: true,
+//   tempFileDir: "./uploads"
+// }));
+
+app.use(fileUpload());
 app.use(cors());
 app.use(express.json());
 

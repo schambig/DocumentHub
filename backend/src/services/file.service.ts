@@ -12,7 +12,8 @@ export const client = new S3Client({
 })
 
 export async function uploadFile(file: any, cod:string) {
-  const stream = fs.createReadStream(file.tempFilePath)
+  // const stream = fs.createReadStream(file.tempFilePath)
+  const stream = file.data;
   const uploadParams = {
       Bucket: AWS_BUCKET_NAME,
       Key: cod,
@@ -103,7 +104,7 @@ export async function getFileURL(filename:string, originalName:string) {
   })
   const options = {
     expiresIn: 300,
-    responseContentDisposition: `inline; filename="${filename}"`
+    responseContentDisposition: `inline; filename="${originalName}"`
   };
   return await getSignedUrl(client, command, options);
 }
