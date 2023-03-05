@@ -63,7 +63,7 @@ export function LoginMenu() {
           setCurrentToastId(toastId);
           // return response.data;
         } else if (response.status === 403){
-          const toastId = toast.error("Usuario Inactivo, Comuniquese con un administrador para recuperar su cuenta", { autoClose: 3000, toastId: currentToastId });
+          const toastId = toast.warn("Usuario Inactivo, Comuniquese con un administrador para recuperar su cuenta", { autoClose: 3000, toastId: currentToastId });
           setCurrentToastId(toastId);
           // return response.data;
         } else if (response.status === 404){
