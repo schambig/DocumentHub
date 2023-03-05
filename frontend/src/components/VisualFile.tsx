@@ -9,80 +9,32 @@ interface PropsDocUrl{
 }
 
 export function DocumentPreviewButton({ documentUrl }:PropsDocUrl):JSX.Element {
-  // const [isPreviewOpen, setIsPreviewOpen] = useState(false);
-
-  // const handlePreviewClick = () => {
-  //   setIsPreviewOpen(true);
-  // };
-
-  // const handleDownloadClick = () => {
-  //   window.open(documentUrl, '_blank');
-  // };
-
-  // const handleDownload = async () => {
-  //   const response = await fetch(`http://localhost:8000/api/files/download/${documentUrl}`);
-  //   const blob = await response.blob();
-
-  //   const url = URL.createObjectURL(blob);
-  //   const link = document.createElement('a');
-  //   link.href = url;
-  //   link.download = (response.status === 200 ? "":"");
-  //   document.body.appendChild(link);
-  //   link.click();
-  //   document.body.removeChild(link);
-  // };
-
-  // const handleDownloadClick = async () => {
-  //   axios.get(`http://localhost:8000/api/files/download/${documentUrl}`)
-  //   .then((response) => {
-  //     if (response.status === 200){
-  //       return response.data;
-  //     }
-  //   })
-  //   .then((data)=>{
-  //     window.open(data.url, '_blank');
-  //   })
-  // }
-
-  // const downloadFile = async () => {
-  //   axios.get(`http://localhost:8000/api/files/download/${documentUrl}`)
-  //   .then((response) => {
-  //     if (response.status === 200){
-  //       return response.data;
-  //     }
-  //   })
-  //   .then((data)=>{
-  //     fetch(data.url)
-  //      .then(response => response.blob())
-  //      .then(blob => saveAs(blob));
-  //   })
-  // }
-  
+ 
   const downloadFile = async () => {
-    axios.get(`http://localhost:8000/api/files/download/${documentUrl}`)
-      .then((response) => {
-        if (response.status === 200) {
+      axios.get(`http://localhost:8000/api/files/download/${documentUrl}`)
+        .then((response) => {
+            if (response.status === 200) {
+        
+                return response.data;
+              }
+            })
+            .then((data) => {
+                fetch(data.url)
+                  .then(response => response.blob())
+                  .then(blob => saveAs(blob, data.name));
+              });
+          }
 
-          return response.data;
-        }
-      })
-      .then((data) => {
-        fetch(data.url)
-          .then(response => response.blob())
-          .then(blob => saveAs(blob, data.name));
-      });
-  }
-  
   const viewFile = async () => {
     axios.get(`http://localhost:8000/api/files/download/${documentUrl}`)
-      .then((response) => {
-        if (response.status === 200) {
-          return response.data;
-        }
-      })
-      .then((data) => {
-        window.open(data.url, '_blank');
-      });
+    .then((response) => {
+      if (response.status === 200) {
+      return response.data;
+    }
+  })
+  .then((data) => {
+    window.open(data.url, '_blank');
+  });
   }
   
 
@@ -93,11 +45,11 @@ export function DocumentPreviewButton({ documentUrl }:PropsDocUrl):JSX.Element {
         Visualizar
       </Button> */}
       
-      <Button variant="contained" color="secondary" onClick={downloadFile}>
+      <Button key='down' variant="contained" color="secondary" onClick={downloadFile}>
         DESCARGAR
       </Button>
       
-      <Button sx={{ml: '10px', mr:'10px'}}variant="contained" color="secondary" onClick={viewFile}>
+      <Button key='view' sx={{ml: '10px', mr:'10px'}}variant="contained" color="secondary" onClick={viewFile}>
         VER
       </Button>
     
