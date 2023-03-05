@@ -26,6 +26,7 @@
     "bcrypt": "^5.1.0",
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",
+    "file-saver": "^2.0.5",
     "framer-motion": "^9.0.2",
     "jsonwebtoken": "^9.0.0",
     "nth-check": "^2.1.1",
@@ -70,6 +71,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/file-saver": "^2.0.5",
     "@types/jsonwebtoken": "^9.0.1",
     "@types/node": "^18.14.4",
     "@types/path-to-regexp": "^1.7.0",

@@ -166,13 +166,13 @@ const [loadState, setLoadState] = useState<boolean>(true);
   const columns: GridColDef[] = [
     
     { 
-      field: 'urlAwsUrl',
+      field: 'uuiAws',
       headerAlign: 'center', 
       headerName: 'URL', 
       align: 'center',
-      width: 120,
+      width: 300,
       renderCell: (params) => (
-        <DocumentPreviewButton documentUrl={params.value}/>
+          <DocumentPreviewButton documentUrl={params.value}/>   
       ),
     },
     { field: 'id', headerName: 'N°', flex:1,align: 'center',headerAlign: 'center'},

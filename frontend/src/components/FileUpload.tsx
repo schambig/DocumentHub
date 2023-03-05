@@ -21,6 +21,7 @@ import {LoadingButton} from '@mui/lab'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { toast, ToastContainer } from 'react-toastify';
+import { v4 as uuidv4 } from 'uuid';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -148,6 +149,10 @@ function verifyData(){
     return false;
   }
 }
+  
+function reemplazarEspaciosPorGuiones(texto: string): string {
+  return texto.replace(/\s+/g, "-");
+}
 
 
   function errorButtonHandler() {
@@ -177,6 +182,7 @@ function verifyData(){
     setLoadSave({...loadSave , status:true})
     // Realiza alguna accion si completa correctamente
     if (dataFile) {
+      const nombreload = reemplazarEspaciosPorGuiones(dataFile.name);
       // variable verificada cargada
       const file = dataFile;
       const formData = new FormData();
@@ -185,7 +191,7 @@ function verifyData(){
           nombreFile:dataFile.name,
           userSubida:userUPname,
           urlAws:"urldownload",
-          uuidAws:"nameEncrypt",
+          uuidAws:`${uuidv4()}-${nombreload}`,
           tablaInversionistaId:selectedOption1?.id,
           tablaProductoId:selectedOption3?.id,
           tablaCategoriaId:selectedOption4?.id,
@@ -202,6 +208,8 @@ function verifyData(){
         },
       })
         .then((response) => {
+          console.log("soy la respuesta de la api post file {result}")
+          console.log(response);
           // ver la url que devuelve el S3
           // o todo la fila del nuevo elemento de la tabla documento
           const toastId = toast.success('Subiendo archivo', { autoClose: 1500, toastId: currentToastId });
@@ -210,6 +218,7 @@ function verifyData(){
           setTimeout(() => {setLoadSave({...loadSave , respSuccess:false, color:'primary' })},2000)
           //----cargar datos a la tabla ------------------
           if(response.status === 200){
+            // data.urlAws = response.location
             axios.post('http://localhost:8000/api/documentos',data)
             .then((response) => {
               if(response.status === 201){
