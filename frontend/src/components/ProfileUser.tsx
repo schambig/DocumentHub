@@ -161,7 +161,18 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
         <div className="container" style={{margin: '0px'}}>
           <h1> Profile Usuario:</h1>
           {/* primera fila */}
-          <Grid sx={{display:'flex', padding:'0px' , width:'100%' ,justifyContent:'center', alignItems:'center', margin: '10px 0px 20px 0px'}} container spacing={2}>
+          
+          <Grid container sx={{
+            display:'flex',
+            padding:'0px' ,
+            width:'100%' ,
+            justifyContent:'center',
+            alignItems:'center',
+            margin: '10px 0px 20px 0px'}}
+            spacing={2}
+            columns={10}
+            >
+            
             <Grid sx={{padding:'0px'}} item xs={10}>
                 <TextField
                   sx={{ width: '100%'}}
@@ -173,10 +184,11 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                   value={userData.id}
                   onChange={handleChange}
                   InputProps={{ readOnly: true }}
-                />
+                  />
             </Grid>
 
-            <Grid item xs={4}>
+                  
+            <Grid item xs={10} sm={10} md={4} lg={4} >
                 <TextField
                   sx={{ width: '100%'}}
                   name="userNombre"
@@ -188,7 +200,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 />
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={10} sm={10} md={4} lg={4} >
             <TextField
                   sx={{ width: '100%'}}
                   name="rol"
@@ -200,7 +212,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 />
             </Grid>
       
-            <Grid item xs={2}>
+            <Grid item sx={{ display: { xs: 'none', md: 'block' } }} xs={12} md={2}>
               <FormControlLabel
                 sx={{ width: '100%'}}
                 control={
@@ -214,7 +226,8 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 label={userData.estado ? "Status: (Active)": "Status: (Disabled)"}
               />
             </Grid>
-            <Grid item xs={4}>
+
+            <Grid item xs={10} sm={10} md={4} lg={4} >
               <TextField
               sx={{width:'100%'}}
                 name="email"
@@ -226,7 +239,9 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
               />
             </Grid>
 
-            <Grid item xs={4}>
+        
+
+            <Grid item xs={10} sm={10} md={4} lg={4}>
               <TextField
               sx={{width:'100%'}}
               
@@ -240,7 +255,22 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 />
             </Grid>
 
-            <Grid item xs={2}>
+
+            <Grid item xs={4} sm={4} sx={{display: {md: 'none' }}}>
+              <FormControlLabel
+                sx={{ width: '100%'}}
+                control={
+                  <Checkbox
+                    color='neutral'
+                    checked={userData.estado}
+                    onChange={handleChange}
+                    name="statusCheckbox"
+                  />
+                }
+                label={userData.estado ? "Status: (Active)": "Status: (Disabled)"}
+              />
+            </Grid>
+            <Grid item xs={4} sm={5} md={2} lg={2}>
               <Button
                 sx={{width: '100%'}}
                 onClick={handleShowPS}
@@ -255,8 +285,13 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
           {showPS ? ( <Divider sx={{marginTop: '10px'}}/>):(null)}
 
           { showPS ? (
-          <Grid sx={{display:'flex', margin: "5px 0px" ,justifyContent:'center', alignItems:'center'}} container spacing={2}>
-            <Grid item xs={4}>
+          <Grid sx={{
+            display:'flex',
+            margin: "5px 0px",
+            justifyContent:'center',
+            alignItems:'center'}}
+            container spacing={2}>
+            <Grid item xs={10} sm={10} md={4} lg={4}>
               <TextField
               sx={{width:'100%'}}
               
@@ -270,7 +305,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 />
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={10} sm={10} md={4} lg={4}>
               <TextField
               sx={{width:'100%'}}
               
@@ -285,7 +320,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
             </Grid>
 
 
-            <Grid item xs={2}>
+            <Grid item xs={10} sm={10} md={2} lg={2}>
               {/* <Button sx={{width:'100%'}} variant="contained" color="primary" onClick={handleSave}>
                 Save
               </Button> */}
