@@ -293,6 +293,17 @@ module.exports = function (webpackEnv) {
       ],
     },
     resolve: {
+      fallback:{
+        "buffer": require.resolve("buffer/"),
+				"crypto": require.resolve("crypto-browserify"),
+				"util": require.resolve("util/"),
+        "stream": require.resolve("stream-browserify"),
+        "zlib": require.resolve("browserify-zlib"),
+        "assert": require.resolve("assert/"),
+        "os": require.resolve("os-browserify/browser"),
+        "path": require.resolve("path-browserify"),
+        "fs": require.resolve("browserify-fs"),
+      },
       // This allows you to set a fallback for where webpack should look for modules.
       // We placed these paths second because we want `node_modules` to "win"
       // if there are any conflicts. This matches Node resolution mechanism.
