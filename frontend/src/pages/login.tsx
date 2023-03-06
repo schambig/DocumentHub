@@ -23,10 +23,8 @@ import axios from 'axios';
 import bcrypt from "bcrypt";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import jwt from 'jsonwebtoken';
-// import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
 
-//dotenv.config();
 
 function Copyright(props: any) {
   return (
