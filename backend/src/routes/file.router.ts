@@ -87,14 +87,19 @@ fileRouter.post("/", async (request: Request, response: Response) => {
 
 fileRouter.get("/download/:name", async (req, res) => {
   const name = req.params.name;
-  const result = await FileService.getFile(name);
-  if (result) {
-    if (result.Metadata && result.Metadata.originalname){
-      const originalName = result.Metadata?.originalname;
-      const url = await FileService.getFileURL(name, originalName);
-      res.status(200).json({url: url, name: originalName});
+  try{
+    const result = await FileService.getFile(name);
+    if (result) {
+      if (result.Metadata && result.Metadata.originalname){
+        const originalName = result.Metadata?.originalname;
+        const url = await FileService.getFileURL(name, originalName);
+        res.status(200).json({url: url, name: originalName});
+      }
+    } else {
+      res.status(404).send("File not found");
     }
-  } else {
+  }
+  catch{
     res.status(404).send("File not found");
   }
 });
