@@ -17,24 +17,33 @@ export function DocumentPreviewButton({ documentUrl }:PropsDocUrl):JSX.Element {
         
                 return response.data;
               }
-            })
-            .then((data) => {
-                fetch(data.url)
-                  .then(response => response.blob())
-                  .then(blob => saveAs(blob, data.name));
+        })
+        .then((data) => {
+            fetch(data.url)
+              .then(response => response.blob())
+              .then(blob => saveAs(blob, data.name))
+              .catch((error:any)=>{
+                console.log(error);
               });
-          }
+          })
+        .catch((error:any)=>{
+          console.log(error);
+        });
+  }
 
   const viewFile = async () => {
     axios.get(`http://localhost:8000/api/files/download/${documentUrl}`)
     .then((response) => {
       if (response.status === 200) {
       return response.data;
-    }
-  })
-  .then((data) => {
-    window.open(`https://docs.google.com/viewer?url=${encodeURIComponent(data.url)}&embedded=true`, '_blank');
-  });
+      }
+    })
+    .then((data:any) => {
+      window.open(`https://docs.google.com/viewer?url=${encodeURIComponent(data.url)}&embedded=true`, '_blank');
+    })
+    .catch((error:any)=>{
+      console.log(error);
+    })
   }
   
 
