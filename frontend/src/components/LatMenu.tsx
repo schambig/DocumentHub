@@ -164,20 +164,20 @@ export const LatMenu: React.FC<{}> = ():JSX.Element => {
 
     const FilterItems:Array<filter> = [
         {
-            text: 'Inversionista',
-            icon: <PersonIcon />,
-            path: '/',
-            tabla: apiInversionista,
-            load: loadingAPI1,
-            keyui: "unico1"
-        },
-        {
             text: 'Documento',
             icon: <DescriptionIcon />,
             path: '/',
             tabla: apiTipoDoc,
             load: loadingAPI2,
             keyui: "unico2",
+        },
+        {
+            text: 'Inversionista',
+            icon: <PersonIcon />,
+            path: '/',
+            tabla: apiInversionista,
+            load: loadingAPI1,
+            keyui: "unico1"
         },
         {
             text: 'Producto',

@@ -55,49 +55,18 @@ export function LoginMenu() {
     //Get the DB data
     axios.post("http://localhost:8000/api/login/jwt", { "email":email, "password":password })
     .then((response) => {
-      if(response.status !== 200){
-        if(response.status === 401){
-          const toastId = toast.error("Usuario o contraseña incorrecta", { autoClose: 1500, toastId: currentToastId });
-          setCurrentToastId(toastId);
-          // return response.data;
-        } else if (response.status === 403){
-          const toastId = toast.warn("Usuario Inactivo, Comuniquese con un administrador para recuperar su cuenta", { autoClose: 3000, toastId: currentToastId });
-          setCurrentToastId(toastId);
-          // return response.data;
-        } else if (response.status === 404){
-          const toastId = toast.error("Usuario o contraseña incorrecta", { autoClose: 3000, toastId: currentToastId });
-          setCurrentToastId(toastId);
-          // return response.data;
-        } else {
-          console.log("resp1",response);
-          return response.data;
-        }
-        return response.data;
-        // const token = (response.headers.authorization.split(' '))[1];
-        // localStorage.setItem("token", token);
-        // let coreKey = "core";
-        // const options:jwt.VerifyOptions = {
-        //   algorithms: ['HS256'],
-        // };
-        // if (coreKey){
-        //   jwt.verify(token, coreKey, options ,(error:any, decodedToken:any) => {
-        //     if (error) {
-        //       // Maneja el error de token inválido o expirado
-        //       console.log({ message: "Token inválido o expirado" });
-        //     } else {
-  
-        //       console.log(decodedToken); // Accede a la información del token
-        //       // Continúa con la lógica de la API
-        //     }
-        //   });
-        // }
-      }
+      if(response.status === 200){
+        const token = (response.headers.authorization.split(' '))[1];
+        localStorage.setItem("token", "");
+        localStorage.setItem("token", token);
+      };
       console.log(response);
       console.log(response.status);
       return response.data;
     })
     .then((userData) => {
       if (userData.estado){
+        console.log(userData.rol);
         setGlobalID(userData.id);
         let rol=0;
         if (userData.rol === "ADMIN"){
@@ -110,7 +79,7 @@ export function LoginMenu() {
           rol=0;
         }
         setSessionRol(rol);
-        navigate('/search')
+        navigate('/search');
       }else {
         console.log("no entrega user data")
       }
