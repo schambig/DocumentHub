@@ -14,7 +14,7 @@ dotenv.config({ path: './backend/.env' });
 usuarioRouterlogin.post('/jwt', async (req: Request, res: Response) => {
   const options:jwt.SignOptions = {
     algorithm: 'HS256',
-    expiresIn: '0.1h'
+    expiresIn: '1h'
   };
   const { email, password } = req.body;
   try {
@@ -51,7 +51,7 @@ usuarioRouterlogin.post('/jwt', async (req: Request, res: Response) => {
         return res.status(401).json({message: "Usuario o contraseña incorrecta"})
       }
     }
-    return res.status(404).json("Usuario could not be found")
+    return res.status(404).json({message: "Usuario could not be found"})
   } catch (error: any) {
     return res.status(500).json(error.message)
   }
@@ -82,3 +82,59 @@ usuarioRouterlogin.post(
     }
   }
 )
+
+usuarioRouterlogin.get('/jwt/verify', async (req: Request, res: Response) => {
+  const options:jwt.SignOptions = {
+    algorithm: 'HS256',
+    expiresIn: '1h'
+  };
+  // return res.status(200).json({msg: "llego aqui"});
+
+  if (process.env.SECRET_KEY && req.headers.authorization){
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) {
+      return res.status(401).json({ message: 'Token no proporcionado' });
+    }
+    const decodedToken = jwt.decode(token, {complete: true}) as {[key: string]: any};
+    if (!decodedToken || !decodedToken.header || !decodedToken.header.alg) {
+      return res.status(403).json({ message: 'Token inválido' });
+    }
+    if (decodedToken.header.alg !== 'HS256') {
+      return res.status(403).json({ message: 'Algoritmo de cifrado no válido' });
+    }
+    try {
+      const dataToken = jwt.verify(token, process.env.SECRET_KEY);
+      if (typeof dataToken === 'object' && dataToken !== null) {
+        const userId = dataToken.id; // Extraer datos del token
+          // verificar el estado del usuario
+
+        const usuario = await UsuarioService.getUsuario(userId)
+        if (usuario !== null){
+          if (usuario.estado === true){
+            const tokenPayload = {
+              ...usuario
+            };
+              // Crear un nuevo token
+            const newToken = jwt.sign(tokenPayload,  process.env.SECRET_KEY, options);
+            const responsePayload = {
+              ...usuario,
+              password: "",
+            };
+            // Devolver el nuevo token y una respuesta JSON
+            res.setHeader("Authorization", `Bearer ${newToken}`);
+            res.setHeader("Access-Control-Expose-Headers", "Authorization");
+            return res.status(200).json(responsePayload);
+          }else{
+            return res.status(403).json({ message: 'Usuario Inactivo' });
+          }
+        } else {
+          return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+      }
+    } catch (error) {
+      return res.status(401).json({ message: 'Token no válido' });
+    }
+  }
+  return res.status(404).json({ message: 'Error en servidor faltan datos' });
+});
