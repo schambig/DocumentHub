@@ -28,6 +28,8 @@ interface deFaultAPI{
 
 export const LatMenu: React.FC<{}> = ():JSX.Element => {
 
+
+
     const initialAPI:deFaultAPI[] = [
         {
             id: null,
@@ -254,7 +256,7 @@ return (
                 sx={{ minWidth: '250px', maxWidth: '80%',}}
                 renderInput={(params) => {
                     return(
-                        <TextField  key={item.keyui} color='neutral' {...params} label={item.text} size='medium' 
+                        <TextField  key={item.keyui} color='primary' {...params} label={item.text} size='medium' 
                         InputProps={{ 
                         ...params.InputProps,
                         endAdornment: (

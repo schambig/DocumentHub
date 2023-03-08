@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'ArialBlack';
+  font-family: 'AuxiliaBlack';
   src: url('./fonts/auxilia-black/Auxilia-Black.ttf') format('truetype');
 }
 
@@ -71,10 +71,6 @@ p {
   font-family: 'Montserrat-Medium', sans-serif;
 }
 
-body {
-  font-family: 'Montserrat-Medium', sans-serif;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -111,3 +107,4 @@ code {
 .container > div {
   flex-grow: 1;
 }
+

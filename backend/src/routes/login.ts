@@ -14,7 +14,7 @@ dotenv.config({ path: './backend/.env' });
 usuarioRouterlogin.post('/jwt', async (req: Request, res: Response) => {
   const options:jwt.SignOptions = {
     algorithm: 'HS256',
-    expiresIn: '0.1h'
+    expiresIn: '1h'
   };
   const { email, password } = req.body;
   try {
@@ -86,7 +86,7 @@ usuarioRouterlogin.post(
 usuarioRouterlogin.get('/jwt/verify', async (req: Request, res: Response) => {
   const options:jwt.SignOptions = {
     algorithm: 'HS256',
-    expiresIn: '0.1h'
+    expiresIn: '1h'
   };
   // return res.status(200).json({msg: "llego aqui"});
 

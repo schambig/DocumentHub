@@ -16,7 +16,7 @@ export enum themePalette {
     WHITECORE = "#F0F0F0",
     GRISCORE = "#9B999F",
     BLACKCORE = "#000000",
-    FONT_GLOBAL = "'JetBrains Mono', monospace",
+    FONT_GLOBAL = "'Montserrat-Medium', monospace",
 }
 
 const theme = createTheme ({
@@ -24,7 +24,7 @@ const theme = createTheme ({
     palette: {
         mode: 'light',
         background: {
-            default: themePalette.WHITECORE,
+            default: themePalette.BG,
         },
         secondary: {
             light:themePalette.CELESTECORELIGTH,
@@ -75,30 +75,49 @@ declare module '@mui/material/styles' {
   declare module '@mui/material/Button' {
     interface ButtonPropsColorOverrides {
       neutral: true;
+      info: true;
     }
   }
 
   declare module '@mui/material/TextField' {
     interface TextFieldPropsColorOverrides {
       neutral: true;
+      info: true;
     }
   }
 
   declare module '@mui/material/FormControl' {
     interface FormControlPropsColorOverrides{
       neutral: true;
+      info: true;
     }
   }
 
   declare module '@mui/material/Checkbox'{
     interface CheckboxPropsColorOverrides {
       neutral: true;
+      info: true;
     }
   }
 
   declare module '@mui/material/InputLabel'{
     interface InputLabelPropsColorOverrides{
       neutral: true;
+      info: true;
+    }
+  }
+
+  declare module '@mui/material/IconButton'{
+    interface IconButtonPropsColorOverrides{
+      neutral: true;
+      info: true;
+    }
+  }
+
+  declare module '@mui/material/AppBar'{
+    interface AppBarPropsColorOverrides{
+      neutral: true;
+      info: true;
     }
   }
 

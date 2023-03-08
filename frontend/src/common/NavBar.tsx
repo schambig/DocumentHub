@@ -163,7 +163,7 @@ export const NavBar: React.FunctionComponent<{}> = () => {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
-                color="info"
+                color="neutral"
             >
                 <MenuIcon />
             </IconButton>
@@ -241,7 +241,7 @@ export const NavBar: React.FunctionComponent<{}> = () => {
                 <Button
                 id={location.pathname === page.ruta ? 'nuevo':''}
                 startIcon={page.sticon}
-                color={location.pathname === page.ruta ?'success':'info'}
+                color={location.pathname === page.ruta ?'success':'primary'}
                 variant='contained'
                 key={page.name}
                 value={page.ruta}
@@ -265,8 +265,8 @@ export const NavBar: React.FunctionComponent<{}> = () => {
 
             <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-                <IconButton  onClick={handleOpenUserMenu} sx={{ p: 0}}>
-                <Avatar  alt={nameUser ? nameUser : ''} src="/static/images/avatar/2.jpg" />
+                <IconButton  color="neutral" onClick={handleOpenUserMenu} sx={{ p: 0}}>
+                <Avatar alt={nameUser ? nameUser : ''} src="/static/images/avatar/2.jpg" />
                 </IconButton>
             </Tooltip>
             <Menu
