@@ -40,6 +40,7 @@ export const NavBar: React.FunctionComponent<{}> = () => {
     const location = useLocation();
     const { setSelectedOption1, setSelectedOption2, setSelectedOption3, setSelectedOption4 } = useContext(SelectionContext);
     const {sessionRol, setSessionRol} = useContext(SelectionContext);
+    const { nameUser } = useContext(SelectionContext);
 
     const navigate = useNavigate();
     const setFilter = ():void => {
@@ -265,7 +266,7 @@ export const NavBar: React.FunctionComponent<{}> = () => {
             <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
                 <IconButton  onClick={handleOpenUserMenu} sx={{ p: 0}}>
-                <Avatar  alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar  alt={nameUser ? nameUser : ''} src="/static/images/avatar/2.jpg" />
                 </IconButton>
             </Tooltip>
             <Menu

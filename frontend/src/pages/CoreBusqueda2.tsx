@@ -1,10 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import React, { useState, useContext, useEffect } from 'react';
+import Button from '@mui/material/Button';
 //import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 //import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 //import { SelectionContext } from '../context/SelectionContext';
 import { Container, Grid } from "@mui/material";
 // import React, { useContext } from 'react';
 import { NavBar } from '../common/NavBar';
+import { ExitUser } from '../common/ExitPage';
 import { LatMenu } from '../components/LatMenu';
 import '../styles/CoreAppV1.css';
 import { TableBusqueda } from '../components/TableBusqueda';
@@ -15,7 +18,8 @@ export const AppBusquedav2: React.FunctionComponent<{}> = (): JSX.Element => {
   const { sessionRol, setSessionRol } = useContext(SelectionContext);
   const { setGlobalID } = useContext(SelectionContext);
   const [isLoading, setIsLoading] = useState(true);
-  
+  const { setNameUser } = useContext(SelectionContext);
+  const navigate = useNavigate();
   
   useEffect(() => {
     const token = localStorage.getItem('tokenCore');
@@ -41,6 +45,7 @@ export const AppBusquedav2: React.FunctionComponent<{}> = (): JSX.Element => {
               }else{
                 rol=0;
               }
+              setNameUser(response.data.userNombre);
               setSessionRol(rol);
           };
           console.log("pagina Busqueda, validacion");
@@ -49,6 +54,7 @@ export const AppBusquedav2: React.FunctionComponent<{}> = (): JSX.Element => {
         })
         .catch((error:any) => {
           console.error(error);
+          localStorage.setItem("tokenCore",'');
           setSessionRol(0);
           setIsLoading(false);
         });
@@ -77,6 +83,7 @@ export const AppBusquedav2: React.FunctionComponent<{}> = (): JSX.Element => {
 
               <Grid item sx={{
                 display: 'flex',
+                justifyContent: 'center'
               }}>
                 <LatMenu />
               </Grid>
@@ -84,7 +91,7 @@ export const AppBusquedav2: React.FunctionComponent<{}> = (): JSX.Element => {
             <TableBusqueda />
           </div>
         ) : null
-      ) : <h1>Prohibido el acceso sin Rol </h1>
+      ) : <ExitUser />
       }
 
 

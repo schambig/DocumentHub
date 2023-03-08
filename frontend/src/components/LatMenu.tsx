@@ -165,7 +165,7 @@ export const LatMenu: React.FC<{}> = ():JSX.Element => {
     const FilterItems:Array<filter> = [
         {
             text: 'Documento',
-            icon: <DescriptionIcon />,
+            icon: <DescriptionIcon style={{ color: '#444' }}/>,
             path: '/',
             tabla: apiTipoDoc,
             load: loadingAPI2,
@@ -173,7 +173,7 @@ export const LatMenu: React.FC<{}> = ():JSX.Element => {
         },
         {
             text: 'Inversionista',
-            icon: <PersonIcon />,
+            icon: <PersonIcon style={{ color: '#444' }}/>,
             path: '/',
             tabla: apiInversionista,
             load: loadingAPI1,
@@ -181,7 +181,7 @@ export const LatMenu: React.FC<{}> = ():JSX.Element => {
         },
         {
             text: 'Producto',
-            icon: <MapsHomeWorkIcon />,
+            icon: <MapsHomeWorkIcon style={{ color: '#444' }}/>,
             path: '/',
             tabla: apiProducto,
             load: loadingAPI3,
@@ -189,7 +189,7 @@ export const LatMenu: React.FC<{}> = ():JSX.Element => {
         },
         {
             text: 'Levantamiento / Emision',
-            icon: <AssignmentIcon />,
+            icon: <AssignmentIcon style={{ color: '#444' }}/>,
             path: '/',
             tabla: apiNumLev,
             load: loadingAPI4,
@@ -236,7 +236,9 @@ return (
             <Grid item sx={{
                 display:'flex',
                 alignItems: 'center',
+                fontFamily: "ArialBlack"
                 }}>
+        
             <ListItem 
                 key={item.text}
                 sx={{display:'flex'}}>
@@ -249,10 +251,10 @@ return (
                 id="combo-box-demo"
                 options={item.tabla}
                 getOptionLabel ={option => option.name}
-                sx={{ minWidth: '250px', maxWidth: '80%', }}
+                sx={{ minWidth: '250px', maxWidth: '80%',}}
                 renderInput={(params) => {
                     return(
-                        <TextField key={item.keyui} color='neutral' {...params} label={item.text} size='medium' 
+                        <TextField  key={item.keyui} color='neutral' {...params} label={item.text} size='medium' 
                         InputProps={{ 
                         ...params.InputProps,
                         endAdornment: (

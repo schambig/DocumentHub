@@ -77,14 +77,14 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
 
   const handleSave = async():Promise<void> => {
     setLoadSave({...loadSave , status:true})
-    if ((userData.userNombre === '' || userData.email === '' || userData.password === '')){
+    if ((userData.userNombre === '' || userData.email === '')){
       setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
       setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1500)
       const toastId = toast.error('Completar la informacion', { autoClose: 1500, toastId: currentToastId });
       setCurrentToastId(toastId);
       return console.log("Error push Data");
       
-    }else if((userData.userNombre === null || userData.email === null || userData.password === null)){
+    }else if((userData.userNombre === null || userData.email === null)){
       setLoadSave({...loadSave ,status:false, respError:true, color:'error'  })
       setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1500)
       const toastId = toast.error('Completar la informacion', { autoClose: 1500, toastId: currentToastId });
@@ -137,7 +137,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
 
   return (
     <div>
-      <h1> Actualizar Usuario:</h1>
+      <h2> Actualizar Usuario:</h2>
       <Autocomplete
         sx={{m: '25px 0px'}}
         id="user-select"
@@ -147,7 +147,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
         onChange={(event, newValue) => {
           setSelectedUser(newValue);
           if (newValue) {
-            setUserData(newValue);
+            setUserData({...newValue,password:''});
             setStatusCheckbox(newValue.estado);
           } else {
             setUserData({

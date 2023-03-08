@@ -1,16 +1,20 @@
 import { Container, Divider, Grid } from '@mui/material';
 import React, { useState, useContext, useEffect } from 'react';
 import { NavBar } from '../common/NavBar';
+import { ExitUser } from '../common/ExitPage';
 import { UserEditor } from '../components/LoginCrud';
 import { SelectionContext } from '../context/SelectionContext';
 import {CreateUser } from '../components/CreateUser';
 import axios from 'axios';
+import {Typography} from '@mui/material'
+import { useNavigate } from "react-router-dom";
 
 export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
   const { sessionRol, setSessionRol } = useContext(SelectionContext);
   const { setGlobalID } = useContext(SelectionContext);
   const [isLoading, setIsLoading] = useState(true);
-  
+  const { setNameUser } = useContext(SelectionContext);
+  const navigate = useNavigate();
   
   useEffect(() => {
     const token = localStorage.getItem('tokenCore');
@@ -37,6 +41,7 @@ export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
               }else{
                 rol=0;
               }
+              setNameUser(response.data.userNombre);
               setSessionRol(rol);
           };
           console.log("pagina Busqueda, validacion");
@@ -45,6 +50,7 @@ export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
         })
         .catch((error:any) => {
           console.error(error);
+          localStorage.setItem("tokenCore",'');
           setSessionRol(0);
           setIsLoading(false);
         });
@@ -85,7 +91,7 @@ export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
                 display: 'flex',
                 flexDirection:'column'
               }}>
-                <h1> Crear Usuario:</h1>
+                <h2>Crear Usuario:</h2>
                 <CreateUser />
                 
               </Grid>
@@ -93,7 +99,7 @@ export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
             </Grid>
           </div>
         ) : null
-      ) : <h1>Prohibido el acceso sin Rol </h1>
+      ) : <ExitUser />
       }
       {/* <h1>Estoy en CoreUser</h1> */}
     </Container>

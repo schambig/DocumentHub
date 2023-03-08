@@ -2,16 +2,19 @@ import { Container, Grid } from '@mui/material';
 // import React, { useContext } from 'react';
 import React, { useState, useContext, useEffect } from 'react';
 import { NavBar } from '../common/NavBar';
+import { ExitUser } from '../common/ExitPage';
 import UploadFiles from '../components/FileUpload';
 import { LatMenuLoad } from '../components/LatMenuLoadV2';
 import { SelectionContext } from '../context/SelectionContext';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 export const AppFileV2: React.FunctionComponent<{}> = (): JSX.Element => {
   const { sessionRol, setSessionRol } = useContext(SelectionContext);
   const { setGlobalID } = useContext(SelectionContext);
   const [isLoading, setIsLoading] = useState(true);
-  
+  const { setNameUser } = useContext(SelectionContext);
+  const navigate = useNavigate();
   
   useEffect(() => {
     const token = localStorage.getItem('tokenCore');
@@ -25,7 +28,6 @@ export const AppFileV2: React.FunctionComponent<{}> = (): JSX.Element => {
           if(response.status === 200){
             console.log(response);
             const token2 = (response.headers.authorization.split(' '))[1];
-            localStorage.setItem("tokenCore", "");
             localStorage.setItem("tokenCore", token2);
             setGlobalID(response.data.id)
             let rol=0;
@@ -38,6 +40,7 @@ export const AppFileV2: React.FunctionComponent<{}> = (): JSX.Element => {
               }else{
                 rol=0;
               }
+              setNameUser(response.data.userNombre);
               setSessionRol(rol);
           };
           console.log("pagina Busqueda, validacion");
@@ -46,6 +49,7 @@ export const AppFileV2: React.FunctionComponent<{}> = (): JSX.Element => {
         })
         .catch((error:any) => {
           console.error(error);
+          localStorage.setItem("tokenCore",'');
           setSessionRol(0);
           setIsLoading(false);
         });
@@ -74,6 +78,7 @@ export const AppFileV2: React.FunctionComponent<{}> = (): JSX.Element => {
                 </Grid>
                 <Grid item sx={{
                   display: 'flex',
+                  justifyContent:'center'
                 }}>
                   <LatMenuLoad />
                 </Grid>
@@ -81,7 +86,7 @@ export const AppFileV2: React.FunctionComponent<{}> = (): JSX.Element => {
               </Grid>
             </div>
           ) : null
-        ) : <h1>Prohibido sin Rol</h1>
+        ) : <ExitUser />
       }
 
       {/* <h1>Estoy en CoreFile</h1> */}

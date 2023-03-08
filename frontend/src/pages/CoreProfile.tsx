@@ -1,15 +1,18 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Container, Grid } from '@mui/material';
-import { NavBar } from '../common/NavBar'
+import { NavBar } from '../common/NavBar';
+import { ExitUser } from '../common/ExitPage';
 import { SelectionContext } from '../context/SelectionContext';
 import {UserProfile} from '../components/ProfileUser';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 export const AppProfile: React.FunctionComponent<{}> = (): JSX.Element => {
   const { sessionRol, setSessionRol } = useContext(SelectionContext);
   const { setGlobalID } = useContext(SelectionContext);
   const [isLoading, setIsLoading] = useState(true);
-  
+  const { setNameUser } = useContext(SelectionContext);
+  const navigate = useNavigate();
   
   useEffect(() => {
     const token = localStorage.getItem('tokenCore');
@@ -38,6 +41,7 @@ export const AppProfile: React.FunctionComponent<{}> = (): JSX.Element => {
             }else{
               rol=0;
             }
+            setNameUser(response.data.userNombre);
             setSessionRol(rol);
         };
         console.log("pagina Busqueda, validacion");
@@ -46,6 +50,7 @@ export const AppProfile: React.FunctionComponent<{}> = (): JSX.Element => {
       })
       .catch((error:any) => {
         console.error(error);
+        localStorage.setItem("tokenCore",'');
         setSessionRol(0);
         setIsLoading(false);
       });
@@ -83,7 +88,7 @@ export const AppProfile: React.FunctionComponent<{}> = (): JSX.Element => {
             </Grid>
           </div>
         ) : null
-      ) : <h1>Prohibido sin ROL</h1>
+      ) : <ExitUser />
       }
 
 

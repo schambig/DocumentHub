@@ -170,7 +170,7 @@ const [loadState, setLoadState] = useState<boolean>(true);
       headerAlign: 'center', 
       headerName: 'URL', 
       align: 'center',
-      width: 300,
+      width: 240,
       renderCell: (params) => (
           <DocumentPreviewButton documentUrl={params.value}/>   
       ),
@@ -221,8 +221,8 @@ const [loadState, setLoadState] = useState<boolean>(true);
         display: 'block',
         width: 'inherit',
       }}>
-        <Button onClick={handleShow} variant='contained' color='primary' sx={{mt:1, mb:1, width:'100%'}}  startIcon={<FilterAltOutlinedIcon />}>
-        <Typography variant="h5" component="h2">Filtrar</Typography>
+        <Button onClick={handleShow} variant='contained' color='neutral' sx={{mt:1, mb:1, width:'100%', ':hover': { backgroundColor: '#F76A1A' } }}  startIcon={<FilterAltOutlinedIcon style={{ fontSize: 35 }} />}>
+        <Typography sx={{fontFamily: 'Montserrat-Medium'}} variant="h5" component="h2">Filtrar</Typography>
         </Button>
       </Grid>
 

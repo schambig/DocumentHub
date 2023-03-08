@@ -45,6 +45,7 @@ export function LoginMenu() {
   const [currentToastId, setCurrentToastId] = useState<any | undefined>(undefined);
   const { setSessionRol } = useContext(SelectionContext);
   const { setGlobalID } = useContext(SelectionContext);
+  const { setNameUser } = useContext(SelectionContext);
   localStorage.setItem('tokenCore','')
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -78,6 +79,7 @@ export function LoginMenu() {
         }else{
           rol=0;
         }
+        setNameUser(userData.userNombre);
         setSessionRol(rol);
         navigate('/search');
       }else {
