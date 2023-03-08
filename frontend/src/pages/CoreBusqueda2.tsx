@@ -18,19 +18,18 @@ export const AppBusquedav2: React.FunctionComponent<{}> = (): JSX.Element => {
   
   
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('tokenCore');
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
       axios.get('http://localhost:8000/api/login/jwt/verify', config)
-        .then(response => {
+        .then((response:any) => {
           if(response.status === 200){
             console.log(response);
             const token2 = (response.headers.authorization.split(' '))[1];
-            localStorage.setItem("token", "");
-            localStorage.setItem("token", token2);
+            localStorage.setItem("tokenCore", token2);
             setGlobalID(response.data.id)
             let rol=0;
               if (response.data.rol === "ADMIN"){
@@ -48,7 +47,7 @@ export const AppBusquedav2: React.FunctionComponent<{}> = (): JSX.Element => {
           console.log(response.data);
           setIsLoading(false);
         })
-        .catch(error => {
+        .catch((error:any) => {
           console.error(error);
           setSessionRol(0);
           setIsLoading(false);

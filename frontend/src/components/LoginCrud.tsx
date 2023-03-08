@@ -185,7 +185,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
                 />
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={10} sm={10} md={4} lg={4}>
                 <TextField
                   sx={{ width: '100%'}}
                   name="userNombre"
@@ -196,7 +196,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
                 />
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={5} sm={5} md={4} lg={4}>
               <FormControl color='neutral' fullWidth>
                 <InputLabel sx={{}} id="demo-simple-select-label" >Role</InputLabel>
                 <Select
@@ -217,7 +217,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
               </FormControl>
             </Grid>
       
-            <Grid item xs={2}>
+            <Grid item xs={5} sm={5} md={2} lg={2}>
               <FormControlLabel
                 sx={{ width: '100%'}}
                 control={
@@ -236,7 +236,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
         <div style={{display: 'flex', minWidth: 0, margin: '10px 20px 10px 20px'}}>
           {/* segunda fila */}
           <Grid sx={{display:'flex', justifyContent:'center', alignItems:'center'}} container spacing={2}>
-            <Grid item xs={4}>
+            <Grid item xs={10} sm={10} md={4} lg={4}>
               <TextField
               sx={{width:'100%'}}
                 name="email"
@@ -247,7 +247,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
               />
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={10} sm={10} md={4} lg={4}>
               <TextField
               sx={{width:'100%'}}
               
@@ -260,7 +260,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
                 />
             </Grid>
 
-            <Grid item xs={2}>
+            <Grid item xs={10} sm={10} md={2} lg={2}>
               {/* <Button sx={{width:'100%'}} variant="contained" color="primary" onClick={handleSave}>
                 Save
               </Button> */}

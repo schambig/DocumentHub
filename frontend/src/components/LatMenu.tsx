@@ -202,15 +202,15 @@ const { setSelectedOption1, setSelectedOption2, setSelectedOption3, setSelectedO
 // captar datos dependiendo evento onChange
 
 const optionListSelect = [
-    selectedOption1,
     selectedOption2,
+    selectedOption1,
     selectedOption3,
     selectedOption4,
 ]
 
 const optionListSet = [
-    setSelectedOption1,
     setSelectedOption2,
+    setSelectedOption1,
     setSelectedOption3,
     setSelectedOption4,
 ]

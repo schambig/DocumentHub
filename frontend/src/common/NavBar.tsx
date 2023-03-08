@@ -113,7 +113,8 @@ export const NavBar: React.FunctionComponent<{}> = () => {
 
     const changeRol = (path:string) => {
         if (path === '/login'){
-            setSessionRol(null)
+            setSessionRol(null);
+            localStorage.setItem('tokenCore','')
         }
     }
 
@@ -126,7 +127,11 @@ export const NavBar: React.FunctionComponent<{}> = () => {
             justifyContent: 'space-between',
             //backgroundColor: 'red',
         }}>
-            <Box color='info' sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+            <Box color='info' sx={{ 
+                display: { xs: 'none', md: 'flex' },
+                mr: 1,
+                minWidth: '57px',
+                padding: '1em' }}>
             <img id="img_logo"
               src={YourSVG} alt="No Result"
             />

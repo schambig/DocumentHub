@@ -13,7 +13,7 @@ export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
   
   
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('tokenCore');
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -24,8 +24,8 @@ export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
           if(response.status === 200){
             console.log(response);
             const token2 = (response.headers.authorization.split(' '))[1];
-            localStorage.setItem("token", "");
-            localStorage.setItem("token", token2);
+            localStorage.setItem("tokenCore", "");
+            localStorage.setItem("tokenCore", token2);
             setGlobalID(response.data.id)
             let rol=0;
               if (response.data.rol === "ADMIN"){

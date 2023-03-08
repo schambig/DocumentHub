@@ -45,7 +45,7 @@ export function LoginMenu() {
   const [currentToastId, setCurrentToastId] = useState<any | undefined>(undefined);
   const { setSessionRol } = useContext(SelectionContext);
   const { setGlobalID } = useContext(SelectionContext);
-
+  localStorage.setItem('tokenCore','')
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -57,8 +57,8 @@ export function LoginMenu() {
     .then((response) => {
       if(response.status === 200){
         const token = (response.headers.authorization.split(' '))[1];
-        localStorage.setItem("token", "");
-        localStorage.setItem("token", token);
+        
+        localStorage.setItem("tokenCore", token);
       };
       console.log(response);
       console.log(response.status);
