@@ -18,6 +18,7 @@ if (!process.env.PORT) {
   process.exit(1);
 }
 
+// const ip = '172.22.240.1'; // la dirección IP de tu computadora
 const PORT: number = parseInt(<string>(process.env.PORT), 10);
 
 const app = express();

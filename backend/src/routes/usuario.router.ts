@@ -71,12 +71,24 @@ usuarioRouter.patch(
       return response.status(400).json({errors: errors.array()});
     }
     const id: string = request.params.id;
+
     try {
-      const newpassword =  await bcrypt.hash(request.body.password, 10);
-      request.body.password = newpassword;
-      const usuario = request.body;
-      const updateUsuario = await UsuarioService.updateUsuario(usuario, id);
-      return response.status(200).json(updateUsuario);
+      if(request.body.password === '' || request.body.password === null){
+        const newData = {
+          userNombre: request.body.userNombre,
+          email: request.body.email,
+          estado: request.body.estado,
+          rol: request.body.rol,
+        }
+        const updateUsuario = await UsuarioService.updateUsuario(newData, id);
+        return response.status(200).json(updateUsuario);
+      }else{
+        const newpassword =  await bcrypt.hash(request.body.password, 10);
+        request.body.password = newpassword;
+        const usuario = request.body;
+        const updateUsuario = await UsuarioService.updateUsuario(usuario, id);
+        return response.status(200).json(updateUsuario);
+      }
     } catch (error: any) {
       return response.status(500).json(error.message);
     }
