@@ -100,6 +100,10 @@ code {
   background-color: rgb(183, 205, 219,0.4);
 }
 
+#conWidth{
+  min-width: 100%;
+}
+
 .container {
   width: 100%;
 }

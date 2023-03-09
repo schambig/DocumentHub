@@ -76,7 +76,7 @@ export const NavBar: React.FunctionComponent<{}> = () => {
     // const settings = ['Profile', 'Account', 'Logout'];
     const settings = [
         {
-            name: 'Profile',
+            name: 'Mi perfil',
             ruta: '/profile',
             keyChild1: 'profile',
             sticon: <AccountBoxOutlinedIcon />,
@@ -87,7 +87,7 @@ export const NavBar: React.FunctionComponent<{}> = () => {
         //     sticon: < BadgeOutlinedIcon />,
         // },
         {
-            name: 'Logout',
+            name: 'Cerrar sesion',
             ruta: '/login',
             keyChild1: 'logout',
             sticon: <LogoutIcon />,
@@ -121,7 +121,7 @@ export const NavBar: React.FunctionComponent<{}> = () => {
 
     return (
     <AppBar color='info' position="static">
-        <Container maxWidth="lg" style={{ marginLeft: 0 , marginRight: 0}}>
+        <Container id='conWidth' style={{ marginLeft: 0 , marginRight: 0}}>
         <Toolbar disableGutters sx={{
             display: 'flex',
             alignContent: 'center',
@@ -226,8 +226,8 @@ export const NavBar: React.FunctionComponent<{}> = () => {
                 <Button
                 id={location.pathname === page.ruta ? 'nuevo':''}
                 startIcon={page.sticon}
-                color={location.pathname === page.ruta ?'success':'primary'}
-                variant='contained'
+                color={location.pathname === page.ruta ?'neutral':'neutral'}
+                variant={location.pathname === page.ruta ?'outlined':'text'}
                 key={page.name}
                 value={page.ruta}
                 onClick={() => {return(setFilter(), navigate(page.ruta))}}

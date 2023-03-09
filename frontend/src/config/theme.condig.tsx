@@ -47,12 +47,16 @@ const theme = createTheme ({
         },
         info:{
             main: themePalette.WHITECORE,
-            contrastText: '#fff'
+            contrastText: '#000',
         },
         neutral:{
             main: themePalette.BLACKCORE,
             contrastText: '#fff',
         },
+        warning:{
+          main: themePalette.NARANJACORELIGTH,
+          contrastText: '#000',
+        }
     },
     typography: {
         fontFamily: themePalette.FONT_GLOBAL,

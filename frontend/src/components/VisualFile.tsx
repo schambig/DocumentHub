@@ -62,8 +62,8 @@ export function DocumentPreviewButton({ documentUrl }:PropsDocUrl):JSX.Element {
       
       <Button 
         key='down'
-        variant="contained" 
-        color="secondary" 
+        variant="outlined" 
+        color="neutral" 
         onClick={downloadFile}>
         {/* DESCARGAR */}
         {/* <DownloadIcon /> */}
@@ -74,8 +74,8 @@ export function DocumentPreviewButton({ documentUrl }:PropsDocUrl):JSX.Element {
       <Button 
         key='view' 
         sx={{ml: '10px', mr:'10px'}}
-        variant="contained" 
-        color="secondary" 
+        variant="outlined"  
+        color="neutral" 
         onClick={viewFile}>
         {/* VER */}
         {/* <VisibilityIcon /> */}
