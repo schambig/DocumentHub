@@ -1,5 +1,5 @@
-import React from "react";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import React from "react";
 
 type ThemeProp = {
     children: JSX.Element;
@@ -46,7 +46,7 @@ const theme = createTheme ({
             contrastText: themePalette.WHITECORE,
         },
         info:{
-            main: themePalette.GRISCORE,
+            main: themePalette.WHITECORE,
             contrastText: '#fff'
         },
         neutral:{

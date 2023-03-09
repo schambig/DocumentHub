@@ -1,26 +1,26 @@
-import React , {useContext} from "react"
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
+import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
+import Container from '@mui/material/Container';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Toolbar from '@mui/material/Toolbar';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import React, { useContext } from "react";
 //import AdbIcon from '@mui/icons-material/Adb';
-import YourSVG from '../core_icons/CoreCapitalSAF_logo.svg'
+import YourSVG from '../core_icons/CoreCapitalSAF_logo.svg';
 //import { makeStyles } from "@mui/material";
 //import { minWidth, padding, width } from "@mui/system";
 //import SearchIcon from '@mui/icons-material/Search';
 import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
 //import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import ListItemIcon from '@mui/material/ListItemIcon';
 //import { pink } from "@mui/material/colors";
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 //import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined';
@@ -31,7 +31,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { SelectionContext } from '../context/SelectionContext';
 //import { green, grey, red } from "@mui/material/colors";
-import {themeSizes} from '../config/theme.condig'
+import { themeSizes } from '../config/theme.condig';
 
 export const NavBar: React.FunctionComponent<{}> = () => {
 
@@ -120,18 +120,20 @@ export const NavBar: React.FunctionComponent<{}> = () => {
     }
 
     return (
-    <AppBar color='secondary' position="static">
-        <Container maxWidth="lg">
+    <AppBar color='info' position="static">
+        <Container maxWidth="lg" style={{ marginLeft: 0 , marginRight: 0}}>
         <Toolbar disableGutters sx={{
             display: 'flex',
             alignContent: 'center',
             justifyContent: 'space-between',
             //backgroundColor: 'red',
-        }}>
+        }}
+        >
             <Box color='info' sx={{ 
                 display: { xs: 'none', md: 'flex' },
                 mr: 1,
                 minWidth: '57px',
+                
                 padding: '1em' }}>
             <img id="img_logo"
               src={YourSVG} alt="No Result"
@@ -205,6 +207,7 @@ export const NavBar: React.FunctionComponent<{}> = () => {
                      padding: '1em', }}>
             <img id="img_logo"
               src={YourSVG} alt="No Result"
+              style={{ width: '500px' }}
             />
             </Box>
             
