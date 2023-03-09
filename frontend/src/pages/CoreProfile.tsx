@@ -61,7 +61,7 @@ export const AppProfile: React.FunctionComponent<{}> = (): JSX.Element => {
   }
 
   return (
-    <Container>
+    <Container id='conWidth'>
       {sessionRol ? (
         sessionRol <= 3 ? (
           <div>
