@@ -178,15 +178,15 @@ const [loadState, setLoadState] = useState<boolean>(true);
     },
     { field: 'id', headerName: 'N°', flex:1,align: 'center',headerAlign: 'center'},
     { field: 'nombreFile', headerName: 'Archivo',width: 250,headerAlign: 'center'},
-    { field: 'fechaSubida', headerName: 'Fecha', width: 170,headerAlign: 'center' },
+    { field: 'fechaSubida', headerName: 'Fecha', width: 220,align: 'center',headerAlign: 'center' },
     { field: 'tipoDocumento', headerName: 'Doc', width: 150,align: 'center',headerAlign: 'center'},
     { field: 'PEP', headerName: 'PEP', width: 50, align: 'center',headerAlign: 'center'},
     { field: 'tipoDoc', headerName: 'Id', width: 180, align: 'center',headerAlign: 'center'},
     { field: 'numDoc', headerName: 'Nro. Identidad', width: 140,align: 'center',headerAlign: 'center'},
-    { field: 'nombreInversionista', headerName: 'Inversionista', width: 320,headerAlign: 'center'},
+    { field: 'nombreInversionista', headerName: 'Inversionista', width: 370,headerAlign: 'center'},
     { field: 'codigoProducto', headerName: 'Cod', width: 70,align: 'center',headerAlign: 'center'},
-    { field: 'nombreProducto', headerName: 'Producto', width: 290,headerAlign: 'center'},
-    { field: 'descripcionCategoria', headerName: 'Categoria', width: 150,align: 'center',headerAlign: 'center'},
+    { field: 'nombreProducto', headerName: 'Producto', width: 350,headerAlign: 'center'},
+    { field: 'descripcionCategoria', headerName: 'Categoria', width: 210,align: 'center',headerAlign: 'center'},
   ];
 
   const filterButton:Filtro = {
