@@ -21,6 +21,7 @@ import { convDocM, newTipoDoc } from '../assets/data_documento'
 import { SelectionContext } from '../context/SelectionContext';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import Typography from '@mui/material/Typography';
 
 interface deFaultAPI {
     id: string | null

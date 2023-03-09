@@ -224,6 +224,7 @@ function reemplazarEspaciosPorGuiones(texto: string): string {
             .then((response) => {
               if(response.status === 201){
                 toast.success('Registrado exitoso', { autoClose: 1500 });
+                Borrar();
               }else{
                 toast.error('Fallo el registro', { autoClose: 1500});
               }

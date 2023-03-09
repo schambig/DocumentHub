@@ -13,6 +13,7 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 //import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {themeSizes} from '../config/theme.condig'
 
 // interface User {
 //   id: number;
@@ -275,9 +276,9 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 sx={{width: '100%'}}
                 onClick={handleShowPS}
                 variant='contained'>
-              <Typography  variant="h6" style={{fontWeight: 'bold'}}>
+              {/* <Typography  variant="h6" style={{fontWeight: 'bold'}}> */}
                 {showPS ? "Canceled" :"Update PS"}
-              </Typography>
+              {/* </Typography> */}
               </Button>
               
               </Grid>
@@ -328,15 +329,15 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
               sx={{height:'100%', width:'100%'}}
               loading={loadSave?.status ? loadSave.status : false}
               loadingPosition="start"
-              startIcon={loadSave.respError ? <ErrorOutlineIcon/>: (loadSave.respSuccess ? <PublishedWithChangesIcon/>: (<SyncIcon sx={{fontSize: '35px'}}/>))}
+              startIcon={loadSave.respError ? <ErrorOutlineIcon style={{fontSize:(themeSizes.FSbutton)}}/>: (loadSave.respSuccess ? <PublishedWithChangesIcon style={{fontSize:(themeSizes.FSbutton)}}/>: (<SyncIcon style={{fontSize:(themeSizes.FSbutton)}}/>))}
               variant="contained"
               color={loadSave.color === 'primary' || loadSave.color === 'error' || loadSave.color === 'success' ? loadSave.color : 'primary'}
               onClick={handleSave}
               size="large"
             >
-             <Typography variant="h6" style={{fontWeight: 'bold'}}>
+             {/* <Typography variant="h6" > */}
                 {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("UPDATE"))}
-              </Typography>
+              {/* </Typography> */}
             </LoadingButton>
             <ToastContainer />
             </Grid>
