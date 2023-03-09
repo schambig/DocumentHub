@@ -19,7 +19,8 @@ import { convCateM, newCategoria } from '../assets/data_levantamiento'
 import { convDocM, newTipoDoc } from '../assets/data_documento'
 //import { display } from '@mui/system';
 import { SelectionContext } from '../context/SelectionContext';
-
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 interface deFaultAPI {
     id: string | null
@@ -31,6 +32,13 @@ interface deFaultAPI {
 //   }
 
 export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
+
+    const theme = useTheme();
+    const isXs = useMediaQuery(theme.breakpoints.only('xs'));
+    const isSm = useMediaQuery(theme.breakpoints.only('sm'));
+    const isMd = useMediaQuery(theme.breakpoints.only('md'));
+    const isLg = useMediaQuery(theme.breakpoints.only('lg'));
+    const isXl = useMediaQuery(theme.breakpoints.only('xl'));
 
     const initialAPI: deFaultAPI[] = [
         {
@@ -132,11 +140,15 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
         return () => clearTimeout(timer);
     }, [])
 
+    // numero de opciones disponible
+    const { selectedOption1, selectedOption2, selectedOption3, selectedOption4 } = useContext(SelectionContext);
+    const { setSelectedOption1, setSelectedOption2, setSelectedOption3, setSelectedOption4 } = useContext(SelectionContext);
+    //const {isAutocomplete1Enabled,isAutocomplete2Enabled,isAutocomplete3Enabled,isAutocomplete4Enabled} = useContext(SelectionContext);
 
     const FilterItems: Array<filter> = [
         {
             text: 'Inversionista',
-            icon: <PersonIcon />,
+            icon: <PersonIcon style={{ color: selectedOption1 ? '#000' : '' }}/>,
             path: '/',
             tabla: apiInversionista,
             load: loadingAPI1,
@@ -144,7 +156,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
         },
         {
             text: 'Documento',
-            icon: <DescriptionIcon />,
+            icon: <DescriptionIcon style={{ color: selectedOption2 ? '#000' : ''}}/>,
             path: '/',
             tabla: apiTipoDoc,
             load: loadingAPI2,
@@ -152,7 +164,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
         },
         {
             text: 'Producto',
-            icon: <MapsHomeWorkIcon />,
+            icon: <MapsHomeWorkIcon style={{ color: selectedOption3 ? '#000' : '' }}/>,
             path: '/',
             tabla: apiProducto,
             load: loadingAPI3,
@@ -160,17 +172,13 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
         },
         {
             text: 'Levantamiento / Emision',
-            icon: <AssignmentIcon />,
+            icon: <AssignmentIcon style={{ color: selectedOption4 ? '#000' : '' }}/>,
             path: '/',
             tabla: apiCategoria,
             load: loadingAPI4,
             keyui: "unico4",
         },
     ]
-    // numero de opciones disponible
-    const { selectedOption1, selectedOption2, selectedOption3, selectedOption4 } = useContext(SelectionContext);
-    const { setSelectedOption1, setSelectedOption2, setSelectedOption3, setSelectedOption4 } = useContext(SelectionContext);
-    //const {isAutocomplete1Enabled,isAutocomplete2Enabled,isAutocomplete3Enabled,isAutocomplete4Enabled} = useContext(SelectionContext);
     //const {setIsAutocomplete1Enabled,setIsAutocomplete2Enabled,setIsAutocomplete3Enabled,setIsAutocomplete4Enabled} = useContext(SelectionContext);
     
     //     selectedOption1 ► Inversionista,
@@ -308,7 +316,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                     key={FilterItems[1].text}
                     sx={{ display: 'flex' }}>
                     <ListItemText >
-                        <ListItemIcon color='#000'>{FilterItems[1].icon}</ListItemIcon>
+                        <ListItemIcon >{FilterItems[1].icon}</ListItemIcon>
                         <Autocomplete
                             disablePortal
                             loading={FilterItems[1].load}
@@ -316,7 +324,9 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                             id="combo-box-demo"
                             options={FilterItems[1].tabla}
                             getOptionLabel={option => option.name}
-                            sx={{ minWidth: '250px', maxWidth: '80%', }}
+                            sx={{
+                                minWidth: isXs ? '340px' : isSm ? '570px' : isMd ? '800px' : isLg ? '500px' : isXl ? '700px' : null,
+                            }}
                             renderInput={(params) => {
                                 return (
                                     <TextField key={FilterItems[1].keyui} color='neutral' {...params} label={FilterItems[1].text} size='medium'
@@ -355,7 +365,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                     key={FilterItems[0].text}
                     sx={{ display: 'flex' }}>
                     <ListItemText >
-                        <ListItemIcon color='#000'>{FilterItems[0].icon}</ListItemIcon>
+                        <ListItemIcon >{FilterItems[0].icon}</ListItemIcon>
                         <Autocomplete
                             disabled={handleDisableInversionista(selectedOption2) ? true : false}
                             value={handleDisableInversionista(selectedOption2) ? null : selectedOption1}
@@ -365,7 +375,9 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                             id="combo-box-demo"
                             options={apiInversionista}
                             getOptionLabel={option => option.name}
-                            sx={{ minWidth: '250px', maxWidth: '80%', }}
+                            sx={{
+                                minWidth: isXs ? '340px' : isSm ? '570px' : isMd ? '800px' : isLg ? '500px' : isXl ? '700px' : null,
+                            }}
                             renderInput={(params) => {
                                 return (
                                     <TextField key={FilterItems[0].keyui} color='neutral' {...params} label={FilterItems[0].text} size='medium'
@@ -403,7 +415,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                     key={FilterItems[2].text}
                     sx={{ display: 'flex' }}>
                     <ListItemText>
-                        <ListItemIcon color='#000'>{FilterItems[2].icon}</ListItemIcon>
+                        <ListItemIcon >{FilterItems[2].icon}</ListItemIcon>
                         <Autocomplete
                             disabled={handleDisableProducto(selectedOption1,selectedOption2) ? true : false}
                             value={handleDisableProducto(selectedOption1,selectedOption2) ? null : selectedOption3}
@@ -413,7 +425,9 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                             id="combo-box-demo"
                             options={apiProducto}
                             getOptionLabel={option => option.name}
-                            sx={{ minWidth: '250px', maxWidth: '80%', }}
+                            sx={{
+                                minWidth: isXs ? '340px' : isSm ? '570px' : isMd ? '800px' : isLg ? '500px' : isXl ? '700px' : null,
+                            }}
                             renderInput={(params) => {
                                 return (
                                     <TextField key={FilterItems[2].keyui} color='neutral' {...params} label={FilterItems[2].text} size='medium'
@@ -448,7 +462,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                     key={FilterItems[3].text}
                     sx={{ display: 'flex' }}>
                     <ListItemText >
-                        <ListItemIcon color='#000'>{FilterItems[3].icon}</ListItemIcon>
+                        <ListItemIcon >{FilterItems[3].icon}</ListItemIcon>
                         <Autocomplete
                             disablePortal
                             disabled={handleDisableCategoria(selectedOption3) ? true : false}
@@ -458,7 +472,9 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                             id="combo-box-demo"
                             options={apiCategoria}
                             getOptionLabel={option => option.name}
-                            sx={{ minWidth: '250px', maxWidth: '80%', }}
+                            sx={{
+                                minWidth: isXs ? '340px' : isSm ? '570px' : isMd ? '800px' : isLg ? '500px' : isXl ? '700px' : null,
+                            }}
                             renderInput={(params) => {
                                 return (
                                     <TextField key={FilterItems[3].keyui} color='neutral' {...params} label={FilterItems[3].text} size='medium'

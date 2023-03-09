@@ -8,6 +8,7 @@ import {CreateUser } from '../components/CreateUser';
 import axios from 'axios';
 import {Typography} from '@mui/material'
 import { useNavigate } from "react-router-dom";
+import { stylesContainer } from '../common/dataComponent';
 
 export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
   const { sessionRol, setSessionRol } = useContext(SelectionContext);
@@ -61,7 +62,7 @@ export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
   }
 
   return (
-    <Container>
+    <Container style={stylesContainer}>
 
       {sessionRol ? (
         sessionRol === 1 ? (

@@ -11,7 +11,8 @@ import {tipoDoc, newTipoDoc} from '../assets/data_documento'
 import {LinearProgress} from '@mui/material';
 import { auto } from '@popperjs/core';
 import {DocumentPreviewButton} from './VisualFile';
-import {tDocumento} from '../assets/data_tDocumento'
+import {tDocumento} from '../assets/data_tDocumento';
+import { stylesContainer2 } from '../common/dataComponent';
 
 export const TableBusqueda: React.FunctionComponent<{}> = ():JSX.Element => {
 
@@ -212,7 +213,7 @@ const [loadState, setLoadState] = useState<boolean>(true);
 
 
   return (
-    <Container>
+    <Container style={stylesContainer2}>
       <Grid sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -222,7 +223,9 @@ const [loadState, setLoadState] = useState<boolean>(true);
         width: 'inherit',
       }}>
         <Button onClick={handleShow} variant='contained' color='primary' sx={{mt:1, mb:1, width:'100%', }}  startIcon={<FilterAltOutlinedIcon style={{ fontSize: 35 }} />}>
-        <Typography variant="h5" component="h2">Filtrar</Typography>
+          <Typography variant="h6" component="h2">
+            Filtrar
+          </Typography>
         </Button>
       </Grid>
 

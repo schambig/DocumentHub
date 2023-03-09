@@ -13,6 +13,7 @@ import '../styles/CoreAppV1.css';
 import { TableBusqueda } from '../components/TableBusqueda';
 import { SelectionContext } from '../context/SelectionContext';
 import axios from 'axios';
+import { stylesContainer } from '../common/dataComponent'
 
 export const AppBusquedav2: React.FunctionComponent<{}> = (): JSX.Element => {
   const { sessionRol, setSessionRol } = useContext(SelectionContext);
@@ -65,7 +66,7 @@ export const AppBusquedav2: React.FunctionComponent<{}> = (): JSX.Element => {
   }
 
   return (
-    <Container>
+    <Container style={stylesContainer}>
 
       {sessionRol ? (
         sessionRol <= 3 ? (

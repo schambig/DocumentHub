@@ -1,26 +1,27 @@
 import React, { useState, useContext, useEffect } from 'react';
-//import List from '@mui/material/List';
-//import ListItemButton from '@mui/material/ListItemButton';
+// import List from '@mui/material/List';
+// import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PersonIcon from '@mui/icons-material/Person';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import DescriptionIcon from '@mui/icons-material/Description';
 import { Box, Grid, LinearProgress, ListItem } from '@mui/material';
-//import { red } from '@mui/material/colors';
+// import { red } from '@mui/material/colors';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 // import { top100Films } from '../assets/top100'
 import AssignmentIcon from '@mui/icons-material/Assignment';
-//import { grey } from '@mui/material/colors';
+// import { grey } from '@mui/material/colors';
 import {converInverM , newInversionista} from '../assets/data_inversionistas'
 import {convProductoM , newProDucto} from '../assets/data_producto'
 import {convCateM , newCategoria} from '../assets/data_levantamiento'
 import {convDocM , newTipoDoc} from '../assets/data_documento'
-//import { display } from '@mui/system';
+// import { display } from '@mui/system';
 import { SelectionContext } from '../context/SelectionContext';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+// import {stylesFiltros} from '../common/dataComponent';
 
 
 interface deFaultAPI{
@@ -226,7 +227,7 @@ export const LatMenu: React.FC<{}> = ():JSX.Element => {
 
 
 return (
-    <Grid sx={
+    <Grid container sx={
         {
         display: 'flex', 
         flexWrap: 'wrap',
@@ -261,7 +262,7 @@ return (
                 options={item.tabla}
                 getOptionLabel ={option => option.name}
                 sx={{
-                    minWidth: isXs ? '340px' : isSm ? '585px' : isMd ? '400px' : isLg ? '500px' : isXl ? '500px' : null,
+                    minWidth: isXs ? '340px' : isSm ? '570px' : isMd ? '800px' : isLg ? '500px' : isXl ? '700px' : null,
                 }}
                 renderInput={(params) => {
                     return(

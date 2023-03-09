@@ -8,6 +8,7 @@ import { LatMenuLoad } from '../components/LatMenuLoadV2';
 import { SelectionContext } from '../context/SelectionContext';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { stylesContainer } from '../common/dataComponent'
 
 export const AppFileV2: React.FunctionComponent<{}> = (): JSX.Element => {
   const { sessionRol, setSessionRol } = useContext(SelectionContext);
@@ -15,6 +16,7 @@ export const AppFileV2: React.FunctionComponent<{}> = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(true);
   const { setNameUser } = useContext(SelectionContext);
   const navigate = useNavigate();
+
   
   useEffect(() => {
     const token = localStorage.getItem('tokenCore');
@@ -59,7 +61,7 @@ export const AppFileV2: React.FunctionComponent<{}> = (): JSX.Element => {
     return <div>Loading...</div>;
   }
   return (
-    <Container>
+    <Container style={stylesContainer}>
 
       {
         sessionRol ? (
