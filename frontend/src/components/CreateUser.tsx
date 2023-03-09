@@ -149,26 +149,26 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
           alignItems:'center'}} 
           container 
           spacing={2}>
-          <Grid item xs={10} sm={10} md={4} lg={4}>
+          <Grid item xs={10} sm={10} md={10} lg={4}>
             <TextField
               sx={{width:'100%'}}
               color='neutral'
               name="userNombre"
-              label="Name"
+              label="Nombre"
               value={userData.userNombre}
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={5} sm={5} md={4} lg={4}>
+          <Grid item xs={5} sm={5} md={5} lg={4}>
           <FormControl fullWidth color='neutral'>
-            <InputLabel sx={{}} id="demo-simple-select-label"  >Role</InputLabel>
+            <InputLabel sx={{}} id="demo-simple-select-label"  >Rol</InputLabel>
             <Select
               sx={{width:'100%'}}
               labelId="demo-simple-select-label"
               name='rol'
               id="demo-simple-select"
               value={rol}
-              label="ROL"
+              label="Rol"
               onChange={handleChangeROL}
             >
               <MenuItem value={RolUsuario.ADMIN}>Admin</MenuItem>
@@ -177,7 +177,7 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
             </Select>
           </FormControl>
           </Grid>
-          <Grid item xs={5} sm={5} md={2} lg={2}>
+          <Grid item xs={5} sm={5} md={5} lg={2}>
             <FormControlLabel
               sx={{width:'100%'}}
               color='neutral'
@@ -189,7 +189,7 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
                   name="statusCheckbox"
                 />
               }
-              label={statusCheckbox ? "Status: (Active)": "Status: (Disabled)"}
+              label={statusCheckbox ? "Estado: (Activo)": "Estado: (Inactivo)"}
             />
           </Grid>
         </Grid>
@@ -200,30 +200,30 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
         {/* enviar a una segunda fila  */}
         <Grid sx={{display:'flex', justifyContent:'center', alignItems:'center'}} container spacing={2}>
 
-          <Grid item xs={10} sm={10} md={4} lg={4}>
+          <Grid item xs={10} sm={10} md={10} lg={4}>
             <TextField
               sx={{width:'100%'}}
               color='neutral'
               name="email"
-              label="Email"
+              label="Correo electrónico"
               value={userData.email}
               onChange={handleChange}
             />
           </Grid>
 
-          <Grid item xs={10} sm={10} md={4} lg={4}>
+          <Grid item xs={10} sm={10} md={10} lg={4}>
             <TextField
               sx={{width:'100%'}}
               color="neutral"
               name="password"
-              label="Password"
+              label="Contraseña"
               value={userData.password}
               onChange={handleChange}
               type="password"
               />
           </Grid>
 
-          <Grid item xs={10} sm={10} md={2} lg={2}>
+          <Grid item xs={10} sm={10} md={10} lg={2}>
             {/* <Button sx={{width:'100%'}} variant="contained" color="primary" onClick={handleSave}>
                 Save
             </Button> */}
@@ -238,7 +238,7 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
               size="large"
             >
               {/* <Typography variant="h6" style={{fontWeight: 'bold'}}> */}
-                {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("CREATE"))}
+                {loadSave.respError ? "Error": (loadSave.respSuccess ? "Éxito": ("Crear"))}
              {/* </Typography> */}
               
             </LoadingButton>

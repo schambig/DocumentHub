@@ -160,7 +160,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
 
   return (
         <div className="container" style={{margin: '0px'}}>
-          <h1> Profile Usuario:</h1>
+          <h2> Mi Perfil:</h2>
           {/* primera fila */}
           
           <Grid container sx={{
@@ -193,7 +193,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 <TextField
                   sx={{ width: '100%'}}
                   name="userNombre"
-                  label="Name"
+                  label="Nombre"
                   value={userData.userNombre}
                   onChange={handleChange}
                   color='neutral'
@@ -205,7 +205,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
             <TextField
                   sx={{ width: '100%'}}
                   name="rol"
-                  label="Role"
+                  label="Rol"
                   value={userData.rol}
                   onChange={handleChange}
                   color='neutral'
@@ -224,7 +224,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                     name="statusCheckbox"
                   />
                 }
-                label={userData.estado ? "Status: (Active)": "Status: (Disabled)"}
+                label={userData.estado ? "Estado: (Activo)": "Estado: (Inactivo)"}
               />
             </Grid>
 
@@ -232,7 +232,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
               <TextField
               sx={{width:'100%'}}
                 name="email"
-                label="Email"
+                label="Correo electrónico"
                 value={userData.email}
                 onChange={handleChange}
                 color='neutral'
@@ -247,7 +247,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
               sx={{width:'100%'}}
               
                 name="password"
-                label="Password"
+                label="Contraseña"
                 value={userData.password}
                 onChange={handleChange}
                 type="password"
@@ -268,7 +268,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                     name="statusCheckbox"
                   />
                 }
-                label={userData.estado ? "Status: (Active)": "Status: (Disabled)"}
+                label={userData.estado ? "Estado: (Activo)": "Estado: (Inactivo)"}
               />
             </Grid>
             <Grid item xs={4} sm={5} md={2} lg={2}>
@@ -277,7 +277,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 onClick={handleShowPS}
                 variant='contained'>
               {/* <Typography  variant="h6" style={{fontWeight: 'bold'}}> */}
-                {showPS ? "Canceled" :"Update PS"}
+                {showPS ? "Cancelar" :"Actualizar"}
               {/* </Typography> */}
               </Button>
               
@@ -297,7 +297,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
               sx={{width:'100%'}}
               
                 name="newpassword"
-                label="New Password"
+                label="Nueva Contraseña"
                 value={newPS}
                 onChange={handleChangeNewPS}
                 type="password"
@@ -311,7 +311,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
               sx={{width:'100%'}}
               
                 name="repeatpassword"
-                label="Repeat Password"
+                label="Repetir Contraseña"
                 value={repPS}
                 onChange={handleChangeRepPS}
                 type="password"
@@ -336,7 +336,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
               size="large"
             >
              {/* <Typography variant="h6" > */}
-                {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("UPDATE"))}
+                {loadSave.respError ? "Error": (loadSave.respSuccess ? "Éxito": ("Actualizar"))}
               {/* </Typography> */}
             </LoadingButton>
             <ToastContainer />

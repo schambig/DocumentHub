@@ -188,20 +188,20 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
                 />
             </Grid>
 
-            <Grid item xs={10} sm={10} md={4} lg={4}>
+            <Grid item xs={10} sm={10} md={10} lg={4}>
                 <TextField
                   sx={{ width: '100%'}}
                   name="userNombre"
-                  label="Name"
+                  label="Nombre"
                   value={userData.userNombre}
                   onChange={handleChange}
                   color='neutral'
                 />
             </Grid>
 
-            <Grid item xs={5} sm={5} md={4} lg={4}>
+            <Grid item xs={5} sm={5} md={5} lg={4}>
               <FormControl color='neutral' fullWidth>
-                <InputLabel sx={{}} id="demo-simple-select-label" >Role</InputLabel>
+                <InputLabel sx={{}} id="demo-simple-select-label" >Rol</InputLabel>
                 <Select
                   sx={{width:'100%'}}
                   name="rol"
@@ -209,7 +209,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
                   id="demo-simple-select"
                   // value={rol ? (setUserData({...userData, rol:rol})) : (userData.rol)}
                   value={rol ? rol : (userData.rol)}
-                  label="Role"
+                  label="Rol"
                   onChange={handleChangeROL}
                   //color='neutral'
                 >
@@ -220,7 +220,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
               </FormControl>
             </Grid>
       
-            <Grid item xs={5} sm={5} md={2} lg={2}>
+            <Grid item xs={5} sm={5} md={5} lg={2}>
               <FormControlLabel
                 sx={{ width: '100%'}}
                 control={
@@ -231,7 +231,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
                     name="statusCheckbox"
                   />
                 }
-                label={statusCheckbox ? "Status: (Active)": "Status: (Disabled)"}
+                label={statusCheckbox ? "Estado: (Activo)": "Estado: (Inactivo)"}
               />
             </Grid>
           </Grid>
@@ -239,23 +239,23 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
         <div style={{display: 'flex', minWidth: 0, margin: '10px 20px 10px 20px'}}>
           {/* segunda fila */}
           <Grid sx={{display:'flex', justifyContent:'center', alignItems:'center'}} container spacing={2}>
-            <Grid item xs={10} sm={10} md={4} lg={4}>
+            <Grid item xs={10} sm={10} md={10} lg={4}>
               <TextField
               sx={{width:'100%'}}
                 name="email"
-                label="Email"
+                label="Correo electrónico"
                 value={userData.email}
                 onChange={handleChange}
                 color='neutral'
               />
             </Grid>
 
-            <Grid item xs={10} sm={10} md={4} lg={4}>
+            <Grid item xs={10} sm={10} md={10} lg={4}>
               <TextField
               sx={{width:'100%'}}
               
                 name="password"
-                label="Password"
+                label="Contraseña"
                 value={userData.password}
                 onChange={handleChange}
                 type="password"
@@ -263,7 +263,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
                 />
             </Grid>
 
-            <Grid item xs={10} sm={10} md={2} lg={2}>
+            <Grid item xs={10} sm={10} md={10} lg={2}>
               {/* <Button sx={{width:'100%'}} variant="contained" color="primary" onClick={handleSave}>
                 Save
               </Button> */}
@@ -278,7 +278,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
               size="large"
             >
              {/* <Typography variant="h6" style={{fontWeight: 'bold'}}> */}
-                {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("UPDATE"))}
+                {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "Éxito": ("Actualizar"))}
               {/* </Typography> */}
             </LoadingButton>
             <ToastContainer/>
