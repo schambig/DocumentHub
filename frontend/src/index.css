@@ -108,3 +108,14 @@ code {
   flex-grow: 1;
 }
 
+/* codigo para botones */
+.MuiButton-root {
+  transition: background-color 250ms ease-in-out !important;
+}
+
+/* .MuiButton-root:hover {
+  color: white;
+  background-color: black !important;
+} */
+/* final botones */
+

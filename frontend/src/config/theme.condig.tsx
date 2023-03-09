@@ -5,6 +5,13 @@ type ThemeProp = {
     children: JSX.Element;
 }
 
+export enum themeSizes {
+  FSbuttonSmall = 25,
+  FSbutton = 35,
+  FSbuttonLarge = 40,
+  FStext = 18,
+}
+
 export enum themePalette {
     BG = "#A6C1D3",
     CELESTECORE = "#A6C1D3",
@@ -49,15 +56,31 @@ const theme = createTheme ({
     },
     typography: {
         fontFamily: themePalette.FONT_GLOBAL,
+        fontSize: themeSizes.FStext,
     },
-    // components: {
-    //     MuiButton: {
-    //         MuiDisable: {
-                
-    //             }
-    //         }
-    //     }
-    // }
+    components: {
+      MuiButton:{
+        styleOverrides: {
+          root: {
+            fontWeigth: 'bold',
+            '&:hover':{
+              backgroundColor: '#000',
+              color: '#fff',
+            },
+            '& .MuiSvgIcon-root': {
+              fontSize: themeSizes.FSbutton,
+            },
+          }
+        }
+      },
+      MuiSvgIcon:{
+        styleOverrides: {
+          root: {
+            fontSize: themeSizes.FSbutton,
+          }
+        }
+      }
+    }
 });
 
 declare module '@mui/material/styles' {

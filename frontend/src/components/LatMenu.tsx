@@ -19,6 +19,8 @@ import {convCateM , newCategoria} from '../assets/data_levantamiento'
 import {convDocM , newTipoDoc} from '../assets/data_documento'
 //import { display } from '@mui/system';
 import { SelectionContext } from '../context/SelectionContext';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 
 interface deFaultAPI{
@@ -28,7 +30,12 @@ interface deFaultAPI{
 
 export const LatMenu: React.FC<{}> = ():JSX.Element => {
 
-
+    const theme = useTheme();
+    const isXs = useMediaQuery(theme.breakpoints.only('xs'));
+    const isSm = useMediaQuery(theme.breakpoints.only('sm'));
+    const isMd = useMediaQuery(theme.breakpoints.only('md'));
+    const isLg = useMediaQuery(theme.breakpoints.only('lg'));
+    const isXl = useMediaQuery(theme.breakpoints.only('xl'));
 
     const initialAPI:deFaultAPI[] = [
         {
@@ -156,18 +163,36 @@ export const LatMenu: React.FC<{}> = ():JSX.Element => {
                 .catch(error => {
                     console.error('There was a problem with the network request:', error);
                 });
-        };
-        const timer = setTimeout(() => {
-            fetchData();
-          }, 2000);
-        return () => clearTimeout(timer);
+            };
+            const timer = setTimeout(() => {
+                fetchData();
+            }, 2000);
+            return () => clearTimeout(timer);
     }, [])
-
-
+    
+    // numero de opciones disponible
+    const { selectedOption1, selectedOption2, selectedOption3, selectedOption4 } = useContext(SelectionContext);
+    const { setSelectedOption1, setSelectedOption2, setSelectedOption3, setSelectedOption4 } = useContext(SelectionContext);
+    // captar datos dependiendo evento onChange
+    
+    const optionListSelect = [
+        selectedOption2,
+        selectedOption1,
+        selectedOption3,
+        selectedOption4,
+    ]
+    
+    const optionListSet = [
+        setSelectedOption2,
+        setSelectedOption1,
+        setSelectedOption3,
+        setSelectedOption4,
+    ]
+    
     const FilterItems:Array<filter> = [
         {
             text: 'Documento',
-            icon: <DescriptionIcon style={{ color: '#444' }}/>,
+            icon: <DescriptionIcon style={{ color: selectedOption2 ? '#000' : ''}}/>,
             path: '/',
             tabla: apiTipoDoc,
             load: loadingAPI2,
@@ -175,7 +200,7 @@ export const LatMenu: React.FC<{}> = ():JSX.Element => {
         },
         {
             text: 'Inversionista',
-            icon: <PersonIcon style={{ color: '#444' }}/>,
+            icon: <PersonIcon style={{ color: selectedOption1 ? '#000' : '' }}/>,
             path: '/',
             tabla: apiInversionista,
             load: loadingAPI1,
@@ -183,7 +208,7 @@ export const LatMenu: React.FC<{}> = ():JSX.Element => {
         },
         {
             text: 'Producto',
-            icon: <MapsHomeWorkIcon style={{ color: '#444' }}/>,
+            icon: <MapsHomeWorkIcon style={{ color: selectedOption3 ? '#000' : '' }}/>,
             path: '/',
             tabla: apiProducto,
             load: loadingAPI3,
@@ -191,31 +216,13 @@ export const LatMenu: React.FC<{}> = ():JSX.Element => {
         },
         {
             text: 'Levantamiento / Emision',
-            icon: <AssignmentIcon style={{ color: '#444' }}/>,
+            icon: <AssignmentIcon style={{ color: selectedOption4 ? '#000' : '' }}/>,
             path: '/',
             tabla: apiNumLev,
             load: loadingAPI4,
             keyui: "unico4",
         },
     ] 
-// numero de opciones disponible
-const { selectedOption1, selectedOption2, selectedOption3, selectedOption4 } = useContext(SelectionContext);
-const { setSelectedOption1, setSelectedOption2, setSelectedOption3, setSelectedOption4 } = useContext(SelectionContext);
-// captar datos dependiendo evento onChange
-
-const optionListSelect = [
-    selectedOption2,
-    selectedOption1,
-    selectedOption3,
-    selectedOption4,
-]
-
-const optionListSet = [
-    setSelectedOption2,
-    setSelectedOption1,
-    setSelectedOption3,
-    setSelectedOption4,
-]
 
 
 return (
@@ -245,7 +252,7 @@ return (
                 key={item.text}
                 sx={{display:'flex'}}>
                 <ListItemText >
-                <ListItemIcon color='#000'>{item.icon}</ListItemIcon>
+                <ListItemIcon>{item.icon}</ListItemIcon>
                 <Autocomplete
                 disablePortal
                 loading={item.load}
@@ -253,10 +260,12 @@ return (
                 id="combo-box-demo"
                 options={item.tabla}
                 getOptionLabel ={option => option.name}
-                sx={{ minWidth: '250px', maxWidth: '80%',}}
+                sx={{
+                    minWidth: isXs ? '340px' : isSm ? '585px' : isMd ? '400px' : isLg ? '500px' : isXl ? '500px' : null,
+                }}
                 renderInput={(params) => {
                     return(
-                        <TextField  key={item.keyui} color='primary' {...params} label={item.text} size='medium' 
+                        <TextField  key={item.keyui} color='neutral' {...params} label={item.text} size='medium' style={{ fontSize: '30px' }} 
                         InputProps={{ 
                         ...params.InputProps,
                         endAdornment: (

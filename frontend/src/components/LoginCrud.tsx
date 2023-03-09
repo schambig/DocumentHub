@@ -25,25 +25,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export const UserEditor:React.FC<{}> = ():JSX.Element => {
   
-  const container = {
-    hidden: { opacity: 1, scale: 0 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
-      }
-    }
-  }
-    
-  const item = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1
-    }
-  }
+  
   
   interface LoadSave{
     status:boolean
@@ -289,15 +271,15 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
               sx={{height:'100%', width:'100%'}}
               loading={loadSave?.status ? loadSave.status : false}
               loadingPosition="start"
-              startIcon={loadSave.respError ? <ErrorOutlineIcon/>: (loadSave.respSuccess ? <PublishedWithChangesIcon/>: (<SyncIcon sx={{fontSize: '35px'}}/>))}
+              startIcon={loadSave.respError ? <ErrorOutlineIcon style={{fontSize: '40px'}}/>: (loadSave.respSuccess ? <PublishedWithChangesIcon style={{fontSize: '40px'}}/>: (<SyncIcon style={{fontSize: '40px'}}/>))}
               variant="contained"
               color={loadSave.color === 'primary' || loadSave.color === 'error' || loadSave.color === 'success' ? loadSave.color : 'primary'}
               onClick={handleSave}
               size="large"
             >
-             <Typography variant="h6" style={{fontWeight: 'bold'}}>
+             {/* <Typography variant="h6" style={{fontWeight: 'bold'}}> */}
                 {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("UPDATE"))}
-              </Typography>
+              {/* </Typography> */}
             </LoadingButton>
             <ToastContainer/>
             </Grid>

@@ -54,11 +54,20 @@ export function DocumentPreviewButton({ documentUrl }:PropsDocUrl):JSX.Element {
         Visualizar
       </Button> */}
       
-      <Button key='down' variant="contained" color="secondary" onClick={downloadFile}>
+      <Button 
+        key='down'
+        variant="contained" 
+        color="secondary" 
+        onClick={downloadFile}>
         DESCARGAR
       </Button>
       
-      <Button key='view' sx={{ml: '10px', mr:'10px'}}variant="contained" color="secondary" onClick={viewFile}>
+      <Button 
+        key='view' 
+        sx={{ml: '10px', mr:'10px'}}
+        variant="contained" 
+        color="secondary" 
+        onClick={viewFile}>
         VER
       </Button>
     

@@ -9,6 +9,7 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {themeSizes} from '../config/theme.condig'
 
 export const CreateUser: React.FC<{}> = ():JSX.Element => {
   // const [loadSave, setLoadSave] = useState<boolean>(false);
@@ -230,15 +231,15 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
               sx={{height:'100%', width:'100%'}}
               loading={loadSave?.status ? loadSave.status : false}
               loadingPosition="start"
-              startIcon={loadSave.respError ? <ErrorOutlineIcon/>: (loadSave.respSuccess ? <CheckCircleOutlineIcon/>: (<SaveIcon />))}
+              startIcon={loadSave.respError ? <ErrorOutlineIcon style={{fontSize: themeSizes.FSbutton}}/>: (loadSave.respSuccess ? <CheckCircleOutlineIcon style={{fontSize: themeSizes.FSbutton}}/>: (<SaveIcon style={{fontSize: themeSizes.FSbutton}} />))}
               variant="contained"
               color={loadSave.color === 'primary' || loadSave.color === 'error' || loadSave.color === 'success' ? loadSave.color : 'primary'}
               onClick={handleSave}
               size="large"
             >
-              <Typography variant="h6" style={{fontWeight: 'bold'}}>
+              {/* <Typography variant="h6" style={{fontWeight: 'bold'}}> */}
                 {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("CREATE"))}
-              </Typography>
+             {/* </Typography> */}
               
             </LoadingButton>
             <ToastContainer />

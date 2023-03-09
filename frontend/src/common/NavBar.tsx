@@ -31,7 +31,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { SelectionContext } from '../context/SelectionContext';
 //import { green, grey, red } from "@mui/material/colors";
-
+import {themeSizes} from '../config/theme.condig'
 
 export const NavBar: React.FunctionComponent<{}> = () => {
 
@@ -55,21 +55,21 @@ export const NavBar: React.FunctionComponent<{}> = () => {
             ruta: '/user',
             keyChild1: 'actualizar',
             permiso: 1,
-            sticon: <SensorOccupiedIcon />,
+            sticon: <SensorOccupiedIcon style={{fontSize:(themeSizes.FSbutton - 5)}} />,
         },
         {
             name: 'Busqueda',
             ruta: '/search',
             keyChild1: 'busqueda',
             permiso: 3,
-            sticon: <ManageSearchIcon />,
+            sticon: <ManageSearchIcon style={{fontSize:themeSizes.FSbutton}} />,
         },
         {
             name: 'Carga Archivo',
             ruta: '/file',
             keyChild1: 'carga_archivo',
             permiso: 2,
-            sticon: <CloudUploadOutlinedIcon />,
+            sticon: <CloudUploadOutlinedIcon style={{fontSize:themeSizes.FSbutton}}/>,
         }
     ]
     // const routs = ['/usuarios','/busqueda', '/archivos'];
@@ -207,25 +207,7 @@ export const NavBar: React.FunctionComponent<{}> = () => {
               src={YourSVG} alt="No Result"
             />
             </Box>
-            {/*<AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}></AdbIcon>*/}
-            {/* <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-            }}
-            >
-            LOGO 
-            </Typography> */}
+            
             <Box sx={{ 
                 // display: 'flex',
                 // width: '55%',
@@ -250,12 +232,13 @@ export const NavBar: React.FunctionComponent<{}> = () => {
                 sx={{ 
                     my: 2,
                     //color: 'white', 
-                    display: 'flex',
+                    //display: 'flex',
                     padding: '0.5 em 2em',
                     margin: '0em 0.5em',
-                    maxWidth: '20em',
+                    //maxWidth: '20em',
                     
-                    minWidth: '5em'
+                    //minWidth: '5em'
+                    
                 }}
                 >
                 {page.name}
@@ -266,7 +249,7 @@ export const NavBar: React.FunctionComponent<{}> = () => {
             <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
                 <IconButton  color="neutral" onClick={handleOpenUserMenu} sx={{ p: 0}}>
-                <Avatar alt={nameUser ? nameUser : ''} src="/static/images/avatar/2.jpg" />
+                <Avatar sx={{ bgcolor: "#000" }} alt={nameUser ? nameUser : ''} src="/static/images/avatar/2.jpg" />
                 </IconButton>
             </Tooltip>
             <Menu
@@ -294,10 +277,12 @@ export const NavBar: React.FunctionComponent<{}> = () => {
                         navigate(setting.ruta)
                     )}} 
                   disabled={location.pathname === setting.ruta}>
-                    <ListItemIcon>
+                    <ListItemIcon key={setting.keyChild1 + 'Icon'} id={location.pathname === setting.ruta ? 'menuBarIcon':''}>
                         {setting.sticon}
                     </ListItemIcon>
-                    <Typography textAlign="center">{setting.name}</Typography>
+                    <Typography key={setting.keyChild1 + 'Icon'} id={location.pathname === setting.ruta ? 'menuBarText':''} textAlign="center">
+                        {setting.name}
+                    </Typography>
                 </MenuItem>
                 ))}
             </Menu>
