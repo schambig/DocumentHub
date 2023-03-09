@@ -1,5 +1,3 @@
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,17 +11,16 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import coreLogo from '../core_icons/CoreCapitalSAF_logo.svg';
+
 // import jwt from 'jsonwebtoken';
-import * as React from 'react';
-import { useNavigate } from "react-router-dom";
-import { SelectionContext } from '../context/SelectionContext';
-import { useContext, useState } from 'react';
-import { usUario, RolUsuario } from '../assets/data_user';
 import axios from 'axios';
-import bcrypt from "bcrypt";
+import * as React from 'react';
+import { useContext, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import jwt from 'jsonwebtoken';
+import { SelectionContext } from '../context/SelectionContext';
 
 
 function Copyright(props: any) {
@@ -142,13 +139,7 @@ export function LoginMenu() {
             alignItems: 'center',
           }}
         >
-          <div> </div>
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
+            <img src={coreLogo} alt="CoreLogo"  style={{ minWidth: '62.5%', maxWidth: '62.5%', paddingBottom: '100px', paddingTop: '50px'}}/>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
