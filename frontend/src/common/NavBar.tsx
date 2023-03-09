@@ -227,7 +227,7 @@ export const NavBar: React.FunctionComponent<{}> = () => {
                 id={location.pathname === page.ruta ? 'nuevo':''}
                 startIcon={page.sticon}
                 color={location.pathname === page.ruta ?'neutral':'neutral'}
-                variant={location.pathname === page.ruta ?'outlined':'text'}
+                variant={location.pathname === page.ruta ?'outlined':'outlined'}
                 key={page.name}
                 value={page.ruta}
                 onClick={() => {return(setFilter(), navigate(page.ruta))}}
