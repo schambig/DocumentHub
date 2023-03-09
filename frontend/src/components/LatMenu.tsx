@@ -21,6 +21,7 @@ import {convDocM , newTipoDoc} from '../assets/data_documento'
 import { SelectionContext } from '../context/SelectionContext';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import {stylesAutocomplete} from '../common/dataComponent';
 // import {stylesFiltros} from '../common/dataComponent';
 
 
@@ -262,11 +263,15 @@ return (
                 options={item.tabla}
                 getOptionLabel ={option => option.name}
                 sx={{
+                    bgcolor: stylesAutocomplete.bgwhite,
                     minWidth: isXs ? '340px' : isSm ? '570px' : isMd ? '800px' : isLg ? '500px' : isXl ? '700px' : null,
+                    // '& input': {
+                    //     bgcolor: 'rgb(255,255,255,0.3)',
+                    // }
                 }}
                 renderInput={(params) => {
                     return(
-                        <TextField  key={item.keyui} color='neutral' {...params} label={item.text} size='medium' style={{ fontSize: '30px' }} 
+                        <TextField  key={item.keyui} color='neutral' {...params} label={item.text} size='medium' 
                         InputProps={{ 
                         ...params.InputProps,
                         endAdornment: (

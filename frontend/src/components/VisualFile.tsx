@@ -3,6 +3,12 @@ import React from 'react';
 import {Button} from '@mui/material';
 import axios from 'axios';
 import { saveAs } from 'file-saver';
+import DownloadIcon from '@mui/icons-material/Download';
+import DownloadingIcon from '@mui/icons-material/Downloading';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import PreviewIcon from '@mui/icons-material/Preview';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 
 interface PropsDocUrl{
     documentUrl:string
@@ -59,7 +65,10 @@ export function DocumentPreviewButton({ documentUrl }:PropsDocUrl):JSX.Element {
         variant="contained" 
         color="secondary" 
         onClick={downloadFile}>
-        DESCARGAR
+        {/* DESCARGAR */}
+        {/* <DownloadIcon /> */}
+        <FileDownloadOutlinedIcon />
+        {/* <DownloadingIcon /> */}
       </Button>
       
       <Button 
@@ -68,7 +77,10 @@ export function DocumentPreviewButton({ documentUrl }:PropsDocUrl):JSX.Element {
         variant="contained" 
         color="secondary" 
         onClick={viewFile}>
-        VER
+        {/* VER */}
+        {/* <VisibilityIcon /> */}
+        {/* <PreviewIcon /> */}
+        <VisibilityOutlinedIcon />
       </Button>
     
       {/* {isPreviewOpen && (

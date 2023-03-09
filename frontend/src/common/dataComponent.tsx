@@ -14,6 +14,9 @@ export const stylesContainer2 = {
     margin: '0 auto',
 }
 
+export const stylesAutocomplete = {
+    bgwhite: 'rgb(240,240,240,0.38)',
+}
 // export const stylesFiltros = {
 //     minWidth: isXs ? '340px' : isSm ? '570px' : isMd ? '800px' : isLg ? '500px' : isXl ? '700px' : null,
 // }

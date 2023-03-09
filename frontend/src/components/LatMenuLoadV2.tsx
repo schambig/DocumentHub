@@ -22,6 +22,7 @@ import { SelectionContext } from '../context/SelectionContext';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Typography from '@mui/material/Typography';
+import {stylesAutocomplete} from '../common/dataComponent';
 
 interface deFaultAPI {
     id: string | null
@@ -326,6 +327,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                             options={FilterItems[1].tabla}
                             getOptionLabel={option => option.name}
                             sx={{
+                                bgcolor: stylesAutocomplete.bgwhite,
                                 minWidth: isXs ? '340px' : isSm ? '570px' : isMd ? '800px' : isLg ? '500px' : isXl ? '700px' : null,
                             }}
                             renderInput={(params) => {
@@ -377,6 +379,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                             options={apiInversionista}
                             getOptionLabel={option => option.name}
                             sx={{
+                                bgcolor: stylesAutocomplete.bgwhite,
                                 minWidth: isXs ? '340px' : isSm ? '570px' : isMd ? '800px' : isLg ? '500px' : isXl ? '700px' : null,
                             }}
                             renderInput={(params) => {
@@ -427,6 +430,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                             options={apiProducto}
                             getOptionLabel={option => option.name}
                             sx={{
+                                bgcolor: stylesAutocomplete.bgwhite,
                                 minWidth: isXs ? '340px' : isSm ? '570px' : isMd ? '800px' : isLg ? '500px' : isXl ? '700px' : null,
                             }}
                             renderInput={(params) => {
@@ -474,6 +478,7 @@ export const LatMenuLoad: React.FC<{}> = (): JSX.Element => {
                             options={apiCategoria}
                             getOptionLabel={option => option.name}
                             sx={{
+                                bgcolor: stylesAutocomplete.bgwhite,
                                 minWidth: isXs ? '340px' : isSm ? '570px' : isMd ? '800px' : isLg ? '500px' : isXl ? '700px' : null,
                             }}
                             renderInput={(params) => {
