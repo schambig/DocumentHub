@@ -23,6 +23,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { toast, ToastContainer } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 import 'react-toastify/dist/ReactToastify.css';
+import {themeSizes} from '../config/theme.condig'
 
 
 
@@ -340,20 +341,20 @@ function reemplazarEspaciosPorGuiones(texto: string): string {
               }} />
       </Button> */}
       <LoadingButton
-              sx={{height:'100%', width:'100%'}}
-              loading={loadSave?.status ? loadSave.status : false}
-              loadingPosition="start"
-              endIcon={loadSave.respError ? <ErrorOutlineIcon/>: (loadSave.respSuccess ? <CheckCircleOutlineIcon/>: (<UploadIcon />))}
-              variant="contained"
-              color={loadSave.color === 'primary' || loadSave.color === 'error' || loadSave.color === 'success' ? loadSave.color : 'primary'}
-              onClick={verifyData() ? successButtonHandler : errorButtonHandler}
-              size="large"
-            >
-              <Typography variant="h6" style={{fontWeight: 'bold'}}>
-                {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("ENVIAR ARCHIVO"))}
-              </Typography>
+        sx={{height:'100%', width:'100%'}}
+        loading={loadSave?.status ? loadSave.status : false}
+        loadingPosition="start"
+        endIcon={loadSave.respError ? <ErrorOutlineIcon style={{fontSize:(themeSizes.FSbutton)}} />: (loadSave.respSuccess ? <CheckCircleOutlineIcon style={{fontSize:(themeSizes.FSbutton)}}/>: (<UploadIcon style={{fontSize:(themeSizes.FSbutton)}}/>))}
+        variant="contained"
+        color={loadSave.color === 'primary' || loadSave.color === 'error' || loadSave.color === 'success' ? loadSave.color : 'primary'}
+        onClick={verifyData() ? successButtonHandler : errorButtonHandler}
+        size="large"
+      >
+        <Typography variant="h6">
+          {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("ENVIAR ARCHIVO"))}
+        </Typography>
               
-            </LoadingButton>
+      </LoadingButton>
       <ToastContainer />
       </Grid>
 
