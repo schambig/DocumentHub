@@ -251,7 +251,7 @@ export const NavBar: React.FunctionComponent<{}> = () => {
 
             <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-                <IconButton  color="neutral" onClick={handleOpenUserMenu} sx={{ p: 0}}>
+                <IconButton  color="info" onClick={handleOpenUserMenu} sx={{ p: 0}}>
                 <Avatar sx={{ bgcolor: "#000" }} alt={nameUser ? nameUser : ''} src="/static/images/avatar/2.jpg" />
                 </IconButton>
             </Tooltip>

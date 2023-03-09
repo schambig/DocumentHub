@@ -73,7 +73,7 @@ export function DocumentPreviewButton({ documentUrl }:PropsDocUrl):JSX.Element {
       
       <Button 
         key='view' 
-        sx={{ml: '10px', mr:'10px'}}
+        sx={{ml: '10px', mr:'0px'}}
         variant="outlined"  
         color="neutral" 
         onClick={viewFile}>

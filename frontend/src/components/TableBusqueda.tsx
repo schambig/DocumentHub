@@ -171,7 +171,7 @@ const [loadState, setLoadState] = useState<boolean>(true);
       headerAlign: 'center', 
       headerName: 'URL', 
       align: 'center',
-      width: 240,
+      width: 190,
       renderCell: (params) => (
           <DocumentPreviewButton documentUrl={params.value}/>   
       ),
@@ -180,9 +180,9 @@ const [loadState, setLoadState] = useState<boolean>(true);
     { field: 'nombreFile', headerName: 'Archivo',width: 250,headerAlign: 'center'},
     { field: 'fechaSubida', headerName: 'Fecha', width: 220,align: 'center',headerAlign: 'center' },
     { field: 'tipoDocumento', headerName: 'Doc', width: 150,align: 'center',headerAlign: 'center'},
-    { field: 'PEP', headerName: 'PEP', width: 50, align: 'center',headerAlign: 'center'},
+    { field: 'PEP', headerName: 'PEP', width: 80, align: 'center',headerAlign: 'center'},
     { field: 'tipoDoc', headerName: 'Id', width: 180, align: 'center',headerAlign: 'center'},
-    { field: 'numDoc', headerName: 'Nro. Identidad', width: 140,align: 'center',headerAlign: 'center'},
+    { field: 'numDoc', headerName: 'Nro. Identidad', width: 180,align: 'center',headerAlign: 'center'},
     { field: 'nombreInversionista', headerName: 'Inversionista', width: 370,headerAlign: 'center'},
     { field: 'codigoProducto', headerName: 'Cod', width: 70,align: 'center',headerAlign: 'center'},
     { field: 'nombreProducto', headerName: 'Producto', width: 350,headerAlign: 'center'},
@@ -249,9 +249,9 @@ const [loadState, setLoadState] = useState<boolean>(true);
               sx={{
                 mt: 1,
                 p: 2,
-                boxShadow: 2,
-                border: 2,
-                backgroundColor: '#ffffff',
+                boxShadow: 20,
+                border: 1,
+                backgroundColor: '#f0f0f0',
                 opacity: '1',
                 borderColor: 'neutral.main',
                 '& .MuiDataGrid-cell:hover': {
@@ -260,7 +260,7 @@ const [loadState, setLoadState] = useState<boolean>(true);
               }}
             />
           </div>
-          <Button onClick={handleHide}>Ocultar Tabla</Button>
+          <Button color='neutral' variant='outlined' onClick={handleHide}>Ocultar Tabla</Button>
         </div>
       )}
       {showTable && loadState && (
