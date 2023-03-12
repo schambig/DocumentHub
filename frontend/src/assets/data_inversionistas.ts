@@ -14,7 +14,20 @@ export interface inVersionista{
     tipoIdentificacion: DocIdent,
     nroIdentificacion: string,
     pep: boolean,
+    [key: string]: any;
 }
+
+export interface inVerSTR{
+    id: string,
+    nombres: string,
+    apPaterno: string,
+    apMaterno: string,
+    tipoIdentificacion: string,
+    nroIdentificacion: string,
+    pep: string,
+    [key: string]: any;
+}
+
 
 export interface newInversionista{
     id: string,
