@@ -119,6 +119,7 @@ export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
                 <InversionistaCrear />
                 </div>
               </Grid>
+              <Divider />
               {/* <h1> Componente  </h1> */}
             </Grid>
           </div>

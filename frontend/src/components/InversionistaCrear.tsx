@@ -7,6 +7,7 @@ import SyncIcon from '@mui/icons-material/Sync';
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import {LoadingButton} from '@mui/lab';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import SaveIcon from '@mui/icons-material/Save';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {inVersionista,inVerSTR ,DocIdent,newInversionista,convertirInver,converInverM} from '../assets/data_inversionistas';
@@ -88,9 +89,67 @@ export const InversionistaCrear:React.FC<{}> = ():JSX.Element => {
                 [event.target.name]: event.target.value,
             }); 
           }
-        
-        
     };
+
+    const handleSave = async():Promise<void> => {
+      setLoadSave({...loadSave , status:true})
+      if ((inverData.nombres === '' || inverData.apPaterno === '' || inverData.apMaterno === '' || inverData.nroIdentificacion === '')){
+        setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
+        setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1500)
+        const toastId = toast.error('Completar la informacion', { autoClose: 1500, toastId: currentToastId });
+        setCurrentToastId(toastId);
+        return console.log("Error push Data");
+        
+      }else if((inverData.nombres === null || inverData.apPaterno === null || inverData.apMaterno === null || inverData.tipoIdentificacion === null || inverData.nroIdentificacion === null)){
+        setLoadSave({...loadSave ,status:false, respError:true, color:'error'  })
+        setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1500)
+        const toastId = toast.error('Completar la informacion', { autoClose: 1500, toastId: currentToastId });
+        setCurrentToastId(toastId);
+        return console.log("Error push Data null");
+  
+      }else{
+      setTimeout(() => {
+        axios.post(`http://localhost:8000/api/inversionistas`, {
+            ...inverData,
+            pep: statusCheckbox,
+        })
+          .then(response => {
+            setRefresh(!refresh);
+            if (response.status === 201){
+              setLoadSave({...loadSave ,status:false ,respSuccess:true, color:'success' })
+              setTimeout(() => {setLoadSave({...loadSave , respSuccess:false, color:'primary' })},2000)
+              const toastId = toast.success('Usuario actualizado con exito', { autoClose: 2000, toastId: currentToastId });
+              setCurrentToastId(toastId);
+            }else{
+              setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
+              setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},2000)
+              const toastId = toast.error('Posible falla', { autoClose: 2000, toastId: currentToastId });
+              setCurrentToastId(toastId);
+            }
+            console.log('Respuesta del servidor:', response);
+          })
+          .catch(error => {
+            setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
+            setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},2000)
+            if (error.response.status === 500){
+              const toastId = toast.error("Error al actualizar, correo ya existente", { autoClose: 2000, toastId: currentToastId });
+              console.log('Respuesta del servidor ___>:', error);
+              setCurrentToastId(toastId);
+            } else if (error.response.status === 404){
+              const toastId = toast.error('Sin Conexion a DataBase', { autoClose: 2000, toastId: currentToastId });
+              setCurrentToastId(toastId);
+            } else {
+              const toastId = toast.error('Sin Conexion', { autoClose: 2000, toastId: currentToastId });
+              setCurrentToastId(toastId);
+              return console.error('Error al enviar datos:', error);
+            }
+            
+          })
+        },1000)
+      }
+  
+    };
+
 
     let fields:JSX.Element[] = [];
 
@@ -98,7 +157,7 @@ export const InversionistaCrear:React.FC<{}> = ():JSX.Element => {
         const keys = Object.keys(selectedInver);
         fields = keys.map((key:string) => (
             key === 'pep' ? (
-                <Grid item xs={5} sm={5} md={4} lg={4} key={key}>
+                <Grid item xs={5} sm={5} md={2} lg={2} key={key}>
                   <FormControlLabel
                     sx={{ width: '100%'}}
                     control={
@@ -118,7 +177,7 @@ export const InversionistaCrear:React.FC<{}> = ():JSX.Element => {
              ) : (
             
             key === 'tipoIdentificacion' ? (
-                <Grid item xs={10} sm={10} md={4} lg={4}>
+                <Grid item xs={10} sm={10} md={3} lg={3}>
                 <FormControl fullWidth color='neutral'>
                     <InputLabel sx={{}} id="demo-simple-select-label"  >Tipo Identificación</InputLabel>
                     <Select
@@ -138,7 +197,7 @@ export const InversionistaCrear:React.FC<{}> = ():JSX.Element => {
                 </Grid>
 
             ) : (
-              <Grid item xs={10} sm={10} md={4} lg={4} key={key}>
+              <Grid item xs={10} sm={10} md={3.5} lg={3.5} key={key}>
               <TextField
                 sx={{ width: '100%' }}
                 name={key}
@@ -163,15 +222,15 @@ export const InversionistaCrear:React.FC<{}> = ():JSX.Element => {
               fields
             }
 
-            <Grid item xs={5} sm={5} md={4} lg={4}>
+            <Grid item xs={5} sm={5} md={2} lg={2}>
               <LoadingButton
               sx={{height:'100%', width:'100%'}}
               loading={loadSave?.status ? loadSave.status : false}
               loadingPosition="start"
-              startIcon={loadSave.respError ? <ErrorOutlineIcon style={{fontSize: '40px'}}/>: (loadSave.respSuccess ? <PublishedWithChangesIcon style={{fontSize: '40px'}}/>: (<SyncIcon style={{fontSize: '40px'}}/>))}
+              startIcon={loadSave.respError ? <ErrorOutlineIcon style={{fontSize: '40px'}}/>: (loadSave.respSuccess ? <PublishedWithChangesIcon style={{fontSize: '40px'}}/>: (<SaveIcon style={{fontSize: '40px'}}/>))}
               variant="contained"
               color={loadSave.color === 'primary' || loadSave.color === 'error' || loadSave.color === 'success' ? loadSave.color : 'primary'}
-              // onClick={handleSave}
+              onClick={handleSave}
               size="large"
               >
                 {loadSave.respError ? "Error": (loadSave.respSuccess ? "Éxito": ("Crear"))}
@@ -181,14 +240,14 @@ export const InversionistaCrear:React.FC<{}> = ():JSX.Element => {
 
             </Grid>
             
-            <p>{inverData.id}</p>
+            {/* <p>{inverData.id}</p>
             <p>{inverData.nombres}</p>
             <p>{inverData.apPaterno}</p>
             <p>{inverData.apMaterno}</p>
             <p>{inverData.tipoIdentificacion}</p>
             <p>{inverData.nroIdentificacion}</p>
             <p>{inverData.pep ? "PEP: SI" : "PEP: NO"}</p>
-            <p>{statusCheckbox ? "Status:SI":"Status:NO"}</p>
+            <p>{statusCheckbox ? "Status:SI":"Status:NO"}</p> */}
 
         </div>
     );
