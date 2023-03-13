@@ -14,6 +14,7 @@ import { usuarioRestoreRouter } from "./routes/restore.usuario.router";
 import { tipoDocumentoRouter } from "./routes/tipo.documento.router";
 import { usuarioRouter } from "./routes/usuario.router";
 
+
 config();
 
 if (!process.env.PORT) {
@@ -31,6 +32,7 @@ const app = express();
 // }));
 
 app.use(fileUpload());
+
 app.use(cors());
 app.use(express.json());
 
@@ -44,6 +46,7 @@ app.use("/api/categorias", categoriaRouter);
 app.use("/api/files", fileRouter);
 app.use("/api/email",emailRouter);
 app.use("/api/restorepass", usuarioRestoreRouter)
+
 
 app.listen(PORT, () => {
   console.log(`🚀 Listening on port ${PORT} ...`);
