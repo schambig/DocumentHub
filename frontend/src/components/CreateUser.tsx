@@ -9,12 +9,37 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {themeSizes} from '../config/theme.condig'
+import {themeSizes} from '../config/theme.condig';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export const CreateUser: React.FC<{}> = ():JSX.Element => {
-  // const [loadSave, setLoadSave] = useState<boolean>(false);
-  // const [loadSaveOK, setLoadSaveOK] = useState<boolean>(false);
-  // const [loadSaveError, setLoadSaveError] = useState<boolean>(false);
+  const [passwordError, setPasswordError] = useState("");
+  const validatePassword = (password:string) => {
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
+  };
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const password = event.target.value;
+
+    if (!password || validatePassword(password)) {
+      setPasswordError("");
+    } else {
+      setPasswordError("La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un símbolo especial (@$!%*?&).");
+    }
+    setUserData({ ...userData, password });
+  };
+
+
+
+  const [showPassword, setShowPassword] = React.useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
+  
   interface LoadSave{
     status:boolean
     respSuccess: boolean
@@ -74,7 +99,9 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
   // }
     
   const handleSave = async (): Promise<void> => {
-     // fetch(`http://localhost:8000/api/usuarios/${userData.id}`, {
+    const isValid = validatePassword(userData.password);
+
+    // fetch(`http://localhost:8000/api/usuarios/${userData.id}`, {
     
     setLoadSave({...loadSave , status:true})
     if ((userData.userNombre === '' || userData.email === '' || userData.password === '')){
@@ -90,6 +117,15 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
       const toastId = toast.error('Completar la informacion', { autoClose: 1500, toastId: currentToastId });
       setCurrentToastId(toastId);
       return console.log("Error push Data null");
+    }else if(!isValid) {
+      setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
+      setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1500)
+      const toastId = toast.error('Ingresar una contraseña válida', { autoClose: 1500, toastId: currentToastId });
+      setCurrentToastId(toastId);
+      setPasswordError(
+        'La contraseña debe tener al menos 8 caracteres, incluir al menos una letra mayúscula, una letra minúscula, un número y un símbolo.'
+      );
+      return;
     }else{
 
       setTimeout(() => {
@@ -218,8 +254,27 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
               name="password"
               label="Contraseña"
               value={userData.password}
-              onChange={handleChange}
-              type="password"
+              onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
+                handleChange(e);
+                handlePasswordChange(e);
+              }}
+              type={showPassword ? 'text' : 'password'}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      // aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
+              error={Boolean(passwordError)}
+              helperText={passwordError}
               />
           </Grid>
 

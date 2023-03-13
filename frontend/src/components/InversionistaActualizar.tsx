@@ -144,9 +144,9 @@ export const InversionistaEditor:React.FC<{}> = ():JSX.Element => {
 
     if (selectedInver){
         const keys = Object.keys(selectedInver);
-        fields = keys.map((key:string) => (
+        fields = keys.map((key:string, index:number) => (
             key === 'pep' ? (
-                <Grid item xs={5} sm={5} md={2} lg={2} key={key}>
+                <Grid item xs={5} sm={5} md={2} lg={2} key={index + 1000}>
                   <FormControlLabel
                     sx={{ width: '100%'}}
                     control={
@@ -162,7 +162,7 @@ export const InversionistaEditor:React.FC<{}> = ():JSX.Element => {
                 </Grid>
               ) : (
             key === 'id' ? (
-                <Grid item xs={10} sm={10} md={10.5} lg={10.5} key={key}>
+                <Grid item xs={10} sm={10} md={10.5} lg={10.5} key={index + 1000}>
                   <TextField
                     sx={{ width: '100%' }}
                     name={key}
@@ -176,7 +176,7 @@ export const InversionistaEditor:React.FC<{}> = ():JSX.Element => {
                 </Grid>
              ) : (
               key === 'tipoIdentificacion' ? (
-                <Grid item xs={10} sm={10} md={2} lg={2}>
+                <Grid item xs={10} sm={10} md={2} lg={2} key={index + 1000}>
                 <FormControl fullWidth color='neutral'>
                     <InputLabel sx={{}} id="demo-simple-select-label"  >Tipo Identificación</InputLabel>
                     <Select
@@ -196,7 +196,7 @@ export const InversionistaEditor:React.FC<{}> = ():JSX.Element => {
                 </Grid>
 
             ) : (
-              <Grid item xs={10} sm={10} md={3.5} lg={3.5} key={key}>
+              <Grid item xs={10} sm={10} md={3.5} lg={3.5} key={index + 1000} >
               <TextField
                 sx={{ width: '100%' }}
                 name={key}

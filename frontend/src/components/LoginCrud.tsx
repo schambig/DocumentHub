@@ -10,6 +10,10 @@ import SyncIcon from '@mui/icons-material/Sync';
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import {LoadingButton} from '@mui/lab'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 // import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 // import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 import { toast, ToastContainer } from 'react-toastify';
@@ -24,9 +28,12 @@ import 'react-toastify/dist/ReactToastify.css';
 // }
 
 export const UserEditor:React.FC<{}> = ():JSX.Element => {
-  
-  
-  
+  const [showPassword, setShowPassword] = React.useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
+
   interface LoadSave{
     status:boolean
     respSuccess: boolean
@@ -140,7 +147,6 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
 
   return (
     <div>
-      <h2> Actualizar Usuario:</h2>
       <Autocomplete
         sx={{m: '25px 0px'}}
         id="user-select"
@@ -258,8 +264,22 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
                 label="Contraseña"
                 value={userData.password}
                 onChange={handleChange}
-                type="password"
                 color='neutral'
+                type={showPassword ? 'text' : 'password'}
+                InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      // aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
                 />
             </Grid>
 

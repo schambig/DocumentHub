@@ -13,7 +13,12 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 //import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {themeSizes} from '../config/theme.condig'
+import {themeSizes} from '../config/theme.condig';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
 
 // interface User {
 //   id: number;
@@ -31,6 +36,16 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
     respError: boolean
     color: string
   }
+  const [showPassword1, setShowPassword1] = React.useState(false);
+  const [showPassword2, setShowPassword2] = React.useState(false);
+  const [showPassword3, setShowPassword3] = React.useState(false);
+  const handleClickShowPassword1 = () => setShowPassword1((show) => !show);
+  const handleClickShowPassword2 = () => setShowPassword2((show) => !show);
+  const handleClickShowPassword3 = () => setShowPassword3((show) => !show);
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
+
   const [newPS,setNewPS] = useState<string>('');
   const [repPS,setRepPS] = useState<string>('');
   const [showPS, setShowPS] = useState<boolean>(false);
@@ -250,9 +265,23 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 label="Contraseña"
                 value={userData.password}
                 onChange={handleChange}
-                type="password"
                 color='neutral'
-                InputProps={{ readOnly: true }}
+                type={showPassword1 ? 'text' : 'password'}
+                InputProps={{
+                  readOnly: true,
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        // aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword1}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword1 ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                    )
+                  }}
                 />
             </Grid>
 
@@ -300,9 +329,23 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 label="Nueva Contraseña"
                 value={newPS}
                 onChange={handleChangeNewPS}
-                type="password"
                 color='neutral'
                 // InputProps={{ readOnly: true }}
+                type={showPassword2 ? 'text' : 'password'}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        // aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword2}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword2 ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                  }}  
                 />
             </Grid>
 
@@ -314,9 +357,23 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 label="Repetir Contraseña"
                 value={repPS}
                 onChange={handleChangeRepPS}
-                type="password"
-                color='neutral'
                 // InputProps={{ readOnly: true }}
+                color='neutral'
+                type={showPassword3 ? 'text' : 'password'}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        // aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword3}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword3 ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                  }}
                 />
             </Grid>
 

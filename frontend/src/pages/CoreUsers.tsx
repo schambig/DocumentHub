@@ -85,7 +85,8 @@ export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
               <Grid item sx={{
                 display: 'block',
               }}>
-                <div style={{marginBottom: '2rem'}}>
+                <div style={{marginBottom: '3rem'}}>
+                <h2> Actualizar Usuario:</h2>
                   <UserEditor />
                 </div>
               </Grid>
@@ -94,7 +95,7 @@ export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
                 display: 'flex',
                 flexDirection:'column'
               }}>
-                <div style={{marginBottom: '2rem'}}>
+                <div style={{marginBottom: '6rem'}}>
                 <h2>Crear Usuario:</h2>
                 <CreateUser />
                 </div>
@@ -104,7 +105,7 @@ export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
                 display: 'flex',
                 flexDirection:'column'
               }}>
-                <div style={{marginBottom: '2rem'}}>
+                <div style={{marginBottom: '3rem'}}>
                 <h2>Actualizar Inversionista:</h2>
                 <InversionistaEditor />
                 </div>
@@ -114,7 +115,7 @@ export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
                 display: 'flex',
                 flexDirection:'column'
               }}>
-                <div style={{marginBottom: '2rem'}}>
+                <div style={{marginBottom: '6rem'}}>
                 <h2>Crear Inversionista:</h2>
                 <InversionistaCrear />
                 </div>

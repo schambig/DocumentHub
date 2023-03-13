@@ -7,6 +7,7 @@ import {UserProfile} from '../components/ProfileUser';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
+
 export const AppProfile: React.FunctionComponent<{}> = (): JSX.Element => {
   const { sessionRol, setSessionRol } = useContext(SelectionContext);
   const { setGlobalID } = useContext(SelectionContext);
