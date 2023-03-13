@@ -1,16 +1,18 @@
-import fileUpload from "express-fileupload";
+import cors from "cors";
 import { config } from "dotenv";
 import express from "express";
-import cors from "cors";
+import fileUpload from "express-fileupload";
 
-import { inversionistaRouter } from "./routes/inversionista.router";
-import { productoRouter } from "./routes/producto.router";
-import { usuarioRouter } from "./routes/usuario.router";
-import { documentoRouter } from "./routes/documento.router";
-import { tipoDocumentoRouter } from "./routes/tipo.documento.router";
 import { categoriaRouter } from "./routes/categoria.router";
-import { usuarioRouterlogin } from "./routes/login";
+import { documentoRouter } from "./routes/documento.router";
+import { emailRouter } from "./routes/email.router";
 import { fileRouter } from "./routes/file.router";
+import { inversionistaRouter } from "./routes/inversionista.router";
+import { usuarioRouterlogin } from "./routes/login";
+import { productoRouter } from "./routes/producto.router";
+import { usuarioRestoreRouter } from "./routes/restore.usuario.router";
+import { tipoDocumentoRouter } from "./routes/tipo.documento.router";
+import { usuarioRouter } from "./routes/usuario.router";
 
 config();
 
@@ -40,6 +42,8 @@ app.use("/api/login",usuarioRouterlogin);
 app.use("/api/tipo-documentos", tipoDocumentoRouter);
 app.use("/api/categorias", categoriaRouter);
 app.use("/api/files", fileRouter);
+app.use("/api/email",emailRouter);
+app.use("/api/restorepass", usuarioRestoreRouter)
 
 app.listen(PORT, () => {
   console.log(`🚀 Listening on port ${PORT} ...`);

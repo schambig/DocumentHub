@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AppV1 from './CoreAppV1';
 //import AppBusqueda1 from './CoreBusquedaTEST'
 //import {AppBusqueda} from './CoreBusqueda'
@@ -60,6 +60,11 @@ const CoreRoute: core_route[] = [
         render: <RestorePass />,
         //render: AppUser,
     },
+    {
+        path: '/reset-password/:token',
+        render: <RestorePass />
+      },
+    
 ]
 
 function AppRoutes() {

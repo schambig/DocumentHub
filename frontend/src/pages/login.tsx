@@ -43,7 +43,27 @@ export function LoginMenu() {
   const { setSessionRol } = useContext(SelectionContext);
   const { setGlobalID } = useContext(SelectionContext);
   const { setNameUser } = useContext(SelectionContext);
-  localStorage.setItem('tokenCore','')
+  localStorage.setItem('tokenCore', '')
+
+
+
+  const handleSend = (event: any) => {
+    event.preventDefault();
+    console.log(event);
+    const emailuser = textFieldValue;
+    console.log(emailuser)
+    axios.post("http://localhost:8000/api/email", { "email": emailuser })
+      .then((response) => {
+        if (response.status === 200) {
+          console.log("Gozu");
+        };
+        console.log(response);
+        console.log(response.status);
+        return response.data;
+      })
+
+      handleClose();
+  }
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -51,57 +71,58 @@ export function LoginMenu() {
     const email = data.get('email');
     const password = data.get('password');
     //Get the DB data
-    axios.post("http://localhost:8000/api/login/jwt", { "email":email, "password":password })
-    .then((response) => {
-      if(response.status === 200){
-        const token = (response.headers.authorization.split(' '))[1];
-        
-        localStorage.setItem("tokenCore", token);
-      };
-      console.log(response);
-      console.log(response.status);
-      return response.data;
-    })
-    .then((userData) => {
-      if (userData.estado){
-        console.log(userData.rol);
-        setGlobalID(userData.id);
-        let rol=0;
-        if (userData.rol === "ADMIN"){
-          rol=1;
-        }else if (userData.rol === "DATAUSER"){
-          rol=2;
-        }else if (userData.rol === "USER"){
-          rol=3;
-        }else{
-          rol=0;
+    axios.post("http://localhost:8000/api/login/jwt", { "email": email, "password": password })
+      .then((response) => {
+        if (response.status === 200) {
+          const token = (response.headers.authorization.split(' '))[1];
+
+          localStorage.setItem("tokenCore", token);
+        };
+        console.log(response);
+        console.log(response.status);
+        return response.data;
+      })
+      .then((userData) => {
+        if (userData.estado) {
+          console.log(userData.rol);
+          setGlobalID(userData.id);
+          let rol = 0;
+          if (userData.rol === "ADMIN") {
+            rol = 1;
+          } else if (userData.rol === "DATAUSER") {
+            rol = 2;
+          } else if (userData.rol === "USER") {
+            rol = 3;
+          } else {
+            rol = 0;
+          }
+          setNameUser(userData.userNombre);
+          setSessionRol(rol);
+          navigate('/search');
+        } else {
+          console.log("no entrega user data")
         }
-        setNameUser(userData.userNombre);
-        setSessionRol(rol);
-        navigate('/search');
-      }else {
-        console.log("no entrega user data")
-      }
-      console.log(userData)
-    })
-    .catch((error) => {
-      if(error.response.status === 401){
-        const toastId = toast.error("Usuario o contraseña incorrecta", { autoClose: 1500, toastId: currentToastId });
-        setCurrentToastId(toastId);
-      } else if(error.response.status === 403){
-        const toastId = toast.error("Usuario Inactivo, Comuniquese con un administrador para recuperar su cuenta", { autoClose: 3000, toastId: currentToastId });
-        setCurrentToastId(toastId);
-      } else if(error.response.status === 404){
-        const toastId = toast.error("Usuario o contraseña incorrecta", { autoClose: 3000, toastId: currentToastId });
-        setCurrentToastId(toastId);
-      } else {
-        const toastId = toast.error("Usuario o contraseña incorrecta", { autoClose: 3000, toastId: currentToastId });
-        setCurrentToastId(toastId);
-      }
-      console.error(error);
-    });
-    };
+        console.log(userData)
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          const toastId = toast.error("Usuario o contraseña incorrecta", { autoClose: 1500, toastId: currentToastId });
+          setCurrentToastId(toastId);
+        } else if (error.response.status === 403) {
+          const toastId = toast.error("Usuario Inactivo, Comuniquese con un administrador para recuperar su cuenta", { autoClose: 3000, toastId: currentToastId });
+          setCurrentToastId(toastId);
+        } else if (error.response.status === 404) {
+          const toastId = toast.error("Usuario o contraseña incorrecta", { autoClose: 3000, toastId: currentToastId });
+          setCurrentToastId(toastId);
+        } else {
+          const toastId = toast.error("Usuario o contraseña incorrecta", { autoClose: 3000, toastId: currentToastId });
+          setCurrentToastId(toastId);
+        }
+        console.error(error);
+      });
+  };
   const [open, setOpen] = React.useState(false);
+  const [textFieldValue, setTextFieldValue] = useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -139,7 +160,7 @@ export function LoginMenu() {
             alignItems: 'center',
           }}
         >
-            <img src={coreLogo} alt="CoreLogo"  style={{ minWidth: '62.5%', maxWidth: '62.5%', paddingBottom: '100px', paddingTop: '50px'}}/>
+          <img src={coreLogo} alt="CoreLogo" style={{ minWidth: '62.5%', maxWidth: '62.5%', paddingBottom: '100px', paddingTop: '50px' }} />
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -170,7 +191,7 @@ export function LoginMenu() {
               onClick={() => handleSubmit}
             >
               Sign In
-              
+
             </Button>
             <ToastContainer />
             <Grid container>
@@ -187,16 +208,19 @@ export function LoginMenu() {
                     <TextField
                       autoFocus
                       margin="dense"
-                      id="name"
+                      id="useremail"
                       label="Email Address"
                       type="email"
                       fullWidth
                       variant="standard"
+                      value={textFieldValue}
+                      onChange={(event) => setTextFieldValue(event.target.value)}
+
                     />
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Send</Button>
+                    <Button onClick={handleSend}>Send</Button>
                   </DialogActions>
                 </Dialog>
               </Grid>

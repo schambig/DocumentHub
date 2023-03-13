@@ -31,6 +31,7 @@
     "framer-motion": "^9.0.2",
     "jose": "^4.13.1",
     "jsonwebtoken": "^9.0.0",
+    "jwt-decode": "^3.1.2",
     "nth-check": "^2.1.1",
     "path-browserify": "^1.0.1",
     "react": "^18.2.0",
