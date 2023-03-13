@@ -36,6 +36,36 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
     respError: boolean
     color: string
   }
+  const [newPS,setNewPS] = useState<string>('');
+  const [repPS,setRepPS] = useState<string>('');
+  const [showPS, setShowPS] = useState<boolean>(false);
+  const [passwordError1, setPasswordError1] = useState("");
+  const [passwordError2, setPasswordError2] = useState("");
+  const validatePassword = (password:string) => {
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
+  };
+  
+  const handlePasswordChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const password = event.target.value;
+    if (!password || validatePassword(password)) {
+      setPasswordError1("");
+    } else {
+      setPasswordError1("La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un símbolo especial (@$!%*?&).");
+    }
+    setNewPS(password);
+  };
+
+  const handlePasswordChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const password = event.target.value;
+    if (!password || validatePassword(password)) {
+      setPasswordError2("");
+    } else {
+      setPasswordError2("La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un símbolo especial (@$!%*?&).");
+    }
+    setRepPS(password);
+  };
+
   const [showPassword1, setShowPassword1] = React.useState(false);
   const [showPassword2, setShowPassword2] = React.useState(false);
   const [showPassword3, setShowPassword3] = React.useState(false);
@@ -46,9 +76,6 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
     event.preventDefault();
   };
 
-  const [newPS,setNewPS] = useState<string>('');
-  const [repPS,setRepPS] = useState<string>('');
-  const [showPS, setShowPS] = useState<boolean>(false);
   const [currentToastId, setCurrentToastId] = useState<any | undefined>(undefined);
   const [loadSave, setLoadSave] = useState<LoadSave>({status:false, respSuccess:false, respError:false, color:'primary' });
   //const [rol, setROL] = useState<RolUsuario | null>();
@@ -106,21 +133,29 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
   // };
 
   const handleSave = async():Promise<void> => {
+    const isValid1 = validatePassword(newPS);
+    const isValid2 = validatePassword(repPS);
     setLoadSave({...loadSave , status:true})
-    if ((newPS === '' && repPS === '')){
+    if ((newPS === '' || repPS === '')){
       setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
       setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1500)
       const toastId = toast.error('Campos vacios', { autoClose: 1500, toastId: currentToastId });
       setCurrentToastId(toastId);
       return console.log("Error push Data");
       
-    }else if((newPS === null && repPS === null)){
+    }else if((newPS === null || repPS === null)){
       setLoadSave({...loadSave ,status:false, respError:true, color:'error'  })
       setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1500)
       const toastId = toast.error('Campos vacios', { autoClose: 1500, toastId: currentToastId });
       setCurrentToastId(toastId);
       return console.log("Error push Data null");
 
+    }else if(!isValid1 || !isValid2) {
+      setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
+      setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1500)
+      const toastId = toast.error('Ingresar una contraseña válida', { autoClose: 1500, toastId: currentToastId });
+      setCurrentToastId(toastId);
+      return;
     }else{
       if((newPS === repPS) && (newPS !== userData.password )){
         setTimeout(() => {
@@ -328,7 +363,10 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 name="newpassword"
                 label="Nueva Contraseña"
                 value={newPS}
-                onChange={handleChangeNewPS}
+                onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
+                  handleChangeNewPS(e);
+                  handlePasswordChange1(e);
+                }}
                 color='neutral'
                 // InputProps={{ readOnly: true }}
                 type={showPassword2 ? 'text' : 'password'}
@@ -345,7 +383,9 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                       </IconButton>
                     </InputAdornment>
                   )
-                  }}  
+                  }}
+                  error={Boolean(passwordError1)}
+                  helperText={passwordError1} 
                 />
             </Grid>
 
@@ -356,7 +396,10 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 name="repeatpassword"
                 label="Repetir Contraseña"
                 value={repPS}
-                onChange={handleChangeRepPS}
+                onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
+                  handleChangeRepPS(e);
+                  handlePasswordChange2(e);
+                }}
                 // InputProps={{ readOnly: true }}
                 color='neutral'
                 type={showPassword3 ? 'text' : 'password'}
@@ -374,6 +417,8 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                     </InputAdornment>
                   )
                   }}
+                  error={Boolean(passwordError2)}
+                  helperText={passwordError2} 
                 />
             </Grid>
 
