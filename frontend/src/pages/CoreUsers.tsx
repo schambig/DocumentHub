@@ -9,6 +9,8 @@ import axios from 'axios';
 import {Typography} from '@mui/material'
 import { useNavigate } from "react-router-dom";
 import { stylesContainer } from '../common/dataComponent';
+import {InversionistaEditor} from '../components/InversionistaActualizar'
+import {InversionistaCrear} from '../components/InversionistaCrear'
 
 export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
   const { sessionRol, setSessionRol } = useContext(SelectionContext);
@@ -68,7 +70,7 @@ export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
         sessionRol === 1 ? (
           <div>
 
-            <Grid sx={{
+            <Grid container sx={{
               display: 'flex',
               flexDirection: 'column',
 
@@ -92,10 +94,32 @@ export const AppUser: React.FunctionComponent<{}> = (): JSX.Element => {
                 display: 'flex',
                 flexDirection:'column'
               }}>
+                <div style={{marginBottom: '2rem'}}>
                 <h2>Crear Usuario:</h2>
                 <CreateUser />
-                
+                </div>
               </Grid>
+              <Divider />
+              <Grid item sx={{
+                display: 'flex',
+                flexDirection:'column'
+              }}>
+                <div style={{marginBottom: '2rem'}}>
+                <h2>Actualizar Inversionista:</h2>
+                <InversionistaEditor />
+                </div>
+              </Grid>
+              <Divider />
+              <Grid item sx={{
+                display: 'flex',
+                flexDirection:'column'
+              }}>
+                <div style={{marginBottom: '2rem'}}>
+                <h2>Crear Inversionista:</h2>
+                <InversionistaCrear />
+                </div>
+              </Grid>
+              <Divider />
               {/* <h1> Componente  </h1> */}
             </Grid>
           </div>
