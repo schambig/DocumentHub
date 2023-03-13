@@ -28,6 +28,22 @@ import 'react-toastify/dist/ReactToastify.css';
 // }
 
 export const UserEditor:React.FC<{}> = ():JSX.Element => {
+  const [passwordError, setPasswordError] = useState("");
+  const validatePassword = (password:string) => {
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
+  };
+  
+  const handlePasswordChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+    const password = event.target.value;
+    if (!password || validatePassword(password)) {
+      setPasswordError("");
+    } else {
+      setPasswordError("La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un símbolo especial (@$!%*?&).");
+    }
+    setUserData({ ...userData, password });
+  };
+
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -86,6 +102,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
 
 
   const handleSave = async():Promise<void> => {
+    const isValid = validatePassword(userData.password);
     setLoadSave({...loadSave , status:true})
     if ((userData.userNombre === '' || userData.email === '')){
       setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
@@ -101,6 +118,15 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
       setCurrentToastId(toastId);
       return console.log("Error push Data null");
 
+    }else if(!isValid && userData.password) {
+      setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
+      setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1500)
+      const toastId = toast.error('Ingresar una contraseña válida', { autoClose: 1500, toastId: currentToastId });
+      setCurrentToastId(toastId);
+      setPasswordError(
+        'La contraseña debe tener al menos 8 caracteres, incluir al menos una letra mayúscula, una letra minúscula, un número y un símbolo.'
+      );
+      return;
     }else{
     setTimeout(() => {
       axios.patch(`http://localhost:8000/api/usuarios/${userData.id}`, {
@@ -263,7 +289,10 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
                 name="password"
                 label="Contraseña"
                 value={userData.password}
-                onChange={handleChange}
+                onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
+                  handleChange(e);
+                  handlePasswordChange(e);
+                }}
                 color='neutral'
                 type={showPassword ? 'text' : 'password'}
                 InputProps={{
@@ -280,6 +309,8 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
                   </InputAdornment>
                 )
               }}
+              error={Boolean(passwordError)}
+              helperText={passwordError}
                 />
             </Grid>
 
