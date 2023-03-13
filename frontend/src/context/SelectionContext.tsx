@@ -15,6 +15,9 @@ interface SelectionContextType {
     setSelectedOption2: React.Dispatch<React.SetStateAction<newTipoDoc | null>>;
     setSelectedOption3: React.Dispatch<React.SetStateAction<newProDucto | null>>;
     setSelectedOption4: React.Dispatch<React.SetStateAction<newCategoria | null>>;
+    // Avatar Leter
+    nameUser: string | null;
+    setNameUser: React.Dispatch<React.SetStateAction<string | null>>;
     // control login
     email: string | null;
     password: string | null;
@@ -67,4 +70,6 @@ export const SelectionContext = React.createContext<SelectionContextType>({
     setRefresh: () => {},
     globalID:'',
     setGlobalID: () => {},
+    nameUser:'',
+    setNameUser: () => {},
 });

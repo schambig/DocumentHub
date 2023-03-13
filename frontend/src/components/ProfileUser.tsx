@@ -13,6 +13,7 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 //import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {themeSizes} from '../config/theme.condig'
 
 // interface User {
 //   id: number;
@@ -106,7 +107,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
       return console.log("Error push Data null");
 
     }else{
-      if((newPS === repPS) && (newPS !== userData.password)){
+      if((newPS === repPS) && (newPS !== userData.password )){
         setTimeout(() => {
           axios.patch(`http://localhost:8000/api/usuarios/${userData.id}`, {
               ...userData,
@@ -146,12 +147,6 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
               
             })
           },1000)
-
-      }else if(newPS === userData.password){
-        setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
-        setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},2000)
-        const toastId = toast.error('No repetir contraseña actual', { autoClose: 2000, toastId: currentToastId });
-        setCurrentToastId(toastId);
       }else{
         setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
         setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},2000)
@@ -165,9 +160,20 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
 
   return (
         <div className="container" style={{margin: '0px'}}>
-          <h1> Profile Usuario:</h1>
+          <h2> Mi Perfil:</h2>
           {/* primera fila */}
-          <Grid sx={{display:'flex', padding:'0px' , width:'100%' ,justifyContent:'center', alignItems:'center', margin: '10px 0px 20px 0px'}} container spacing={2}>
+          
+          <Grid container sx={{
+            display:'flex',
+            padding:'0px' ,
+            width:'100%' ,
+            justifyContent:'center',
+            alignItems:'center',
+            margin: '10px 0px 20px 0px'}}
+            spacing={2}
+            columns={10}
+            >
+            
             <Grid sx={{padding:'0px'}} item xs={10}>
                 <TextField
                   sx={{ width: '100%'}}
@@ -179,14 +185,15 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                   value={userData.id}
                   onChange={handleChange}
                   InputProps={{ readOnly: true }}
-                />
+                  />
             </Grid>
 
-            <Grid item xs={4}>
+                  
+            <Grid item xs={10} sm={10} md={4} lg={4} >
                 <TextField
                   sx={{ width: '100%'}}
                   name="userNombre"
-                  label="Name"
+                  label="Nombre"
                   value={userData.userNombre}
                   onChange={handleChange}
                   color='neutral'
@@ -194,11 +201,11 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 />
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={10} sm={10} md={4} lg={4} >
             <TextField
                   sx={{ width: '100%'}}
                   name="rol"
-                  label="Role"
+                  label="Rol"
                   value={userData.rol}
                   onChange={handleChange}
                   color='neutral'
@@ -206,7 +213,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 />
             </Grid>
       
-            <Grid item xs={2}>
+            <Grid item sx={{ display: { xs: 'none', md: 'block' } }} xs={12} md={2}>
               <FormControlLabel
                 sx={{ width: '100%'}}
                 control={
@@ -217,14 +224,15 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                     name="statusCheckbox"
                   />
                 }
-                label={userData.estado ? "Status: (Active)": "Status: (Disabled)"}
+                label={userData.estado ? "Estado: (Activo)": "Estado: (Inactivo)"}
               />
             </Grid>
-            <Grid item xs={4}>
+
+            <Grid item xs={10} sm={10} md={4} lg={4} >
               <TextField
               sx={{width:'100%'}}
                 name="email"
-                label="Email"
+                label="Correo electrónico"
                 value={userData.email}
                 onChange={handleChange}
                 color='neutral'
@@ -232,12 +240,14 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
               />
             </Grid>
 
-            <Grid item xs={4}>
+        
+
+            <Grid item xs={10} sm={10} md={4} lg={4}>
               <TextField
               sx={{width:'100%'}}
               
                 name="password"
-                label="Password"
+                label="Contraseña"
                 value={userData.password}
                 onChange={handleChange}
                 type="password"
@@ -246,14 +256,29 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 />
             </Grid>
 
-            <Grid item xs={2}>
+
+            <Grid item xs={4} sm={4} sx={{display: {md: 'none' }}}>
+              <FormControlLabel
+                sx={{ width: '100%'}}
+                control={
+                  <Checkbox
+                    color='neutral'
+                    checked={userData.estado}
+                    onChange={handleChange}
+                    name="statusCheckbox"
+                  />
+                }
+                label={userData.estado ? "Estado: (Activo)": "Estado: (Inactivo)"}
+              />
+            </Grid>
+            <Grid item xs={4} sm={5} md={2} lg={2}>
               <Button
                 sx={{width: '100%'}}
                 onClick={handleShowPS}
                 variant='contained'>
-              <Typography  variant="h6" style={{fontWeight: 'bold'}}>
-                {showPS ? "Canceled" :"Update PS"}
-              </Typography>
+              {/* <Typography  variant="h6" style={{fontWeight: 'bold'}}> */}
+                {showPS ? "Cancelar" :"Actualizar"}
+              {/* </Typography> */}
               </Button>
               
               </Grid>
@@ -261,13 +286,18 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
           {showPS ? ( <Divider sx={{marginTop: '10px'}}/>):(null)}
 
           { showPS ? (
-          <Grid sx={{display:'flex', margin: "5px 0px" ,justifyContent:'center', alignItems:'center'}} container spacing={2}>
-            <Grid item xs={4}>
+          <Grid sx={{
+            display:'flex',
+            margin: "5px 0px",
+            justifyContent:'center',
+            alignItems:'center'}}
+            container spacing={2}>
+            <Grid item xs={10} sm={10} md={4} lg={4}>
               <TextField
               sx={{width:'100%'}}
               
                 name="newpassword"
-                label="New Password"
+                label="Nueva Contraseña"
                 value={newPS}
                 onChange={handleChangeNewPS}
                 type="password"
@@ -276,12 +306,12 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
                 />
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={10} sm={10} md={4} lg={4}>
               <TextField
               sx={{width:'100%'}}
               
                 name="repeatpassword"
-                label="Repeat Password"
+                label="Repetir Contraseña"
                 value={repPS}
                 onChange={handleChangeRepPS}
                 type="password"
@@ -291,7 +321,7 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
             </Grid>
 
 
-            <Grid item xs={2}>
+            <Grid item xs={10} sm={10} md={2} lg={2}>
               {/* <Button sx={{width:'100%'}} variant="contained" color="primary" onClick={handleSave}>
                 Save
               </Button> */}
@@ -299,15 +329,15 @@ export const UserProfile:React.FC<{}> = ():JSX.Element => {
               sx={{height:'100%', width:'100%'}}
               loading={loadSave?.status ? loadSave.status : false}
               loadingPosition="start"
-              startIcon={loadSave.respError ? <ErrorOutlineIcon/>: (loadSave.respSuccess ? <PublishedWithChangesIcon/>: (<SyncIcon sx={{fontSize: '35px'}}/>))}
+              startIcon={loadSave.respError ? <ErrorOutlineIcon style={{fontSize:(themeSizes.FSbutton)}}/>: (loadSave.respSuccess ? <PublishedWithChangesIcon style={{fontSize:(themeSizes.FSbutton)}}/>: (<SyncIcon style={{fontSize:(themeSizes.FSbutton)}}/>))}
               variant="contained"
               color={loadSave.color === 'primary' || loadSave.color === 'error' || loadSave.color === 'success' ? loadSave.color : 'primary'}
               onClick={handleSave}
               size="large"
             >
-             <Typography variant="h6" style={{fontWeight: 'bold'}}>
-                {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("UPDATE"))}
-              </Typography>
+             {/* <Typography variant="h6" > */}
+                {loadSave.respError ? "Error": (loadSave.respSuccess ? "Éxito": ("Actualizar"))}
+              {/* </Typography> */}
             </LoadingButton>
             <ToastContainer />
             </Grid>

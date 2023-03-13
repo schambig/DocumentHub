@@ -1,5 +1,3 @@
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,43 +11,16 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import coreLogo from '../core_icons/CoreCapitalSAF_logo.svg';
+
 // import jwt from 'jsonwebtoken';
+import axios from 'axios';
 import * as React from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { SelectionContext } from '../context/SelectionContext';
-import { useContext } from 'react';
-import { usUario, RolUsuario } from '../assets/data_user';
-
-// const token = jwt.sign({ /* payload */ }, 'secret');
-// interface User {
-//   username: string;
-//   password: string;
-// }
-
-// function login(username: string, password: string) {
-//   // Send a request to the API to verify the credentials
-//   fetch('http://localhost:3001/users')
-//     .then(response => response.json())
-//     .then((users: User[]) => {
-//       const user = users.find(u => u.username === username && u.password === password);
-
-//       if (user) {
-//         // Generate a JWT token
-//         const token = jwt.sign({ username }, 'secret');
-
-//         // Store the token in localStorage
-//         localStorage.setItem('token', token);
-
-//         // Redirect the user to the dashboard page
-//         window.location.href = '/dashboard';
-//       } else {
-//         // Handle invalid credentials
-//       }
-//     })
-//     .catch(error => {
-//       // Handle the error
-//     });
-// }
 
 
 function Copyright(props: any) {
@@ -65,67 +36,93 @@ function Copyright(props: any) {
   );
 }
 
-// function login(username: string, password: string) {
-//   // Send a request to the API to verify the credentials
-//   fetch('http://localhost:8000/tUsuarios')
-//     .then(response => response.json())
-//     .then((users) => {
-//       const user = users.find((u:any) => u.username === username && u.password === password);
 
-//       if (user) {
-//         // Generate a JWT token
-//         const token = jwt.sign({ username }, 'secret');
-
-//         // Store the token in localStorage
-//         localStorage.setItem('token', token);
-
-//         // Redirect the user to the dashboard page
-//         window.location.href = '/dashboard';
-//       } else {
-//         // Handle invalid credentials
-//       }
-//     })
-//     .catch(error => {
-//       // Handle the error
-//     });
-// }
 
 export function LoginMenu() {
-
+  const [currentToastId, setCurrentToastId] = useState<any | undefined>(undefined);
   const { setSessionRol } = useContext(SelectionContext);
   const { setGlobalID } = useContext(SelectionContext);
+  const { setNameUser } = useContext(SelectionContext);
+  localStorage.setItem('tokenCore', '')
+
+
+
+  const handleSend = (event: any) => {
+    event.preventDefault();
+    console.log(event);
+    const emailuser = textFieldValue;
+    console.log(emailuser)
+    axios.post("http://localhost:8000/api/email", { "email": emailuser })
+      .then((response) => {
+        if (response.status === 200) {
+          console.log("Gozu");
+        };
+        console.log(response);
+        console.log(response.status);
+        return response.data;
+      })
+
+      handleClose();
+  }
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    //Get the DB data
-    fetch('http://localhost:8000/api/usuarios')
-      .then(response => response.json())
-      .then((item) => {
-        const elemento:usUario[] = item.filter((dato:usUario) => dato.email === email && dato.password === password)
-        if (elemento.length) {
-          // captar la data de idrol y settear el variable sessionRol
-          const role = elemento[0].rol
-          const roleSet = role===RolUsuario.ADMIN ? (1):(role===RolUsuario.DATAUSER ? (2):(role===RolUsuario.USER ? (3):(null)))
-          setSessionRol(roleSet)
-          setGlobalID(elemento[0].id)
-          navigate("/app")
-        }
-        // console.log(item[0].email);
-      })
-      .catch(error => {
-        setSessionRol(1)
-          navigate("/app")
-        // Handle the error
-      });
     //Get the form data
     const email = data.get('email');
     const password = data.get('password');
-    //
-    // if ( email === )
+    //Get the DB data
+    axios.post("http://localhost:8000/api/login/jwt", { "email": email, "password": password })
+      .then((response) => {
+        if (response.status === 200) {
+          const token = (response.headers.authorization.split(' '))[1];
 
-    
+          localStorage.setItem("tokenCore", token);
+        };
+        console.log(response);
+        console.log(response.status);
+        return response.data;
+      })
+      .then((userData) => {
+        if (userData.estado) {
+          console.log(userData.rol);
+          setGlobalID(userData.id);
+          let rol = 0;
+          if (userData.rol === "ADMIN") {
+            rol = 1;
+          } else if (userData.rol === "DATAUSER") {
+            rol = 2;
+          } else if (userData.rol === "USER") {
+            rol = 3;
+          } else {
+            rol = 0;
+          }
+          setNameUser(userData.userNombre);
+          setSessionRol(rol);
+          navigate('/search');
+        } else {
+          console.log("no entrega user data")
+        }
+        console.log(userData)
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          const toastId = toast.error("Usuario o contraseña incorrecta", { autoClose: 1500, toastId: currentToastId });
+          setCurrentToastId(toastId);
+        } else if (error.response.status === 403) {
+          const toastId = toast.error("Usuario Inactivo, Comuniquese con un administrador para recuperar su cuenta", { autoClose: 3000, toastId: currentToastId });
+          setCurrentToastId(toastId);
+        } else if (error.response.status === 404) {
+          const toastId = toast.error("Usuario o contraseña incorrecta", { autoClose: 3000, toastId: currentToastId });
+          setCurrentToastId(toastId);
+        } else {
+          const toastId = toast.error("Usuario o contraseña incorrecta", { autoClose: 3000, toastId: currentToastId });
+          setCurrentToastId(toastId);
+        }
+        console.error(error);
+      });
   };
   const [open, setOpen] = React.useState(false);
+  const [textFieldValue, setTextFieldValue] = useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -163,13 +160,7 @@ export function LoginMenu() {
             alignItems: 'center',
           }}
         >
-          <div> </div>
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
+          <img src={coreLogo} alt="CoreLogo" style={{ minWidth: '62.5%', maxWidth: '62.5%', paddingBottom: '100px', paddingTop: '50px' }} />
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -200,7 +191,9 @@ export function LoginMenu() {
               onClick={() => handleSubmit}
             >
               Sign In
+
             </Button>
+            <ToastContainer />
             <Grid container>
               <Grid item xs justifyContent="center">
                 <Link href="#" variant="body2" onClick={handleClickOpen}>
@@ -215,16 +208,19 @@ export function LoginMenu() {
                     <TextField
                       autoFocus
                       margin="dense"
-                      id="name"
+                      id="useremail"
                       label="Email Address"
                       type="email"
                       fullWidth
                       variant="standard"
+                      value={textFieldValue}
+                      onChange={(event) => setTextFieldValue(event.target.value)}
+
                     />
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Send</Button>
+                    <Button onClick={handleSend}>Send</Button>
                   </DialogActions>
                 </Dialog>
               </Grid>

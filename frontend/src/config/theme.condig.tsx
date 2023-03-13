@@ -1,8 +1,15 @@
-import React from "react";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import React from "react";
 
 type ThemeProp = {
     children: JSX.Element;
+}
+
+export enum themeSizes {
+  FSbuttonSmall = 25,
+  FSbutton = 35,
+  FSbuttonLarge = 40,
+  FStext = 18,
 }
 
 export enum themePalette {
@@ -16,7 +23,7 @@ export enum themePalette {
     WHITECORE = "#F0F0F0",
     GRISCORE = "#9B999F",
     BLACKCORE = "#000000",
-    FONT_GLOBAL = "'JetBrains Mono', monospace",
+    FONT_GLOBAL = "'Montserrat-Medium', monospace",
 }
 
 const theme = createTheme ({
@@ -24,7 +31,7 @@ const theme = createTheme ({
     palette: {
         mode: 'light',
         background: {
-            default: themePalette.WHITECORE,
+            default: themePalette.BG,
         },
         secondary: {
             light:themePalette.CELESTECORELIGTH,
@@ -39,25 +46,45 @@ const theme = createTheme ({
             contrastText: themePalette.WHITECORE,
         },
         info:{
-            main: themePalette.GRISCORE,
-            contrastText: '#fff'
+            main: themePalette.WHITECORE,
+            contrastText: '#000',
         },
         neutral:{
             main: themePalette.BLACKCORE,
             contrastText: '#fff',
         },
+        warning:{
+          main: themePalette.NARANJACORELIGTH,
+          contrastText: '#000',
+        }
     },
     typography: {
         fontFamily: themePalette.FONT_GLOBAL,
+        fontSize: themeSizes.FStext,
     },
-    // components: {
-    //     MuiButton: {
-    //         MuiDisable: {
-                
-    //             }
-    //         }
-    //     }
-    // }
+    components: {
+      MuiButton:{
+        styleOverrides: {
+          root: {
+            fontWeigth: 'bold',
+            '&:hover':{
+              backgroundColor: '#000',
+              color: '#fff',
+            },
+            '& .MuiSvgIcon-root': {
+              fontSize: themeSizes.FSbutton,
+            },
+          }
+        }
+      },
+      MuiSvgIcon:{
+        styleOverrides: {
+          root: {
+            fontSize: themeSizes.FSbutton,
+          }
+        }
+      }
+    }
 });
 
 declare module '@mui/material/styles' {
@@ -75,30 +102,49 @@ declare module '@mui/material/styles' {
   declare module '@mui/material/Button' {
     interface ButtonPropsColorOverrides {
       neutral: true;
+      info: true;
     }
   }
 
   declare module '@mui/material/TextField' {
     interface TextFieldPropsColorOverrides {
       neutral: true;
+      info: true;
     }
   }
 
   declare module '@mui/material/FormControl' {
     interface FormControlPropsColorOverrides{
       neutral: true;
+      info: true;
     }
   }
 
   declare module '@mui/material/Checkbox'{
     interface CheckboxPropsColorOverrides {
       neutral: true;
+      info: true;
     }
   }
 
   declare module '@mui/material/InputLabel'{
     interface InputLabelPropsColorOverrides{
       neutral: true;
+      info: true;
+    }
+  }
+
+  declare module '@mui/material/IconButton'{
+    interface IconButtonPropsColorOverrides{
+      neutral: true;
+      info: true;
+    }
+  }
+
+  declare module '@mui/material/AppBar'{
+    interface AppBarPropsColorOverrides{
+      neutral: true;
+      info: true;
     }
   }
 

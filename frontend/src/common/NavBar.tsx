@@ -1,26 +1,26 @@
-import React , {useContext} from "react"
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
+import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
+import Container from '@mui/material/Container';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Toolbar from '@mui/material/Toolbar';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import React, { useContext } from "react";
 //import AdbIcon from '@mui/icons-material/Adb';
-import YourSVG from '../core_icons/CoreCapitalSAF_logo.svg'
+import YourSVG from '../core_icons/CoreCapitalSAF_logo.svg';
 //import { makeStyles } from "@mui/material";
 //import { minWidth, padding, width } from "@mui/system";
 //import SearchIcon from '@mui/icons-material/Search';
 import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
 //import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import ListItemIcon from '@mui/material/ListItemIcon';
 //import { pink } from "@mui/material/colors";
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 //import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined';
@@ -31,7 +31,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { SelectionContext } from '../context/SelectionContext';
 //import { green, grey, red } from "@mui/material/colors";
-
+import { themeSizes } from '../config/theme.condig';
 
 export const NavBar: React.FunctionComponent<{}> = () => {
 
@@ -40,6 +40,7 @@ export const NavBar: React.FunctionComponent<{}> = () => {
     const location = useLocation();
     const { setSelectedOption1, setSelectedOption2, setSelectedOption3, setSelectedOption4 } = useContext(SelectionContext);
     const {sessionRol, setSessionRol} = useContext(SelectionContext);
+    const { nameUser } = useContext(SelectionContext);
 
     const navigate = useNavigate();
     const setFilter = ():void => {
@@ -54,28 +55,28 @@ export const NavBar: React.FunctionComponent<{}> = () => {
             ruta: '/user',
             keyChild1: 'actualizar',
             permiso: 1,
-            sticon: <SensorOccupiedIcon />,
+            sticon: <SensorOccupiedIcon style={{fontSize:(themeSizes.FSbutton - 5)}} />,
         },
         {
             name: 'Busqueda',
             ruta: '/search',
             keyChild1: 'busqueda',
             permiso: 3,
-            sticon: <ManageSearchIcon />,
+            sticon: <ManageSearchIcon style={{fontSize:themeSizes.FSbutton}} />,
         },
         {
             name: 'Carga Archivo',
             ruta: '/file',
             keyChild1: 'carga_archivo',
             permiso: 2,
-            sticon: <CloudUploadOutlinedIcon />,
+            sticon: <CloudUploadOutlinedIcon style={{fontSize:themeSizes.FSbutton}}/>,
         }
     ]
     // const routs = ['/usuarios','/busqueda', '/archivos'];
     // const settings = ['Profile', 'Account', 'Logout'];
     const settings = [
         {
-            name: 'Profile',
+            name: 'Mi perfil',
             ruta: '/profile',
             keyChild1: 'profile',
             sticon: <AccountBoxOutlinedIcon />,
@@ -86,7 +87,7 @@ export const NavBar: React.FunctionComponent<{}> = () => {
         //     sticon: < BadgeOutlinedIcon />,
         // },
         {
-            name: 'Logout',
+            name: 'Cerrar sesion',
             ruta: '/login',
             keyChild1: 'logout',
             sticon: <LogoutIcon />,
@@ -113,20 +114,27 @@ export const NavBar: React.FunctionComponent<{}> = () => {
 
     const changeRol = (path:string) => {
         if (path === '/login'){
-            setSessionRol(null)
+            setSessionRol(null);
+            localStorage.setItem('tokenCore','')
         }
     }
 
     return (
-    <AppBar color='secondary' position="static">
-        <Container maxWidth="lg">
+    <AppBar color='info' position="static">
+        <Container id='conWidth' style={{ marginLeft: 0 , marginRight: 0}}>
         <Toolbar disableGutters sx={{
             display: 'flex',
             alignContent: 'center',
             justifyContent: 'space-between',
             //backgroundColor: 'red',
-        }}>
-            <Box color='info' sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+        }}
+        >
+            <Box color='info' sx={{ 
+                display: { xs: 'none', md: 'flex' },
+                mr: 1,
+                minWidth: '57px',
+                
+                padding: '1em' }}>
             <img id="img_logo"
               src={YourSVG} alt="No Result"
             />
@@ -157,7 +165,7 @@ export const NavBar: React.FunctionComponent<{}> = () => {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
-                color="info"
+                color="neutral"
             >
                 <MenuIcon />
             </IconButton>
@@ -199,27 +207,10 @@ export const NavBar: React.FunctionComponent<{}> = () => {
                      padding: '1em', }}>
             <img id="img_logo"
               src={YourSVG} alt="No Result"
+              style={{ width: '500px' }}
             />
             </Box>
-            {/*<AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}></AdbIcon>*/}
-            {/* <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-            }}
-            >
-            LOGO 
-            </Typography> */}
+            
             <Box sx={{ 
                 // display: 'flex',
                 // width: '55%',
@@ -235,8 +226,8 @@ export const NavBar: React.FunctionComponent<{}> = () => {
                 <Button
                 id={location.pathname === page.ruta ? 'nuevo':''}
                 startIcon={page.sticon}
-                color={location.pathname === page.ruta ?'success':'info'}
-                variant='contained'
+                color={location.pathname === page.ruta ?'neutral':'neutral'}
+                variant={location.pathname === page.ruta ?'outlined':'outlined'}
                 key={page.name}
                 value={page.ruta}
                 onClick={() => {return(setFilter(), navigate(page.ruta))}}
@@ -244,12 +235,13 @@ export const NavBar: React.FunctionComponent<{}> = () => {
                 sx={{ 
                     my: 2,
                     //color: 'white', 
-                    display: 'flex',
+                    //display: 'flex',
                     padding: '0.5 em 2em',
                     margin: '0em 0.5em',
-                    maxWidth: '20em',
+                    //maxWidth: '20em',
                     
-                    minWidth: '5em'
+                    //minWidth: '5em'
+                    
                 }}
                 >
                 {page.name}
@@ -259,8 +251,8 @@ export const NavBar: React.FunctionComponent<{}> = () => {
 
             <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-                <IconButton  onClick={handleOpenUserMenu} sx={{ p: 0}}>
-                <Avatar  alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <IconButton  color="info" onClick={handleOpenUserMenu} sx={{ p: 0}}>
+                <Avatar sx={{ bgcolor: "#000" }} alt={nameUser ? nameUser : ''} src="/static/images/avatar/2.jpg" />
                 </IconButton>
             </Tooltip>
             <Menu
@@ -288,10 +280,12 @@ export const NavBar: React.FunctionComponent<{}> = () => {
                         navigate(setting.ruta)
                     )}} 
                   disabled={location.pathname === setting.ruta}>
-                    <ListItemIcon>
+                    <ListItemIcon key={setting.keyChild1 + 'Icon'} id={location.pathname === setting.ruta ? 'menuBarIcon':''}>
                         {setting.sticon}
                     </ListItemIcon>
-                    <Typography textAlign="center">{setting.name}</Typography>
+                    <Typography key={setting.keyChild1 + 'Icon'} id={location.pathname === setting.ruta ? 'menuBarText':''} textAlign="center">
+                        {setting.name}
+                    </Typography>
                 </MenuItem>
                 ))}
             </Menu>

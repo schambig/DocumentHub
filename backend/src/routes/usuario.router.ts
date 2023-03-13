@@ -1,7 +1,7 @@
-import express from "express";
+import bcrypt from "bcrypt";
 import type { Request, Response } from "express";
+import express from "express";
 import { body, validationResult } from "express-validator";
-
 import * as UsuarioService from "../services/usuario.service";
 
 export const usuarioRouter = express.Router();
@@ -43,7 +43,11 @@ usuarioRouter.post(
     if (!errors.isEmpty()) {
       return response.status(400).json({errors: errors.array()});
     }
+    if(request.body.rol === ''){
+      return response.status(401).json({message: "Error Role"});
+    }
     try {
+      request.body.password =  await bcrypt.hash(request.body.password, 10);
       const usuario = request.body
       const newUsuario = await UsuarioService.createUsuario(usuario)
       return response.status(201).json(newUsuario)
@@ -67,10 +71,24 @@ usuarioRouter.patch(
       return response.status(400).json({errors: errors.array()});
     }
     const id: string = request.params.id;
+
     try {
-      const usuario = request.body
-      const updateUsuario = await UsuarioService.updateUsuario(usuario, id)
-      return response.status(200).json(updateUsuario)
+      if(request.body.password === '' || request.body.password === null){
+        const newData = {
+          userNombre: request.body.userNombre,
+          email: request.body.email,
+          estado: request.body.estado,
+          rol: request.body.rol,
+        }
+        const updateUsuario = await UsuarioService.updateUsuario(newData, id);
+        return response.status(200).json(updateUsuario);
+      }else{
+        const newpassword =  await bcrypt.hash(request.body.password, 10);
+        request.body.password = newpassword;
+        const usuario = request.body;
+        const updateUsuario = await UsuarioService.updateUsuario(usuario, id);
+        return response.status(200).json(updateUsuario);
+      }
     } catch (error: any) {
       return response.status(500).json(error.message);
     }

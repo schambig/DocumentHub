@@ -31,6 +31,14 @@ export const getUsuario = async (id: string) => {
   })
 }
 
+export const getUsuarioByEmail = async (email: string) => {
+  return db.tablaUsuarios.findUnique({
+    where: {
+      email: email
+    }
+  })
+}
+
 export const createUsuario = async (usuario: Omit<Usuario, "id">) => {
   const { userNombre, email, password, estado, rol } = usuario;
   return db.tablaUsuarios.create({

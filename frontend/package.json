@@ -19,13 +19,21 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.4.0",
-    "@types/node": "^18.13.0",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.3.4",
+    "bcrypt": "^5.1.0",
+    "browserify-fs": "^1.0.0",
+    "browserify-zlib": "^0.2.0",
+    "dotenv": "^16.0.3",
+    "file-saver": "^2.0.5",
     "framer-motion": "^9.0.2",
+    "jose": "^4.13.1",
+    "jsonwebtoken": "^9.0.0",
+    "jwt-decode": "^3.1.2",
     "nth-check": "^2.1.1",
+    "path-browserify": "^1.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
@@ -33,14 +41,15 @@
     "react-toastify": "^9.1.1",
     "request": "^2.88.2",
     "svgo": "^3.0.2",
+    "util": "^0.12.5",
     "uuid": "^9.0.0",
     "uuidv4": "^6.2.13",
     "web-vitals": "^3.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -62,7 +71,22 @@
     ]
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/file-saver": "^2.0.5",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/node": "^18.14.4",
     "@types/path-to-regexp": "^1.7.0",
-    "react-scripts": "^5.0.1"
+    "assert": "^2.0.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
+    "process": "^0.11.10",
+    "react-app-rewired": "^2.2.1",
+    "react-scripts": "^5.0.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.0",
+    "webpack": "^5.75.0"
   }
 }

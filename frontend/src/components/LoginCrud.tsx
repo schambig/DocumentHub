@@ -24,6 +24,9 @@ import 'react-toastify/dist/ReactToastify.css';
 // }
 
 export const UserEditor:React.FC<{}> = ():JSX.Element => {
+  
+  
+  
   interface LoadSave{
     status:boolean
     respSuccess: boolean
@@ -77,14 +80,14 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
 
   const handleSave = async():Promise<void> => {
     setLoadSave({...loadSave , status:true})
-    if ((userData.userNombre === '' || userData.email === '' || userData.password === '')){
+    if ((userData.userNombre === '' || userData.email === '')){
       setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
       setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1500)
       const toastId = toast.error('Completar la informacion', { autoClose: 1500, toastId: currentToastId });
       setCurrentToastId(toastId);
       return console.log("Error push Data");
       
-    }else if((userData.userNombre === null || userData.email === null || userData.password === null)){
+    }else if((userData.userNombre === null || userData.email === null)){
       setLoadSave({...loadSave ,status:false, respError:true, color:'error'  })
       setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1500)
       const toastId = toast.error('Completar la informacion', { autoClose: 1500, toastId: currentToastId });
@@ -137,7 +140,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
 
   return (
     <div>
-      <h1> Actualizar Usuario:</h1>
+      <h2> Actualizar Usuario:</h2>
       <Autocomplete
         sx={{m: '25px 0px'}}
         id="user-select"
@@ -147,7 +150,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
         onChange={(event, newValue) => {
           setSelectedUser(newValue);
           if (newValue) {
-            setUserData(newValue);
+            setUserData({...newValue,password:''});
             setStatusCheckbox(newValue.estado);
           } else {
             setUserData({
@@ -185,20 +188,20 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
                 />
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={10} sm={10} md={10} lg={4}>
                 <TextField
                   sx={{ width: '100%'}}
                   name="userNombre"
-                  label="Name"
+                  label="Nombre"
                   value={userData.userNombre}
                   onChange={handleChange}
                   color='neutral'
                 />
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={5} sm={5} md={5} lg={4}>
               <FormControl color='neutral' fullWidth>
-                <InputLabel sx={{}} id="demo-simple-select-label" >Role</InputLabel>
+                <InputLabel sx={{}} id="demo-simple-select-label" >Rol</InputLabel>
                 <Select
                   sx={{width:'100%'}}
                   name="rol"
@@ -206,7 +209,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
                   id="demo-simple-select"
                   // value={rol ? (setUserData({...userData, rol:rol})) : (userData.rol)}
                   value={rol ? rol : (userData.rol)}
-                  label="Role"
+                  label="Rol"
                   onChange={handleChangeROL}
                   //color='neutral'
                 >
@@ -217,7 +220,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
               </FormControl>
             </Grid>
       
-            <Grid item xs={2}>
+            <Grid item xs={5} sm={5} md={5} lg={2}>
               <FormControlLabel
                 sx={{ width: '100%'}}
                 control={
@@ -228,7 +231,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
                     name="statusCheckbox"
                   />
                 }
-                label={statusCheckbox ? "Status: (Active)": "Status: (Disabled)"}
+                label={statusCheckbox ? "Estado: (Activo)": "Estado: (Inactivo)"}
               />
             </Grid>
           </Grid>
@@ -236,23 +239,23 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
         <div style={{display: 'flex', minWidth: 0, margin: '10px 20px 10px 20px'}}>
           {/* segunda fila */}
           <Grid sx={{display:'flex', justifyContent:'center', alignItems:'center'}} container spacing={2}>
-            <Grid item xs={4}>
+            <Grid item xs={10} sm={10} md={10} lg={4}>
               <TextField
               sx={{width:'100%'}}
                 name="email"
-                label="Email"
+                label="Correo electrónico"
                 value={userData.email}
                 onChange={handleChange}
                 color='neutral'
               />
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={10} sm={10} md={10} lg={4}>
               <TextField
               sx={{width:'100%'}}
               
                 name="password"
-                label="Password"
+                label="Contraseña"
                 value={userData.password}
                 onChange={handleChange}
                 type="password"
@@ -260,7 +263,7 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
                 />
             </Grid>
 
-            <Grid item xs={2}>
+            <Grid item xs={10} sm={10} md={10} lg={2}>
               {/* <Button sx={{width:'100%'}} variant="contained" color="primary" onClick={handleSave}>
                 Save
               </Button> */}
@@ -268,15 +271,15 @@ export const UserEditor:React.FC<{}> = ():JSX.Element => {
               sx={{height:'100%', width:'100%'}}
               loading={loadSave?.status ? loadSave.status : false}
               loadingPosition="start"
-              startIcon={loadSave.respError ? <ErrorOutlineIcon/>: (loadSave.respSuccess ? <PublishedWithChangesIcon/>: (<SyncIcon sx={{fontSize: '35px'}}/>))}
+              startIcon={loadSave.respError ? <ErrorOutlineIcon style={{fontSize: '40px'}}/>: (loadSave.respSuccess ? <PublishedWithChangesIcon style={{fontSize: '40px'}}/>: (<SyncIcon style={{fontSize: '40px'}}/>))}
               variant="contained"
               color={loadSave.color === 'primary' || loadSave.color === 'error' || loadSave.color === 'success' ? loadSave.color : 'primary'}
               onClick={handleSave}
               size="large"
             >
-             <Typography variant="h6" style={{fontWeight: 'bold'}}>
-                {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("UPDATE"))}
-              </Typography>
+             {/* <Typography variant="h6" style={{fontWeight: 'bold'}}> */}
+                {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "Éxito": ("Actualizar"))}
+              {/* </Typography> */}
             </LoadingButton>
             <ToastContainer/>
             </Grid>

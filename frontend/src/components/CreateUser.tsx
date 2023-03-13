@@ -9,6 +9,7 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {themeSizes} from '../config/theme.condig'
 
 export const CreateUser: React.FC<{}> = ():JSX.Element => {
   // const [loadSave, setLoadSave] = useState<boolean>(false);
@@ -26,14 +27,22 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
   //const [users, setUsers] = useState<usUario[]>([]);
   const {refresh, setRefresh} = useContext(SelectionContext);
   //const [selectedUser, setSelectedUser] = useState<usUario | null>(null);
-  const [userData, setUserData] = useState<usUario>({
+  interface Cuser{
+    id: string,
+    userNombre: string,
+    email: string,
+    password: string,
+    estado: boolean,
+    rol: string
+  }
+  const [userData, setUserData] = useState<usUario | Cuser>({
       id: '',
       userNombre: '',
       email: '',
       password: '',
       estado: false,
       // rol: RolUsuario.USER
-      rol: RolUsuario.USER
+      rol: ''
   });
     
   const [statusCheckbox, setStatusCheckbox] = useState<boolean>(false);
@@ -90,7 +99,7 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
       })
         .then(response => {
           setRefresh(!refresh);
-          if (response.status === 200){
+          if (response.status === 201){
             setLoadSave({...loadSave ,status:false ,respSuccess:true, color:'success' })
             setTimeout(() => {setLoadSave({...loadSave , respSuccess:false, color:'primary' })},2000)
             const toastId = toast.success('Usuario creado con exito', { autoClose: 2000, toastId: currentToastId });
@@ -113,6 +122,9 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
           } else if (error.response.status === 404){
             const toastId = toast.error('Sin Conexion a DataBase', { autoClose: 2000, toastId: currentToastId });
             setCurrentToastId(toastId);
+          } else if (error.response.status === 401){
+            const toastId = toast.error('Debe Asignar un rol', { autoClose: 2000, toastId: currentToastId });
+            setCurrentToastId(toastId);
           } else {
             const toastId = toast.error('Sin Conexion', { autoClose: 2000, toastId: currentToastId });
             setCurrentToastId(toastId);
@@ -131,27 +143,32 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
 
         <div style={{display: 'flex', minWidth: 0, margin: '10px 20px 10px 20px'}} >
         {/* enviar a una primera fila  */}
-        <Grid sx={{display:'flex', justifyContent:'center', alignItems:'center'}} container spacing={2}>
-          <Grid item xs={4}>
+        <Grid sx={{
+          display:'flex',
+          justifyContent:'center',
+          alignItems:'center'}} 
+          container 
+          spacing={2}>
+          <Grid item xs={10} sm={10} md={10} lg={4}>
             <TextField
               sx={{width:'100%'}}
               color='neutral'
               name="userNombre"
-              label="Name"
+              label="Nombre"
               value={userData.userNombre}
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={5} sm={5} md={5} lg={4}>
           <FormControl fullWidth color='neutral'>
-            <InputLabel sx={{}} id="demo-simple-select-label"  >Role</InputLabel>
+            <InputLabel sx={{}} id="demo-simple-select-label"  >Rol</InputLabel>
             <Select
               sx={{width:'100%'}}
               labelId="demo-simple-select-label"
               name='rol'
               id="demo-simple-select"
               value={rol}
-              label="ROL"
+              label="Rol"
               onChange={handleChangeROL}
             >
               <MenuItem value={RolUsuario.ADMIN}>Admin</MenuItem>
@@ -160,7 +177,7 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
             </Select>
           </FormControl>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={5} sm={5} md={5} lg={2}>
             <FormControlLabel
               sx={{width:'100%'}}
               color='neutral'
@@ -172,7 +189,7 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
                   name="statusCheckbox"
                 />
               }
-              label={statusCheckbox ? "Status: (Active)": "Status: (Disabled)"}
+              label={statusCheckbox ? "Estado: (Activo)": "Estado: (Inactivo)"}
             />
           </Grid>
         </Grid>
@@ -183,30 +200,30 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
         {/* enviar a una segunda fila  */}
         <Grid sx={{display:'flex', justifyContent:'center', alignItems:'center'}} container spacing={2}>
 
-          <Grid item xs={4}>
+          <Grid item xs={10} sm={10} md={10} lg={4}>
             <TextField
               sx={{width:'100%'}}
               color='neutral'
               name="email"
-              label="Email"
+              label="Correo electrónico"
               value={userData.email}
               onChange={handleChange}
             />
           </Grid>
 
-          <Grid item xs={4}>
+          <Grid item xs={10} sm={10} md={10} lg={4}>
             <TextField
               sx={{width:'100%'}}
               color="neutral"
               name="password"
-              label="Password"
+              label="Contraseña"
               value={userData.password}
               onChange={handleChange}
               type="password"
               />
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item xs={10} sm={10} md={10} lg={2}>
             {/* <Button sx={{width:'100%'}} variant="contained" color="primary" onClick={handleSave}>
                 Save
             </Button> */}
@@ -214,15 +231,15 @@ export const CreateUser: React.FC<{}> = ():JSX.Element => {
               sx={{height:'100%', width:'100%'}}
               loading={loadSave?.status ? loadSave.status : false}
               loadingPosition="start"
-              startIcon={loadSave.respError ? <ErrorOutlineIcon/>: (loadSave.respSuccess ? <CheckCircleOutlineIcon/>: (<SaveIcon />))}
+              startIcon={loadSave.respError ? <ErrorOutlineIcon style={{fontSize: themeSizes.FSbutton}}/>: (loadSave.respSuccess ? <CheckCircleOutlineIcon style={{fontSize: themeSizes.FSbutton}}/>: (<SaveIcon style={{fontSize: themeSizes.FSbutton}} />))}
               variant="contained"
               color={loadSave.color === 'primary' || loadSave.color === 'error' || loadSave.color === 'success' ? loadSave.color : 'primary'}
               onClick={handleSave}
               size="large"
             >
-              <Typography variant="h6" style={{fontWeight: 'bold'}}>
-                {loadSave.respError ? "ERROR": (loadSave.respSuccess ? "SUCCESS": ("CREATE"))}
-              </Typography>
+              {/* <Typography variant="h6" style={{fontWeight: 'bold'}}> */}
+                {loadSave.respError ? "Error": (loadSave.respSuccess ? "Éxito": ("Crear"))}
+             {/* </Typography> */}
               
             </LoadingButton>
             <ToastContainer />

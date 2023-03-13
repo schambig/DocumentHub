@@ -11,7 +11,8 @@ import {tipoDoc, newTipoDoc} from '../assets/data_documento'
 import {LinearProgress} from '@mui/material';
 import { auto } from '@popperjs/core';
 import {DocumentPreviewButton} from './VisualFile';
-import {tDocumento} from '../assets/data_tDocumento'
+import {tDocumento} from '../assets/data_tDocumento';
+import { stylesContainer2 } from '../common/dataComponent';
 
 export const TableBusqueda: React.FunctionComponent<{}> = ():JSX.Element => {
 
@@ -166,26 +167,26 @@ const [loadState, setLoadState] = useState<boolean>(true);
   const columns: GridColDef[] = [
     
     { 
-      field: 'urlAwsUrl',
+      field: 'uuiAws',
       headerAlign: 'center', 
       headerName: 'URL', 
       align: 'center',
-      width: 120,
+      width: 190,
       renderCell: (params) => (
-        <DocumentPreviewButton documentUrl={params.value}/>
+          <DocumentPreviewButton documentUrl={params.value}/>   
       ),
     },
     { field: 'id', headerName: 'N°', flex:1,align: 'center',headerAlign: 'center'},
-    { field: 'nombreFile', headerName: 'Archivo',width: 200,headerAlign: 'center'},
-    { field: 'fechaSubida', headerName: 'Fecha', width: 220,headerAlign: 'center' },
+    { field: 'nombreFile', headerName: 'Archivo',width: 280,headerAlign: 'center'},
+    { field: 'fechaSubida', headerName: 'Fecha', width: 220,align: 'center',headerAlign: 'center' },
     { field: 'tipoDocumento', headerName: 'Doc', width: 150,align: 'center',headerAlign: 'center'},
-    { field: 'PEP', headerName: 'PEP', width: 50, align: 'center',headerAlign: 'center'},
+    { field: 'PEP', headerName: 'PEP', width: 80, align: 'center',headerAlign: 'center'},
     { field: 'tipoDoc', headerName: 'Id', width: 180, align: 'center',headerAlign: 'center'},
-    { field: 'numDoc', headerName: 'Nro. Identidad', width: 140,align: 'center',headerAlign: 'center'},
-    { field: 'nombreInversionista', headerName: 'Inversionista', width: 320,headerAlign: 'center'},
-    { field: 'codigoProducto', headerName: 'Cod', width: 70,align: 'center',headerAlign: 'center'},
-    { field: 'nombreProducto', headerName: 'Producto', width: 290,headerAlign: 'center'},
-    { field: 'descripcionCategoria', headerName: 'Categoria', width: 150,align: 'center',headerAlign: 'center'},
+    { field: 'numDoc', headerName: 'Nro. Identidad', width: 180,align: 'center',headerAlign: 'center'},
+    { field: 'nombreInversionista', headerName: 'Inversionista', width: 370,headerAlign: 'center'},
+    { field: 'codigoProducto', headerName: 'Cod', width: 100,align: 'center',headerAlign: 'center'},
+    { field: 'nombreProducto', headerName: 'Producto', width: 350,headerAlign: 'center'},
+    { field: 'descripcionCategoria', headerName: 'Categoria', width: 210,align: 'center',headerAlign: 'center'},
   ];
 
   const filterButton:Filtro = {
@@ -212,7 +213,7 @@ const [loadState, setLoadState] = useState<boolean>(true);
 
 
   return (
-    <Container>
+    <Container style={stylesContainer2}>
       <Grid sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -221,8 +222,10 @@ const [loadState, setLoadState] = useState<boolean>(true);
         display: 'block',
         width: 'inherit',
       }}>
-        <Button onClick={handleShow} variant='contained' color='primary' sx={{mt:1, mb:1, width:'100%'}}  startIcon={<FilterAltOutlinedIcon />}>
-        <Typography variant="h5" component="h2">Filtrar</Typography>
+        <Button onClick={handleShow} variant='contained' color='primary' sx={{mt:1, mb:1, width:'100%', }}  startIcon={<FilterAltOutlinedIcon style={{ fontSize: 35 }} />}>
+          <Typography variant="h6" component="h2">
+            Filtrar
+          </Typography>
         </Button>
       </Grid>
 
@@ -246,9 +249,9 @@ const [loadState, setLoadState] = useState<boolean>(true);
               sx={{
                 mt: 1,
                 p: 2,
-                boxShadow: 2,
-                border: 2,
-                backgroundColor: '#ffffff',
+                boxShadow: 20,
+                border: 1,
+                backgroundColor: '#f0f0f0',
                 opacity: '1',
                 borderColor: 'neutral.main',
                 '& .MuiDataGrid-cell:hover': {
@@ -257,7 +260,7 @@ const [loadState, setLoadState] = useState<boolean>(true);
               }}
             />
           </div>
-          <Button onClick={handleHide}>Ocultar Tabla</Button>
+          <Button color='neutral' variant='outlined' onClick={handleHide}>Ocultar Tabla</Button>
         </div>
       )}
       {showTable && loadState && (
