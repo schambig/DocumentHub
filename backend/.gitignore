@@ -211,4 +211,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+
+# AWS S3 upload folder
+uploads
 # End of https://www.toptal.com/developers/gitignore/api/macos,linux,windows,node
