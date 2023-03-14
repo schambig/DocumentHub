@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
-import {TextField, FormControlLabel,  Checkbox, Button, Grid, InputLabel, Select, MenuItem, FormControl, Typography} from '@mui/material'
-import {usUario, RolUsuario} from '../assets/data_user'
-import {SelectionContext} from '../context/SelectionContext'
-import axios from 'axios'
-import {LoadingButton} from '@mui/lab'
+import React, { useContext, useEffect, useState } from 'react';
+import {TextField, FormControlLabel,  Checkbox, Button, Grid, InputLabel, Select, MenuItem, FormControl, Typography} from '@mui/material';
+import {usUario, RolUsuario} from '../assets/data_user';
+import {SelectionContext} from '../context/SelectionContext';
+import axios from 'axios';
+import {LoadingButton} from '@mui/lab';
 import SaveIcon from '@mui/icons-material/Save';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
