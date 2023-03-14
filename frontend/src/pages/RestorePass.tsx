@@ -16,10 +16,17 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import React, { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {themeSizes} from '../config/theme.condig';
 import { RolUsuario, usUario } from '../assets/data_user';
 import { SelectionContext } from '../context/SelectionContext';
+import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import {LoadingButton} from '@mui/lab';
+
+
 
 export function RestorePass() {
   interface LoadSave {
@@ -101,6 +108,8 @@ export function RestorePass() {
 
   };
   const handleSave = async (): Promise<void> => {
+    const isValid1 = validatePassword(newPS);
+    const isValid2 = validatePassword(repPS);
     setLoadSave({ ...loadSave, status: true })
     console.log(newPS);
     console.log(repPS);
@@ -118,7 +127,13 @@ export function RestorePass() {
       setCurrentToastId(toastId);
       return console.log("Error push Data null");
 
-    } else {
+    } else if(!isValid1 || !isValid2 ) {
+      setLoadSave({...loadSave ,status:false, respError:true, color:'error' })
+      setTimeout(() => {setLoadSave({...loadSave , respError:false, color:'primary' })},1500)
+      const toastId = toast.error('Ingresar una contraseña válida', { autoClose: 1500, toastId: currentToastId });
+      setCurrentToastId(toastId);
+      return;
+    }else {
       if ((newPS === repPS) && (newPS !== userData.password)) {
         setTimeout(() => {
           console.log(repPS);
@@ -134,11 +149,13 @@ export function RestorePass() {
                 setTimeout(() => { setLoadSave({ ...loadSave, respSuccess: false, color: 'primary' }) }, 2000)
                 const toastId = toast.success('Usuario actualizado con exito', { autoClose: 2000, toastId: currentToastId });
                 setCurrentToastId(toastId);
+                setTimeout(() => { navigate("/login") }, 5000)
               } else {
                 setLoadSave({ ...loadSave, status: false, respError: true, color: 'error' })
                 setTimeout(() => { setLoadSave({ ...loadSave, respError: false, color: 'primary' }) }, 2000)
                 const toastId = toast.error('Posible falla', { autoClose: 2000, toastId: currentToastId });
                 setCurrentToastId(toastId);
+                // navigate("/login");
               }
               console.log('Respuesta del servidor:', response);
             })
@@ -167,21 +184,20 @@ export function RestorePass() {
         setCurrentToastId(toastId);
       }
     }
-    navigate("/login");
   }
   const [showPassword1, setShowPassword1] = React.useState(false);
   const [showPassword2, setShowPassword2] = React.useState(false);
-  const handleChangeNewPS = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewPS(event.target.value)
-  };
+  // const handleChangeNewPS = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setNewPS(event.target.value)
+  // };
 
-  const handleChangeRepPS = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRepPS(event.target.value)
-  };
+  // const handleChangeRepPS = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setRepPS(event.target.value)
+  // };
 
-  const handleShowPS = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    setShowPS(!showPS);
-  }
+  // const handleShowPS = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  //   setShowPS(!showPS);
+  // }
   const handleClickShowPassword1 = () => setShowPassword1((show) => !show);
   const handleClickShowPassword2 = () => setShowPassword2((show) => !show);
   const navigate = useNavigate();
@@ -203,7 +219,7 @@ export function RestorePass() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Restore Password
+          Restablecer Contraseña
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={3}>
@@ -212,7 +228,7 @@ export function RestorePass() {
              <Grid item xs={12}>
               <TextField
                   sx={{width:'100%'}}
-                  name="password"
+                  name="newpass"
                   label="Nueva Contraseña"
                   value={newPS}
                   onChange={handlePasswordChange1}
@@ -236,33 +252,11 @@ export function RestorePass() {
                   helperText={passwordError1} 
                 />
                 <p>{newPS}</p>
-              {/*<FormControl sx={{ m: 1, width: '50ch' }} color='error' variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                <OutlinedInput
-                  id="newpass"
-                  name="newpass"
-                  onChange={handleChangeNewPS}
-                  type={showPassword ? 'text' : 'password'}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
-                />
-              </FormControl> */}
             </Grid>
             <Grid item xs={12}>
               <TextField
                 sx={{width:'100%'}}
-                name="password"
+                name="cpassword"
                 label="Repetir Contraseña"
                 value={repPS}
                 onChange={handlePasswordChange2}
@@ -286,30 +280,23 @@ export function RestorePass() {
                 helperText={passwordError2} 
               />
               <p>{repPS}</p>
-              {/* <FormControl sx={{ m: 1, width: '50ch' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Password2</InputLabel>
-                <OutlinedInput
-                  id="cpassword"
-                  name="cpassword"
-                  onChange={handleChangeRepPS}
-                  type={showPassword ? 'text' : 'password'}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-              </FormControl> */}
             </Grid>
           </Grid>
-          <Button
+          <LoadingButton
+            sx={{height:'100%', width:'100%'}}
+            loading={loadSave?.status ? loadSave.status : false}
+            loadingPosition="start"
+            startIcon={loadSave.respError ? <ErrorOutlineIcon style={{fontSize:(themeSizes.FSbutton)}}/>: (loadSave.respSuccess ? <CheckCircleOutlineIcon style={{fontSize:(themeSizes.FSbutton)}}/>: (<VpnKeyOutlinedIcon style={{fontSize:(themeSizes.FSbutton)}}/>))}
+            variant="contained"
+            color={loadSave.color === 'primary' || loadSave.color === 'error' || loadSave.color === 'success' ? loadSave.color : 'primary'}
+            onClick={handleSave}
+            size="large"
+          >
+            {/* <Typography variant="h6" > */}
+              {loadSave.respError ? "Error": (loadSave.respSuccess ? "Éxito": ("Actualizar"))}
+            {/* </Typography> */}
+          </LoadingButton>
+          {/* <Button
             //onClick={() => navigate("/login")}
             onClick={handleSave}
             type="submit"
@@ -318,7 +305,8 @@ export function RestorePass() {
             sx={{ mt: 3, mb: 2 }}
           >
             Reset password
-          </Button>
+          </Button> */}
+          <ToastContainer />
         </Box>
       </Box>
     </Container>
