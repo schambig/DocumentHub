@@ -251,7 +251,7 @@ export function RestorePass() {
                   error={Boolean(passwordError1)}
                   helperText={passwordError1} 
                 />
-                <p>{newPS}</p>
+                {/* <p>{newPS}</p> */}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -279,7 +279,7 @@ export function RestorePass() {
                 error={Boolean(passwordError2)}
                 helperText={passwordError2} 
               />
-              <p>{repPS}</p>
+              {/* <p>{repPS}</p> */}
             </Grid>
           </Grid>
           <LoadingButton
