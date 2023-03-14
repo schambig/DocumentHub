@@ -4,6 +4,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Button, Grid, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField'
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import FormControl from '@mui/material/FormControl';
@@ -40,6 +41,8 @@ export function RestorePass() {
   const [newPS, setNewPS] = useState<string>('');
   const [repPS, setRepPS] = useState<string>('');
   const [showPS, setShowPS] = useState<boolean>(false);
+  const [passwordError1, setPasswordError1] = useState("");
+  const [passwordError2, setPasswordError2] = useState("");
   const [currentToastId, setCurrentToastId] = useState<any | undefined>(undefined);
   const [loadSave, setLoadSave] = useState<LoadSave>({ status: false, respSuccess: false, respError: false, color: 'primary' });
   //const [rol, setROL] = useState<RolUsuario | null>();
@@ -55,6 +58,30 @@ export function RestorePass() {
     estado: false,
     rol: RolUsuario.USER
   });
+  const validatePassword = (password:string) => {
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
+  };
+
+  const handlePasswordChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const password = event.target.value;
+    if (!password || validatePassword(password)) {
+      setPasswordError1("");
+    } else {
+      setPasswordError1("La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un símbolo especial (@$!%*?&).");
+    }
+    setNewPS(password);
+  };
+
+  const handlePasswordChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const password = event.target.value;
+    if (!password || validatePassword(password)) {
+      setPasswordError2("");
+    } else {
+      setPasswordError2("La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un símbolo especial (@$!%*?&).");
+    }
+    setRepPS(password);
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -142,7 +169,8 @@ export function RestorePass() {
     }
     navigate("/login");
   }
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword1, setShowPassword1] = React.useState(false);
+  const [showPassword2, setShowPassword2] = React.useState(false);
   const handleChangeNewPS = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewPS(event.target.value)
   };
@@ -154,7 +182,8 @@ export function RestorePass() {
   const handleShowPS = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setShowPS(!showPS);
   }
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowPassword1 = () => setShowPassword1((show) => !show);
+  const handleClickShowPassword2 = () => setShowPassword2((show) => !show);
   const navigate = useNavigate();
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -178,8 +207,36 @@ export function RestorePass() {
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <FormControl sx={{ m: 1, width: '50ch' }} color='error' variant="outlined">
+
+
+             <Grid item xs={12}>
+              <TextField
+                  sx={{width:'100%'}}
+                  name="password"
+                  label="Nueva Contraseña"
+                  value={newPS}
+                  onChange={handlePasswordChange1}
+                  color='neutral'
+                  type={showPassword1 ? 'text' : 'password'}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          // aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword1}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword1 ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    )
+                  }}
+                  error={Boolean(passwordError1)}
+                  helperText={passwordError1} 
+                />
+                <p>{newPS}</p>
+              {/*<FormControl sx={{ m: 1, width: '50ch' }} color='error' variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                 <OutlinedInput
                   id="newpass"
@@ -200,11 +257,37 @@ export function RestorePass() {
                   }
                   label="Password"
                 />
-              </FormControl>
+              </FormControl> */}
             </Grid>
             <Grid item xs={12}>
-              <FormControl sx={{ m: 1, width: '50ch' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+              <TextField
+                sx={{width:'100%'}}
+                name="password"
+                label="Repetir Contraseña"
+                value={repPS}
+                onChange={handlePasswordChange2}
+                color='neutral'
+                type={showPassword2 ? 'text' : 'password'}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        // aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword2}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword2 ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
+                error={Boolean(passwordError2)}
+                helperText={passwordError2} 
+              />
+              <p>{repPS}</p>
+              {/* <FormControl sx={{ m: 1, width: '50ch' }} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-password">Password2</InputLabel>
                 <OutlinedInput
                   id="cpassword"
                   name="cpassword"
@@ -222,9 +305,8 @@ export function RestorePass() {
                       </IconButton>
                     </InputAdornment>
                   }
-                  label="Password"
                 />
-              </FormControl>
+              </FormControl> */}
             </Grid>
           </Grid>
           <Button
