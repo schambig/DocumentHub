@@ -37,6 +37,17 @@
 - [About the project](#about-the-project)
 - [Getting started](#getting-started)
 - [Installation](#installation)
-- [Usage](#Usage)
+- [Usage](#usage)
 - [Authors](#authors)
 
+---
+
+## About the project
+
+## Getting started
+
+## Installation
+
+## Usage
+
+## Authors
