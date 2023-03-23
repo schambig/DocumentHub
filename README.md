@@ -24,7 +24,7 @@
   <img src="https://github.com/schambig/DocumentHub/blob/master/images/documents.png" alt="Logo" width="100" height="100"  >
   </a>
 
-  <h3 align="center">DocumentHub</h3>
+  <h1 align="center">DocumentHub</h1>
 
   <p align="center">
     MVP Document Management System
@@ -32,4 +32,11 @@
     <a href="https://"><strong>Check the landing page</strong></a>
     <br />
 </div>
+
+# Table of Contents
+- [About the project](#about-the-project)
+- [Getting started](#getting-started)
+- [Installation](#installation)
+- [Usage](#Usage)
+- [Authors](#authors)
 
