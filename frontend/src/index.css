@@ -1,0 +1,125 @@
+@font-face {
+  font-family: 'AuxiliaBlack';
+  src: url('./fonts/auxilia-black/Auxilia-Black.ttf') format('truetype');
+}
+
+/* @font-face {
+  font-family: 'Montserrat';
+  src: url('../fonts/Montserrat-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+} */
+
+@font-face {
+  font-family: 'Montserrat-Bold';
+  src: url('./fonts/montserrat/Montserrat-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat-Italic';
+  src: url('./fonts/montserrat/Montserrat-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Montserrat-Medium';
+  src: url('./fonts/montserrat/Montserrat-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat-SemiBold';
+  src: url('./fonts/montserrat/Montserrat-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat-SemiBoldItalic';
+  src: url('./fonts/montserrat/Montserrat-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+
+/* body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+} */
+
+body{
+  font-family: 'Montserrat-Medium', sans-serif;
+}
+
+h1 {
+  font-family: 'ArialBlack', sans-serif;
+}
+
+h2 {
+  font-family: 'Montserrat-Bold', sans-serif;
+}
+
+p {
+  font-family: 'Montserrat-Medium', sans-serif;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#img_logo {
+  height: 50px;
+  width: auto;
+}
+
+#nuevo {
+  color: white;
+  background-color: black;
+}
+
+#menuBarIcon{
+  color: rgb(0, 0, 0, 1);
+}
+
+#menuBarText{
+  color: rgb(0, 0, 0, 1);
+}
+
+#menuItem{
+  color: rgb(0, 0, 0, 1);
+  opacity: 1;
+  background-color: rgb(183, 205, 219,0.4);
+}
+
+#conWidth{
+  min-width: 100%;
+}
+
+.container {
+  width: 100%;
+}
+
+.container > div {
+  flex-grow: 1;
+}
+
+/* codigo para botones */
+.MuiButton-root {
+  transition: background-color 250ms ease-in-out !important;
+}
+
+/* .MuiButton-root:hover {
+  color: white;
+  background-color: black !important;
+} */
+/* final botones */
+

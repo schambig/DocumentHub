@@ -1,0 +1,131 @@
+// Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model TablaInversionista {
+  id                 String             @id @default(cuid())
+  nombres            String             @db.VarChar(40)
+  apPaterno          String             @db.VarChar(30)
+  apMaterno          String             @db.VarChar(30)
+  tipoIdentificacion DocIdent
+  nroIdentificacion  String             @db.VarChar(20)
+  pep                Boolean            @default(false)
+  relProdInver       RelProdInver[]
+  tablaDocumento     TablaDocumento[]
+  relProdCateInver   RelProdCateInver[]
+}
+
+model TablaProducto {
+  id               String             @id @default(cuid())
+  codProducto      String             @db.VarChar(10)
+  nombreProducto   String             @db.VarChar(50)
+  relProdInver     RelProdInver[]
+  tablaDocumento   TablaDocumento[]
+  relProdCate      RelProdCate[]
+  relProdCateInver RelProdCateInver[]
+}
+
+model RelProdInver {
+  inversionista        TablaInversionista @relation(fields: [tablaInversionistaId], references: [id])
+  tablaInversionistaId String
+  producto             TablaProducto      @relation(fields: [tablaProductoId], references: [id])
+  tablaProductoId      String
+
+  @@id([tablaInversionistaId, tablaProductoId])
+}
+
+model TablaDocumento {
+  id            String          @id @default(cuid())
+  nombreFile    String          @db.VarChar(100)
+  userSubida    String          @db.VarChar(100)
+  fechaSubida   DateTime        @default(now())
+  uuidAws       String
+  urlAws        String
+  tablaDescarga TablaDescarga[]
+
+  // Relations
+  inversionista        TablaInversionista? @relation(fields: [tablaInversionistaId], references: [id])
+  tablaInversionistaId String?
+  producto             TablaProducto?      @relation(fields: [tablaProductoId], references: [id])
+  tablaProductoId      String?
+  categoria            TablaCategoria?     @relation(fields: [tablaCategoriaId], references: [id])
+  tablaCategoriaId     String?
+  tipoDocumento        TablaTipoDocumento  @relation(fields: [tablaTipoDocumentoId], references: [id])
+  tablaTipoDocumentoId String
+}
+
+model TablaCategoria {
+  id               String             @id @default(cuid())
+  tipo             String             @db.VarChar(40) // Levantamento o emision
+  tablaDocumento   TablaDocumento[]
+  relProdCate      RelProdCate[]
+  relProdCateInver RelProdCateInver[]
+}
+
+model RelProdCate {
+  producto         TablaProducto  @relation(fields: [tablaProductoId], references: [id])
+  tablaProductoId  String
+  categoria        TablaCategoria @relation(fields: [tablaCategoriaId], references: [id])
+  tablaCategoriaId String
+
+  @@id([tablaProductoId, tablaCategoriaId])
+}
+
+model RelProdCateInver {
+  producto             TablaProducto      @relation(fields: [tablaProductoId], references: [id])
+  tablaProductoId      String
+  categoria            TablaCategoria     @relation(fields: [tablaCategoriaId], references: [id])
+  tablaCategoriaId     String
+  inversionista        TablaInversionista @relation(fields: [tablaInversionistaId], references: [id])
+  tablaInversionistaId String
+
+  @@id([tablaProductoId, tablaCategoriaId, tablaInversionistaId])
+}
+
+model TablaTipoDocumento {
+  id             String           @id @default(cuid())
+  nombre         String           @db.VarChar(20)
+  descripcion    String?          @db.VarChar(100)
+  tablaDocumento TablaDocumento[]
+}
+
+model TablaUsuarios {
+  id            String          @id @default(cuid())
+  userNombre    String          @db.VarChar(100)
+  email         String          @unique
+  password      String
+  estado        Boolean         @default(true)
+  rol           RolUsuario
+  TablaDescarga TablaDescarga[]
+}
+
+model TablaDescarga {
+  id            String   @id @default(cuid())
+  fechaDescarga DateTime @default(now())
+
+  // Relations
+  usuarioDescarga  TablaUsuarios  @relation(fields: [tablaUsuariosId], references: [id])
+  tablaUsuariosId  String
+  documento        TablaDocumento @relation(fields: [tablaDocumentoId], references: [id])
+  tablaDocumentoId String
+}
+
+enum DocIdent {
+  DNI
+  CARNETEXTRANJERIA
+  PASAPORTE
+}
+
+enum RolUsuario {
+  ADMIN
+  DATAUSER
+  USER
+}
